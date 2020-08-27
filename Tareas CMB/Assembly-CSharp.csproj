@@ -758,6 +758,10 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{69e57180-4f8d-4bdc-73af-6863dabdd95a}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{24b13755-9671-d491-628d-a32da4e91aa9}</Project>
       <Name>Unity.Timeline.Editor</Name>

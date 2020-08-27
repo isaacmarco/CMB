@@ -4,37 +4,43 @@ using UnityEngine;
 
 public class TareaTopos : Tarea
 {
-    // lista de huecos donde puede aparecer el topo     
-    public GameObject[] huecos; 
-    // lista de disponibilidad de huecos
-    private bool[] huecosDisponibles; 
+    // devuelve el tiempo que el topo es visible al salir
+    public float TiempoExposicionTopo
+    {
+        get{return this.tiempoExposicionTopo; }
+    }
+
+    // lista topos
+    public Topo[] topos;
+    // tiempo entre salidas del topo
+    private float tiempoParaNuevoTopo = 2f; 
+    // tiempo durante el que el topo es visible
+    private float tiempoExposicionTopo = 3f;
 
     protected override void Inicio()
     {
+        StartCoroutine(CorutinaPartida());
+    }
+
+    private IEnumerator CorutinaPartida()
+    {
+        while(true)
+        {
+            NuevoTopo();
+            yield return new WaitForSeconds(tiempoParaNuevoTopo);
+
+        }
+        yield return null; 
     }
 
     // aparece un topo nuevo 
     private void NuevoTopo()
     {
-        // obtener hueco al azar
-        int indiceHueco = Random.Range(0, huecos.Length);
-        // comprobar si esta ocupado
-        if (!huecosDisponibles[indiceHueco])
-        {
-            // mostramos el nuevo topo
-            huecos[indiceHueco].SetActive(true);
-        } else {
-            // no aparece el topo 
-        }
+        // obtener topo al azar
+        int indiceTopo = Random.Range(0, topos.Length);
+       
     }
 
-    // llamado por la interfaz de usuario cuando
-    // miras un hueco 
-    public void GolpearHueco(int indiceHueco)
-    {}
-
-    // se golpea el topo de ese hueco 
-    private void GolpearTopo(Topo topo)
-    {}
+   
 
 }
