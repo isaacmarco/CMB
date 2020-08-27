@@ -45,6 +45,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Tarea.cs" />
+     <Compile Include="Assets\Scripts\TareaTopos.cs" />
+     <Compile Include="Assets\Scripts\Topo.cs" />
      <Compile Include="Assets\Tobii\DemoScenes\Scripts\CleanUI.cs" />
      <Compile Include="Assets\Tobii\DemoScenes\Scripts\CleanUIForCanvas.cs" />
      <Compile Include="Assets\Tobii\DemoScenes\Scripts\CleanUIOpacityOverrideForCanvas.cs" />
