@@ -10,6 +10,11 @@ public class TareaTopos : Tarea
         get{return this.tiempoExposicionTopo; }
     }
 
+    void Start()
+    {
+        Debug.Log("INICIO");
+    }
+
     // lista topos
     public Topo[] topos;
     // tiempo entre salidas del topo

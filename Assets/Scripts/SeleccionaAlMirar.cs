@@ -25,7 +25,8 @@ public class SeleccionaAlMirar : MonoBehaviour
 
     public void Seleccionar()
     {
-        topo.Golpedo();
+		Debug.Log("GOLPEADO");
+        //topo.Golpedo();
         /*
         // Show icon
 			if (!MarkIcon.gameObject.activeInHierarchy)
@@ -64,15 +65,16 @@ public class SeleccionaAlMirar : MonoBehaviour
 	{
 		if (gazeAware.HasGazeFocus) // && Vector3.Distance(transform.position, Camera.main.transform.position) < distanciaMaxima)
 		{
-			tiempoActivado = Time.unscaledTime;
+			Seleccionar();			// tiempoActivado = Time.unscaledTime;
 		}
-		
+		/*
 		if (Time.unscaledTime - tiempoActivado > tiempoDesactivacion)
 		{
             Deseleccionar();			
 		} else 	{
             Seleccionar();			
 		}
+		*/
 	}    
     
 }
