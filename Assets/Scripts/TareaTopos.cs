@@ -1,13 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Tobii.Gaming;
 public class TareaTopos : Tarea
 {
+    private GazeAware gazeAware;
+
     // devuelve el tiempo que el topo es visible al salir
     public float TiempoExposicionTopo
     {
         get{return this.tiempoExposicionTopo; }
+    }
+
+    void Awake()
+    {
+        gazeAware = GetComponent<GazeAware>();
+    }
+    void Update()
+    {
+        if(gazeAware!=null)
+        {
+            GameObject focusedObject = TobiiAPI.GetFocusedObject();
+            if(focusedObject!=null)
+                Debug.Log(focusedObject.name);
+        }
     }
 
     void Start()
