@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7001288963281395434}
   - component: {fileID: 8989380402810399783}
+  - component: {fileID: 8404752741428648741}
+  - component: {fileID: 820136095991185096}
   - component: {fileID: 1063757662186386990}
   - component: {fileID: 10599866445615397}
   - component: {fileID: 3257187766849929674}
@@ -44,6 +46,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65c2dbbcb6515aa449edd1a3e5ce256a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8404752741428648741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344876229659393621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808fa1e7b9fff8a46a021d16806c648d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanciaMaxima: 40
+  tiempoDesactivacion: 1
+--- !u!114 &820136095991185096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344876229659393621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d87d489c55fc504987b709bbe1e4ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!33 &1063757662186386990

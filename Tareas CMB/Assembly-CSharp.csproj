@@ -45,6 +45,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\SeleccionaAlMirar.cs" />
      <Compile Include="Assets\Scripts\Tarea.cs" />
      <Compile Include="Assets\Scripts\TareaTopos.cs" />
      <Compile Include="Assets\Scripts\Topo.cs" />
