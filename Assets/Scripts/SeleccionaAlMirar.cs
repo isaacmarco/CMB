@@ -44,6 +44,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 
     public void Deseleccionar()
     {
+		
         /*
         // Remove icon
 			if (MarkIcon.localScale.x > 0.1f)
@@ -59,7 +60,7 @@ public class SeleccionaAlMirar : MonoBehaviour
         */
     }
 
-	protected void Update()
+	void Update()
 	{
 		if (gazeAware.HasGazeFocus) // && Vector3.Distance(transform.position, Camera.main.transform.position) < distanciaMaxima)
 		{
