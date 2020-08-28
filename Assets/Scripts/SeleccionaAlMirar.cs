@@ -61,11 +61,11 @@ public class SeleccionaAlMirar : MonoBehaviour
 
 	protected void Update()
 	{
-		if (gazeAware.HasGazeFocus && Vector3.Distance(transform.position, Camera.main.transform.position) < distanciaMaxima)
+		if (gazeAware.HasGazeFocus) // && Vector3.Distance(transform.position, Camera.main.transform.position) < distanciaMaxima)
 		{
 			tiempoActivado = Time.unscaledTime;
 		}
-
+		
 		if (Time.unscaledTime - tiempoActivado > tiempoDesactivacion)
 		{
             Deseleccionar();			
