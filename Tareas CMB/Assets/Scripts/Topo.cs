@@ -22,6 +22,9 @@ public class Topo : MonoBehaviour
 
     public void Golpedo()
     {
+        if(escondido)
+            return; 
+            
         // feedback al recibir el golpe
         if(!golpeado)
         {

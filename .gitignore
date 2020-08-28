@@ -9,6 +9,14 @@ Tareas CMB/obj/
 Tareas CMB/Logs/
 Tareas CMB/.vs
 
+Temp/
+Obj/
+UnityGenerated/
+Library/
+obj/
+Logs/
+.vs
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -34,39 +42,3 @@ ExportedObj/
 ehthumbs.db
 Thumbs.db
 
-# Jetbrain Rider Cache
-.idea/
-Assets/Plugins/Editor/JetBrains*
-LinguaMagicka/Terra Alia.rar
-LinguaMagicka/TerraAlia.rar
-LinguaMagicka/TerraAliaTestMode.rar
-LinguaMagicka/PC Build.zip
-LinguaMagicka/Terra Alia Mac.app.rar
-LinguaMagicka/Terra Alia 26-11-2019.rar
-LinguaMagicka/Terra Alia 5-12-19.rar
-LinguaMagicka/Terra Alia 12-12-19.rar
-LinguaMagicka/Terra Alia 17-12-19.rar
-LinguaMagicka/Terra Alia 18-12-2019.rar
-LinguaMagicka/Terra Alia 19-12-19.rar
-LinguaMagicka/Terra Alia 20-12-19.rar
-LinguaMagicka/Terra Alia 21-12-19.rar
-LinguaMagicka/Terra Alia 22-12-19.rar
-LinguaMagicka/Assets/Aura 2/System.meta
-LinguaMagicka/Assets/Art/Particles/Enviroment particles/Materials.meta
-LinguaMagicka/Assets/Art/Particles/Enviroment particles/Dust/Effects.meta
-LinguaMagicka/Assets/Art/Assets/Nature/Tent_CR_MAX_550/Model/CH/Prefab.meta
-LinguaMagicka/Terra Alia 03-01-2020.rar
-LinguaMagicka/Terra Alia 24-12-19.rar
-LinguaMagicka/Terra Alia 17-01-2020.rar
-LinguaMagicka/Terra Alia 21-01-2020.rar
-LinguaMagicka/Terra Alia 22-01-2020.rar
-LinguaMagicka/Terra Alia 24-01-2020.rar
-LinguaMagicka/Bug Attachments - Terra Alia - 27-01-2020.rar
-LinguaMagicka/Terra Alia 28-01-2020.rar
-LinguaMagicka/Terra Alia 29-01-2020.rar
-LinguaMagicka/Bug Attachments - Terra Alia - 30-01-2020.rar
-LinguaMagicka/Terra Alia 30-01-2020.rar
-LinguaMagicka/Terra Alia 31-01-2020 Launch Build.rar
-LinguaMagicka/Terra Alia 31-01-2020 Pre Launch Build.rar
-LinguaMagicka/Terra Alia For Testing.rar
-LinguaMagicka/Assets/codeandweb.com/Editor/SettingsTexturePackerImporter.txt
