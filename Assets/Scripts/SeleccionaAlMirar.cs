@@ -13,7 +13,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 	//private AudioSource _audio;
     //public Transform MarkIcon;
 
-	protected void Awake()
+	void Awake()
 	{
 		gazeAware = GetComponent<GazeAware>();	
         topo = GetComponent<Topo>();	
