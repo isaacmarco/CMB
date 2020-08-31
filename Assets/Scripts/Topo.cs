@@ -22,14 +22,13 @@ public class Topo : MonoBehaviour
 
     public void Golpedo()
     {
-        Debug.Log("DETECTADO");
-
-        //if(escondido)
-            //return; 
+        if(escondido)
+            return; 
             
         // feedback al recibir el golpe
         if(!golpeado)
         {
+            Debug.Log("topo golpeado");
             iTween.ShakeScale(gameObject, new Vector3(0.4f, 0.4f, 0.4f), 0.6f);
             golpeado = true; 
         }
@@ -38,7 +37,7 @@ public class Topo : MonoBehaviour
     void Start()
     {
         // crear referencias
-        tarea = FindObjectOfType<TareaTopos>();
+        //tarea = FindObjectOfType<TareaTopos>();
     }
 
     private IEnumerator CorutinaSalirExterior()

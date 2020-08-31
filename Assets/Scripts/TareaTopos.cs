@@ -12,23 +12,21 @@ public class TareaTopos : Tarea
         get{return this.tiempoExposicionTopo; }
     }
 
+/*
     void Awake()
     {
         gazeAware = GetComponent<GazeAware>();
-    }
+    }*/
+    
     void Update()
     {
+        /*
         if(gazeAware!=null)
         {
             GameObject focusedObject = TobiiAPI.GetFocusedObject();
             if(focusedObject!=null)
                 Debug.Log(focusedObject.name);
-        }
-    }
-
-    void Start()
-    {
-        Debug.Log("INICIO");
+        }*/
     }
 
     // lista topos
@@ -46,6 +44,8 @@ public class TareaTopos : Tarea
 
     private IEnumerator CorutinaPartida()
     {
+        Debug.Log("Partida en curso");
+
         // tiempo de espera inicial
         yield return new WaitForSeconds(1f);
 
@@ -58,12 +58,13 @@ public class TareaTopos : Tarea
             yield return new WaitForSeconds(tiempoParaNuevoTopo);
 
         }
-        yield return null; 
     }
 
     // aparece un topo nuevo 
     private void NuevoTopo()
     {
+        Debug.Log("Nuevo topo");
+
         // obtener topo al azar
         int indiceTopo = Random.Range(0, topos.Length);
         if(topos[indiceTopo].Escondido)

@@ -25,8 +25,8 @@ public class SeleccionaAlMirar : MonoBehaviour
 
     public void Seleccionar()
     {
-		Debug.Log("GOLPEADO");
-        //topo.Golpedo();
+		//Debug.Log("GOLPEADO");
+        topo.Golpedo();
         /*
         // Show icon
 			if (!MarkIcon.gameObject.activeInHierarchy)
