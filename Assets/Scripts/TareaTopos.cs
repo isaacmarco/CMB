@@ -4,6 +4,8 @@ using UnityEngine;
 using Tobii.Gaming;
 public class TareaTopos : Tarea
 {
+    public int contadorTopos, aciertos, errores; 
+
     private GazeAware gazeAware;
 
     // devuelve el tiempo que el topo es visible al salir
@@ -12,6 +14,14 @@ public class TareaTopos : Tarea
         get{return this.tiempoExposicionTopo; }
     }
 
+    public void Acierto()
+    {
+        aciertos++;
+    }
+    public void Error()
+    {
+        errores++;
+    }
 /*
     void Awake()
     {
@@ -68,7 +78,10 @@ public class TareaTopos : Tarea
         // obtener topo al azar
         int indiceTopo = Random.Range(0, topos.Length);
         if(topos[indiceTopo].Escondido)
+        {
             topos[indiceTopo].SalirExterior();
+            contadorTopos++;
+        }
        
     }
 

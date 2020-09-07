@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Tipos 
+{
+    Topo, Pato, Obeja, Pinguino
+}
+
 public class Topo : MonoBehaviour
 {    
+    public GameObject modeloTopo, modeloPato, modeloObeja, 
+    modeloPinguino; 
+
     public bool Escondido {
         get{ return this.escondido; }
     }
@@ -16,7 +24,11 @@ public class Topo : MonoBehaviour
 
     public void SalirExterior()
     {
-        StartCoroutine(CorutinaSalirExterior() );
+        Tipos tipo = Tipos.Topo; 
+        if(Random.value > 0.5f)
+            tipo = (Tipos) Random.Range(0, 4);
+
+        StartCoroutine(CorutinaSalirExterior( tipo) );
     }
 
 
@@ -31,6 +43,7 @@ public class Topo : MonoBehaviour
             Debug.Log("topo golpeado");
             iTween.ShakeScale(gameObject, new Vector3(0.4f, 0.4f, 0.4f), 0.6f);
             golpeado = true; 
+            FindObjectOfType<TareaTopos>().Acierto();
         }
     }
 
@@ -40,13 +53,28 @@ public class Topo : MonoBehaviour
         //tarea = FindObjectOfType<TareaTopos>();
     }
 
-    private IEnumerator CorutinaSalirExterior()
+    private void OcultarModelos()
     {
-        
+        GameObject[] modelos = {
+            modeloTopo, modeloPato, modeloObeja, modeloPinguino
+        };
+
+        foreach(GameObject modelo in modelos)
+            modelo.SetActive(false);
+    }
+
+    private IEnumerator CorutinaSalirExterior(Tipos tipo)
+    {
+        // ocultar los modelos y mostrar el adecuado 
+        OcultarModelos();
+        GameObject[] modelos = {
+            modeloTopo, modeloPato, modeloObeja, modeloPinguino
+        };
+        modelos[ (int) tipo].SetActive(true);
 
         Vector3 posicion = gameObject.transform.position; 
         float tiempoAnimacion = 0.5f; 
-        float alturaObjetivo = 1f; 
+        float alturaObjetivo = 0.5f; 
 
         // animacion de salida al exterior        
         iTween.MoveTo(gameObject, new Vector3(posicion.x, alturaObjetivo, posicion.z), tiempoAnimacion);
@@ -60,8 +88,12 @@ public class Topo : MonoBehaviour
 
 
         // empezamos la animacion de vuelta a la tierra
-        iTween.MoveTo(gameObject, new Vector3(posicion.x, 0, posicion.z), tiempoAnimacion);
+        iTween.MoveTo(gameObject, new Vector3(posicion.x, -1, posicion.z), tiempoAnimacion);
 
+        // contabilizar error
+        if(!golpeado)
+            FindObjectOfType<TareaTopos>().Error();
+            
         // actualizamos el estado del topo
         escondido = true; 
 
