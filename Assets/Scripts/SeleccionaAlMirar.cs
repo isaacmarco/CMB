@@ -9,14 +9,14 @@ public class SeleccionaAlMirar : MonoBehaviour
 	public float tiempoDesactivacion = 1f;
 	private GazeAware gazeAware;
 	private float tiempoActivado;
-    private Topo topo;
+    private Estimulo estimulo;
 	//private AudioSource _audio;
     //public Transform MarkIcon;
 
 	void Awake()
 	{
 		gazeAware = GetComponent<GazeAware>();	
-        topo = GetComponent<Topo>();	
+        estimulo = GetComponent<Estimulo>();	
 		tiempoActivado = -1000f;
         //_audio = GetComponent<AudioSource>();
 		//MarkIcon.localScale = Vector3.one * 0.1f;
@@ -26,7 +26,7 @@ public class SeleccionaAlMirar : MonoBehaviour
     public void Seleccionar()
     {
 		//Debug.Log("GOLPEADO");
-        topo.Golpedo();
+        estimulo.Golpedo();
         /*
         // Show icon
 			if (!MarkIcon.gameObject.activeInHierarchy)
