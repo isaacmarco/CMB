@@ -3,7 +3,8 @@
     Topo, 
     Pato, 
     Oveja, 
-    Pinguino
+    Pinguino,
+    Gato
 };
 
 public enum SimilitudEstimulos

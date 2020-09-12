@@ -1,27 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Tobii.Gaming;
 public class TareaTopos : Tarea
 {
-    private int puntuacion, aciertos, errores;     
+    private int puntuacion, aciertos, errores, omisiones;     
     private GazeAware gazeAware;
     // todo: establecer como privado y recurrir al 
     // componente Aplicacion 
     public NivelScriptable nivel;
-    private NivelDificultadScriptable nivelDificultad; 
+    public ConfiguracionScriptable configuracion; 
+    private NivelDificultadScriptable nivelDificultad;    
 
     // devuelve el tiempo que el topo es visible al salir
-    public float TiempoExposicionDelEstimulo
-    {
-        get{return this.tiempoExposicionDelEstimulo; }
-    }
+    public float TiempoPermanenciaDelEstimulo { get{ return nivelDificultad.tiempoPermanenciaDelEstimulo; } }
     // devuelve el nivel de dificultad
-    public NivelDificultadScriptable NivelDificultad
+    public NivelDificultadScriptable NivelDificultad { get { return nivelDificultad;} }
+    public ConfiguracionScriptable Configuracion { get { return configuracion;} }
+    public NivelScriptable Nivel { get { return nivel;} }
+    public int Aciertos { get { return aciertos;} }    
+    public int Errores { get{return errores;} }
+    public int Omisiones { get { return omisiones;} }
+
+    // lista topos
+    public Estimulo[] estimulos;
+    
+
+    protected override void Inicio()
     {
-        get { return this.nivelDificultad;}
+        // crear referencia al nivel de dificultad
+        nivelDificultad = nivel.nivelDeDificultad;
+      
+
+        // inciar cortuina de la partida 
+        StartCoroutine(CorutinaPartida());
     }
 
+    
+    // se registra un acierto 
     public void Acierto()
     {        
         aciertos++;
@@ -29,40 +46,35 @@ public class TareaTopos : Tarea
             PartidaGanada();
     }
 
+    // se registra una omision 
+    public void Omision()
+    {
+        omisiones++;
+        ComprobarOmisionError();
+    }    
+
+    // se registra un error
     public void Error()
     {
         errores++;
-        if( errores >= nivel.erroresParaPerder)
+        ComprobarOmisionError();
+    }
+
+    // se comprueba el estado de la partida despues de un error
+    // o una omision 
+    private void ComprobarOmisionError()
+    {
+        if(errores + omisiones >= nivel.omisionesOErroresParaPerder)
             PartidaPerdida();
     }
     
     private void PartidaGanada()
     {
-        Debug.Log("Partida ganada");
+        //Debug.Log("Partida ganada");
     }
     private void PartidaPerdida()
     {
-        Debug.Log("Partida perdida");
-    }
-
-
-    // lista topos
-    public Estimulo[] estimulos;
-    // tiempo entre salidas del topo
-    private float tiempoParaNuevoEstimulo = 3f; 
-    // tiempo durante el que el topo es visible
-    private float tiempoExposicionDelEstimulo = 3f;
-
-    protected override void Inicio()
-    {
-        // crear referencia al nivel de dificultad
-        nivelDificultad = nivel.nivelDeDificultad;
-        // configurar tarea segun el nivel de dificultad
-        tiempoExposicionDelEstimulo = nivelDificultad.tiempoPermanenciaDelEstimuloObjetivo;
-        tiempoParaNuevoEstimulo = nivelDificultad.tiempoParaNuevoEstimuloObjetivo;
-
-        // inciar cortuina de la partida 
-        StartCoroutine(CorutinaPartida());
+        //Debug.Log("Partida perdida");
     }
 
     private IEnumerator CorutinaPartida()
@@ -78,7 +90,7 @@ public class TareaTopos : Tarea
             // generar un nuevo topo
             NuevoEstimulo();
             // esperar un tiempo antes de mostrar otro
-            yield return new WaitForSeconds(tiempoParaNuevoEstimulo);
+            yield return new WaitForSeconds(nivelDificultad.tiempoParaNuevoEstimulo);
 
         }
     }
@@ -86,15 +98,16 @@ public class TareaTopos : Tarea
     // aparece un topo nuevo 
     private void NuevoEstimulo()
     {
-        Debug.Log("Nuevo estimulo");
+        
+        // Debug.Log("Nuevo estimulo");
 
         // obtener topo al azar
         int indiceEstimulo = Random.Range(0, estimulos.Length);
         // TODO: 
         // obtener indices en la matriz al azar hasta que
         // se obtenga un estimulo que este escondido
-        if(estimulos[indiceEstimulo].Escondido)
-            estimulos[indiceEstimulo].Nuevo(nivel);   
+        if(!estimulos[indiceEstimulo].EnUso)
+            estimulos[indiceEstimulo].Nuevo();   
             
     }
 

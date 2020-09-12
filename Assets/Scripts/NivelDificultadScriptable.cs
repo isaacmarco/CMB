@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class NivelDificultadScriptable : ScriptableObject
 {
-    public float tiempoParaNuevoEstimuloObjetivo; 
-    public float tiempoPermanenciaDelEstimuloObjetivo;    
     public SimilitudEstimulos similitudEntreEstimulos;
+    public float tiempoParaNuevoEstimulo; 
+    public float tiempoPermanenciaDelEstimulo;    
+    
     
 }

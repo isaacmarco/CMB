@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a6d1cb606d2fc448fb85d64952c7c2, type: 3}
   m_Name: Nivel1
   m_EditorClassIdentifier: 
-  numeroDelNivel: 0
-  aciertosParaSuperarElNivel: 10
-  erroresParaPerder: 5
+  numeroDelNivel: 1
+  estimuloObjetivo: 0
   nivelDeDificultad: {fileID: 11400000, guid: 44a9beb938f3ed545a75000114ab7a1a, type: 2}
+  aciertosParaSuperarElNivel: 10
+  omisionesOErroresParaPerder: 3
   nivelSuperado: 0

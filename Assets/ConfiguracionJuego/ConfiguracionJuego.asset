@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630c7184126c59c43b991f10ee16acd0, type: 3}
-  m_Name: NivelDificultad1
+  m_Script: {fileID: 11500000, guid: 0129b03419a1c1a49a32165758b92eb1, type: 3}
+  m_Name: ConfiguracionJuego
   m_EditorClassIdentifier: 
-  tiempoParaNuevoEstimuloObjetivo: 1
-  tiempoPermanenciaDelEstimuloObjetivo: 1
-  estimuloObjetivo: 0
-  similitudEntreEstimulos: 0
+  utilizarRatonAdicionalmente: 1

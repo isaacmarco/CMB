@@ -6,9 +6,10 @@ using UnityEngine;
 public class NivelScriptable : ScriptableObject
 {
     public int numeroDelNivel; 
-    public int aciertosParaSuperarElNivel; 
-    public int erroresParaPerder; 
     public Estimulos estimuloObjetivo; 
     public NivelDificultadScriptable nivelDeDificultad; 
+    public int aciertosParaSuperarElNivel; 
+    public int omisionesOErroresParaPerder;     
+    
     public bool nivelSuperado; 
 }

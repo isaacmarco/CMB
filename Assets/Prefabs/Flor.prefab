@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 445724}
   - component: {fileID: 9545690}
   m_Layer: 0
-  m_Name: FLOWER
+  m_Name: Flor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,7 +772,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 797b2cd86b2d7e64b9019b98e4b48395, type: 3}
   m_Controller: {fileID: 9100000, guid: 1f08115e50dfd3d4eb6ad3b06869bf81, type: 2}
   m_CullingMode: 1

@@ -10,11 +10,13 @@ public class SeleccionaAlMirar : MonoBehaviour
 	private GazeAware gazeAware;
 	private float tiempoActivado;
     private Estimulo estimulo;
+	private TareaTopos tarea; 
 	//private AudioSource _audio;
     //public Transform MarkIcon;
 
 	void Awake()
 	{
+		tarea = FindObjectOfType<TareaTopos>();
 		gazeAware = GetComponent<GazeAware>();	
         estimulo = GetComponent<Estimulo>();	
 		tiempoActivado = -1000f;
@@ -75,6 +77,22 @@ public class SeleccionaAlMirar : MonoBehaviour
             Seleccionar();			
 		}
 		*/
+		
+		if(tarea.Configuracion.utilizarRatonAdicionalmente)
+		{
+			Ray ray;
+     		RaycastHit hit;
+			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if(Input.GetMouseButton(0))
+			{
+        		if(Physics.Raycast(ray, out hit))
+        		{
+					if(hit.collider.gameObject == gameObject)
+					Seleccionar();
+        		} 
+			}
+		}
+
 	}    
     
 }

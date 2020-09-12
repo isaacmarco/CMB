@@ -5,29 +5,38 @@ using UnityEngine;
 public class Estimulo : MonoBehaviour
 {    
     public GameObject modeloTopo, modeloPato, modeloOveja, 
-    modeloPinguino; 
+    modeloPinguino, modeloGato; 
 
     public bool Escondido {
-        get{ return this.escondido; }
+        get{ return escondido; }
     }
-
-    // un estimulo solo puede ser golpeado si no esta escondido 
-    private bool escondido = true; 
-    private bool golpeado = false; 
-    private bool esObjetivo = false; 
-    private Estimulos estimulo = Estimulos.Topo; 
-    private TareaTopos tarea; 
+    public bool EnUso {
+        get { return enUso; }
+    }
     
+    // el estimulo esta bajo tierra
+    private bool escondido = true; 
+    // se ha golpeado el estimulo 
+    private bool golpeado = false; 
+    // el estimulo esta siendo usado por la tarea
+    private bool enUso = false; 
+    // tipo de estimulo 
+    private Estimulos estimulo = Estimulos.Topo; 
+    // referencia a la tarea 
+    private TareaTopos tarea; 
+    // corutina para mostrar el estimulo 
+    private Coroutine corrutinaSalida; 
     
     // generamos un nuevo estimulo siguiendo la configuracion
     // del nivel de dificultad 
-    public void Nuevo(NivelScriptable nivel)
+    public void Nuevo()
     {
+        enUso = true; 
         
         // generar el estimulo dependiendo de la configuracion 
         // de dificultad de la tarea
-
-        Estimulos estimulo = nivel.estimuloObjetivo;
+        NivelScriptable nivel = tarea.Nivel; 
+        //Estimulos estimulo = nivel.estimuloObjetivo;
         NivelDificultadScriptable nivelDificultad = nivel.nivelDeDificultad;        
             
 
@@ -35,18 +44,16 @@ public class Estimulo : MonoBehaviour
         switch( nivelDificultad.similitudEntreEstimulos)
         {
             case SimilitudEstimulos.SoloEstimuloObjetivo:
-            // solo se muestra el estimulo objetivo configurado en el nivel
+            // solo aparecen estimulos objetivo
             estimulo = nivel.estimuloObjetivo;
             break;
 
             case SimilitudEstimulos.DiferentesEstimulos:
-            // estimulos aleatorios
+            // puede aparecer cualquier estimulo
             estimulo = (Estimulos) (Random.Range(0, 4));
-            // si coincide el estimulo aleatorio con el objetivo entonces
-            // es un estimulo objetivo 
-            esObjetivo = estimulo == nivel.estimuloObjetivo; 
             break;
 
+            /*
             case SimilitudEstimulos.DiferentesEstimulosConElColorDelObjetivo:
             // estimulos aleatorios que pueden tener el color
             // del estimulo objetivo 
@@ -78,6 +85,7 @@ public class Estimulo : MonoBehaviour
             // TODO
             // cambiar detalles en el estimulo objetivo
             break;
+            */
         }
 
 
@@ -85,62 +93,91 @@ public class Estimulo : MonoBehaviour
         // comprobar si el estimulo es objetivo 
         //esObjetivo = estimulo == tarea.nivel.estimuloObjetivo;
         // iniciar la tarea de mostrar el estimulo 
-        StartCoroutine(CorutinaSalirExterior(estimulo));
+        corrutinaSalida = StartCoroutine(CorrutinaSalirExterior(estimulo));
     }
-
-    /*
-    public void SalirExterior()
-    {
-        Estimulos tipo = Estimulos.Topo; 
-        if(Random.value > 0.5f)
-            tipo = (Estimulos) Random.Range(0, 4);
-
-        StartCoroutine(CorutinaSalirExterior( tipo) );
-    }
-    */
-
-
+  
     public void Golpedo()
     {
+        // si esta escondido abandonamos el metodo 
         if(escondido)
             return; 
             
-        // feedback al recibir el golpe
         if(!golpeado)
-        {
-            Debug.Log("topo golpeado");
-            iTween.ShakeScale(gameObject, new Vector3(0.4f, 0.4f, 0.4f), 0.6f);
+        {         
             golpeado = true; 
-            FindObjectOfType<TareaTopos>().Acierto();
+            // comprobamos si es un acierto o un error comparando
+            // el estimulo golpeado con el estimulo objetivo configurado
+            // en la tarea 
+            if(tarea.Nivel.estimuloObjetivo == estimulo)
+            {
+                FindObjectOfType<TareaTopos>().Acierto();
+            } else {
+                FindObjectOfType<TareaTopos>().Error();
+            }                                  
+
+            // detenemos la corrutina de salida
+            StopCoroutine(corrutinaSalida);
+
+            // iniciamos una secuencia nueva      
+            StartCoroutine(CorrutinaGolpeo());
         }
+    }
+
+    private IEnumerator CorrutinaGolpeo()
+    {
+        
+        // feedback visual del golpe
+        iTween.ShakeScale(gameObject, new Vector3(0.4f, 0.4f, 0.4f), 0.6f);     
+        yield return new WaitForSeconds(0.6f); 
+
+        // empezamos la animacion de vuelta a la tierra
+        Vector3 posicion = gameObject.transform.position; 
+        float tiempoAnimacion = 0.5f; 
+        iTween.MoveTo(gameObject, new Vector3(posicion.x, -1, posicion.z), tiempoAnimacion);
+        
+        // esperamos un tiempo antes de dejar este estimulo
+        // disponible
+        yield return new WaitForSeconds(1f); 
+
+        // permitimos su nuevo uso 
+        enUso = false; 
+
+        yield return null; 
+
     }
 
     void Awake()
     {
         // crear referencias
         tarea = FindObjectOfType<TareaTopos>();
-        //nivelDificultad = tarea.NivelDificultad;
     }
 
+    // oculta todos los modelos 3D que puede usar el estimulo 
     private void OcultarModelos()
     {
         GameObject[] modelos = {
-            modeloTopo, modeloPato, modeloOveja, modeloPinguino
+            modeloTopo, modeloPato, modeloOveja, modeloPinguino, modeloGato
         };
 
         foreach(GameObject modelo in modelos)
             modelo.SetActive(false);
     }
 
-    private IEnumerator CorutinaSalirExterior(Estimulos tipo)
+    
+
+    private IEnumerator CorrutinaSalirExterior(Estimulos tipo)
     {
-        // ocultar los modelos y mostrar el adecuado 
+        // ocultar los modelos
         OcultarModelos();
+
+        // lista de estimulos posibles 
         GameObject[] modelos = {
-            modeloTopo, modeloPato, modeloOveja, modeloPinguino
+            modeloTopo, modeloPato, modeloOveja, modeloPinguino, modeloGato
         };
+        // mostrar el modelo 3D adecuado 
         modelos[ (int) tipo].SetActive(true);
 
+        // variables para la animacion de aparicion del estimulo
         Vector3 posicion = gameObject.transform.position; 
         float tiempoAnimacion = 0.5f; 
         float alturaObjetivo = 0.5f; 
@@ -152,19 +189,42 @@ public class Estimulo : MonoBehaviour
         escondido = false; 
         golpeado = false; 
 
-        // esperamos el tiempo de exposicion
-        yield return new WaitForSeconds(3f); //tarea.TiempoExposicionTopo);
-
+        // esperamos el tiempo de permanencia configurado en el 
+        // scriptable del nivel de dificultad 
+        yield return new WaitForSeconds(tarea.NivelDificultad.tiempoPermanenciaDelEstimulo);
 
         // empezamos la animacion de vuelta a la tierra
         iTween.MoveTo(gameObject, new Vector3(posicion.x, -1, posicion.z), tiempoAnimacion);
 
-        // contabilizar error
-        if(!golpeado)
-            FindObjectOfType<TareaTopos>().Error();
+        // pasado el tiempo de permanencia del estimulo podemos
+        // computar un error o una omision si no hemos golpeado el estimulo.
+        // Comparamos el estimulo con el estimulo objetivo configurado en el nivel 
+        if (!golpeado)
+        {
             
+            Debug.Log(estimulo + " vs " + tarea.Nivel.estimuloObjetivo);
+
+            if(estimulo == tarea.Nivel.estimuloObjetivo)
+            {
+                // era un estimulo objetivo que no hemos golpeado 
+                FindObjectOfType<TareaTopos>().Omision();
+
+            } else{
+
+                // hemos dejado de golpear un estimulo que no 
+                // era objetivo
+            }
+        }
+        
         // actualizamos el estado del topo
         escondido = true; 
+
+        // esperamos un tiempo antes de dejar este estimulo
+        // disponible
+        yield return new WaitForSeconds(1f); 
+
+        // permitimos su nuevo uso 
+        enUso = false; 
 
         yield return null; 
     }
