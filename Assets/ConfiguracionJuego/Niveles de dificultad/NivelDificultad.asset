@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630c7184126c59c43b991f10ee16acd0, type: 3}
   m_Name: NivelDificultad
   m_EditorClassIdentifier: 
-  similitudEntreEstimulos: 0
-  tiempoParaNuevoEstimulo: 1
+  similitudEntreEstimulos: 1
+  tiempoParaNuevoEstimulo: 2
   tiempoPermanenciaDelEstimulo: 2
