@@ -26,6 +26,12 @@ public class TareaTopos : Tarea
     // lista topos
     public Estimulo[] estimulos;
     
+    [SerializeField] private RectTransform canvasRect; 
+
+    public RectTransform CanvasRect 
+    {
+        get {return canvasRect;}
+    }
 
     protected override void Inicio()
     {

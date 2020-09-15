@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ConfiguracionJuego
   m_EditorClassIdentifier: 
   utilizarRatonAdicionalmente: 1
+  tiempoNecesarioParaSeleccion: 0.5

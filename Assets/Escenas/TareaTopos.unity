@@ -288,6 +288,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1247008095342645345, guid: b9c3843325666604c920b943320dce28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
@@ -1353,6 +1358,7 @@ MonoBehaviour:
   - {fileID: 1073720011}
   - {fileID: 66123059}
   - {fileID: 106348284}
+  canvasRect: {fileID: 222543681}
 --- !u!4 &681659154
 Transform:
   m_ObjectHideFlags: 0
@@ -1584,8 +1590,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221.85, y: -166.9}
-  m_SizeDelta: {x: 443.7, y: 333.7}
+  m_AnchoredPosition: {x: 159.2, y: -92.1}
+  m_SizeDelta: {x: 318.3, y: 184.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878778044
 MonoBehaviour:
@@ -2297,6 +2303,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1247008095342645345, guid: b9c3843325666604c920b943320dce28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
@@ -2457,6 +2468,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1247008095342645345, guid: b9c3843325666604c920b943320dce28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name

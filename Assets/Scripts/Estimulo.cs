@@ -13,6 +13,9 @@ public class Estimulo : MonoBehaviour
     public bool EnUso {
         get { return enUso; }
     }
+    public bool Golpeado {
+        get { return golpeado;}
+    }
     
     // el estimulo esta bajo tierra
     private bool escondido = true; 
@@ -202,7 +205,7 @@ public class Estimulo : MonoBehaviour
         if (!golpeado)
         {
             
-            Debug.Log(estimulo + " vs " + tarea.Nivel.estimuloObjetivo);
+            //Debug.Log(estimulo + " vs " + tarea.Nivel.estimuloObjetivo);
 
             if(estimulo == tarea.Nivel.estimuloObjetivo)
             {

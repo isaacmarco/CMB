@@ -7,6 +7,7 @@ using UnityEngine;
 public class ConfiguracionScriptable : ScriptableObject
 {
     
-    public bool utilizarRatonAdicionalmente; 
+    public bool utilizarRatonAdicionalmente = true; 
+    public float tiempoNecesarioParaSeleccion = 5f; 
 
 }
