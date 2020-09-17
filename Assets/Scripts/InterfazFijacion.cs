@@ -13,9 +13,6 @@ public class InterfazFijacion : MonoBehaviour
         // obtenemos el rect del canvas para calculos de coordenadas
         Canvas canvas = GetComponentInParent<Canvas>();
         canvasRect = FindObjectOfType<TareaTopos>().CanvasRect; 
-
-        
-        
     }   
 
     // actualizar el valor de progreso de fijacion 

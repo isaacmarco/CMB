@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Tobii.Gaming;
+
 public class TareaTopos : Tarea
 {
     private int puntuacion, aciertos, errores, omisiones;     
