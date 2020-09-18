@@ -37,9 +37,29 @@ public class PuntoVision : MonoBehaviour
         
         // obtener la posicion a la que se esta mirando
         // e interpolarla con la anterior (en coordenadas de pantalla)
-        Vector2 punto = TobiiAPI.GetGazePoint().Screen;     
+        //Vector2 punto = TobiiAPI.GetGazePoint().Screen;     
         // punto = Input.mousePosition;         
-        puntoFiltrado = Vector2.Lerp(puntoFiltrado, punto, 0.5f);
+        //puntoFiltrado = Vector2.Lerp(puntoFiltrado, punto, 0.5f);
+
+
+        GazePoint gazePoint = TobiiAPI.GetGazePoint();
+
+		if (gazePoint.IsValid)
+		{
+			Vector2 posicionGaze = gazePoint.Screen;			
+			Vector2 posicionEntera = new Vector2(
+                Mathf.RoundToInt(posicionGaze.x), 
+                Mathf.RoundToInt(posicionGaze.y)
+            );
+
+              
+            // posicionamos el punto. Debido al punto de pivote y configuracion
+            // del canvas, podemos utilizar directamente las coordenadas en 
+            // espacio de pantalla para dibujar en el canvas la UI del punto
+            imagenPunto.GetComponent<RectTransform>().anchoredPosition = posicionEntera; // posicionEnElCanvas; 
+			
+		} 
+      
 
         //Debug.Log(puntoFiltrado);
         
@@ -56,10 +76,6 @@ public class PuntoVision : MonoBehaviour
             out posicionEnElCanvas
         );*/
 
-        // posicionamos el punto. Debido al punto de pivote y configuracion
-        // del canvas, podemos utilizar directamente las coordenadas en 
-        // espacio de pantalla para dibujar en el canvas la UI del punto
-        imagenPunto.GetComponent<RectTransform>().anchoredPosition = puntoFiltrado; // posicionEnElCanvas; 
 
     }
    
