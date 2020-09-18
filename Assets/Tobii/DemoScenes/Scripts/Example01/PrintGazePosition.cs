@@ -14,18 +14,18 @@ using Tobii.Gaming;
 /// </remarks>
 public class PrintGazePosition : MonoBehaviour
 {
-	public Text xCoord;
-	public Text yCoord;
-	public GameObject GazePoint;
+	//public Text xCoord;
+	//public Text yCoord;
+	//public GameObject GazePoint;
 
 	private float _pauseTimer;
-	private Outline _xOutline;
-	private Outline _yOutline;
-
+	//private Outline _xOutline;
+	//private Outline _yOutline;
+//
 	void Start()
 	{
-		_xOutline = xCoord.GetComponent<Outline>();
-		_yOutline = yCoord.GetComponent<Outline>();
+		//_xOutline = xCoord.GetComponent<Outline>();
+		//_yOutline = yCoord.GetComponent<Outline>();
 	}
 
 	void Update()
@@ -36,28 +36,31 @@ public class PrintGazePosition : MonoBehaviour
 			return;
 		}
 
-		GazePoint.SetActive(false);
-		_xOutline.enabled = false;
-		_yOutline.enabled = false;
+		//GazePoint.SetActive(false);
+		//_xOutline.enabled = false;
+		//_yOutline.enabled = false;
 
 		GazePoint gazePoint = TobiiAPI.GetGazePoint();
 		if (gazePoint.IsValid)
 		{
 			Vector2 gazePosition = gazePoint.Screen;
-			yCoord.color = xCoord.color = Color.white;
+			//yCoord.color = xCoord.color = Color.white;
 			Vector2 roundedSampleInput = new Vector2(Mathf.RoundToInt(gazePosition.x), Mathf.RoundToInt(gazePosition.y));
-			xCoord.text = "x (in px): " + roundedSampleInput.x;
-			yCoord.text = "y (in px): " + roundedSampleInput.y;
-		}
 
+			Debug.Log(roundedSampleInput.x + ", " + roundedSampleInput.y);
+			//xCoord.text = "x (in px): " + roundedSampleInput.x;
+			//yCoord.text = "y (in px): " + roundedSampleInput.y;
+		} 
+
+		/*
 		if (Input.GetKeyDown(KeyCode.Space) && gazePoint.IsRecent())
 		{
 			_pauseTimer = 3f;
-			GazePoint.transform.localPosition = (gazePoint.Screen - new Vector2(Screen.width, Screen.height) / 2f) / GetComponentInParent<Canvas>().scaleFactor;
+			//GazePoint.transform.localPosition = (gazePoint.Screen - new Vector2(Screen.width, Screen.height) / 2f) / GetComponentInParent<Canvas>().scaleFactor;
 			yCoord.color = xCoord.color = new Color(0 / 255f, 190 / 255f, 255 / 255f);
-			GazePoint.SetActive(true);
-			_xOutline.enabled = true;
-			_yOutline.enabled = true;
-		}
+			//GazePoint.SetActive(true);
+			//_xOutline.enabled = true;
+			//_yOutline.enabled = true;
+		}*/
 	}
 }
