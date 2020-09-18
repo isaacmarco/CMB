@@ -46,10 +46,11 @@ public class PuntoVision : MonoBehaviour
 
 		if (gazePoint.IsValid)
 		{
-			Vector2 posicionGaze = gazePoint.Screen;			
+			Vector2 posicionGaze = gazePoint.Screen;	
+            puntoFiltrado = Vector2.Lerp(puntoFiltrado, posicionGaze, 0.5f);
 			Vector2 posicionEntera = new Vector2(
-                Mathf.RoundToInt(posicionGaze.x), 
-                Mathf.RoundToInt(posicionGaze.y)
+                Mathf.RoundToInt(puntoFiltrado.x), 
+                Mathf.RoundToInt(puntoFiltrado.y)
             );
 
               
