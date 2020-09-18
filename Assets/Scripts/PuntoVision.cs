@@ -10,19 +10,19 @@ public class PuntoVision : MonoBehaviour
     private Image imagenPunto; 
     private float alphaNormal = 0.4f; 
     private float alphaSeleccion = 1f; 
-    private Vector2 puntoFiltrado = Vector2.zero;
+    private Vector2 puntoFiltrado = Vector2.zero;    
     [SerializeField] private RectTransform canvasRect; 
 
     void Awake()
     {
-        // crear referencia al sprite 
+        // crear referencias
         imagenPunto = GetComponent<Image>();
     }
 
     void Update()
     {
-     
-
+        
+        
         // actualizar alpha del punto dependiendo de si estamos
         // mirando a un objeto del juego 
         GameObject objetoFijado = TobiiAPI.GetFocusedObject();
@@ -36,8 +36,10 @@ public class PuntoVision : MonoBehaviour
         // obtener la posicion a la que se esta mirando
         // e interpolarla con la anterior (en coordenadas de pantalla)
         Vector2 punto = TobiiAPI.GetGazePoint().Screen;     
-        //Vector2 punto = Input.mousePosition;         
+        // punto = Input.mousePosition;         
         puntoFiltrado = Vector2.Lerp(puntoFiltrado, punto, 0.5f);
+
+        Debug.Log(puntoFiltrado);
         
         // el punto obtenido por Tobii esta en coordenadas de pantalla
         // (0,0)-(ancho, alto). Hay que convertir esas coordenadas al 
