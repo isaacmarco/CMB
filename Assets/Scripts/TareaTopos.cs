@@ -47,6 +47,7 @@ public class TareaTopos : Tarea
     // se registra un acierto 
     public void Acierto()
     {        
+        FindObjectOfType<Audio>().FeedbackAcierto();
         aciertos++;
         if(aciertos >= nivel.aciertosParaSuperarElNivel)
             PartidaGanada();
@@ -62,6 +63,7 @@ public class TareaTopos : Tarea
     // se registra un error
     public void Error()
     {
+        FindObjectOfType<Audio>().FeedbackError();
         errores++;
         ComprobarOmisionError();
     }
