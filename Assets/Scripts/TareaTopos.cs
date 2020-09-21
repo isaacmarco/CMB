@@ -9,16 +9,18 @@ public class TareaTopos : Tarea
     private GazeAware gazeAware;
     // todo: establecer como privado y recurrir al 
     // componente Aplicacion 
-    public NivelScriptable nivel;
+    //public NivelScriptable nivel;
     public ConfiguracionScriptable configuracion; 
     private NivelDificultadScriptable nivelDificultad;    
 
     // devuelve el tiempo que el topo es visible al salir
-    public float TiempoPermanenciaDelEstimulo { get{ return nivelDificultad.tiempoPermanenciaDelEstimulo; } }
+    public float TiempoPermanenciaDelEstimulo { get{ return Nivel.tiempoPermanenciaDelEstimulo; } }
     // devuelve el nivel de dificultad
-    public NivelDificultadScriptable NivelDificultad { get { return nivelDificultad;} }
+    //public NivelDificultadScriptable NivelDificultad { get { return nivelDificultad;} }
     public ConfiguracionScriptable Configuracion { get { return configuracion;} }
-    public NivelScriptable Nivel { get { return nivel;} }
+    public NivelScriptable Nivel { 
+        get { return Configuracion.nivelActual;} 
+    }
     public int Aciertos { get { return aciertos;} }    
     public int Errores { get{return errores;} }
     public int Omisiones { get { return omisiones;} }
@@ -36,7 +38,7 @@ public class TareaTopos : Tarea
     protected override void Inicio()
     {
         // crear referencia al nivel de dificultad
-        nivelDificultad = nivel.nivelDeDificultad;
+        // nivelDificultad = nivel.nivelDeDificultad;
       
 
         // inciar cortuina de la partida 
@@ -49,13 +51,14 @@ public class TareaTopos : Tarea
     {        
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertos++;
-        if(aciertos >= nivel.aciertosParaSuperarElNivel)
+        if(aciertos >= Nivel.aciertosParaSuperarElNivel)
             PartidaGanada();
     }
 
     // se registra una omision 
     public void Omision()
     {
+        FindObjectOfType<Audio>().FeedbackOmision();
         omisiones++;
         ComprobarOmisionError();
     }    
@@ -72,7 +75,7 @@ public class TareaTopos : Tarea
     // o una omision 
     private void ComprobarOmisionError()
     {
-        if(errores + omisiones >= nivel.omisionesOErroresParaPerder)
+        if(errores + omisiones >= Nivel.omisionesOErroresParaPerder)
             PartidaPerdida();
     }
     
@@ -98,7 +101,7 @@ public class TareaTopos : Tarea
             // generar un nuevo topo
             NuevoEstimulo();
             // esperar un tiempo antes de mostrar otro
-            yield return new WaitForSeconds(nivelDificultad.tiempoParaNuevoEstimulo);
+            yield return new WaitForSeconds(Nivel.tiempoParaNuevoEstimulo);
 
         }
     }
@@ -110,12 +113,12 @@ public class TareaTopos : Tarea
         // Debug.Log("Nuevo estimulo");
 
         // obtener topo al azar
-        int indiceEstimulo = Random.Range(0, estimulos.Length);
+        int indiceMatriz = Random.Range(0, estimulos.Length);
         // TODO: 
         // obtener indices en la matriz al azar hasta que
         // se obtenga un estimulo que este escondido
-        if(!estimulos[indiceEstimulo].EnUso)
-            estimulos[indiceEstimulo].Nuevo();   
+        if(!estimulos[indiceMatriz].EnUso)
+            estimulos[indiceMatriz].Nuevo();   
             
     }
 

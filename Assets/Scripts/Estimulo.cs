@@ -40,11 +40,10 @@ public class Estimulo : MonoBehaviour
         // de dificultad de la tarea
         NivelScriptable nivel = tarea.Nivel; 
         //Estimulos estimulo = nivel.estimuloObjetivo;
-        NivelDificultadScriptable nivelDificultad = nivel.nivelDeDificultad;        
             
 
         // comprobamos el tipo de similitud entre estimulos configurada
-        switch( nivelDificultad.similitudEntreEstimulos)
+        switch( nivel.similitudEntreEstimulos)
         {
             case SimilitudEstimulos.SoloEstimuloObjetivo:
             // solo aparecen estimulos objetivo
@@ -52,8 +51,28 @@ public class Estimulo : MonoBehaviour
             break;
 
             case SimilitudEstimulos.DiferentesEstimulos:
-            // puede aparecer cualquier estimulo
-            estimulo = (Estimulos) (Random.Range(0, 4));
+            // puede aparecer cualquier estimulo, el estimulo objetivo
+            // aparece con cierta probabilidad configurada
+            float probabilidad = tarea.Configuracion.probabilidadAparicionEstimuloObjetio; 
+            if(Random.value < probabilidad)
+            {
+                // aparece el estimulo objetivo
+                estimulo = nivel.estimuloObjetivo;
+            } else {
+                // aparecera un estimulo que no es el objetivo, 
+                // lo eliminamos de la lista de posibles estimulos y elegimos
+                // uno al azar
+                ArrayList opcionesEstimulos = new ArrayList() {
+                    Estimulos.Topo, Estimulos.Pato, 
+                    Estimulos.Oveja, Estimulos.Pinguino, Estimulos.Gato
+                };
+                // lo quitamos
+                opcionesEstimulos.Remove(nivel.estimuloObjetivo);
+                // elegimos otro al azar
+                estimulo = (Estimulos) opcionesEstimulos[Random.Range(0, opcionesEstimulos.Count)];
+
+            }
+            
             break;
 
             /*
@@ -194,7 +213,7 @@ public class Estimulo : MonoBehaviour
 
         // esperamos el tiempo de permanencia configurado en el 
         // scriptable del nivel de dificultad 
-        yield return new WaitForSeconds(tarea.NivelDificultad.tiempoPermanenciaDelEstimulo);
+        yield return new WaitForSeconds(tarea.Nivel.tiempoPermanenciaDelEstimulo);
 
         // empezamos la animacion de vuelta a la tierra
         iTween.MoveTo(gameObject, new Vector3(posicion.x, -1, posicion.z), tiempoAnimacion);

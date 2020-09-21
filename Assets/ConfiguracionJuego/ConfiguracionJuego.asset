@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0129b03419a1c1a49a32165758b92eb1, type: 3}
   m_Name: ConfiguracionJuego
   m_EditorClassIdentifier: 
+  nivelActual: {fileID: 11400000, guid: 00e2852b60f7749459645140b82c912e, type: 2}
   utilizarRatonAdicionalmente: 1
-  tiempoNecesarioParaSeleccion: 0.5
   volumenDelFeedback: 1
+  tiempoNecesarioParaSeleccion: 0.5
+  probabilidadAparicionEstimuloObjetio: 0.4
