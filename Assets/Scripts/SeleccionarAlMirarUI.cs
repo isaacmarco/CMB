@@ -9,11 +9,12 @@ public class SeleccionarAlMirarUI : MonoBehaviour
     // componente tobii
 	private GazeAware gazeAware;	
     // refrencia a la tarea
-    private TareaTopos tarea; 	    
+    private Menu menu; 	    
     // si estamos mirando el estimulo en este frame
 	private bool elementoUIMirado; 
 	// momento en el que empezamos a mirar este estimulo	
 	private float tiempoInicioFijacion; 
+	private InterfazFijacion interfazFijacion; 
     // nombre del metodo que se ejecutara al mirar
     [SerializeField] private OpcionesMenu opcion; 
 
@@ -21,8 +22,9 @@ public class SeleccionarAlMirarUI : MonoBehaviour
     void Awake()
 	{
 		// creamos las referencias 
-		tarea = FindObjectOfType<TareaTopos>();
+		menu = FindObjectOfType<Menu>();
 		gazeAware = GetComponent<GazeAware>();	
+		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		
 	}
 
 
@@ -33,11 +35,11 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	{	
 		Ray ray;
      	RaycastHit hit;
-		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		ray = Camera.main.ScreenPointToRay(Input.mousePosition);		
 		// comprobamos tanto el tobii como el mouse 	
 		return gazeAware.HasGazeFocus || 
 			(
-				tarea.Configuracion.utilizarRatonAdicionalmente && 		
+				menu.Configuracion.utilizarRatonAdicionalmente && 		
 				Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject
 			);
 	}
@@ -81,24 +83,27 @@ public class SeleccionarAlMirarUI : MonoBehaviour
             break;
             
             case OpcionesMenu.LanzarTareaTopos:
+				Debug.Log("A");
             break;
 
             case OpcionesMenu.LanzarTarea2:
+				Debug.Log("B");
             break;
         }
     }
 
 	private void ContinuarFijacion()
-	{
+	{		
 		elementoUIMirado = true; 
 		// comprobar el tiempo
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
-		float tiempoNecesario = tarea.Configuracion.tiempoNecesarioParaSeleccion;
+		float tiempoNecesario = menu.Configuracion.tiempoNecesarioParaSeleccion;
 		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;
-		
+		// actualizar la ui de fijacion 
+		interfazFijacion.Actualizar(tiempoNormalizado);
 		if(tiempoFijacionTranscurrido > tiempoNecesario)
-		{
+		{			
 			// ya hemos terminado
 			SeleccionarUI();
 			DetenerFijacion();
@@ -110,12 +115,14 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	private void ComenzarFijacion()
 	{		
 		tiempoInicioFijacion = Time.unscaledTime;
+		elementoUIMirado = true;		
 	}
 	
 	
 	private void DetenerFijacion()
-	{	
+	{			
 		elementoUIMirado = false; 
+		interfazFijacion.Reiniciar();		
 	}
 
 
