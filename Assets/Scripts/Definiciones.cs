@@ -16,4 +16,9 @@ public enum SimilitudEstimulos
     EstimuloObjetivoConDetallesCambiantes
 };
 
-
+public enum OpcionesMenu
+{
+    VolverMenu,
+    LanzarTareaTopos, 
+    LanzarTarea2
+}
