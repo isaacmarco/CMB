@@ -10,16 +10,15 @@ public class TareaTopos : Tarea
     // todo: establecer como privado y recurrir al 
     // componente Aplicacion 
     //public NivelScriptable nivel;
-    public ConfiguracionScriptable configuracion; 
-    private NivelDificultadScriptable nivelDificultad;    
+    public ConfiguracionScriptable configuracion;     
 
     // devuelve el tiempo que el topo es visible al salir
     public float TiempoPermanenciaDelEstimulo { get{ return Nivel.tiempoPermanenciaDelEstimulo; } }
     // devuelve el nivel de dificultad
     //public NivelDificultadScriptable NivelDificultad { get { return nivelDificultad;} }
     public ConfiguracionScriptable Configuracion { get { return configuracion;} }
-    public NivelScriptable Nivel { 
-        get { return Configuracion.nivelActual;} 
+    public NivelToposScriptable Nivel { 
+        get { return (NivelToposScriptable) Configuracion.nivelActual;} 
     }
     public int Aciertos { get { return aciertos;} }    
     public int Errores { get{return errores;} }

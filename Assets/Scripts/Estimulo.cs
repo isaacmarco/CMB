@@ -38,7 +38,7 @@ public class Estimulo : MonoBehaviour
         
         // generar el estimulo dependiendo de la configuracion 
         // de dificultad de la tarea
-        NivelScriptable nivel = tarea.Nivel; 
+        NivelToposScriptable nivel = tarea.Nivel; 
         //Estimulos estimulo = nivel.estimuloObjetivo;
             
 

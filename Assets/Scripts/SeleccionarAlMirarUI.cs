@@ -16,8 +16,8 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	private float tiempoInicioFijacion; 
 	private InterfazFijacion interfazFijacion; 
     // nombre del metodo que se ejecutara al mirar
-    [SerializeField] private OpcionesMenu opcion; 
-
+    [SerializeField] private OpcionesSeleccionablesMenu opcion; 
+	[SerializeField] private Tareas tarea;
 
     void Awake()
 	{
@@ -25,6 +25,7 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 		menu = FindObjectOfType<Menu>();
 		gazeAware = GetComponent<GazeAware>();	
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		
+		interfazFijacion.Reiniciar();		
 	}
 
 
@@ -74,23 +75,10 @@ public class SeleccionarAlMirarUI : MonoBehaviour
        
 	}    	
 
-    private void SeleccionarUI()
+    private void Seleccionar()
     {
-        // reproducir el metodo apropiado
-        switch(opcion)
-        { 
-            case OpcionesMenu.VolverMenu:
-            break;
-            
-            case OpcionesMenu.LanzarTareaTopos:
-				Debug.Log("A");
-            break;
-
-            case OpcionesMenu.LanzarTarea2:
-				Debug.Log("B");
-            break;
-        }
-    }
+		FindObjectOfType<Menu>().EjecutarOpcionMenu(opcion, tarea);
+	}
 
 	private void ContinuarFijacion()
 	{		
@@ -98,14 +86,14 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 		// comprobar el tiempo
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
-		float tiempoNecesario = menu.Configuracion.tiempoNecesarioParaSeleccion;
+		float tiempoNecesario = menu.Configuracion.tiempoParaSeleccionEnMenus;
 		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;
 		// actualizar la ui de fijacion 
 		interfazFijacion.Actualizar(tiempoNormalizado);
 		if(tiempoFijacionTranscurrido > tiempoNecesario)
 		{			
 			// ya hemos terminado
-			SeleccionarUI();
+			Seleccionar();
 			DetenerFijacion();
 		} else {
 			// debemos seguir mirando 

@@ -16,9 +16,16 @@ public enum SimilitudEstimulos
     EstimuloObjetivoConDetallesCambiantes
 };
 
-public enum OpcionesMenu
+public enum OpcionesSeleccionablesMenu
 {
-    VolverMenu,
-    LanzarTareaTopos, 
-    LanzarTarea2
+    VolverMenuPrincipal,
+    MenuTareaTopos, 
+    ComenzarTareaTopos,
+    SalirAplicacion
+}
+
+public enum Tareas
+{
+    Ninguna, 
+    Topos
 }

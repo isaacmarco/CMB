@@ -94,7 +94,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 		// comprobar el tiempo
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
-		float tiempoNecesario = tarea.Configuracion.tiempoNecesarioParaSeleccion;
+		float tiempoNecesario = tarea.Configuracion.tiempoParaSeleccion;
 		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;
 		// TODO AQUI SE ESTA DANDO UN NULL Y NO SE LA RAZON
 		interfazFijacion.Actualizar(tiempoNormalizado);

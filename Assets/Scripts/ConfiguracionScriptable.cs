@@ -10,12 +10,14 @@ public class ConfiguracionScriptable : ScriptableObject
     public NivelScriptable nivelActual;
     [Header("Configuracion general")]
     public bool utilizarRatonAdicionalmente = true; 
-    
+    public float tiempoParaSeleccionEnMenus = 1f; 
     [Range(0, 1)]
     public float volumenDelFeedback = 1f; 
     [Header("Configuracion de la tarea")]
-    public float tiempoNecesarioParaSeleccion = 5f; 
+    public float tiempoParaSeleccion = 1f; 
     [Range(0, 1)]
     public float probabilidadAparicionEstimuloObjetio = 0.5f; 
+    [Header("Lista de tareas")]
+    public TareaScriptable[] tareas; 
 
 }
