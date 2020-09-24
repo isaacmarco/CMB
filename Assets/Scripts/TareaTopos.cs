@@ -5,19 +5,10 @@ using Tobii.Gaming;
 
 public class TareaTopos : Tarea
 {
-    private int puntuacion, aciertos, errores, omisiones;     
-    private GazeAware gazeAware;
-    // todo: establecer como privado y recurrir al 
-    // componente Aplicacion 
-    //public NivelScriptable nivel;   
-    private ArrayList listaRegistrosOculares; 
-    public ConfiguracionScriptable configuracion;     
-
+    private int puntuacion, aciertos, errores, omisiones;           
+  
     // devuelve el tiempo que el topo es visible al salir
-    public float TiempoPermanenciaDelEstimulo { get{ return Nivel.tiempoPermanenciaDelEstimulo; } }
-    // devuelve el nivel de dificultad
-    //public NivelDificultadScriptable NivelDificultad { get { return nivelDificultad;} }
-    public ConfiguracionScriptable Configuracion { get { return configuracion;} }
+    public float TiempoPermanenciaDelEstimulo { get{ return Nivel.tiempoPermanenciaDelEstimulo; } }    
     public NivelToposScriptable Nivel { 
         get { return (NivelToposScriptable) Configuracion.nivelActual;} 
     }
@@ -28,73 +19,12 @@ public class TareaTopos : Tarea
     // lista topos
     public Estimulo[] estimulos;
     
-    [SerializeField] private RectTransform canvasRect; 
-
-    public RectTransform CanvasRect 
-    {
-        get {return canvasRect;}
-    }
 
     protected override void Inicio()
     {        
         // inciar corrutina de la partida 
-        StartCoroutine(CorutinaPartida());
-        // iniciar la corrutina del diario
-        StartCoroutine(RegistroDiario());
-    }
-
-    private IEnumerator RegistroDiario()
-    {
-        float tiempoEspera = 1 / Configuracion.intervaloRegistroOcularEnHZ;
-        listaRegistrosOculares = new ArrayList();
-        int tiempoActualRegistro = 0; 
-
-        while(true)
-        {           
-
-            // obtenemos la posicion a la que se mira para registrarla
-            GazePoint gazePoint = TobiiAPI.GetGazePoint();
-
-		    if (gazePoint.IsValid)
-		    {
-			    Vector2 posicionGaze = gazePoint.Screen;	            			        
-                // creamos el nuevo registro y lo introducimos en la lista
-                listaRegistrosOculares.Add( new RegistroCocular(
-                    (int) posicionGaze.x, 
-                    (int) posicionGaze.y, 
-                    tiempoActualRegistro)
-                );
-                
-
-            } else {
-                
-                // si el punto no es valido lo indicamos con un valor especial
-                // x,y negativo
-                listaRegistrosOculares.Add( new RegistroCocular(
-                    -1, -1, tiempoActualRegistro
-                ));
-            }      
-            
-            tiempoActualRegistro++;
-            yield return new WaitForSeconds(tiempoEspera);      
-
-            
-		}   
-        
-    }
-
-    private class RegistroCocular
-    {
-        // momento
-        int tiempo;
-        // punto al que se mira
-        int x, y;
-        public RegistroCocular(int x, int y, int tiempo)
-        {
-            this.x = x; 
-            this.y = y; 
-            this.tiempo = tiempo; 
-        }
+        StartCoroutine(CorrutinaPartida());
+       
     }
 
     
@@ -140,7 +70,7 @@ public class TareaTopos : Tarea
         //Debug.Log("Partida perdida");
     }
 
-    private IEnumerator CorutinaPartida()
+    private IEnumerator CorrutinaPartida()
     {
         Debug.Log("Partida en curso");
 

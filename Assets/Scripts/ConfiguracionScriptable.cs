@@ -6,22 +6,33 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ConfiguracionScriptable : ScriptableObject
 {
-    [Header("Niveles de juego")]
+    [Header("Datos actuales")]
+    public PacienteScriptable pacienteActual;
+    public TareaScriptable tareaActual;     
     public NivelScriptable nivelActual;
-    [Header("Configuracion general")]
+
+    
+    [Header("Configuracion global")]
     public bool utilizarRatonAdicionalmente = true; 
     public float tiempoParaSeleccionEnMenus = 1f; 
+    public bool registrarMovimientoOcularEnDiario = false; 
     public float intervaloRegistroOcularEnHZ = 60f;
     [Range(0, 1)]
     public float volumenDelFeedback = 1f; 
-    [Header("Configuracion de la tarea de topos")]
+
+
+    [Header("Configuracion tarea de topos")]
     public float tiempoParaSeleccion = 1f; 
     [Range(0, 1)]
     public float probabilidadAparicionEstimuloObjetio = 0.5f; 
+
+    [Header("Configuracion tarea de memoria")]
+    public float sinUso = 1f;
+
     [Header("Lista de tareas")]
     public TareaScriptable[] tareas; 
-    [Header("Pacientes")]
-    public PacienteScriptable pacienteActual;
+
+    [Header("Lista de pacientes")]   
     public PacienteScriptable[] pacientes;
 
 }

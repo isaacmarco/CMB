@@ -15,7 +15,7 @@ public class Audio : MonoBehaviour
     
     public void FeedbackOmision()
     {
-        ASfeedbackOmision.volume = tarea.configuracion.volumenDelFeedback; 
+        ASfeedbackOmision.volume = tarea.Configuracion.volumenDelFeedback; 
         ASfeedbackOmision.Play();
     }
 
