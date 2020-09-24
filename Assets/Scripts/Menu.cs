@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private Transform jerarquiaMenuTarea;    
     [Header("Progreso de tareas")]
     [SerializeField] private Transform jerarquiaProgreso;     
-    [SerializeField] private Image progresoTarea; 
+    
 
     public RectTransform CanvasRect 
     {
@@ -43,7 +43,7 @@ public class Menu : MonoBehaviour
         if(jerarquia == jerarquiaMenuTarea)
         {            
             jerarquiaProgreso.gameObject.SetActive(true);
-            progresoTarea.fillAmount = Random.value; 
+            //progresoTarea.fillAmount = Random.value; 
          
             
         } else {

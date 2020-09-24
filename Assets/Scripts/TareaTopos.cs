@@ -9,7 +9,8 @@ public class TareaTopos : Tarea
     private GazeAware gazeAware;
     // todo: establecer como privado y recurrir al 
     // componente Aplicacion 
-    //public NivelScriptable nivel;
+    //public NivelScriptable nivel;   
+    private ArrayList listaRegistrosOculares; 
     public ConfiguracionScriptable configuracion;     
 
     // devuelve el tiempo que el topo es visible al salir
@@ -35,13 +36,65 @@ public class TareaTopos : Tarea
     }
 
     protected override void Inicio()
-    {
-        // crear referencia al nivel de dificultad
-        // nivelDificultad = nivel.nivelDeDificultad;
-      
-
-        // inciar cortuina de la partida 
+    {        
+        // inciar corrutina de la partida 
         StartCoroutine(CorutinaPartida());
+        // iniciar la corrutina del diario
+        StartCoroutine(RegistroDiario());
+    }
+
+    private IEnumerator RegistroDiario()
+    {
+        float tiempoEspera = 1 / Configuracion.intervaloRegistroOcularEnHZ;
+        listaRegistrosOculares = new ArrayList();
+        int tiempoActualRegistro = 0; 
+
+        while(true)
+        {           
+
+            // obtenemos la posicion a la que se mira para registrarla
+            GazePoint gazePoint = TobiiAPI.GetGazePoint();
+
+		    if (gazePoint.IsValid)
+		    {
+			    Vector2 posicionGaze = gazePoint.Screen;	            			        
+                // creamos el nuevo registro y lo introducimos en la lista
+                listaRegistrosOculares.Add( new RegistroCocular(
+                    (int) posicionGaze.x, 
+                    (int) posicionGaze.y, 
+                    tiempoActualRegistro)
+                );
+                
+
+            } else {
+                
+                // si el punto no es valido lo indicamos con un valor especial
+                // x,y negativo
+                listaRegistrosOculares.Add( new RegistroCocular(
+                    -1, -1, tiempoActualRegistro
+                ));
+            }      
+            
+            tiempoActualRegistro++;
+            yield return new WaitForSeconds(tiempoEspera);      
+
+            
+		}   
+        
+    }
+
+    private class RegistroCocular
+    {
+        // momento
+        int tiempo;
+        // punto al que se mira
+        int x, y;
+        public RegistroCocular(int x, int y, int tiempo)
+        {
+            this.x = x; 
+            this.y = y; 
+            this.tiempo = tiempo; 
+        }
     }
 
     

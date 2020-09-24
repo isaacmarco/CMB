@@ -15,8 +15,12 @@ MonoBehaviour:
   nivelActual: {fileID: 11400000, guid: 00e2852b60f7749459645140b82c912e, type: 2}
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
+  intervaloRegistroOcular: 0.016
   volumenDelFeedback: 1
   tiempoParaSeleccion: 0.55
   probabilidadAparicionEstimuloObjetio: 0.864
   tareas:
   - {fileID: 11400000, guid: 483c7baf9b157b34e97152fd58a3850f, type: 2}
+  pacienteActual: {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
+  pacientes:
+  - {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}

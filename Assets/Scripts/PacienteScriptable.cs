@@ -4,8 +4,9 @@ using UnityEngine;
 
 
 [CreateAssetMenu]
-public class JugadorScriptable : ScriptableObject
+public class PacienteScriptable : ScriptableObject
 {
     
     public string nombre; 
+    
 }
