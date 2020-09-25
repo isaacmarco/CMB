@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Estimulo : MonoBehaviour
+public class EstimuloTareaTopo : MonoBehaviour
 {    
     public GameObject modeloTopo, modeloPato, modeloOveja, 
     modeloPinguino, modeloGato; 
@@ -24,7 +24,7 @@ public class Estimulo : MonoBehaviour
     // el estimulo esta siendo usado por la tarea
     private bool enUso = false; 
     // tipo de estimulo 
-    private Estimulos estimulo = Estimulos.Topo; 
+    private EstimulosTareaTopos estimulo = EstimulosTareaTopos.Topo; 
     // referencia a la tarea 
     private TareaTopos tarea; 
     // corutina para mostrar el estimulo 
@@ -63,13 +63,13 @@ public class Estimulo : MonoBehaviour
                 // lo eliminamos de la lista de posibles estimulos y elegimos
                 // uno al azar
                 ArrayList opcionesEstimulos = new ArrayList() {
-                    Estimulos.Topo, Estimulos.Pato, 
-                    Estimulos.Oveja, Estimulos.Pinguino, Estimulos.Gato
+                    EstimulosTareaTopos.Topo, EstimulosTareaTopos.Pato, 
+                    EstimulosTareaTopos.Oveja, EstimulosTareaTopos.Pinguino, EstimulosTareaTopos.Gato
                 };
                 // lo quitamos
                 opcionesEstimulos.Remove(nivel.estimuloObjetivo);
                 // elegimos otro al azar
-                estimulo = (Estimulos) opcionesEstimulos[Random.Range(0, opcionesEstimulos.Count)];
+                estimulo = (EstimulosTareaTopos) opcionesEstimulos[Random.Range(0, opcionesEstimulos.Count)];
 
             }
             
@@ -187,7 +187,7 @@ public class Estimulo : MonoBehaviour
 
     
 
-    private IEnumerator CorrutinaSalirExterior(Estimulos tipo)
+    private IEnumerator CorrutinaSalirExterior(EstimulosTareaTopos tipo)
     {
         // ocultar los modelos
         OcultarModelos();

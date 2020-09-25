@@ -1,10 +1,17 @@
-﻿public enum Estimulos
+﻿public enum EstimulosTareaTopos
 {
     Topo, 
     Pato, 
     Oveja, 
     Pinguino,
     Gato
+};
+
+public enum EstimulosTareaMemory
+{
+    Triangulo, 
+    Cuadrado, 
+    Circulo
 };
 
 public enum SimilitudEstimulos

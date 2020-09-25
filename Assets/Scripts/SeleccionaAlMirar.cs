@@ -9,7 +9,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 	// componente tobii
 	private GazeAware gazeAware;	
 	// referencia al estimulo 
-    private Estimulo estimulo;
+    private EstimuloTareaTopo estimulo;
 	// referecia a la tarea 
 	private TareaTopos tarea; 	    
 	// si estamos mirando el estimulo en este frame
@@ -24,7 +24,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 		// creamos las referencias 
 		tarea = FindObjectOfType<TareaTopos>();
 		gazeAware = GetComponent<GazeAware>();	
-        estimulo = GetComponent<Estimulo>();	
+        estimulo = GetComponent<EstimuloTareaTopo>();	
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		
 	}
 

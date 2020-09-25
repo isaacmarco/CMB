@@ -3,17 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tobii.Gaming;
 
-public class TareaMemoria : Tarea
+public class TareaMemory : Tarea
 {
+    private enum EstadoTareaMemory
+    {
+        Ninguno, 
+        EligiendoPrimeraPieza, 
+        EligiendoSegundaPieza
+    };
+    
     [SerializeField] private GameObject avatar; 
+    [SerializeField] private TarjetaTareaMemory[] tarjetas; 
     private ControladorIK controladorIK; 
     private Vector2 puntoFiltrado; 
+    private EstadoTareaMemory estado;
+    
+
+     public NivelMemoryScriptable Nivel { 
+        get { return (NivelMemoryScriptable) Configuracion.nivelActual;} 
+    }
 
     protected override void Inicio()
     {    
         // referenciar el controladorIK del avatar
         controladorIK = avatar.GetComponent<ControladorIK>();
     }
+
+    // genera las tarjetas para el tablero
+    private void GenerarTarjetas()
+    {
+        // obtenemos la lista de estimulos de la tarea
+        EstimulosTareaMemory[] estimulos = Nivel.listaEstimulosParaFormarParejas;
+        // aleatorizamos la lista de estimulos
+        AleatorizarListaEstimulos(estimulos);
+        // asignamos a cada tarjeta del escenario su estimulo
+        for(int i=0; i<tarjetas.Length; i++)
+            tarjetas[i].AsignarEstimulo(estimulos[i]);
+    }
+
+    private void AleatorizarListaEstimulos(EstimulosTareaMemory[] lista)
+    {
+        int n = lista.Length; 
+        for(int i=0; i<n; i++)
+        {
+            int r = i + (int)(Random.value * ( n-i));
+            EstimulosTareaMemory t = lista[r];
+            lista[r] = lista[i];
+            lista[i] = t; 
+        }
+    }
+
+    // todo algoritmo pescador aqui!
+
 
     void Update()
     {
@@ -23,8 +64,7 @@ public class TareaMemoria : Tarea
         }
     }
 
-   
-
+    
     private void ActualizarBrazoVirtual()
     {
         // obtnemos el punto 
@@ -41,8 +81,7 @@ public class TareaMemoria : Tarea
                 Mathf.RoundToInt(puntoFiltrado.x), 
                 Mathf.RoundToInt(puntoFiltrado.y)
             );         
-            MoverBrazoVirtual(posicionEntera); 
-			
+            MoverBrazoVirtual(posicionEntera); 			
 		} 
       
 

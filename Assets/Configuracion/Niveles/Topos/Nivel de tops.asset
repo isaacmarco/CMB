@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Nivel de prueba
+  m_Name: Nivel de tops
   m_EditorClassIdentifier: Assembly-CSharp::NivelToposScriptable
   numeroDelNivel: 0
-  nivelSuperado: 0
   estimuloObjetivo: 0
   similitudEntreEstimulos: 1
   tiempoParaNuevoEstimulo: 1

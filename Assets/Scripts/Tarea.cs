@@ -36,7 +36,11 @@ public class Tarea : MonoBehaviour
     {
         // cada tarea implementa su propio metodo Inicio()
     }   
-       
+
+    private void EscribirDiarioEnDisco()
+    {
+        
+    }
     
     // corrutina para registrar a donde mira el paciente
     // en cada momento

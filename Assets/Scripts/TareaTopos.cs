@@ -17,7 +17,7 @@ public class TareaTopos : Tarea
     public int Omisiones { get { return omisiones;} }
 
     // lista topos
-    public Estimulo[] estimulos;
+    public EstimuloTareaTopo[] estimulos;
     
 
     protected override void Inicio()

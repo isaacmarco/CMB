@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class NivelToposScriptable : NivelScriptable
 {
     
 
     [Header("Dificultad")]
-    public Estimulos estimuloObjetivo; 
+    public EstimulosTareaTopos estimuloObjetivo; 
     public SimilitudEstimulos similitudEntreEstimulos;
     public float tiempoParaNuevoEstimulo; 
     public float tiempoPermanenciaDelEstimulo;   
