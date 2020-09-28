@@ -9,9 +9,22 @@
 
 public enum EstimulosTareaMemory
 {
-    Triangulo, 
-    Cuadrado, 
-    Circulo
+    Gato, 
+    Perro,
+    Zorro,
+    Rana, 
+    Hipo, 
+    Koala, 
+    Lemur, 
+    Mono,
+    Panda, 
+    Pinguino, 
+    Cerdo, 
+    Conejo, 
+    Oveja, 
+    Zorrillo, 
+    Tigre, 
+    Lobo
 };
 
 public enum SimilitudEstimulos

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Nivel de memory
   m_EditorClassIdentifier: 
   numeroDelNivel: 0
-  anchoMatriz: 2
-  altoMatriz: 2
-  listaEstimulosParaFormarParejas: 0100000000000000
+  anchoMatriz: 4
+  altoMatriz: 3
+  listaEstimulosParaFormarParejas: 090000000a0000000200000003000000040000000f000000
   tiempoParaSeleccionarPareja: 2
   erroresParaPerder: 10

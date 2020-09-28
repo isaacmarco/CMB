@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine;
 
 [CreateAssetMenu]
 public class ConfiguracionScriptable : ScriptableObject
@@ -24,7 +24,7 @@ public class ConfiguracionScriptable : ScriptableObject
     [Header("Configuracion tarea de topos")]
     public float tiempoParaSeleccion = 1f; 
     [Range(0, 1)]
-    public float probabilidadAparicionEstimuloObjetio = 0.5f; 
+    public float probabilidadAparicionEstimuloObjetio = 0.5f;     
 
     [Header("Configuracion tarea de memoria")]
     public float sinUso = 1f;

@@ -10,16 +10,17 @@ public class TareaMemory : Tarea
         Ninguno, 
         EligiendoPrimeraPieza, 
         EligiendoSegundaPieza
-    };
-    
+    };    
     [SerializeField] private GameObject avatar; 
+    [SerializeField] private GameObject prefabTarjeta;
+    [SerializeField] private Transform jerarquiaTarjetas;
     [SerializeField] private TarjetaTareaMemory[] tarjetas; 
     private ControladorIK controladorIK; 
     private Vector2 puntoFiltrado; 
     private EstadoTareaMemory estado;
     
 
-     public NivelMemoryScriptable Nivel { 
+    public NivelMemoryScriptable Nivel { 
         get { return (NivelMemoryScriptable) Configuracion.nivelActual;} 
     }
 
@@ -27,15 +28,61 @@ public class TareaMemory : Tarea
     {    
         // referenciar el controladorIK del avatar
         controladorIK = avatar.GetComponent<ControladorIK>();
+
+        GenerarTarjetas();
+    }
+
+    // instancia una tarjeta en la matriz y devuelve el copmonente
+    private TarjetaTareaMemory InstanciarTarjeta(int x, int y)
+    {
+        // instanciamos la tarjeta y la colocamos en la jerarquina
+        GameObject tarjeta = (GameObject) Instantiate(prefabTarjeta); 
+        tarjeta.name = "Tarjeta (" + x + ", " + y + ")";
+        tarjeta.transform.parent = jerarquiaTarjetas;
+        // posicionamos la tarjeta sobre la mesa
+        float alturaTarjeta = 0.15f;         
+        tarjeta.transform.localPosition = Vector3.zero;         
+        tarjeta.transform.localPosition = new Vector3(x, alturaTarjeta, y);
+        // ajustamos la escala y la rotacion 
+        tarjeta.transform.localScale = new Vector3(0.9f, 0.02f, 0.9f);
+        tarjeta.transform.localEulerAngles = Vector3.zero;
+        // devolvemos el componente
+        return tarjeta.GetComponent<TarjetaTareaMemory>();
     }
 
     // genera las tarjetas para el tablero
     private void GenerarTarjetas()
     {
-        // obtenemos la lista de estimulos de la tarea
-        EstimulosTareaMemory[] estimulos = Nivel.listaEstimulosParaFormarParejas;
+
+        // instanciamos la matriz de tarjetas
+        int contadorTarjetas = 0; 
+        tarjetas = new TarjetaTareaMemory[Nivel.anchoMatriz * Nivel.altoMatriz];
+        for(int i=0; i<Nivel.altoMatriz; i++)
+        {
+            for(int j=0; j<Nivel.anchoMatriz; j++)
+            {
+                // instanciamos la tarjeta e insertamos su componente
+                // devuelto en el vector de componentes de tarjetas
+                tarjetas[contadorTarjetas] = InstanciarTarjeta(j, i);
+                contadorTarjetas++;
+            }
+        }
+        
+
+        // generamos los estimulos para las tarjetas
+        EstimulosTareaMemory[] estimulos;
+
+        // duplicamos cada uno de los estimulos de la lista del nivel para generar las parejas        
+        estimulos = new EstimulosTareaMemory[Nivel.listaEstimulosParaFormarParejas.Length * 2]; 
+        // copiamos la lista
+        Nivel.listaEstimulosParaFormarParejas.CopyTo(estimulos, 0 );
+        // la volvemos a copiar para duplicarla
+        Nivel.listaEstimulosParaFormarParejas.CopyTo(estimulos, Nivel.listaEstimulosParaFormarParejas.Length);
+
+
         // aleatorizamos la lista de estimulos
         AleatorizarListaEstimulos(estimulos);
+
         // asignamos a cada tarjeta del escenario su estimulo
         for(int i=0; i<tarjetas.Length; i++)
             tarjetas[i].AsignarEstimulo(estimulos[i]);

@@ -64,10 +64,35 @@ public class NivelMemoryScriptable : NivelScriptable
             return; 
         }
 
+        // comprobar que los estimulos no esten duplicados en la lista
+        
+        foreach(EstimulosTareaMemory estimulo in listaEstimulosParaFormarParejas)
+        {
+            if(EstimuloDuplicado(estimulo))
+            {
+                Debug.LogError("Hay estimulos duplicados en la lista");
+                return;
+            }
+        }
+
         // si el metodo llega a este punto la configuracion es correcta
         Debug.Log("La configuracion del nivel es correcta"); 
 
 
+    }
+
+    private bool EstimuloDuplicado(EstimulosTareaMemory estimuloBuscado)
+    {
+        int contador = 0; 
+        foreach(EstimulosTareaMemory estimulo in listaEstimulosParaFormarParejas)
+        {
+            if(estimulo == estimuloBuscado)
+            {
+                contador++;
+            }
+        }
+
+        return contador > 1; 
     }
 
     
