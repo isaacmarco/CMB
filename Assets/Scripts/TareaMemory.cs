@@ -8,8 +8,8 @@ public class TareaMemory : Tarea
     private enum EstadoTareaMemory
     {
         Ninguno, 
-        EligiendoPrimeraPieza, 
-        EligiendoSegundaPieza
+        EligiendoPrimeraTarjeta, 
+        EligiendoSegundaTarjeta
     };    
     [SerializeField] private GameObject avatar; 
     [SerializeField] private GameObject prefabTarjeta;
@@ -17,19 +17,76 @@ public class TareaMemory : Tarea
     [SerializeField] private TarjetaTareaMemory[] tarjetas; 
     private ControladorIK controladorIK; 
     private Vector2 puntoFiltrado; 
-    private EstadoTareaMemory estado;
-    
-
+    private EstadoTareaMemory estadoJuego;
+    private TarjetaTareaMemory primeraTarjetaElegida, segundaTarjetaElegida; 
     public NivelMemoryScriptable Nivel { 
         get { return (NivelMemoryScriptable) Configuracion.nivelActual;} 
     }
 
+    
     protected override void Inicio()
     {    
         // referenciar el controladorIK del avatar
         controladorIK = avatar.GetComponent<ControladorIK>();
-
+        // generar la matriz de tarjetas segun el nivel de dificultad
         GenerarTarjetas();
+    }
+
+    public void VoltearTarjeta(TarjetaTareaMemory tarjeta)
+    {
+        switch(estadoJuego)
+        {
+            case EstadoTareaMemory.EligiendoPrimeraTarjeta:
+            ElegirPrimeraTarjeta(tarjeta);
+            break;
+
+            case EstadoTareaMemory.EligiendoSegundaTarjeta:
+            ElegirSegundaTarjeta(tarjeta);
+            break;
+        }
+    }
+
+    private void ElegirPrimeraTarjeta(TarjetaTareaMemory tarjeta)
+    {
+        // cambiamos el estado de la tarea
+        estadoJuego = EstadoTareaMemory.EligiendoSegundaTarjeta;
+        primeraTarjetaElegida = tarjeta;
+        CorrutinaOcultarTarjeta(tarjeta);
+    }
+
+    // corrutina para ocultar una tarjeta tiempo despues de haberle
+    // dado la vuelta
+    private IEnumerator CorrutinaOcultarTarjeta(TarjetaTareaMemory tarjeta)
+    {
+        yield return new WaitForSeconds(1f);
+        tarjeta.Ocultar();
+    }
+
+    private void ElegirSegundaTarjeta(TarjetaTareaMemory tarjeta)
+    {
+        // comprobamos si las dos tarjetas son iguales
+        segundaTarjetaElegida = tarjeta; 
+        ComprobarEleccionTarjetas();
+    }
+
+    private void ComprobarEleccionTarjetas()
+    {
+        // reiniciamos el estado de la tarea 
+        estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
+        // comprobamos las tarjetas
+        if(primeraTarjetaElegida.Estimulo == segundaTarjetaElegida.Estimulo)
+        {
+            Acierto();
+        } else {
+            Error();
+        }
+    }
+
+    private void Acierto()
+    {}
+    private void Error()
+    {
+
     }
 
     // instancia una tarjeta en la matriz y devuelve el copmonente

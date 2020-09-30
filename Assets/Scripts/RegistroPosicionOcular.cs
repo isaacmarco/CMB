@@ -5,14 +5,19 @@ using UnityEngine;
 public class RegistroPosicionOcular
 {
     // momento
-    int tiempo;
+    float tiempo;
     // punto al que se mira
     int x, y;
-    public RegistroPosicionOcular(int x, int y, int tiempo)
+    public RegistroPosicionOcular(int x, int y, float tiempo)
     {
         this.x = x; 
         this.y = y; 
         this.tiempo = tiempo; 
+    }
+
+    public string RegistroFormateadoParaEscribirEnDisco()
+    {
+        return tiempo + ";" + x + ";" + "y";
     }
 
 }

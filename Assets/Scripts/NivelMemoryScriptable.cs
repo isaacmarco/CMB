@@ -6,9 +6,9 @@ using UnityEngine;
 public class NivelMemoryScriptable : NivelScriptable
 {
     [Header("Configuracion")]
-    [Range(2, 10)]
+    [Range(1, 10)]
     public int anchoMatriz = 4; 
-    [Range(2, 10)]
+    [Range(1, 10)]
     public int altoMatriz = 4; 
     public EstimulosTareaMemory[] listaEstimulosParaFormarParejas;
     [Header("Dificultad")]    
