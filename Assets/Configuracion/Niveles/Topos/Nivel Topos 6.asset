@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e66cd84d8b336b64dafb35d741291457, type: 3}
-  m_Name: Nivel de topos
+  m_Name: Nivel Topos 6
   m_EditorClassIdentifier: 
-  numeroDelNivel: 0
+  numeroDelNivel: 5
   estimuloObjetivo: 0
-  similitudEntreEstimulos: 0
-  tiempoParaNuevoEstimulo: 2
-  tiempoPermanenciaDelEstimulo: 1
-  aciertosParaSuperarElNivel: 5
-  omisionesOErroresParaPerder: 5
+  similitudEntreEstimulos: 1
+  tiempoParaNuevoEstimulo: 1.5
+  tiempoPermanenciaDelEstimulo: 2
+  aciertosParaSuperarElNivel: 10
+  omisionesOErroresParaPerder: 20
