@@ -9,7 +9,10 @@ public class TareaMemory : Tarea
     {
         Ninguno, 
         EligiendoPrimeraTarjeta, 
-        EligiendoSegundaTarjeta
+        EligiendoSegundaTarjeta,
+        ComprobandoTarjetas,
+        TareaTerminada
+        
     };    
     [SerializeField] private GameObject avatar; 
     [SerializeField] private GameObject prefabTarjeta;
@@ -19,17 +22,27 @@ public class TareaMemory : Tarea
     private Vector2 puntoFiltrado; 
     private EstadoTareaMemory estadoJuego;
     private TarjetaTareaMemory primeraTarjetaElegida, segundaTarjetaElegida; 
+    
     public NivelMemoryScriptable Nivel { 
         get { return (NivelMemoryScriptable) Configuracion.nivelActual;} 
     }
+    private int errores; 
+    private int aciertos; 
 
-    
+    public bool PermitirSeleccionarTarjetas()
+    {
+        return estadoJuego == EstadoTareaMemory.EligiendoPrimeraTarjeta ||
+        estadoJuego == EstadoTareaMemory.EligiendoSegundaTarjeta; 
+    }
+
     protected override void Inicio()
     {    
         // referenciar el controladorIK del avatar
         controladorIK = avatar.GetComponent<ControladorIK>();
         // generar la matriz de tarjetas segun el nivel de dificultad
         GenerarTarjetas();
+
+        estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
     }
 
     public void VoltearTarjeta(TarjetaTareaMemory tarjeta)
@@ -42,6 +55,15 @@ public class TareaMemory : Tarea
 
             case EstadoTareaMemory.EligiendoSegundaTarjeta:
             ElegirSegundaTarjeta(tarjeta);
+            break;     
+
+            case EstadoTareaMemory.ComprobandoTarjetas:
+            break;
+
+            case EstadoTareaMemory.Ninguno:
+            break;       
+
+            case EstadoTareaMemory.TareaTerminada:
             break;
         }
     }
@@ -49,44 +71,96 @@ public class TareaMemory : Tarea
     private void ElegirPrimeraTarjeta(TarjetaTareaMemory tarjeta)
     {
         // cambiamos el estado de la tarea
+        Debug.Log("Primera tarjeta elegida " + tarjeta.Estimulo);
+        tarjeta.Voltear();
         estadoJuego = EstadoTareaMemory.EligiendoSegundaTarjeta;
         primeraTarjetaElegida = tarjeta;
-        CorrutinaOcultarTarjeta(tarjeta);
     }
 
-    // corrutina para ocultar una tarjeta tiempo despues de haberle
-    // dado la vuelta
-    private IEnumerator CorrutinaOcultarTarjeta(TarjetaTareaMemory tarjeta)
-    {
-        yield return new WaitForSeconds(1f);
-        tarjeta.Ocultar();
-    }
 
     private void ElegirSegundaTarjeta(TarjetaTareaMemory tarjeta)
     {
+        Debug.Log("Segunda tarjeta elegida " + tarjeta.Estimulo);
+        tarjeta.Voltear();        
+        estadoJuego = EstadoTareaMemory.ComprobandoTarjetas;
+        segundaTarjetaElegida = tarjeta;
         // comprobamos si las dos tarjetas son iguales
-        segundaTarjetaElegida = tarjeta; 
-        ComprobarEleccionTarjetas();
+        ComprobarEleccionTarjetas();        
     }
 
     private void ComprobarEleccionTarjetas()
     {
-        // reiniciamos el estado de la tarea 
-        estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
+        
         // comprobamos las tarjetas
         if(primeraTarjetaElegida.Estimulo == segundaTarjetaElegida.Estimulo)
         {
+            // damos feedback de acierto 
             Acierto();
+
+            // la pareja seleccioanda se queda visible 
+            
+            // comprobamos si hemos ganado el juego, el numero de aciertos
+            // debe ser igual al numero de parejas
+            if(aciertos == tarjetas.Length / 2)
+            {
+                JuegoGanado();
+            } else {
+                
+                // reiniciamos el estado de la tarea inmediantamente
+                // para continuar 
+                estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
+            }
+            
+
         } else {
+            // damos feedback de error
             Error();
+            // comenzamos la corrutina para volver a ocultar la pareja
+            // seleccionada
+            StartCoroutine(CorrutinaOcultarPareja());
+
+            if(errores >= Nivel.erroresParaPerder)
+                JuegoPerdido();
+
         }
+        
+    }
+
+    private void JuegoGanado()
+    {
+        Debug.LogError("Juego ganado");
+    }
+
+    private void JuegoPerdido()
+    {
+        Debug.LogError("Juego perdidio");
+    }
+
+    
+    // corrutina para ocultar una tarjeta tiempo despues de haberle
+    // dado la vuelta
+    private IEnumerator CorrutinaOcultarPareja() //TarjetaTareaMemory tarjeta)
+    {
+        Debug.Log("Esperando");
+        yield return new WaitForSeconds(Nivel.tiempoParaOcultarPareja);
+        Debug.Log("Ocultando parejas");
+        primeraTarjetaElegida.Ocultar();
+        segundaTarjetaElegida.Ocultar();
+        // reiniciamos el estado de la tarea 
+        estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
     }
 
     private void Acierto()
-    {}
+    {
+        Debug.Log("Acierto");
+        FindObjectOfType<Audio>().FeedbackAcierto();
+        aciertos++;
+    }
     private void Error()
     {
-
+        Debug.Log("Error");
+        FindObjectOfType<Audio>().FeedbackOmision();
+        errores++;
     }
 
     // instancia una tarjeta en la matriz y devuelve el copmonente

@@ -20,14 +20,21 @@ public class TarjetaTareaMemory : MonoBehaviour
         Ocultar();
     }
 
-    public void Voltear()
+    public void Seleccionar()
     {
         if(volteada)
             return; 
+        
+        Debug.Log("Seleccionando tarjeta");
+        FindObjectOfType<TareaMemory>().VoltearTarjeta(this); 
+    }
 
+    public void Voltear()
+    {
+        Debug.Log("Volteando tarjeta");
         objeto.SetActive(true); 
         volteada = true; 
-        // FindObjectOfType<TareaMemory>().VoltearTarjeta(this); 
+        
         //StartCoroutine(CorrutinaVoltear());
     }
 /*
@@ -40,6 +47,7 @@ public class TarjetaTareaMemory : MonoBehaviour
     */
     public void Ocultar()
     {
+        //Debug.Log("Ocultando tarjeta");
         objeto.SetActive(false);
         volteada = false; 
     }

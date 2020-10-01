@@ -47,7 +47,7 @@ public class SeleccionarTarjetaAlMirar : MonoBehaviour
 
     public void SeleccionarTarjeta()
     {	
-        tarjeta.Voltear();
+        tarjeta.Seleccionar();
     }
 
     
@@ -77,6 +77,11 @@ public class SeleccionarTarjetaAlMirar : MonoBehaviour
 			DetenerFijacion();
 			return; 
 		}
+
+		// si no estamos en un estado adecuado de la tarea
+		// no debemos mostrar el indicador
+		if(!tarea.PermitirSeleccionarTarjetas())
+			return; 
 
 		// comprobamos si tenemos la vista sobre este
 		// estimulo 

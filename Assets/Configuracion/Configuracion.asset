@@ -17,7 +17,7 @@ MonoBehaviour:
   nivelActual: {fileID: 11400000, guid: 4de7d538e7fa30b458cd3edc4fe5e21b, type: 2}
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
-  registrarMovimientoOcularEnDiario: 0
+  registrarMovimientoOcularEnDiario: 1
   intervaloRegistroOcularEnHZ: 60
   volumenDelFeedback: 1
   tiempoParaSeleccion: 0.55

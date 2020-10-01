@@ -6,11 +6,11 @@ public class Audio : MonoBehaviour
 {
     // referencias a los audiosources
     [SerializeField] private AudioSource ASfeedbackAcierto, ASfeedbackError, ASfeedbackOmision;     
-    private TareaTopos tarea;
+    private Tarea tarea;
     
     void Start()
     {
-        tarea = FindObjectOfType<TareaTopos>();
+        tarea = FindObjectOfType<Tarea>();
     }
     
     public void FeedbackOmision()

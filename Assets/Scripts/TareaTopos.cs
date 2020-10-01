@@ -9,9 +9,12 @@ public class TareaTopos : Tarea
   
     // devuelve el tiempo que el topo es visible al salir
     public float TiempoPermanenciaDelEstimulo { get{ return Nivel.tiempoPermanenciaDelEstimulo; } }    
+    
+   
     public NivelToposScriptable Nivel { 
         get { return (NivelToposScriptable) Configuracion.nivelActual;} 
     }
+
     public int Aciertos { get { return aciertos;} }    
     public int Errores { get{return errores;} }
     public int Omisiones { get { return omisiones;} }

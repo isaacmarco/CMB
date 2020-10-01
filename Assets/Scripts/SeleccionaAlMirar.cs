@@ -11,7 +11,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 	// referencia al estimulo 
     private EstimuloTareaTopo estimulo;
 	// referecia a la tarea 
-	private TareaTopos tarea; 	    
+	private Tarea tarea; 	    
 	// si estamos mirando el estimulo en este frame
 	private bool estimuloMirado; 
 	// momento en el que empezamos a mirar este estimulo	
@@ -22,7 +22,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 	void Awake()
 	{
 		// creamos las referencias 
-		tarea = FindObjectOfType<TareaTopos>();
+		tarea = FindObjectOfType<Tarea>();
 		gazeAware = GetComponent<GazeAware>();	
         estimulo = GetComponent<EstimuloTareaTopo>();	
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		

@@ -13,6 +13,7 @@ public class NivelMemoryScriptable : NivelScriptable
     public EstimulosTareaMemory[] listaEstimulosParaFormarParejas;
     [Header("Dificultad")]    
     public float tiempoParaSeleccionarPareja = 2f; 
+    public float tiempoParaOcultarPareja = 2f; 
     [Header("Requisitos para la superacion")]    
     public int erroresParaPerder;      
     

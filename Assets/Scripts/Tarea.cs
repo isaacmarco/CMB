@@ -16,7 +16,7 @@ public class Tarea : MonoBehaviour
     { 
         get { return configuracion;} 
     }   
-
+  
     public RectTransform CanvasRect 
     {
         get {return canvasRect;}
@@ -32,14 +32,24 @@ public class Tarea : MonoBehaviour
             StartCoroutine(RegistroDiario());
     }
 
+    private IEnumerator TestRegistro()
+    {
+        Debug.LogError("Activo test de registro a disco");
+        yield return new WaitForSeconds(5f);
+        EscribirDiarioEnDisco();        
+        yield return null; 
+    }
+
     protected virtual void Inicio()
     {
         // cada tarea implementa su propio metodo Inicio()
     }   
-
+    
     private void EscribirDiarioEnDisco()
     {
-        using (StreamWriter sw = new StreamWriter(@"file.txt"))
+        Debug.Log("Escribiendo diario en disco");
+
+        using (StreamWriter sw = new StreamWriter(@"diario.txt"))
         {
             // cabecera
             sw.WriteLine("codigo del paciente");
@@ -68,6 +78,8 @@ public class Tarea : MonoBehaviour
         listaRegistrosOculares = new ArrayList();
         float tiempoInicio = Time.time;
 
+        StartCoroutine(TestRegistro());
+
         while(true)
         {           
 
@@ -78,13 +90,15 @@ public class Tarea : MonoBehaviour
 
 		    if (gazePoint.IsValid)
 		    {
-			    Vector2 posicionGaze = gazePoint.Screen;	            			        
+			    Vector2 posicionGaze = gazePoint.Screen;	            		
+                	        
                 // creamos el nuevo registro y lo introducimos en la lista
                 
                 listaRegistrosOculares.Add( new RegistroPosicionOcular(
+                    tiempoActual,
                     (int) posicionGaze.x, 
-                    (int) posicionGaze.y, 
-                    tiempoActual)
+                    (int) posicionGaze.y
+                    )
                 );
                 
 
@@ -93,11 +107,11 @@ public class Tarea : MonoBehaviour
                 // si el punto no es valido lo indicamos con un valor especial
                 // x,y negativo
                 listaRegistrosOculares.Add( new RegistroPosicionOcular(
-                    -1, -1,  tiempoActual
+                    tiempoActual, -1, -1  
                 ));
             }      
             
-            tiempoInicio++;
+            //tiempoInicio++;
             yield return new WaitForSeconds(tiempoEspera); 
             
 		}   
