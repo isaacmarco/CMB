@@ -22,6 +22,38 @@ public class TareaTopos : Tarea
     // lista topos
     public EstimuloTareaTopo[] estimulos;
     
+    protected override string ObtenerCabeceraTarea()
+    {
+        string cabecera = string.Empty;
+        string posicionesMatriz = string.Empty; 
+
+        for(int i=0; i<estimulos.Length; i++)
+        {
+            // obtener posicion del elemento
+            Vector3 posicionElementoMatriz = estimulos[i].transform.position; 
+            // transformar las coordeandas
+            Vector2 posicionViewport = Camera.main.WorldToViewportPoint(posicionElementoMatriz);
+            Vector2 posicionEnPantalla = new Vector2(
+                ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f)),
+                ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))
+            );
+            posicionesMatriz += "(" + (int)posicionEnPantalla.x + "," + (int)posicionEnPantalla.y + ") ";            
+        }
+        cabecera += "Posiciones fijas de los estimulos " + posicionesMatriz + "\n";
+
+        cabecera += "Leyenda: tiempo; Estimulo objetivo; x ;y ; matriz que representa el estado de la tarea";
+        return cabecera;
+    }
+
+    protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
+    {
+        // creamos la matriz
+        EstimulosTareaTopos[] matriz = new EstimulosTareaTopos[estimulos.Length];
+        for(int i=0; i<estimulos.Length;i++)
+            matriz[i] = estimulos[i].Estimulo;
+        
+        return new RegistroPosicionOcultarTareaTopos(tiempo, x, y, Nivel.estimuloObjetivo, matriz);        
+    } 
 
     protected override void Inicio()
     {        
@@ -30,6 +62,7 @@ public class TareaTopos : Tarea
        
     }
 
+    
     
     // se registra un acierto 
     public void Acierto()

@@ -1,10 +1,11 @@
 ﻿public enum EstimulosTareaTopos
-{
+{    
     Topo, 
     Pato, 
     Oveja, 
     Pinguino,
-    Gato
+    Gato,
+    Ninguno
 };
 
 public enum EstimulosTareaMemory

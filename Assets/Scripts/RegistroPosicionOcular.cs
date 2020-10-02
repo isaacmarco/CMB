@@ -5,15 +5,10 @@ using UnityEngine;
 public class RegistroPosicionOcular
 {
     // momento
-    float tiempo;
+    protected float tiempo;
     // punto al que se mira
-    int x, y;
-    // matriz para la tarae de topos
-    // -1 no hay estimulo
-    //  0 hay un estimulo
-    //  1 esta el estimulo objetivo
-    public int[] matrizTareaTopos = new int[9];
-
+    protected int x, y;
+    
     public RegistroPosicionOcular(float tiempo, int x, int y)
     {
         this.tiempo = tiempo; 
@@ -21,28 +16,8 @@ public class RegistroPosicionOcular
         this.y = y;         
     }
     
-    public RegistroPosicionOcular(float tiempo, int x, int y, int[] matrizTareaTopos)
+    public virtual string RegistroFormateadoParaEscribirEnDisco()
     {
-        this.tiempo = tiempo; 
-        this.x = x; 
-        this.y = y;         
-        this.matrizTareaTopos = matrizTareaTopos; 
+        return tiempo.ToString("0.0000") + ";" + x + ";" + y;
     }
-
-    public string RegistroFormateadoParaEscribirEnDisco()
-    {
-        return tiempo + ";" + x + ";" + y;
-    }
-
-    public string RegistroFormateadoTareaTopos()
-    {
-        string matrizFormateada = string.Empty; 
-        for(int i=0; i<matrizTareaTopos.Length; i++)
-        {
-            matrizFormateada += matrizTareaTopos[i] + ";";
-            // TODO: QUITAR EL ; EN EL ULTIMO ELEMENTO
-        }
-        return tiempo + ";" + x + ";" + y + ";" + matrizFormateada; 
-    }
-
 }

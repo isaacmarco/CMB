@@ -17,6 +17,10 @@ public class EstimuloTareaTopo : MonoBehaviour
         get { return golpeado;}
     }
     
+    public EstimulosTareaTopos Estimulo
+    {
+        get { return estimulo;}
+    }
     // el estimulo esta bajo tierra
     private bool escondido = true; 
     // se ha golpeado el estimulo 
@@ -24,7 +28,7 @@ public class EstimuloTareaTopo : MonoBehaviour
     // el estimulo esta siendo usado por la tarea
     private bool enUso = false; 
     // tipo de estimulo 
-    private EstimulosTareaTopos estimulo = EstimulosTareaTopos.Topo; 
+    private EstimulosTareaTopos estimulo = EstimulosTareaTopos.Ninguno; 
     // referencia a la tarea 
     private TareaTopos tarea; 
     // corutina para mostrar el estimulo 
@@ -36,6 +40,9 @@ public class EstimuloTareaTopo : MonoBehaviour
     {
         enUso = true; 
         
+        // reiniciamos el estimulo
+        estimulo = EstimulosTareaTopos.Ninguno; 
+
         // generar el estimulo dependiendo de la configuracion 
         // de dificultad de la tarea
         NivelToposScriptable nivel = tarea.Nivel; 
