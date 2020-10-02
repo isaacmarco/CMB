@@ -11,6 +11,11 @@ public class Tarea : MonoBehaviour
     protected GazeAware gazeAware;
     [SerializeField] private ConfiguracionScriptable configuracion;     
     [SerializeField] private RectTransform canvasRect; 
+    [SerializeField] private Mensaje mensaje; 
+
+    public Mensaje Mensaje {
+        get { return mensaje;}
+    } 
 
     public ConfiguracionScriptable Configuracion 
     { 
@@ -25,6 +30,8 @@ public class Tarea : MonoBehaviour
 
     void Awake()
     {
+        Mensaje.Ocultar();
+        
         // inicio de la tarea (virtual)
         Inicio();
         // iniciar la corrutina del diario

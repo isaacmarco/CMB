@@ -34,6 +34,31 @@ public class EstimuloTareaTopo : MonoBehaviour
     // corutina para mostrar el estimulo 
     private Coroutine corrutinaSalida; 
     
+    private void GenerarDiferentesEstimulos()
+    {
+        NivelToposScriptable nivel = tarea.Nivel; 
+        float probabilidad = tarea.Configuracion.probabilidadAparicionEstimuloObjetio; 
+        if(Random.value < probabilidad)
+        {
+            // aparece el estimulo objetivo
+            estimulo = nivel.estimuloObjetivo;
+        } else {
+            // aparecera un estimulo que no es el objetivo, 
+            // lo eliminamos de la lista de posibles estimulos y elegimos
+            // uno al azar
+            ArrayList opcionesEstimulos = new ArrayList() {
+                EstimulosTareaTopos.Topo, EstimulosTareaTopos.Pato, 
+                EstimulosTareaTopos.Oveja, EstimulosTareaTopos.Pinguino, 
+                EstimulosTareaTopos.Gato
+            };
+            // lo quitamos
+            opcionesEstimulos.Remove(nivel.estimuloObjetivo);
+            // elegimos otro al azar
+            estimulo = (EstimulosTareaTopos) opcionesEstimulos[Random.Range(0, opcionesEstimulos.Count)];
+
+        }
+    }
+
     // generamos un nuevo estimulo siguiendo la configuracion
     // del nivel de dificultad 
     public void Nuevo()
@@ -46,40 +71,26 @@ public class EstimuloTareaTopo : MonoBehaviour
         // generar el estimulo dependiendo de la configuracion 
         // de dificultad de la tarea
         NivelToposScriptable nivel = tarea.Nivel; 
-        //Estimulos estimulo = nivel.estimuloObjetivo;
-            
 
         // comprobamos el tipo de similitud entre estimulos configurada
         switch( nivel.similitudEntreEstimulos)
-        {
+        {         
+
             case SimilitudEstimulos.SoloEstimuloObjetivo:
             // solo aparecen estimulos objetivo
             estimulo = nivel.estimuloObjetivo;
             break;
 
+            case SimilitudEstimulos.EstimuloObjetivoCambiante:
+            // el estimulo objetivo cambia cada cierto tiempo, por lo que
+            // entramos en el codigo del case 'Diferentes estimulos'            
+            GenerarDiferentesEstimulos();
+            break;
+
             case SimilitudEstimulos.DiferentesEstimulos:
             // puede aparecer cualquier estimulo, el estimulo objetivo
             // aparece con cierta probabilidad configurada
-            float probabilidad = tarea.Configuracion.probabilidadAparicionEstimuloObjetio; 
-            if(Random.value < probabilidad)
-            {
-                // aparece el estimulo objetivo
-                estimulo = nivel.estimuloObjetivo;
-            } else {
-                // aparecera un estimulo que no es el objetivo, 
-                // lo eliminamos de la lista de posibles estimulos y elegimos
-                // uno al azar
-                ArrayList opcionesEstimulos = new ArrayList() {
-                    EstimulosTareaTopos.Topo, EstimulosTareaTopos.Pato, 
-                    EstimulosTareaTopos.Oveja, EstimulosTareaTopos.Pinguino, EstimulosTareaTopos.Gato
-                };
-                // lo quitamos
-                opcionesEstimulos.Remove(nivel.estimuloObjetivo);
-                // elegimos otro al azar
-                estimulo = (EstimulosTareaTopos) opcionesEstimulos[Random.Range(0, opcionesEstimulos.Count)];
-
-            }
-            
+            GenerarDiferentesEstimulos();
             break;
 
             /*

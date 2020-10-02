@@ -34,7 +34,8 @@ public enum SimilitudEstimulos
     DiferentesEstimulos,
     DiferentesEstimulosConElColorDelObjetivo, 
     EstimuloObjetivoConColorCambiante, 
-    EstimuloObjetivoConDetallesCambiantes
+    EstimuloObjetivoConDetallesCambiantes,
+    EstimuloObjetivoCambiante
 };
 
 public enum OpcionesSeleccionablesMenu

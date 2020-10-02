@@ -57,9 +57,9 @@ public class TareaTopos : Tarea
 
     protected override void Inicio()
     {        
-        // inciar corrutina de la partida 
-        StartCoroutine(CorrutinaPartida());
        
+        // inciar corrutina de la partida 
+        StartCoroutine(CorrutinaPartida());       
     }
 
     
@@ -108,20 +108,56 @@ public class TareaTopos : Tarea
 
     private IEnumerator CorrutinaPartida()
     {
-        Debug.Log("Partida en curso");
+        Debug.Log("Inicio de tarea");
+
+        
+        // test de mensaje
+        /*
+        Mensaje.Mostrar("Hola");
+        yield return new WaitForSeconds(3f);
+        Mensaje.Ocultar();
+        */
 
         // tiempo de espera inicial
         yield return new WaitForSeconds(1f);
 
+        Debug.Log("Comienzo de juego");
+
+        // contador de estimulos generados
+        int contadorEstimulosGenerados = 0; 
+
         // comienzo del game loop
         while(true)
         {
+            
             // generar un nuevo topo
             NuevoEstimulo();
+            contadorEstimulosGenerados++;
+
+            // comprobar si debemos cambiar el estimulo objetivo
+            if(Nivel.similitudEntreEstimulos == SimilitudEstimulos.EstimuloObjetivoCambiante)
+            {
+                // comprobamos si ya han aparecido suficientes estimulos
+                // objetivos del tipo actual                 
+                if(contadorEstimulosGenerados >= Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
+                {
+                    
+                    // cambiamos el estimulo objetivo
+                    contadorEstimulosGenerados = 0; 
+                    EstimulosTareaTopos nuevoEstimuloObjetivo = (EstimulosTareaTopos) Random.Range(0, 4);
+                    // OJO: estoy cambiando el estimulo del scriptable!
+                    Nivel.estimuloObjetivo = nuevoEstimuloObjetivo; 
+                    Debug.Log("Cambiando estimulo objetivo, ahora es " + Nivel.estimuloObjetivo);
+                }
+            }
+
             // esperar un tiempo antes de mostrar otro
             yield return new WaitForSeconds(Nivel.tiempoParaNuevoEstimulo);
-
         }
+    }
+
+    private void ComprobarCambioEstimuloObjetivo()
+    {
     }
 
     // aparece un topo nuevo 
