@@ -98,6 +98,8 @@ public class TareaMemory : Tarea
             Acierto();
 
             // la pareja seleccioanda se queda visible 
+            primeraTarjetaElegida.Resuelta();
+            segundaTarjetaElegida.Resuelta();
             
             // comprobamos si hemos ganado el juego, el numero de aciertos
             // debe ser igual al numero de parejas
@@ -173,7 +175,7 @@ public class TareaMemory : Tarea
         // posicionamos la tarjeta sobre la mesa
         float alturaTarjeta = 0.15f;         
         tarjeta.transform.localPosition = Vector3.zero;         
-        tarjeta.transform.localPosition = new Vector3(x, alturaTarjeta, y);
+        tarjeta.transform.localPosition = new Vector3(x, alturaTarjeta, -y);
         // ajustamos la escala y la rotacion 
         tarjeta.transform.localScale = new Vector3(0.9f, 0.02f, 0.9f);
         tarjeta.transform.localEulerAngles = Vector3.zero;
@@ -199,6 +201,19 @@ public class TareaMemory : Tarea
             }
         }
         
+        // desplazar la jerarquia para que las tarjetas queden centradas
+        float escalaJerarquia = 0.1f; 
+        float distanciaCentroTarjeta = 0.5f; 
+        float desplazamientoX = (Nivel.anchoMatriz / 2f - distanciaCentroTarjeta) * escalaJerarquia; 
+        float desplazamientoY = (Nivel.altoMatriz / 2f - distanciaCentroTarjeta) * escalaJerarquia;
+        // cambiamos la posicion de la jerarquia
+        jerarquiaTarjetas.transform.position = new Vector3
+        (
+            -desplazamientoX,
+            0.135f,
+            desplazamientoY
+        );
+     
 
         // generamos los estimulos para las tarjetas
         EstimulosTareaMemory[] estimulos;
