@@ -16,6 +16,7 @@ public class ConfiguracionScriptable : ScriptableObject
     public bool utilizarRatonAdicionalmente = true; 
     public float tiempoParaSeleccionEnMenus = 1f; 
     public bool registrarMovimientoOcularEnDiario = false; 
+    public int duracionDeMensajes;
     public float intervaloRegistroOcularEnHZ = 60f;
     [Range(0, 1)]
     public float volumenDelFeedback = 1f; 

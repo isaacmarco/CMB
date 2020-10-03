@@ -32,9 +32,11 @@ public enum SimilitudEstimulos
 {
     SoloEstimuloObjetivo, 
     DiferentesEstimulos,
+    /*
     DiferentesEstimulosConElColorDelObjetivo, 
     EstimuloObjetivoConColorCambiante, 
     EstimuloObjetivoConDetallesCambiantes,
+    */
     EstimuloObjetivoCambiante
 };
 

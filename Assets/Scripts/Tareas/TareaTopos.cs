@@ -5,7 +5,11 @@ using Tobii.Gaming;
 
 public class TareaTopos : Tarea
 {
-    private int puntuacion, aciertos, errores, omisiones;           
+    private int puntuacion, aciertos, errores, omisiones;       
+    private Coroutine corrutinaJuego;     
+    private Coroutine corrutinaCambioEstimuloObjetivo; 
+    // contador de estimulos mostrados
+    private int contadorEstimulosMostrados = 0; 
   
     // devuelve el tiempo que el topo es visible al salir
     public float TiempoPermanenciaDelEstimulo { get{ return Nivel.tiempoPermanenciaDelEstimulo; } }    
@@ -59,7 +63,7 @@ public class TareaTopos : Tarea
     {        
        
         // inciar corrutina de la partida 
-        StartCoroutine(CorrutinaPartida());       
+        corrutinaJuego = StartCoroutine(CorrutinaPartida());       
     }
 
     
@@ -98,66 +102,142 @@ public class TareaTopos : Tarea
     }
     
     private void PartidaGanada()
-    {
-        //Debug.Log("Partida ganada");
+    {        
+        StopAllCoroutines();
+        StartCoroutine(DetenerJuego(true)); 
     }
     private void PartidaPerdida()
     {
-        //Debug.Log("Partida perdida");
+        StopAllCoroutines();
+        StartCoroutine(DetenerJuego(false)); 
     }
+
+    private IEnumerator DetenerJuego(bool juegoGanado)
+    {
+        
+        // mostrar feedback
+        if(juegoGanado)
+        {
+            yield return StartCoroutine(MostrarMensaje("Partida Ganada"));
+        } else {
+            yield return StartCoroutine(MostrarMensaje("Partida perdida"));
+        }
+
+        // en este punto se vuelve al menu 
+        Debug.LogError("Juego finalizado");
+
+        yield return null;
+    }
+
 
     private IEnumerator CorrutinaPartida()
     {
         Debug.Log("Inicio de tarea");
 
-        
-        // test de mensaje
-        /*
-        Mensaje.Mostrar("Hola");
-        yield return new WaitForSeconds(3f);
-        Mensaje.Ocultar();
-        */
+        yield return StartCoroutine(MostrarMensaje("Comienza la partida", 1));
 
         // tiempo de espera inicial
         yield return new WaitForSeconds(1f);
 
         Debug.Log("Comienzo de juego");
-
-        // contador de estimulos generados
-        int contadorEstimulosGenerados = 0; 
+       
 
         // comienzo del game loop
         while(true)
-        {
-            
+        {            
             // generar un nuevo topo
             NuevoEstimulo();
-            contadorEstimulosGenerados++;
+            contadorEstimulosMostrados++;
 
-            // comprobar si debemos cambiar el estimulo objetivo
-            if(Nivel.similitudEntreEstimulos == SimilitudEstimulos.EstimuloObjetivoCambiante)
-            {
-                // comprobamos si ya han aparecido suficientes estimulos
-                // objetivos del tipo actual                 
-                if(contadorEstimulosGenerados >= Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
-                {
-                    
-                    // cambiamos el estimulo objetivo
-                    contadorEstimulosGenerados = 0; 
-                    EstimulosTareaTopos nuevoEstimuloObjetivo = (EstimulosTareaTopos) Random.Range(0, 4);
-                    // OJO: estoy cambiando el estimulo del scriptable!
-                    Nivel.estimuloObjetivo = nuevoEstimuloObjetivo; 
-                    Debug.Log("Cambiando estimulo objetivo, ahora es " + Nivel.estimuloObjetivo);
-                }
-            }
+            // comprobar si el nivel de dificultad exige cambios
+            // de estimulo objetivo
+            if(Nivel.similitudEntreEstimulos == SimilitudEstimulos.EstimuloObjetivoCambiante)  
+                yield return StartCoroutine(CorrutinaCambioEstimuloObjetivo());
 
-            // esperar un tiempo antes de mostrar otro
+            
+            // esperar un tiempo antes de mostrar otro estimulo 
             yield return new WaitForSeconds(Nivel.tiempoParaNuevoEstimulo);
         }
     }
 
-    private void ComprobarCambioEstimuloObjetivo()
+    private IEnumerator CorrutinaCambioEstimuloObjetivo()
+    {        
+        // comprobamos si ya han aparecido suficientes estimulos
+        // objetivos del tipo actual                 
+        if(contadorEstimulosMostrados >= Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
+        {                     
+
+            // se han mostrado suficientes estimulos para hacer un cambio, 
+            // pero primero hay que esperar a que no se este 
+            // mostrando ningun estimulo al jugador
+            while(HayEstimulosVisibles())
+            {
+                // esperamos
+                yield return null; 
+            }
+            
+            // proseguimos con la corrutina ya que en este punto
+            // todos los estimulos estan ocultos
+
+            // recordamos el estimulo actual 
+            EstimulosTareaTopos estimuloObjetivoActual = Nivel.estimuloObjetivo; 
+
+            // reiniciamos el contador de estimulos mostrados
+            contadorEstimulosMostrados = 0; 
+            EstimulosTareaTopos nuevoEstimuloObjetivo = (EstimulosTareaTopos) Random.Range(0, 4);
+            // OJO: estoy cambiando el estimulo del scriptable!,
+            // esto no deberia importar en la practica
+            Nivel.estimuloObjetivo = nuevoEstimuloObjetivo; 
+            
+            // comprobar si ha cambiado
+            if(Nivel.estimuloObjetivo != estimuloObjetivoActual)
+            {
+                Debug.Log("Cambiando estimulo objetivo, ahora es " + Nivel.estimuloObjetivo);
+                
+                // feedback
+                yield return StartCoroutine(MostrarMensaje("El objetivo ha cambiado"));
+
+            } else {
+                // seguimos con el mismo estimulo objetivo que antes porque ha
+                // vuelto a ser seleccionado al azar
+            }
+        }                    
+
+        yield return null; 
+    }
+
+    
+
+    // devuelve verdadero si alguno de los estimulos
+    // esta mostrandose al jugador
+    private bool HayEstimulosVisibles()
     {
+        foreach(EstimuloTareaTopo estimulo in estimulos)
+            if(estimulo.EnUso)
+                return true; 
+        return false; 
+    }
+
+    private bool ComprobarCambioEstimuloObjetivo()
+    {        
+        EstimulosTareaTopos estimuloObjetivoActual = Nivel.estimuloObjetivo; 
+
+        // comprobamos si ya han aparecido suficientes estimulos
+        // objetivos del tipo actual                 
+        if(contadorEstimulosMostrados >= Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
+        {                    
+            // reiniciamos el contador de estimulos mostrados
+            contadorEstimulosMostrados = 0; 
+            EstimulosTareaTopos nuevoEstimuloObjetivo = (EstimulosTareaTopos) Random.Range(0, 4);
+            // OJO: estoy cambiando el estimulo del scriptable!
+            Nivel.estimuloObjetivo = nuevoEstimuloObjetivo; 
+            // comprobar si ha cambiado
+            if(Nivel.estimuloObjetivo != estimuloObjetivoActual)
+                Debug.Log("Cambiando estimulo objetivo, ahora es " + Nivel.estimuloObjetivo);
+        }                    
+
+        // devuelve verdadero si el estimulo objetivo ha cambiado 
+        return Nivel.estimuloObjetivo != estimuloObjetivoActual;
     }
 
     // aparece un topo nuevo 

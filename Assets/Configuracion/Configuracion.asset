@@ -18,6 +18,7 @@ MonoBehaviour:
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
   registrarMovimientoOcularEnDiario: 1
+  duracionDeMensajes: 3
   intervaloRegistroOcularEnHZ: 60
   volumenDelFeedback: 1
   tiempoParaSeleccion: 0.55

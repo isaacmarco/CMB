@@ -27,7 +27,17 @@ public class Tarea : MonoBehaviour
         get {return canvasRect;}
     }
 
-
+    protected IEnumerator MostrarMensaje(string mensaje, int duracion = 0)
+    {
+        // si la duracion no se especifica se usa la duracion
+        // configurada en el scriptable 
+        if(duracion == 0)
+            duracion = Configuracion.duracionDeMensajes; 
+        Mensaje.Mostrar(mensaje);        
+        yield return new WaitForSeconds(duracion); 
+        Mensaje.Ocultar();
+    }
+    
     void Awake()
     {
         Mensaje.Ocultar();
