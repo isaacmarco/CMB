@@ -27,6 +27,38 @@ public class Tarea : MonoBehaviour
         get {return canvasRect;}
     }
 
+    public virtual void Acierto(){}
+    public virtual void Error(){}
+    public virtual void Omision(){}
+
+    protected virtual void JuegoGanado(){
+        StopAllCoroutines();
+        StartCoroutine(TerminarJuego(true)); 
+    }
+
+    protected virtual void JuegoPerdido(){
+        StopAllCoroutines();
+        StartCoroutine(TerminarJuego(false)); 
+    }
+
+    protected virtual IEnumerator TerminarJuego(bool partidaGanada){
+
+        // en este punto se vuelve al menu 
+        Debug.LogError("Juego finalizado");
+
+        // mostrar feedback
+        if(partidaGanada)
+        {
+            yield return StartCoroutine(MostrarMensaje("Partida Ganada"));
+        } else {
+            yield return StartCoroutine(MostrarMensaje("Partida perdida"));
+        }
+        
+        AbandonarTarea();
+    }
+
+    private void AbandonarTarea(){}
+    
     protected IEnumerator MostrarMensaje(string mensaje, int duracion = 0)
     {
         // si la duracion no se especifica se usa la duracion

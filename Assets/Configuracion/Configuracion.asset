@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pacienteActual: {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
   tareaActual: {fileID: 11400000, guid: 483c7baf9b157b34e97152fd58a3850f, type: 2}
-  nivelActual: {fileID: 11400000, guid: 01f00ebefb843fd4680add569df916a6, type: 2}
+  nivelActual: {fileID: 11400000, guid: 4de7d538e7fa30b458cd3edc4fe5e21b, type: 2}
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
   registrarMovimientoOcularEnDiario: 1

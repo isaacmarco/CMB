@@ -69,16 +69,16 @@ public class TareaTopos : Tarea
     
     
     // se registra un acierto 
-    public void Acierto()
+    public override void Acierto()
     {        
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertos++;
         if(aciertos >= Nivel.aciertosParaSuperarElNivel)
-            PartidaGanada();
+            JuegoGanado();
     }
 
     // se registra una omision 
-    public void Omision()
+    public override void Omision()
     {
         FindObjectOfType<Audio>().FeedbackOmision();
         omisiones++;
@@ -86,7 +86,7 @@ public class TareaTopos : Tarea
     }    
 
     // se registra un error
-    public void Error()
+    public override void Error()
     {
         FindObjectOfType<Audio>().FeedbackError();
         errores++;
@@ -98,21 +98,11 @@ public class TareaTopos : Tarea
     private void ComprobarOmisionError()
     {
         if(errores + omisiones >= Nivel.omisionesOErroresParaPerder)
-            PartidaPerdida();
+            JuegoPerdido();
     }
     
-    private void PartidaGanada()
-    {        
-        StopAllCoroutines();
-        StartCoroutine(DetenerJuego(true)); 
-    }
-    private void PartidaPerdida()
-    {
-        StopAllCoroutines();
-        StartCoroutine(DetenerJuego(false)); 
-    }
-
-    private IEnumerator DetenerJuego(bool juegoGanado)
+    /*
+    protected override IEnumerator TerminarJuego(bool juegoGanado)
     {
         
         // mostrar feedback
@@ -127,7 +117,7 @@ public class TareaTopos : Tarea
         Debug.LogError("Juego finalizado");
 
         yield return null;
-    }
+    }*/
 
 
     private IEnumerator CorrutinaPartida()

@@ -128,16 +128,23 @@ public class TareaMemory : Tarea
         
     }
 
-    private void JuegoGanado()
+    protected override IEnumerator TerminarJuego(bool juegoGanado)
     {
-        Debug.LogError("Juego ganado");
-    }
+        
+        // mostrar feedback
+        if(juegoGanado)
+        {
+            yield return StartCoroutine(MostrarMensaje("Partida Ganada"));
+        } else {
+            yield return StartCoroutine(MostrarMensaje("Partida perdida"));
+        }
 
-    private void JuegoPerdido()
-    {
-        Debug.LogError("Juego perdidio");
-    }
+        // en este punto se vuelve al menu 
+        Debug.LogError("Juego finalizado");
 
+        yield return null;
+    }
+   
     
     // corrutina para ocultar una tarjeta tiempo despues de haberle
     // dado la vuelta
@@ -152,13 +159,13 @@ public class TareaMemory : Tarea
         estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
     }
 
-    private void Acierto()
+    public override void Acierto()
     {
         Debug.Log("Acierto");
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertos++;
     }
-    private void Error()
+    public override void Error()
     {
         Debug.Log("Error");
         FindObjectOfType<Audio>().FeedbackOmision();
