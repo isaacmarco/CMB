@@ -101,25 +101,6 @@ public class TareaTopos : Tarea
             JuegoPerdido();
     }
     
-    /*
-    protected override IEnumerator TerminarJuego(bool juegoGanado)
-    {
-        
-        // mostrar feedback
-        if(juegoGanado)
-        {
-            yield return StartCoroutine(MostrarMensaje("Partida Ganada"));
-        } else {
-            yield return StartCoroutine(MostrarMensaje("Partida perdida"));
-        }
-
-        // en este punto se vuelve al menu 
-        Debug.LogError("Juego finalizado");
-
-        yield return null;
-    }*/
-
-
     private IEnumerator CorrutinaPartida()
     {
         Debug.Log("Inicio de tarea");

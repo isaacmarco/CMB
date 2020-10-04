@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tobii.Gaming;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Tarea : MonoBehaviour
 {
@@ -46,18 +47,23 @@ public class Tarea : MonoBehaviour
         // en este punto se vuelve al menu 
         Debug.LogError("Juego finalizado");
 
-        // mostrar feedback
+        // mostrar feedback dependiendo del resultado 
         if(partidaGanada)
         {
             yield return StartCoroutine(MostrarMensaje("Partida Ganada"));
         } else {
             yield return StartCoroutine(MostrarMensaje("Partida perdida"));
         }
-        
+
+        // esperar 1 seg antes de lanzar el menu
+        yield return new WaitForSeconds(1f);
         AbandonarTarea();
     }
 
-    private void AbandonarTarea(){}
+    private void AbandonarTarea()
+    {
+        SceneManager.LoadScene("Menu");
+    }
     
     protected IEnumerator MostrarMensaje(string mensaje, int duracion = 0)
     {
@@ -83,7 +89,7 @@ public class Tarea : MonoBehaviour
 
     private IEnumerator TestRegistro()
     {
-        Debug.LogError("Activo test de registro a disco");
+        Debug.Log("Activo test de registro a disco");
         yield return new WaitForSeconds(5f);
         EscribirDiarioEnDisco();        
         yield return null; 

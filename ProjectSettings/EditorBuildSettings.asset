@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Escenas/Menu.unity
+    guid: 289cea346fe80e147b9730566cc6f9eb
+  - enabled: 1
+    path: Assets/Escenas/TareaTopos.unity
+    guid: 6891166cc642e9f4282650936e76ef7a
+  - enabled: 1
+    path: Assets/Escenas/TareaMemory.unity
+    guid: ec21abf5bd694d640a19a9221d8f3ca4
   m_configObjects: {}

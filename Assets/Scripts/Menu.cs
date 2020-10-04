@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Menu : MonoBehaviour
     [SerializeField] private RectTransform canvasRect; 
     [Header("Jerarquia de menus")]
     [SerializeField] private Transform jerarquiaMenuPrincipal;
-    [SerializeField] private Transform jerarquiaMenuTarea;    
+    [SerializeField] private Transform jerarquiaMenuTarea;   
+    [SerializeField] private Transform jerarquiaMenuPerfiles; 
     [Header("Progreso de tareas")]
     [SerializeField] private Transform jerarquiaProgreso;     
     
@@ -31,7 +33,7 @@ public class Menu : MonoBehaviour
     {
         Debug.Log("Mostrando menu " + jerarquia.name);
         Transform[] jerarquias = {
-            jerarquiaMenuPrincipal, jerarquiaMenuTarea
+            jerarquiaMenuPrincipal, jerarquiaMenuTarea, jerarquiaMenuPerfiles
         };
         // desactivamos menus
         foreach(Transform j in jerarquias)
@@ -59,18 +61,37 @@ public class Menu : MonoBehaviour
         switch(opcion)
         { 
             case OpcionesSeleccionablesMenu.VolverMenuPrincipal:
+                // menu principal 
                 MostrarMenu(jerarquiaMenuPrincipal);
             break;
             
             case OpcionesSeleccionablesMenu.MenuTareaTopos:
+                // menu de la tarea seleccionada
 				MostrarMenu(jerarquiaMenuTarea);
+            break;
+
+            case OpcionesSeleccionablesMenu.MenuPerfiles:
+                // perfiles d epacientes
+                MostrarMenu(jerarquiaMenuPerfiles);
             break;
 
             case OpcionesSeleccionablesMenu.SalirAplicacion:
                 Salir();
             break;
+
+            case OpcionesSeleccionablesMenu.ComenzarTareaTopos:
+                // lanzamos la tarea topos
+                SceneManager.LoadScene("TareaTopos");
+    
+            break;
+
+            case OpcionesSeleccionablesMenu.ComenzarTareaMemory:
+                // lanzamos la tarea de memoria
+                SceneManager.LoadScene("TareaMemory");
+            break;
+
         }   
-    }
+    }    
 
     // sale del programa completamente 
     private void Salir()
@@ -79,13 +100,6 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
-    // muestra la pantalla de progreso de la tarea 
-    public void SeleccionarTarea()
-    {}
-
-    // lanza la tarea para jugar 
-    public void LanzarTarea()
-    {        
-    }
+  
     
 }

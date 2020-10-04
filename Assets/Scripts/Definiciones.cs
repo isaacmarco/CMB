@@ -42,10 +42,17 @@ public enum SimilitudEstimulos
 
 public enum OpcionesSeleccionablesMenu
 {
-    VolverMenuPrincipal,
+    VolverMenuPrincipal,    
+    MenuPerfiles, 
+    SalirAplicacion,
     MenuTareaTopos, 
+    MenuTareaMemory, 
     ComenzarTareaTopos,
-    SalirAplicacion
+    ComenzarTareaMemory,        
+    SeleccionarPaciente1, 
+    SeleccionarPaciente2,
+    SeleccionarPaciente3,
+    SeleccionarPaciente4
 }
 
 public enum Tareas
