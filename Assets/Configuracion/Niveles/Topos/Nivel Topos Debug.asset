@@ -15,8 +15,8 @@ MonoBehaviour:
   numeroDelNivel: 11
   estimuloObjetivo: 0
   similitudEntreEstimulos: 2
-  aparicionesAntesDeCambiarEstimuloObjetivo: 10
+  aparicionesAntesDeCambiarEstimuloObjetivo: 4
   tiempoParaNuevoEstimulo: 1
   tiempoPermanenciaDelEstimulo: 2
   aciertosParaSuperarElNivel: 10
-  omisionesOErroresParaPerder: 10
+  omisionesOErroresParaPerder: 20

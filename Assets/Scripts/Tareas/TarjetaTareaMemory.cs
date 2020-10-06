@@ -9,12 +9,17 @@ public class TarjetaTareaMemory : MonoBehaviour
     public Texture[] texturasParaEstimulos;
     private EstimulosTareaMemory estimulo; 
     private bool volteada; 
+    private bool vistaPorJugador; 
     private Vector3 posicionOriginal; 
     public bool Volteda {
         get { return volteada; }
     }
     public EstimulosTareaMemory Estimulo {
         get { return estimulo;}
+    }
+    public bool VistaPorJugador {
+        get { return vistaPorJugador;}
+        set { vistaPorJugador = value; }
     }
 
 
@@ -25,6 +30,7 @@ public class TarjetaTareaMemory : MonoBehaviour
         
         Debug.Log("Seleccionando tarjeta");
         FindObjectOfType<TareaMemory>().VoltearTarjeta(this); 
+        
     }
 
     public void Voltear()

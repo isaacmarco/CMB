@@ -26,7 +26,7 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
-        MostrarMenu(jerarquiaMenuPrincipal);
+        MostrarMenu(jerarquiaMenuPerfiles);
     }
 
     public void MostrarMenu(Transform jerarquia)
@@ -90,8 +90,23 @@ public class Menu : MonoBehaviour
                 SceneManager.LoadScene("TareaMemory");
             break;
 
+            case OpcionesSeleccionablesMenu.SeleccionarPaciente1:
+                SeleccionarPaciente(0);
+            break;
+
+            case OpcionesSeleccionablesMenu.SeleccionarPaciente2:
+                SeleccionarPaciente(1);
+            break;
+
         }   
     }    
+
+    private void SeleccionarPaciente(int indice)
+    {
+        Debug.Log("Paciente seleccionado ");
+        MostrarMenu(jerarquiaMenuPrincipal);
+        
+    }
 
     // sale del programa completamente 
     private void Salir()

@@ -90,9 +90,16 @@ public class Tarea : MonoBehaviour
     private IEnumerator TestRegistro()
     {
         Debug.Log("Activo test de registro a disco");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(60f);
         EscribirDiarioEnDisco();        
         yield return null; 
+    }
+
+    void OnApplicationQuit()
+    {
+        // solo para grabar el test de registro de la tarea
+        // si cerramos el editor
+        EscribirDiarioEnDisco();        
     }
 
     protected virtual void Inicio()

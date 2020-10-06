@@ -18,6 +18,7 @@ public class TareaMemory : Tarea
     [SerializeField] private GameObject prefabTarjeta;
     [SerializeField] private Transform jerarquiaTarjetas;
     [SerializeField] private TarjetaTareaMemory[] tarjetas; 
+    
     private ControladorIK controladorIK; 
     private Vector2 puntoFiltrado; 
     private EstadoTareaMemory estadoJuego;
@@ -35,6 +36,62 @@ public class TareaMemory : Tarea
         estadoJuego == EstadoTareaMemory.EligiendoSegundaTarjeta; 
     }
 
+     protected override string ObtenerCabeceraTarea()
+    {
+        string cabecera = string.Empty;
+        string posicionesFijasTarjetas = string.Empty; 
+        string estimulosSeleccionados = string.Empty; 
+
+        // dimensiones de la matriz
+        cabecera += "La matriz del memory es " +  Nivel.anchoMatriz + "x" + Nivel.altoMatriz + "\n";
+        
+        // distribucion aleatoria del tablero 
+        for(int i=0; i<tarjetas.Length; i++)
+        {
+            // obtenemos cada tarjeta y registramos el estimulo que se le ha
+            // asignado aleatoriamente
+            TarjetaTareaMemory tarjeta = tarjetas[i]; 
+            estimulosSeleccionados += tarjeta.Estimulo + ";";
+        }
+        cabecera += "Estimulos seleccionados para las tarjetas " + estimulosSeleccionados + "\n";
+
+        // posiciones fijas de los estimulos en la matriz                
+        for(int i=0; i<tarjetas.Length; i++)
+        {
+            // obtener posicion de la tarjeta
+            Vector3 posicionElementoMatriz = tarjetas[i].transform.position; 
+            // transformar las coordeandas
+            Vector2 posicionViewport = Camera.main.WorldToViewportPoint(posicionElementoMatriz);
+            Vector2 posicionEnPantalla = new Vector2(
+                ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f)),
+                ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))
+            );
+            posicionesFijasTarjetas += "(" + (int)posicionEnPantalla.x + "," + (int)posicionEnPantalla.y + ") ";            
+        }
+        cabecera += "Posiciones fijas de las tarjetas " + posicionesFijasTarjetas + "\n";
+        
+        cabecera += "Leyenda: tiempo; x; y; matriz con las tarjetas ya vistas; matriz con el estado actual del tablero";
+        return cabecera;
+    }
+
+    
+    protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
+    {
+
+        // estado actual del tablero
+        bool[] matrizEstadoTablero = new bool[tarjetas.Length];
+        // tarjetas ya descrubiertas por el jugador
+        bool[] tarjetasVistasPorJugador = new bool[tarjetas.Length];
+
+        for(int i=0; i<tarjetas.Length; i++)
+        {
+            matrizEstadoTablero[i] = tarjetas[i].Volteda;
+            tarjetasVistasPorJugador[i] = tarjetas[i].VistaPorJugador; 
+        }            
+        
+        return new RegistroPosicionOcultarTareaMemory(tiempo, x, y, tarjetasVistasPorJugador, matrizEstadoTablero);
+    } 
+
     protected override void Inicio()
     {    
         // referenciar el controladorIK del avatar
@@ -47,14 +104,17 @@ public class TareaMemory : Tarea
 
     public void VoltearTarjeta(TarjetaTareaMemory tarjeta)
     {
+
         switch(estadoJuego)
         {
             case EstadoTareaMemory.EligiendoPrimeraTarjeta:
             ElegirPrimeraTarjeta(tarjeta);
+            tarjeta.VistaPorJugador = true; 
             break;
 
             case EstadoTareaMemory.EligiendoSegundaTarjeta:
             ElegirSegundaTarjeta(tarjeta);
+            tarjeta.VistaPorJugador = true; 
             break;     
 
             case EstadoTareaMemory.ComprobandoTarjetas:
@@ -197,6 +257,7 @@ public class TareaMemory : Tarea
         // instanciamos la matriz de tarjetas
         int contadorTarjetas = 0; 
         tarjetas = new TarjetaTareaMemory[Nivel.anchoMatriz * Nivel.altoMatriz];
+        
         for(int i=0; i<Nivel.altoMatriz; i++)
         {
             for(int j=0; j<Nivel.anchoMatriz; j++)
