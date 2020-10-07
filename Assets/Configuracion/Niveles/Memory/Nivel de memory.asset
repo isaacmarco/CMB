@@ -16,6 +16,6 @@ MonoBehaviour:
   anchoMatriz: 4
   altoMatriz: 2
   listaEstimulosParaFormarParejas: 00000000010000000200000003000000
-  tiempoParaSeleccionarPareja: 2
-  tiempoParaOcultarPareja: 2
+  hayTiempoLimite: 1
+  tiempoLimiteParaCompletar: 5
   erroresParaPerder: 10

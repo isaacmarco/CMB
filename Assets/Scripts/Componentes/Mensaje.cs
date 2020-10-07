@@ -7,21 +7,35 @@ public class Mensaje : MonoBehaviour
 {
    
     [SerializeField] private Text mensaje; 
+    [SerializeField] private Image imagen; 
 
     public void Ocultar()
     {
         GetComponent<CanvasGroup>().alpha = 0f; 
     }
 
-    public void Mostrar(string mensaje)
+    public void Mostrar(string mensaje, Sprite imagen = null)
     {
-        Debug.Log("Mensaje: " + mensaje);
-        // mostrar la ui e iniciar la corrutina
-        this.mensaje.text = mensaje; 
+        Debug.Log("Mensaje: " + mensaje);        
+        
+        // asignar parametros 
+        this.mensaje.text = mensaje;
+        this.imagen.enabled = false; 
+
+        if(imagen!=null) 
+        {
+            this.imagen.sprite = imagen;
+            this.imagen.enabled = true;
+        }
+        
+        // hacer el mensaje opaco 
         GetComponent<CanvasGroup>().alpha = 1f; 
-        // StartCoroutine(CorrutinaMensaje(duracionMensaje));         
     }
 
+
+    /*
+    // OBSOLETO, ES LA TAREA LA QUE CONTROLA EL 
+    // TIEMPO DE ESPERA DE LOS MENSAJES
     private IEnumerator CorrutinaMensaje(float duracionMensaje)
     {
         // mostramos el mensaje
@@ -31,5 +45,6 @@ public class Mensaje : MonoBehaviour
         // ocultamos el mensaje 
         GetComponent<CanvasGroup>().alpha = 0f; 
     }
+    */
 
 }

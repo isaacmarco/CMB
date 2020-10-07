@@ -28,7 +28,7 @@ public class ConfiguracionScriptable : ScriptableObject
     public float probabilidadAparicionEstimuloObjetio = 0.5f;     
 
     [Header("Configuracion tarea de memoria")]
-    public float sinUso = 1f;
+    public float tiempoParaOcultarPareja = 2f; 
 
     [Header("Lista de tareas")]
     public TareaScriptable[] tareas; 

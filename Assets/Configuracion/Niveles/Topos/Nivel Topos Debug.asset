@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Nivel Topos Debug
   m_EditorClassIdentifier: 
   numeroDelNivel: 11
+  tipoDeNivel: 2
   estimuloObjetivo: 0
   similitudEntreEstimulos: 2
   aparicionesAntesDeCambiarEstimuloObjetivo: 4

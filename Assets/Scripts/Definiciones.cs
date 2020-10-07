@@ -1,4 +1,11 @@
-﻿public enum EstimulosTareaTopos
+﻿public enum TipoNivel 
+{
+    Normal, 
+    Demostracion,
+    Tutorial
+};
+
+public enum EstimulosTareaTopos
 {    
     Topo, 
     Pato, 

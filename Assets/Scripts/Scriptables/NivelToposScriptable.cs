@@ -6,7 +6,7 @@ using UnityEngine;
 public class NivelToposScriptable : NivelScriptable
 {
     
-
+       
     [Header("Dificultad")]
     public EstimulosTareaTopos estimuloObjetivo; 
     public SimilitudEstimulos similitudEntreEstimulos;

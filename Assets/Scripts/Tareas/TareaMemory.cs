@@ -98,8 +98,24 @@ public class TareaMemory : Tarea
         controladorIK = avatar.GetComponent<ControladorIK>();
         // generar la matriz de tarjetas segun el nivel de dificultad
         GenerarTarjetas();
-
+        // estado inicial 
         estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
+        // si la dificutlad lo exige, hay que empezar a contabilizar
+        // el tiempo limite
+        if(Nivel.hayTiempoLimite)
+            StartCoroutine(CorrutinaCronometro());
+    }
+
+    
+    private IEnumerator CorrutinaCronometro()
+    {
+        Debug.Log("El nivel tiene tiempo limite");
+        if(Nivel.tiempoLimiteParaCompletar < 1)
+            Debug.LogError("No hay suficiente tiempo limite para completar la tarea");
+        // esperamos el tiempo
+        yield return new WaitForSeconds(Nivel.tiempoLimiteParaCompletar);
+        // finalizamos la tarea
+        JuegoPerdido();
     }
 
     public void VoltearTarjeta(TarjetaTareaMemory tarjeta)
@@ -211,7 +227,7 @@ public class TareaMemory : Tarea
     private IEnumerator CorrutinaOcultarPareja() //TarjetaTareaMemory tarjeta)
     {
         Debug.Log("Esperando");
-        yield return new WaitForSeconds(Nivel.tiempoParaOcultarPareja);
+        yield return new WaitForSeconds(Configuracion.tiempoParaOcultarPareja);
         Debug.Log("Ocultando parejas");
         primeraTarjetaElegida.Ocultar();
         segundaTarjetaElegida.Ocultar();

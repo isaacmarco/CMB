@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Nivel Topos 9
   m_EditorClassIdentifier: 
   numeroDelNivel: 8
+  tipoDeNivel: 2
   estimuloObjetivo: 3
   similitudEntreEstimulos: 1
+  aparicionesAntesDeCambiarEstimuloObjetivo: 0
   tiempoParaNuevoEstimulo: 3
   tiempoPermanenciaDelEstimulo: 3
   aciertosParaSuperarElNivel: 10
