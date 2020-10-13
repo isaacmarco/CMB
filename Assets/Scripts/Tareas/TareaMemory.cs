@@ -90,7 +90,12 @@ public class TareaMemory : Tarea
         }            
         
         return new RegistroPosicionOcultarTareaMemory(tiempo, x, y, tarjetasVistasPorJugador, matrizEstadoTablero);
-    } 
+    }
+
+    public override void TiempoExcedido()
+    {
+        Debug.Log("Tiempo excedido");
+    }
 
     protected override void Inicio()
     {    
@@ -102,8 +107,12 @@ public class TareaMemory : Tarea
         estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
         // si la dificutlad lo exige, hay que empezar a contabilizar
         // el tiempo limite
-        if(Nivel.hayTiempoLimite)
-            StartCoroutine(CorrutinaCronometro());
+        //if(Nivel.hayTiempoLimite)
+        //    StartCoroutine(CorrutinaCronometro());
+        
+        // iniciar crono
+        // FindObjectOfType<Reloj>().IniciarCuentaAtras(60);
+        FindObjectOfType<Reloj>().IniciarReloj();
     }
 
     
@@ -204,22 +213,12 @@ public class TareaMemory : Tarea
         
     }
 
-    protected override IEnumerator TerminarJuego(bool juegoGanado)
-    {
-        
-        // mostrar feedback
-        if(juegoGanado)
-        {
-            yield return StartCoroutine(MostrarMensaje("Partida Ganada"));
-        } else {
-            yield return StartCoroutine(MostrarMensaje("Partida perdida"));
-        }
-
-        // en este punto se vuelve al menu 
-        Debug.LogError("Juego finalizado");
-
-        yield return null;
+    protected override void GuardarProgreso(bool partidaGanada)
+    {        
+        Configuracion.pacienteActual.nivelActualTareaMemory++;
+        Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
     }
+
    
     
     // corrutina para ocultar una tarjeta tiempo despues de haberle

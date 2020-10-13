@@ -66,6 +66,11 @@ public class TareaTopos : Tarea
         corrutinaJuego = StartCoroutine(CorrutinaPartida());       
     }
 
+    protected override void GuardarProgreso(bool partidaGanada)
+    {        
+        Configuracion.pacienteActual.nivelActualTareaTopos++;
+        Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+    }
     
     
     // se registra un acierto 

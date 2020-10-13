@@ -35,5 +35,7 @@ public class ConfiguracionScriptable : ScriptableObject
 
     [Header("Lista de pacientes")]   
     public PacienteScriptable[] pacientes;
+    [Header("Estado del programa")]
+    public bool hayPacienteActivo; 
 
 }

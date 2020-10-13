@@ -1,4 +1,11 @@
-﻿public enum TipoNivel 
+﻿public enum Dificultad 
+{
+    Baja, 
+    Media, 
+    Dificil
+};
+
+public enum TipoNivel 
 {
     Normal, 
     Demostracion,
@@ -59,7 +66,9 @@ public enum OpcionesSeleccionablesMenu
     SeleccionarPaciente1, 
     SeleccionarPaciente2,
     SeleccionarPaciente3,
-    SeleccionarPaciente4
+    SeleccionarPaciente4,
+    SiguienteNivel, 
+    AnteriorNivel
 }
 
 public enum Tareas

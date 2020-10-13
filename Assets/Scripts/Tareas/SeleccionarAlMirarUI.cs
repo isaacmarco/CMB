@@ -5,7 +5,12 @@ using Tobii.Gaming;
 
 public class SeleccionarAlMirarUI : MonoBehaviour
 {
-    
+    public enum TipoBotonMenu
+	{
+		Normal, 
+		Auxliar
+	};
+
     // componente tobii
 	private GazeAware gazeAware;	
     // refrencia a la tarea
@@ -16,8 +21,14 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	private float tiempoInicioFijacion; 
 	private InterfazFijacion interfazFijacion; 
     // nombre del metodo que se ejecutara al mirar
+	[Header("Configuracion")]
     [SerializeField] private OpcionesSeleccionablesMenu opcion; 
 	[SerializeField] private Tareas tarea;
+	public TipoBotonMenu tipoBoton; 
+	[Header("Materiales")]
+	[SerializeField] private Material materialBotonNormal;
+	[SerializeField] private Material materialBotonAuxliar; 
+	
 
     void Awake()
 	{
@@ -26,6 +37,11 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 		gazeAware = GetComponent<GazeAware>();	
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		
 		interfazFijacion.Reiniciar();		
+
+		Renderer renderer = gameObject.transform.GetComponentInChildren<Renderer>();
+		renderer.material = materialBotonNormal;
+		if( tipoBoton == TipoBotonMenu.Auxliar)
+			renderer.material = materialBotonAuxliar;
 	}
 
 

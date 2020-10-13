@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f583e52aba783174f8bd9e8874401f90, type: 3}
-  m_Name: Paciente
+  m_Script: {fileID: 11500000, guid: aeff2514729d37b47b62d5ad34be527e, type: 3}
+  m_Name: NivelesExcel
   m_EditorClassIdentifier: 
-  nombre: 
+  nivelesTopos: {fileID: 4900000, guid: 6da674cc0e043864f9bc4dea77ce270d, type: 3}
+  nivelesMemory: {fileID: 4900000, guid: 6da674cc0e043864f9bc4dea77ce270d, type: 3}

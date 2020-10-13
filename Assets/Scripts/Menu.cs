@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro; 
 
 public class Menu : MonoBehaviour
 {
@@ -13,10 +14,9 @@ public class Menu : MonoBehaviour
     [SerializeField] private RectTransform canvasRect; 
     [Header("Jerarquia de menus")]
     [SerializeField] private Transform jerarquiaMenuPrincipal;
-    [SerializeField] private Transform jerarquiaMenuTarea;   
+    [SerializeField] private Transform jerarquiaMenuTareaTopos;   
+    [SerializeField] private Transform jerarquiaMenuTareaMemory;   
     [SerializeField] private Transform jerarquiaMenuPerfiles; 
-    [Header("Progreso de tareas")]
-    [SerializeField] private Transform jerarquiaProgreso;     
     
 
     public RectTransform CanvasRect 
@@ -26,14 +26,37 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
-        MostrarMenu(jerarquiaMenuPerfiles);
+        // crear codigos de pacietes falsos
+        Debug.LogError("Creando codigos de pacientes para debug");
+        PlayerPrefs.SetString("codigoPaciente0", "000");
+        PlayerPrefs.SetString("codigoPaciente1", "001");
+              
+                
+        // cargamos todos los json de los perfiles disponibles
+        Aplicacion.instancia.CargarPerfilesExistentes();        
+
+        // dependiendo de si hay paciente actual se 
+        // mostrara el menu de tareas o el de perfikes
+        if(Configuracion.pacienteActual == null)
+        {
+            // se muestra la seleccion de perfiles, al seleccionar
+            // el perfil se cargaran datos del paciente 
+            MostrarMenu(jerarquiaMenuPerfiles);
+        } else {
+           
+            // ya existe un paciente actual?
+            
+            // mostrar el menu principal a continuacion             
+            MostrarMenu(jerarquiaMenuPrincipal);
+        }
     }
 
     public void MostrarMenu(Transform jerarquia)
     {
         Debug.Log("Mostrando menu " + jerarquia.name);
         Transform[] jerarquias = {
-            jerarquiaMenuPrincipal, jerarquiaMenuTarea, jerarquiaMenuPerfiles
+            jerarquiaMenuPrincipal, jerarquiaMenuTareaTopos, jerarquiaMenuPerfiles,
+            jerarquiaMenuTareaMemory
         };
         // desactivamos menus
         foreach(Transform j in jerarquias)
@@ -41,16 +64,6 @@ public class Menu : MonoBehaviour
         // activamos el correspondiente
         jerarquia.gameObject.SetActive(true); 
 
-        // actualizar el progreso de la tarea si corresponde
-        if(jerarquia == jerarquiaMenuTarea)
-        {            
-            jerarquiaProgreso.gameObject.SetActive(true);
-            //progresoTarea.fillAmount = Random.value; 
-         
-            
-        } else {
-            jerarquiaProgreso.gameObject.SetActive(false);
-        }
     }
 
     public void EjecutarOpcionMenu(OpcionesSeleccionablesMenu opcion, Tareas tarea)
@@ -66,8 +79,15 @@ public class Menu : MonoBehaviour
             break;
             
             case OpcionesSeleccionablesMenu.MenuTareaTopos:
-                // menu de la tarea seleccionada
-				MostrarMenu(jerarquiaMenuTarea);
+                // menu de topos
+				MostrarMenu(jerarquiaMenuTareaTopos);
+                FindObjectOfType<MenuTareaTopos>().Actualizar();
+            break;
+
+            case OpcionesSeleccionablesMenu.MenuTareaMemory:
+                // menu de memory
+                MostrarMenu(jerarquiaMenuTareaMemory);
+                FindObjectOfType<MenuTareaMemory>().Actualizar();
             break;
 
             case OpcionesSeleccionablesMenu.MenuPerfiles:
@@ -90,6 +110,16 @@ public class Menu : MonoBehaviour
                 SceneManager.LoadScene("TareaMemory");
             break;
 
+            case OpcionesSeleccionablesMenu.SiguienteNivel:
+                // para la tarea de memory de momento
+                FindObjectOfType<MenuTareaMemory>().NivelSiguiente();
+            break;
+
+            case OpcionesSeleccionablesMenu.AnteriorNivel:
+                // para la tarea de memory de momento
+                FindObjectOfType<MenuTareaMemory>().NivelAnterior();
+            break;
+            
             case OpcionesSeleccionablesMenu.SeleccionarPaciente1:
                 SeleccionarPaciente(0);
             break;
@@ -103,11 +133,27 @@ public class Menu : MonoBehaviour
 
     private void SeleccionarPaciente(int indice)
     {
-        Debug.Log("Paciente seleccionado ");
-        MostrarMenu(jerarquiaMenuPrincipal);
-        
+        Debug.Log("Paciente seleccionado " + indice);
+        /*
+        // obtener el codigo del paciente desde el prefs
+        string clave = "codigoPaciente" + indice; 
+        string codigoPaciente = PlayerPrefs.GetString(clave);
+        // cargar el paciente actual         
+        Aplicacion.instancia.CargarDatosPaciente(codigoPaciente);
+        // indicar que ya hay un perfil seleccionado
+        Configuracion.hayPacienteActivo = true; */
+
+        // establecer el paciente actual 
+        Configuracion.pacienteActual = configuracion.pacientes[indice];
+
+        // test para guardar el paciente actual 
+        Aplicacion.instancia.GuardarDatosPaciente(configuracion.pacienteActual);
+
+        // mostrar el menu 
+        MostrarMenu(jerarquiaMenuPrincipal);        
     }
 
+    
     // sale del programa completamente 
     private void Salir()
     {

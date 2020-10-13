@@ -4,16 +4,17 @@ using UnityEngine;
 using Tobii.Gaming;
 using System.IO;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Tarea : MonoBehaviour
 {
     private ArrayList listaRegistrosOculares; 
-
+    private int puntuacion; 
     protected GazeAware gazeAware;
     [SerializeField] private ConfiguracionScriptable configuracion;     
     [SerializeField] private RectTransform canvasRect; 
     [SerializeField] private Mensaje mensaje; 
-
+    
     public Mensaje Mensaje {
         get { return mensaje;}
     } 
@@ -31,6 +32,12 @@ public class Tarea : MonoBehaviour
     public virtual void Acierto(){}
     public virtual void Error(){}
     public virtual void Omision(){}
+    public virtual void TiempoExcedido(){}
+    protected virtual void GuardarProgreso(bool partidaGanada){}
+    public virtual void AgregarPuntuacion(int puntuacion)
+    {
+        this.puntuacion += puntuacion; 
+    }
 
     protected virtual void JuegoGanado(){
         StopAllCoroutines();
@@ -41,6 +48,8 @@ public class Tarea : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TerminarJuego(false)); 
     }
+
+ 
 
     protected virtual IEnumerator TerminarJuego(bool partidaGanada){
 
@@ -54,6 +63,10 @@ public class Tarea : MonoBehaviour
         } else {
             yield return StartCoroutine(MostrarMensaje("Partida perdida"));
         }
+
+        // guardar el progreso del paciente, este metodo se implemente
+        // en cada tarea 
+        GuardarProgreso(partidaGanada);
 
         // esperar 1 seg antes de lanzar el menu
         yield return new WaitForSeconds(1f);
@@ -111,7 +124,9 @@ public class Tarea : MonoBehaviour
     {
         Debug.Log("Escribiendo diario en disco");
 
-        string nombreFichero = @"diario.txt";
+        string nombreFichero = Configuracion.pacienteActual.codigo + "-" +
+        DateTime.Now + ".txt"; 
+        
 
         using (StreamWriter sw = new StreamWriter(nombreFichero))
         {

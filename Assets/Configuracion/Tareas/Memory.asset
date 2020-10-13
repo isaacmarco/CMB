@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec900dc192c02742b78d0ed33a3a1fa, type: 3}
   m_Name: Memory
   m_EditorClassIdentifier: 
-  nombre: 
-  numeroDeNiveles: 0
-  nivelActual: 0
-  puntuacionActual: 0
+  nombre: Tarea de memory
