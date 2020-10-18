@@ -236,12 +236,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -428,12 +433,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -603,12 +613,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -883,12 +898,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -1683,12 +1703,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -2250,12 +2275,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -2696,12 +2726,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -2831,12 +2866,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -3040,12 +3080,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -3409,11 +3454,16 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
@@ -3544,12 +3594,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -3679,12 +3734,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -3814,12 +3874,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -4074,12 +4139,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -4209,7 +4279,7 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -4344,12 +4414,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -4604,12 +4679,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -4739,12 +4819,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -5014,12 +5099,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -5149,12 +5239,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -5284,12 +5379,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -5419,12 +5519,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -5587,12 +5692,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -5837,12 +5947,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -5978,12 +6093,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -6228,12 +6348,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
@@ -6488,12 +6613,17 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: opcion
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: nivelACargar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}

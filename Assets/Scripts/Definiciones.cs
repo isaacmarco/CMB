@@ -68,7 +68,8 @@ public enum OpcionesSeleccionablesMenu
     SeleccionarPaciente3,
     SeleccionarPaciente4,
     SiguienteNivel, 
-    AnteriorNivel
+    AnteriorNivel,
+    SeleccionarNivel
 }
 
 public enum Tareas

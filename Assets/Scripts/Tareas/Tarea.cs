@@ -9,7 +9,8 @@ using System;
 public class Tarea : MonoBehaviour
 {
     private ArrayList listaRegistrosOculares; 
-    private int puntuacion; 
+    protected int puntuacion; 
+    protected string nombreTarea; 
     protected GazeAware gazeAware;
     [SerializeField] private ConfiguracionScriptable configuracion;     
     [SerializeField] private RectTransform canvasRect; 
@@ -27,6 +28,11 @@ public class Tarea : MonoBehaviour
     public RectTransform CanvasRect 
     {
         get {return canvasRect;}
+    }
+
+    public virtual string ObtenerNombreTarea()
+    {
+        return string.Empty; 
     }
 
     public virtual void Acierto(){}
@@ -98,12 +104,13 @@ public class Tarea : MonoBehaviour
         // iniciar la corrutina del diario
         if(Configuracion.registrarMovimientoOcularEnDiario)
             StartCoroutine(RegistroDiario());
+            
     }
 
     private IEnumerator TestRegistro()
     {
         Debug.Log("Activo test de registro a disco");
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(3f);
         EscribirDiarioEnDisco();        
         yield return null; 
     }
@@ -112,7 +119,7 @@ public class Tarea : MonoBehaviour
     {
         // solo para grabar el test de registro de la tarea
         // si cerramos el editor
-        EscribirDiarioEnDisco();        
+        //EscribirDiarioEnDisco();        
     }
 
     protected virtual void Inicio()
@@ -120,21 +127,45 @@ public class Tarea : MonoBehaviour
         // cada tarea implementa su propio metodo Inicio()
     }   
     
+
+    // fecha para registrar los datosw 
+    private string fechaRegistro = string.Empty; 
+
+    
+
+    private string ObtenerNombreFichero()
+    {
+        // rutas 
+        string rutaEscritorio = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+        string directorioBaseDatos = "Registros";
+        string codigoPaciente = Configuracion.pacienteActual.codigo; 
+        string nombreTarea = ObtenerNombreTarea();        
+        string rutaDirectorioRegistros = rutaEscritorio + "\\" + directorioBaseDatos + "\\paciente" +
+        codigoPaciente + "\\" + nombreTarea;
+        
+        // crear el directorio para los datos si no existen 
+        Directory.CreateDirectory(rutaDirectorioRegistros);
+
+        // obtener fecha
+        fechaRegistro = System.DateTime.Now.ToString("dddd, dd MMMM yyyy HH-mm-ss");
+
+        // devolver la ruta para el fichero
+        return rutaDirectorioRegistros + "\\" + codigoPaciente + "-" + nombreTarea + "-" + 
+        fechaRegistro + ".txt";
+    }
+
     private void EscribirDiarioEnDisco()
     {
         Debug.Log("Escribiendo diario en disco");
-
-        string nombreFichero = Configuracion.pacienteActual.codigo + "-" +
-        DateTime.Now + ".txt"; 
+        string nombreFichero = ObtenerNombreFichero();
         
-
+        
         using (StreamWriter sw = new StreamWriter(nombreFichero))
         {
-            // cabecera
-            sw.WriteLine("codigo del paciente");
-            sw.WriteLine("nombre de la tarea"); 
-            sw.WriteLine("datos de fechas");
-
+            // cabecera general 
+            sw.WriteLine("codigo del paciente: " + configuracion.pacienteActual.codigo);            
+            sw.WriteLine("fecha de registro: " + fechaRegistro);
+            // cabcera propia de la tarea
             sw.WriteLine(ObtenerCabeceraTarea());
 
 

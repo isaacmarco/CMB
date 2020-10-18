@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Tobii.Gaming;
-
+using System.IO;
 public class TareaTopos : Tarea
 {
-    private int puntuacion, aciertos, errores, omisiones;       
+    private int aciertos, errores, omisiones;       
     private Coroutine corrutinaJuego;     
     private Coroutine corrutinaCambioEstimuloObjetivo; 
     // contador de estimulos mostrados
@@ -26,10 +26,23 @@ public class TareaTopos : Tarea
     // lista topos
     public EstimuloTareaTopo[] estimulos;
     
+    
+    public override string ObtenerNombreTarea()
+    {
+        return "Tarea topos";
+    }
+    
+
+    
+
     protected override string ObtenerCabeceraTarea()
     {
         string cabecera = string.Empty;
         string posicionesMatriz = string.Empty; 
+
+        // datos de la tarea
+        cabecera += "Tarea de topos\n";
+        cabecera += "Nivel actual: " + Configuracion.nivelActual.numeroDelNivel + "\n";
 
         for(int i=0; i<estimulos.Length; i++)
         {

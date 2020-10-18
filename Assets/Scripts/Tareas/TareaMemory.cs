@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Tobii.Gaming;
+using System.IO;
 
 public class TareaMemory : Tarea
 {
@@ -36,11 +37,22 @@ public class TareaMemory : Tarea
         estadoJuego == EstadoTareaMemory.EligiendoSegundaTarjeta; 
     }
 
-     protected override string ObtenerCabeceraTarea()
+    
+    public override string ObtenerNombreTarea()
+    {
+        return "Tarea memory";
+    }
+    
+
+    protected override string ObtenerCabeceraTarea()
     {
         string cabecera = string.Empty;
         string posicionesFijasTarjetas = string.Empty; 
         string estimulosSeleccionados = string.Empty; 
+
+        // datos de la tarea
+        cabecera += "Tarea de memory\n";
+        cabecera += "Nivel actual: " + Configuracion.nivelActual.numeroDelNivel + "\n";
 
         // dimensiones de la matriz
         cabecera += "La matriz del memory es " +  Nivel.anchoMatriz + "x" + Nivel.altoMatriz + "\n";
@@ -119,10 +131,14 @@ public class TareaMemory : Tarea
     private IEnumerator CorrutinaCronometro()
     {
         Debug.Log("El nivel tiene tiempo limite");
+
+        /*
         if(Nivel.tiempoLimiteParaCompletar < 1)
-            Debug.LogError("No hay suficiente tiempo limite para completar la tarea");
+            Debug.LogError("No hay suficiente tiempo limite para completar la tarea");*/
+
         // esperamos el tiempo
-        yield return new WaitForSeconds(Nivel.tiempoLimiteParaCompletar);
+        yield return null; 
+        //yield return new WaitForSeconds(Nivel.tiempoLimiteParaCompletar);
         // finalizamos la tarea
         JuegoPerdido();
     }

@@ -24,6 +24,7 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	[Header("Configuracion")]
     [SerializeField] private OpcionesSeleccionablesMenu opcion; 
 	[SerializeField] private Tareas tarea;
+	[SerializeField] private int nivelACargar;
 	public TipoBotonMenu tipoBoton; 
 	[Header("Materiales")]
 	[SerializeField] private Material materialBotonNormal;
@@ -93,7 +94,7 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 
     private void Seleccionar()
     {
-		FindObjectOfType<Menu>().EjecutarOpcionMenu(opcion, tarea);
+		FindObjectOfType<Menu>().EjecutarOpcionMenu(opcion, tarea, nivelACargar);
 	}
 
 	private void ContinuarFijacion()

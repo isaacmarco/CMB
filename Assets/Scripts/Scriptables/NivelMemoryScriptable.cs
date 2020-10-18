@@ -11,9 +11,11 @@ public class NivelMemoryScriptable : NivelScriptable
     [Range(1, 10)]
     public int altoMatriz = 4; 
     public EstimulosTareaMemory[] listaEstimulosParaFormarParejas;
+    /*
     [Header("Dificultad")]        
     public bool hayTiempoLimite; 
-    public float tiempoLimiteParaCompletar; 
+    public float tiempoLimiteParaCompletar; */
+
     [Header("Requisitos para la superacion")]    
     public int erroresParaPerder;      
     

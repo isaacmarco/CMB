@@ -10,17 +10,25 @@ public class MenuTareaMemory : MonoBehaviour
     
     private int nivelSeleccionado; 
     
+    public void Seleccionar(int nivel)
+    {
+        nivelSeleccionado = nivel; 
+        FindObjectOfType<Menu>().Configuracion.pacienteActual.nivelActualTareaMemory = nivel;         
+        CambiarNivelSeleccionado();
+    }
+
     public void Actualizar()
     {
         // mostrar el nivel actual 
         int nivelActual = FindObjectOfType<Menu>().Configuracion.pacienteActual.nivelActualTareaMemory;
-        this.nivelActual.text = nivelActual.ToString();
+        this.nivelActual.text = (nivelActual+1).ToString();
         nivelSeleccionado = nivelActual; 
     }
 
     private void CambiarNivelSeleccionado()
     {
-        this.nivelActual.text = nivelSeleccionado.ToString();
+        // los niveles comienzan internamente en 0 no en 1
+        this.nivelActual.text = (nivelSeleccionado + 1).ToString();
     }
 
     public void NivelSiguiente()    

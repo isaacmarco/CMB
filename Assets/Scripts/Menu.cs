@@ -45,7 +45,7 @@ public class Menu : MonoBehaviour
         } else {
            
             // ya existe un paciente actual?
-            
+
             // mostrar el menu principal a continuacion             
             MostrarMenu(jerarquiaMenuPrincipal);
         }
@@ -66,7 +66,7 @@ public class Menu : MonoBehaviour
 
     }
 
-    public void EjecutarOpcionMenu(OpcionesSeleccionablesMenu opcion, Tareas tarea)
+    public void EjecutarOpcionMenu(OpcionesSeleccionablesMenu opcion, Tareas tarea, int nivelACargar = -1)
     {
         tareaActual = tarea; 
 
@@ -100,9 +100,11 @@ public class Menu : MonoBehaviour
             break;
 
             case OpcionesSeleccionablesMenu.ComenzarTareaTopos:
+                // establecer el nivel actual de topos
+                // antes de lanzar la tarea
+                
                 // lanzamos la tarea topos
-                SceneManager.LoadScene("TareaTopos");
-    
+                SceneManager.LoadScene("TareaTopos");    
             break;
 
             case OpcionesSeleccionablesMenu.ComenzarTareaMemory:
@@ -126,6 +128,13 @@ public class Menu : MonoBehaviour
 
             case OpcionesSeleccionablesMenu.SeleccionarPaciente2:
                 SeleccionarPaciente(1);
+            break;
+
+            case OpcionesSeleccionablesMenu.SeleccionarNivel:
+                Debug.Log("Seleccionado nivel " + nivelACargar);
+                // establecer un nivel como seleccionado
+                FindObjectOfType<MenuTareaMemory>().Seleccionar(nivelACargar);
+                
             break;
 
         }   

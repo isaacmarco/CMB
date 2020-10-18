@@ -59,11 +59,11 @@ public class Aplicacion : MonoBehaviour
 
     public void CargarDatosPaciente(string codigo)
     {
-        Debug.Log("Cargando datos de paciente " + codigo);
+        //Debug.Log("Cargando datos de paciente " + codigo);
         // recuperamos el json desde el prefs y deserializamos
-        string json = PlayerPrefs.GetString(codigo); 
+        //string json = PlayerPrefs.GetString(codigo); 
         // cargamos los datos en el paciente actual 
-        JsonUtility.FromJsonOverwrite(json, configuracion.pacienteActual); 
+        //JsonUtility.FromJsonOverwrite(json, configuracion.pacienteActual); 
     }
 
     public void CargarPerfilesExistentes()
