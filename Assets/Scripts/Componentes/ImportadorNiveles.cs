@@ -5,16 +5,6 @@ using UnityEditor;
 
 public class ImportadorNiveles 
 {
-    /*
-    [MenuItem("Niveles/Preparar importador")]
-    public static void ImportarNiveles()
-    {
-
-        // cargar scriptable que contiene referencias
-        // a los ficheros excel 
-        ExcelNivelesScriptable refExcel = Resources.Load<ExcelNivelesScriptable>("NivelesExcel");
-
-    }*/
 
     [MenuItem("Niveles/Importar niveles memory")]
     public static void ImportarNivelesMemory()

@@ -26,12 +26,7 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
-        // crear codigos de pacietes falsos
-        Debug.LogError("Creando codigos de pacientes para debug");
-        PlayerPrefs.SetString("codigoPaciente0", "000");
-        PlayerPrefs.SetString("codigoPaciente1", "001");
-              
-                
+       
         // cargamos todos los json de los perfiles disponibles
         Aplicacion.instancia.CargarPerfilesExistentes();        
 
@@ -41,11 +36,12 @@ public class Menu : MonoBehaviour
         {
             // se muestra la seleccion de perfiles, al seleccionar
             // el perfil se cargaran datos del paciente 
+            Debug.Log("No hay paciente actual, mostrando menu de perfiles");
             MostrarMenu(jerarquiaMenuPerfiles);
         } else {
            
             // ya existe un paciente actual?
-
+            Debug.Log("Paciente actual existente, mostrando menu");
             // mostrar el menu principal a continuacion             
             MostrarMenu(jerarquiaMenuPrincipal);
         }
@@ -102,14 +98,19 @@ public class Menu : MonoBehaviour
             case OpcionesSeleccionablesMenu.ComenzarTareaTopos:
                 // establecer el nivel actual de topos
                 // antes de lanzar la tarea
-                
+                Aplicacion.instancia.CargarNivelTareaTopos(
+                    Configuracion.pacienteActual.nivelActualTareaTopos
+                );
                 // lanzamos la tarea topos
-                SceneManager.LoadScene("TareaTopos");    
+                //SceneManager.LoadScene("TareaTopos");    
             break;
 
             case OpcionesSeleccionablesMenu.ComenzarTareaMemory:
+                Aplicacion.instancia.CargarNivelTareaMemory(
+                    Configuracion.pacienteActual.nivelActualTareaMemory
+                );
                 // lanzamos la tarea de memoria
-                SceneManager.LoadScene("TareaMemory");
+                //SceneManager.LoadScene("TareaMemory");
             break;
 
             case OpcionesSeleccionablesMenu.SiguienteNivel:
@@ -156,7 +157,7 @@ public class Menu : MonoBehaviour
         Configuracion.pacienteActual = configuracion.pacientes[indice];
 
         // test para guardar el paciente actual 
-        Aplicacion.instancia.GuardarDatosPaciente(configuracion.pacienteActual);
+        // Aplicacion.instancia.GuardarDatosPaciente(configuracion.pacienteActual);
 
         // mostrar el menu 
         MostrarMenu(jerarquiaMenuPrincipal);        

@@ -6,9 +6,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ConfiguracionScriptable : ScriptableObject
 {
-    [Header("Datos actuales")]
+    [Header("Estado del programa")]
     public PacienteScriptable pacienteActual;
-    public TareaScriptable tareaActual;     
+    // public TareaScriptable tareaActual;     
     public NivelScriptable nivelActual;
 
     
@@ -30,12 +30,11 @@ public class ConfiguracionScriptable : ScriptableObject
     [Header("Configuracion tarea de memoria")]
     public float tiempoParaOcultarPareja = 2f; 
 
-    [Header("Lista de tareas")]
-    public TareaScriptable[] tareas; 
-
+    
     [Header("Lista de pacientes")]   
     public PacienteScriptable[] pacientes;
+    /*
     [Header("Estado del programa")]
-    public bool hayPacienteActivo; 
+    public bool hayPacienteActivo; */
 
 }

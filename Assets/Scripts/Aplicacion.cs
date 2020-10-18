@@ -42,11 +42,32 @@ public class Aplicacion : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        ReiniciarEstadoPrograma();
     }
 
-    void Start()
+
+    public void ReiniciarEstadoPrograma()
     {
+        // reiniciamos el estado del programa
         configuracion.pacienteActual = null; 
+        configuracion.nivelActual = null; 
+    }
+
+    public void CargarNivelTareaTopos(int nivel)
+    {
+        string ruta = "Niveles Topos/NivelTopos " + nivel; 
+        NivelToposScriptable nivelTopos = (NivelToposScriptable) Resources.Load(ruta); 
+        configuracion.nivelActual = nivelTopos; 		
+        Debug.Log("Cargado nivel de topos " + nivelTopos.numeroDelNivel);
+    }
+
+
+    public void CargarNivelTareaMemory(int nivel)
+    {
+        string ruta = "Niveles Memory/NivelMemory " + nivel; 
+        NivelMemoryScriptable nivelmemory = (NivelMemoryScriptable) Resources.Load(ruta); 
+        configuracion.nivelActual = nivelmemory; 	
+        Debug.Log("Cargado nivel de memory " + nivelmemory.numeroDelNivel);
     }
 
     public void GuardarDatosPaciente(PacienteScriptable paciente)
@@ -68,6 +89,15 @@ public class Aplicacion : MonoBehaviour
 
     public void CargarPerfilesExistentes()
     {
+
+        // crear codigos de pacietes falsos, estos datos deben 
+        // configurarse desde algun fichero o menu
+        Debug.LogError("Creando codigos de pacientes para debug");
+        PlayerPrefs.SetString("codigoPaciente0", "000");
+        PlayerPrefs.SetString("codigoPaciente1", "001");
+                
+
+
         // cargar las configuraciones de cada uno de los
         // scriptables posibles para pacientes 
        
