@@ -7,8 +7,7 @@ using UnityEngine;
 public class ConfiguracionScriptable : ScriptableObject
 {
     [Header("Estado del programa")]
-    public PacienteScriptable pacienteActual;
-    // public TareaScriptable tareaActual;     
+    public PacienteScriptable pacienteActual;    
     public NivelScriptable nivelActual;
 
     
@@ -29,12 +28,11 @@ public class ConfiguracionScriptable : ScriptableObject
 
     [Header("Configuracion tarea de memoria")]
     public float tiempoParaOcultarPareja = 2f; 
-
+    public int numeroDeNivelesParaBonus = 2; 
     
     [Header("Lista de pacientes")]   
     public PacienteScriptable[] pacientes;
-    /*
-    [Header("Estado del programa")]
-    public bool hayPacienteActivo; */
+  
+  
 
 }

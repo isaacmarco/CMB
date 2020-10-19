@@ -20,8 +20,7 @@ public class Reloj : MonoBehaviour
 
     private IEnumerator CorrutinaReloj()
     {
-       
-
+        // contamos el timepo que pasa
         while(true)
         {
             yield return new WaitForSeconds(1f);
@@ -32,8 +31,8 @@ public class Reloj : MonoBehaviour
 
     private IEnumerator CorrutinaContraReloj(int tiempoInicio)
     {       
-        Debug.Log("Inicio del cronometro");
-
+        
+        // cuenta atras
         while(tiempoInicio > 0)
         {
             // esperamos y restamos un segundo

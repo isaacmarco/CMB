@@ -54,9 +54,13 @@ public class TareaMemory : Tarea
         cabecera += "Tarea de memory\n";
         cabecera += "Nivel actual: " + Configuracion.nivelActual.numeroDelNivel + "\n";
 
+        // resultados
+        cabecera += "Aciertos: " + aciertos + "\n";
+        cabecera += "Errores: " + errores + "\n";
+
         // dimensiones de la matriz
         cabecera += "La matriz del memory es " +  Nivel.anchoMatriz + "x" + Nivel.altoMatriz + "\n";
-        
+              
         // distribucion aleatoria del tablero 
         for(int i=0; i<tarjetas.Length; i++)
         {
@@ -104,9 +108,29 @@ public class TareaMemory : Tarea
         return new RegistroPosicionOcultarTareaMemory(tiempo, x, y, tarjetasVistasPorJugador, matrizEstadoTablero);
     }
 
-    public override void TiempoExcedido()
+    private IEnumerator CorrutinaPartida()
     {
-        Debug.Log("Tiempo excedido");
+        // mensajes de inicio de niveles 
+        switch(Configuracion.nivelActual.numeroDelNivel)
+        {
+            case 0:
+            yield return StartCoroutine(MostrarMensaje("Busca las parejas", 1));
+            break;
+        }
+        // mensaje de aviso 
+        if(Configuracion.pacienteActual.jugandoNivelDeBonus)
+            yield return StartCoroutine(MostrarMensaje("Hazlo lo más rápido que puedas", 1));
+
+
+        if(Configuracion.pacienteActual.jugandoNivelDeBonus)
+        {            
+            // se trata de un nivel de bonus con tiempo limite            
+            FindObjectOfType<Reloj>().IniciarCuentaAtras(60);
+
+        } else {
+            // el nivel
+            FindObjectOfType<Reloj>().IniciarReloj();
+        } 
     }
 
     protected override void Inicio()
@@ -117,31 +141,22 @@ public class TareaMemory : Tarea
         GenerarTarjetas();
         // estado inicial 
         estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
-        // si la dificutlad lo exige, hay que empezar a contabilizar
-        // el tiempo limite
-        //if(Nivel.hayTiempoLimite)
-        //    StartCoroutine(CorrutinaCronometro());
-        
-        // iniciar crono
-        // FindObjectOfType<Reloj>().IniciarCuentaAtras(60);
-        FindObjectOfType<Reloj>().IniciarReloj();
+
+        StartCoroutine(CorrutinaPartida());       
+       
+
     }
 
     
-    private IEnumerator CorrutinaCronometro()
+    public override void TiempoExcedido()
     {
-        Debug.Log("El nivel tiene tiempo limite");
-
-        /*
-        if(Nivel.tiempoLimiteParaCompletar < 1)
-            Debug.LogError("No hay suficiente tiempo limite para completar la tarea");*/
-
-        // esperamos el tiempo
-        yield return null; 
-        //yield return new WaitForSeconds(Nivel.tiempoLimiteParaCompletar);
-        // finalizamos la tarea
+        // metodo llamado por el cronometro cuando el tiempo
+        // se termina en el nivel de bonus
+        Debug.Log("Tiempo excedido");
         JuegoPerdido();
     }
+    
+
 
     public void VoltearTarjeta(TarjetaTareaMemory tarjeta)
     {
@@ -231,7 +246,44 @@ public class TareaMemory : Tarea
 
     protected override void GuardarProgreso(bool partidaGanada)
     {        
-        Configuracion.pacienteActual.nivelActualTareaMemory++;
+
+        PacienteScriptable paciente = Configuracion.pacienteActual;
+
+        // guardar la puntuacion
+        if(puntuacion > 0)
+            paciente.puntuacionTareaMemory += puntuacion; 
+
+        // comprobar el tipo de partida, en las partidas de bonus
+        // no progresamos en el juego
+        if(!paciente.jugandoNivelDeBonus)
+        {           
+            // registrar el progreso para los niveles de bonus
+            paciente.contadorNivelesGanadosParaBonus++;
+            if(paciente.contadorNivelesGanadosParaBonus >= Configuracion.numeroDeNivelesParaBonus)
+            {
+                Debug.Log("La proxima partida debe ser de bonus");
+                // activamos el flag de nivel bonus y el contador de partidas jugadas
+                paciente.jugandoNivelDeBonus = true;
+                paciente.contadorNivelesGanadosParaBonus = 0; 
+            }
+               
+            int numeroNiveles = 27; 
+            paciente.ultimoNivelDesbloqueadoTareaMemory++;
+            if(paciente.ultimoNivelDesbloqueadoTareaMemory >= numeroNiveles)
+            {
+                // tarea completa
+                Debug.Log("Todos los niveles de la tarea completos");
+                paciente.ultimoNivelDesbloqueadoTareaMemory = 0; 
+            }     
+
+        } else {
+            
+            // acabamos de terminar una partida de bonus, reiniciamos el flag
+            paciente.jugandoNivelDeBonus = false; 
+        }
+      
+
+        // guardar los datos serializados   
         Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
     }
 
@@ -348,7 +400,8 @@ public class TareaMemory : Tarea
     // todo algoritmo pescador aqui!
 
 
-    void Update()
+
+    protected override void Actualizacion()
     {
         if(controladorIK!=null)
         {            

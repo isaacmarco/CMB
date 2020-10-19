@@ -43,6 +43,10 @@ public class TareaTopos : Tarea
         // datos de la tarea
         cabecera += "Tarea de topos\n";
         cabecera += "Nivel actual: " + Configuracion.nivelActual.numeroDelNivel + "\n";
+        // resultados
+        cabecera += "Aciertos: " + aciertos + "\n";
+        cabecera += "Errores: " + errores + "\n";
+        cabecera += "Omision: " + omisiones + "\n";
 
         for(int i=0; i<estimulos.Length; i++)
         {
@@ -81,7 +85,19 @@ public class TareaTopos : Tarea
 
     protected override void GuardarProgreso(bool partidaGanada)
     {        
-        Configuracion.pacienteActual.nivelActualTareaTopos++;
+        // guardar la puntuacion
+        if(puntuacion > 0)
+            Configuracion.pacienteActual.puntuacionTareaTopos += puntuacion; 
+            
+        int numeroNiveles = 61; 
+        Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos++;
+        if(Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos >= numeroNiveles)
+        {
+            Debug.Log("Todos los niveles de la tarea completos");
+            // El juego se ha terminado, no hay mas niveles
+            Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos = numeroNiveles; 
+        }
+        
         Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
     }
     
@@ -91,6 +107,7 @@ public class TareaTopos : Tarea
     {        
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertos++;
+        AgregarPuntuacion(100);
         if(aciertos >= Nivel.aciertosParaSuperarElNivel)
             JuegoGanado();
     }
@@ -100,6 +117,7 @@ public class TareaTopos : Tarea
     {
         FindObjectOfType<Audio>().FeedbackOmision();
         omisiones++;
+        AgregarPuntuacion(-15);
         ComprobarOmisionError();
     }    
 
@@ -108,6 +126,7 @@ public class TareaTopos : Tarea
     {
         FindObjectOfType<Audio>().FeedbackError();
         errores++;
+        AgregarPuntuacion(-25);
         ComprobarOmisionError();
     }
 
@@ -119,10 +138,32 @@ public class TareaTopos : Tarea
             JuegoPerdido();
     }
     
+    
     private IEnumerator CorrutinaPartida()
     {
         Debug.Log("Inicio de tarea");
 
+        // mensaje de explicacion de los diferentes niveles clave
+        switch(Configuracion.nivelActual.numeroDelNivel)
+        {
+            case 0:
+            yield return StartCoroutine(MostrarMensaje("Golpea a los topos", 1));
+            break;
+            case 4:
+            yield return StartCoroutine(MostrarMensaje("Ahora debes ser más rápido", 1));
+            break;
+            case 6:
+            yield return StartCoroutine(MostrarMensaje("¡Atención! Aparecen otros animales", 1));
+            break;
+            case 11:
+            yield return StartCoroutine(MostrarMensaje("¡Fíjate! Golpea a (nombre)", 1));
+            break;
+            case 36:
+            yield return StartCoroutine(MostrarMensaje("Cuidado, puede cambiar en cualquier momento", 1));
+            break;
+        }
+        
+        // mensaje normal de inicia
         yield return StartCoroutine(MostrarMensaje("Comienza la partida", 1));
 
         // tiempo de espera inicial

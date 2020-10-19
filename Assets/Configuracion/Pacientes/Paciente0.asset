@@ -15,9 +15,11 @@ MonoBehaviour:
   nombre: Mario
   codigo: 000
   esZurdo: 0
-  nivelActualTareaTopos: 0
-  nivelActualTareaMemory: 0
-  partidasDeMemoryGanadas: 0
+  ultimoNivelDesbloqueadoTareaTopos: 0
+  ultimoNivelDesbloqueadoTareaMemory: 3
+  nivelActualTareaMemory: 1
+  contadorNivelesGanadosParaBonus: 1
+  jugandoNivelDeBonus: 0
   puntuacionTareaTopos: 0
   puntuacionTareaMemory: 0
   recordTareaMemoryNivelBajo: 0

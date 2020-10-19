@@ -64,7 +64,7 @@ public class Aplicacion : MonoBehaviour
 
     public void CargarNivelTareaMemory(int nivel)
     {
-        string ruta = "Niveles Memory/NivelMemory " + nivel; 
+        string ruta = "Niveles Memory/NivelMemory " + (nivel+1); 
         NivelMemoryScriptable nivelmemory = (NivelMemoryScriptable) Resources.Load(ruta); 
         configuracion.nivelActual = nivelmemory; 	
         Debug.Log("Cargado nivel de memory " + nivelmemory.numeroDelNivel);
@@ -78,15 +78,6 @@ public class Aplicacion : MonoBehaviour
         PlayerPrefs.SetString(paciente.codigo, json);
     }
 
-    public void CargarDatosPaciente(string codigo)
-    {
-        //Debug.Log("Cargando datos de paciente " + codigo);
-        // recuperamos el json desde el prefs y deserializamos
-        //string json = PlayerPrefs.GetString(codigo); 
-        // cargamos los datos en el paciente actual 
-        //JsonUtility.FromJsonOverwrite(json, configuracion.pacienteActual); 
-    }
-
     public void CargarPerfilesExistentes()
     {
 
@@ -95,9 +86,8 @@ public class Aplicacion : MonoBehaviour
         Debug.LogError("Creando codigos de pacientes para debug");
         PlayerPrefs.SetString("codigoPaciente0", "000");
         PlayerPrefs.SetString("codigoPaciente1", "001");
-                
 
-
+     
         // cargar las configuraciones de cada uno de los
         // scriptables posibles para pacientes 
        
@@ -110,6 +100,15 @@ public class Aplicacion : MonoBehaviour
             // deserializar el json en un paciente scriptable de la
             // lista de perfiles disponibles 
             JsonUtility.FromJsonOverwrite(json, configuracion.pacientes[i]);
+            // comprobar si el paciente tiene inciado el 
+            // vector para los tiempos record de cada nivel de memory
+            // si esta vacio creamos el vector en este momento y ya se guardara
+            // mas tarde al completar un nivel 
+            PacienteScriptable paciente = configuracion.pacientes[i];
+            if(paciente.tiemposRecordPorNivelTareaMemory == null || 
+                paciente.tiemposRecordPorNivelTareaMemory.Length == 0)
+                paciente.tiemposRecordPorNivelTareaMemory = new int[28];
+
         }
     }
 

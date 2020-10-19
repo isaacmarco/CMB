@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Tobii.Gaming;
+using TMPro; 
 
 public class SeleccionarAlMirarUI : MonoBehaviour
 {
@@ -29,10 +30,25 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	[Header("Materiales")]
 	[SerializeField] private Material materialBotonNormal;
 	[SerializeField] private Material materialBotonAuxliar; 
-	
+	[Header("Especial")]
+	[SerializeField] private TextMeshPro tiempoRecord; 
+
+
+	public void MostrarTiempoRecord(int record)
+	{
+		if(record == 0)
+		{
+			this.tiempoRecord.text = "--";
+		} else {
+			this.tiempoRecord.text = record.ToString() + "seg.";				
+		}
+		this.tiempoRecord.gameObject.SetActive(true); 
+	}
 
     void Awake()
 	{
+		// ocultar el tiempo medio 
+		tiempoRecord.gameObject.SetActive(false); 
 		// creamos las referencias 
 		menu = FindObjectOfType<Menu>();
 		gazeAware = GetComponent<GazeAware>();	

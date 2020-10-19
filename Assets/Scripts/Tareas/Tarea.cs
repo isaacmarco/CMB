@@ -9,6 +9,7 @@ using System;
 public class Tarea : MonoBehaviour
 {
     private ArrayList listaRegistrosOculares; 
+    private bool registrarEnDiario = true; 
     protected int puntuacion; 
     protected string nombreTarea; 
     protected GazeAware gazeAware;
@@ -45,17 +46,49 @@ public class Tarea : MonoBehaviour
         this.puntuacion += puntuacion; 
     }
 
-    protected virtual void JuegoGanado(){
+    protected void JuegoGanado(){
+        FinalizarRegistro();
         StopAllCoroutines();
         StartCoroutine(TerminarJuego(true)); 
     }
 
-    protected virtual void JuegoPerdido(){
-        StopAllCoroutines();
+    protected void JuegoPerdido(){
+
+        
+        // reiniciamos el flag de nivel de bonus
+        Configuracion.pacienteActual.jugandoNivelDeBonus = false; 
+
+        FinalizarRegistro();
+        StopAllCoroutines();        
         StartCoroutine(TerminarJuego(false)); 
     }
 
- 
+    
+    private void FinalizarRegistro()
+    {
+        registrarEnDiario = false; 
+        EscribirDiarioEnDisco();
+    }
+
+    
+    protected virtual void Actualizacion()
+    {
+        // cada tarea ejecuta aqui su propio update()
+    }
+
+    void Update()
+    {
+        if(Application.isEditor)
+        {
+            // para el debug 
+            if(Input.GetKeyDown(KeyCode.W))
+                JuegoGanado();
+            if(Input.GetKeyDown(KeyCode.L))
+                JuegoPerdido();
+        }
+
+        Actualizacion();
+    }
 
     protected virtual IEnumerator TerminarJuego(bool partidaGanada){
 
@@ -73,6 +106,7 @@ public class Tarea : MonoBehaviour
         // guardar el progreso del paciente, este metodo se implemente
         // en cada tarea 
         GuardarProgreso(partidaGanada);
+        
 
         // esperar 1 seg antes de lanzar el menu
         yield return new WaitForSeconds(1f);
@@ -80,7 +114,7 @@ public class Tarea : MonoBehaviour
     }
 
     private void AbandonarTarea()
-    {
+    {       
         SceneManager.LoadScene("Menu");
     }
     
@@ -105,14 +139,6 @@ public class Tarea : MonoBehaviour
         if(Configuracion.registrarMovimientoOcularEnDiario)
             StartCoroutine(RegistroDiario());
             
-    }
-
-    private IEnumerator TestRegistro()
-    {
-        Debug.Log("Activo test de registro a disco");
-        yield return new WaitForSeconds(3f);
-        EscribirDiarioEnDisco();        
-        yield return null; 
     }
 
     void OnApplicationQuit()
@@ -204,9 +230,9 @@ public class Tarea : MonoBehaviour
         listaRegistrosOculares = new ArrayList();
         float tiempoInicio = Time.time;
 
-        StartCoroutine(TestRegistro());
+        //StartCoroutine(TestRegistro());
 
-        while(true)
+        while(registrarEnDiario)
         {           
 
             // obtenemos la posicion a la que se mira para registrarla

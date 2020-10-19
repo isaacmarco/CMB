@@ -47,6 +47,7 @@ public class Menu : MonoBehaviour
         }
     }
 
+
     public void MostrarMenu(Transform jerarquia)
     {
         Debug.Log("Mostrando menu " + jerarquia.name);
@@ -99,10 +100,10 @@ public class Menu : MonoBehaviour
                 // establecer el nivel actual de topos
                 // antes de lanzar la tarea
                 Aplicacion.instancia.CargarNivelTareaTopos(
-                    Configuracion.pacienteActual.nivelActualTareaTopos
+                    Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos
                 );
                 // lanzamos la tarea topos
-                //SceneManager.LoadScene("TareaTopos");    
+                SceneManager.LoadScene("TareaTopos");    
             break;
 
             case OpcionesSeleccionablesMenu.ComenzarTareaMemory:
@@ -110,7 +111,7 @@ public class Menu : MonoBehaviour
                     Configuracion.pacienteActual.nivelActualTareaMemory
                 );
                 // lanzamos la tarea de memoria
-                //SceneManager.LoadScene("TareaMemory");
+                SceneManager.LoadScene("TareaMemory");
             break;
 
             case OpcionesSeleccionablesMenu.SiguienteNivel:

@@ -11,7 +11,7 @@ public class MenuTareaTopos : MonoBehaviour
     public void Actualizar()
     {
         // mostrar el nivel actual 
-        int nivelActual = FindObjectOfType<Menu>().Configuracion.pacienteActual.nivelActualTareaTopos;
+        int nivelActual = FindObjectOfType<Menu>().Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos;
         this.nivelActual.text = nivelActual.ToString();
     }
 

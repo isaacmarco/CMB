@@ -14,48 +14,21 @@ public class PacienteScriptable : ScriptableObject
    
 
     [Header("Progreso del jugador")]
-    public int nivelActualTareaTopos; 
-    public int nivelActualTareaMemory;
-    public int partidasDeMemoryGanadas; // se reinicia cada X partidas para cargar el nivel de bonus 
+    public int ultimoNivelDesbloqueadoTareaTopos; 
+    public int ultimoNivelDesbloqueadoTareaMemory;
+    public int nivelActualTareaMemory; 
+    // lleva la cuenta de niveles ganados para lanzar un nivel de bonus
+    public int contadorNivelesGanadosParaBonus; 
+    // indica que el nivel que se jugara es de bonus
+    public bool jugandoNivelDeBonus = false; 
     
-    [Header("Puntuaciones y records")]
+    [Header("Puntuaciones")]
     public int puntuacionTareaTopos;
     public int puntuacionTareaMemory; 
-    public int recordTareaMemoryNivelBajo; 
-    public int recordTareaMemoryNivelMedio; 
-    public int recordTareaMemoryNivelDificil; 
-
-    public void Configurar(PacienteScriptable paciente)
-    {
-        if(paciente == null)
-        {
-            Debug.LogError("Paciente nulo");
-            return; 
-        }
-
-        // datos
-        codigo = paciente.codigo; 
-        nombre = paciente.nombre; 
-      
-
-        // progreso
-        nivelActualTareaTopos = paciente.nivelActualTareaTopos; 
-        nivelActualTareaMemory = paciente.nivelActualTareaMemory;
-        partidasDeMemoryGanadas = paciente.partidasDeMemoryGanadas;
-
-        // puntuaciones 
-        puntuacionTareaTopos = paciente.puntuacionTareaTopos;
-        puntuacionTareaMemory = paciente.puntuacionTareaMemory; 
-
-        // partidas de bonus
-        partidasDeMemoryGanadas = paciente.partidasDeMemoryGanadas;
-
-        // records
-        recordTareaMemoryNivelBajo = paciente.recordTareaMemoryNivelBajo; 
-        recordTareaMemoryNivelMedio = paciente.recordTareaMemoryNivelMedio;
-        recordTareaMemoryNivelDificil = paciente.recordTareaMemoryNivelDificil;
-    }
-
+    
+    [Header("Tiempos record para tarea memory")]
+    public int[] tiemposRecordPorNivelTareaMemory; 
+    
 
     
 }
