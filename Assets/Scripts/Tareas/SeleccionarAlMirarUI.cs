@@ -32,11 +32,12 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	[SerializeField] private Material materialBotonAuxliar; 
 	[Header("Especial")]
 	[SerializeField] private TextMeshPro tiempoRecord; 
+	[SerializeField] private TextMeshPro texto; 
 
 
 	public void MostrarTiempoRecord(int record)
 	{
-		if(record == 0)
+		if(record == int.MaxValue)
 		{
 			this.tiempoRecord.text = "--";
 		} else {
@@ -108,6 +109,14 @@ public class SeleccionarAlMirarUI : MonoBehaviour
        
 	}    	
 
+	public void Desactivar()
+	{
+		texto.color = Color.black; 
+	}
+	public void Activar()
+	{
+		texto.color = Color.white; 
+	}
     private void Seleccionar()
     {
 		FindObjectOfType<Menu>().EjecutarOpcionMenu(opcion, tarea, nivelACargar);

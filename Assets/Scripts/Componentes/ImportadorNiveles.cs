@@ -6,6 +6,8 @@ using UnityEditor;
 public class ImportadorNiveles 
 {
 
+#if UNITY_EDITOR
+
     [MenuItem("Niveles/Importar niveles memory")]
     public static void ImportarNivelesMemory()
     {
@@ -244,5 +246,7 @@ public class ImportadorNiveles
         }
 
     }
+
+#endif
    
 }

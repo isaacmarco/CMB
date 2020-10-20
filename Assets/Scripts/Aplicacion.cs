@@ -43,6 +43,10 @@ public class Aplicacion : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         ReiniciarEstadoPrograma();
+
+        // establecer resolucion
+        Screen.SetResolution(1920, 1080, true);
+
     }
 
 
@@ -107,7 +111,13 @@ public class Aplicacion : MonoBehaviour
             PacienteScriptable paciente = configuracion.pacientes[i];
             if(paciente.tiemposRecordPorNivelTareaMemory == null || 
                 paciente.tiemposRecordPorNivelTareaMemory.Length == 0)
-                paciente.tiemposRecordPorNivelTareaMemory = new int[28];
+                    paciente.tiemposRecordPorNivelTareaMemory = new int[28];
+            
+            // ponemos valores de tiempo superables en la primera partida
+            // para que la primera vez siempre sea record
+            for(int j=0; j<paciente.tiemposRecordPorNivelTareaMemory.Length; j++)
+                if(paciente.tiemposRecordPorNivelTareaMemory[j] == 0)
+                    paciente.tiemposRecordPorNivelTareaMemory[j] = int.MaxValue;
 
         }
     }

@@ -131,6 +131,7 @@ MonoBehaviour:
   materialBotonAuxliar: {fileID: 2100000, guid: 514e5a4a285f49d4eb411d95c406404d,
     type: 2}
   tiempoRecord: {fileID: 6800741225522451411}
+  texto: {fileID: 8051404966311627677}
 --- !u!1 &3782348281625865125
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   numeroDelNivel: 3
   dificultad: 0
   tipoDeNivel: 0
-  anchoMatriz: 8
+  anchoMatriz: 10
   altoMatriz: 1
-  listaEstimulosParaFormarParejas: 00000000010000000200000003000000
-  erroresParaPerder: 16
+  listaEstimulosParaFormarParejas: 0000000001000000020000000300000004000000
+  erroresParaPerder: 20

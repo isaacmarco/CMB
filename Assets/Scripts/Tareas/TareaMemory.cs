@@ -24,7 +24,11 @@ public class TareaMemory : Tarea
     private Vector2 puntoFiltrado; 
     private EstadoTareaMemory estadoJuego;
     private TarjetaTareaMemory primeraTarjetaElegida, segundaTarjetaElegida; 
-    
+    private bool juegoEnCurso;
+    public bool JuegoEnCurso
+    {
+        get { return juegoEnCurso; }
+    }
     public NivelMemoryScriptable Nivel { 
         get { return (NivelMemoryScriptable) Configuracion.nivelActual;} 
     }
@@ -53,6 +57,10 @@ public class TareaMemory : Tarea
         // datos de la tarea
         cabecera += "Tarea de memory\n";
         cabecera += "Nivel actual: " + Configuracion.nivelActual.numeroDelNivel + "\n";
+
+        // partida de bonus      
+        string bonus = Configuracion.pacienteActual.jugandoNivelDeBonus ? "Si" : "No";
+        cabecera += "Partida de bonus? " + bonus + "\n";
 
         // resultados
         cabecera += "Aciertos: " + aciertos + "\n";
@@ -114,12 +122,12 @@ public class TareaMemory : Tarea
         switch(Configuracion.nivelActual.numeroDelNivel)
         {
             case 0:
-            yield return StartCoroutine(MostrarMensaje("Busca las parejas", 1));
+            yield return StartCoroutine(MostrarMensaje("Busca las parejas", 2));
             break;
         }
         // mensaje de aviso 
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)
-            yield return StartCoroutine(MostrarMensaje("Hazlo lo más rápido que puedas", 1));
+            yield return StartCoroutine(MostrarMensaje("Hazlo lo más rápido que puedas", 2));
 
 
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)
@@ -131,6 +139,8 @@ public class TareaMemory : Tarea
             // el nivel
             FindObjectOfType<Reloj>().IniciarReloj();
         } 
+
+        juegoEnCurso = true; 
     }
 
     protected override void Inicio()
@@ -141,10 +151,8 @@ public class TareaMemory : Tarea
         GenerarTarjetas();
         // estado inicial 
         estadoJuego = EstadoTareaMemory.EligiendoPrimeraTarjeta;
-
-        StartCoroutine(CorrutinaPartida());       
-       
-
+        // comenzar
+        StartCoroutine(CorrutinaPartida());             
     }
 
     
@@ -153,6 +161,7 @@ public class TareaMemory : Tarea
         // metodo llamado por el cronometro cuando el tiempo
         // se termina en el nivel de bonus
         Debug.Log("Tiempo excedido");
+        juegoEnCurso = false; 
         JuegoPerdido();
     }
     
@@ -160,7 +169,10 @@ public class TareaMemory : Tarea
 
     public void VoltearTarjeta(TarjetaTareaMemory tarjeta)
     {
-
+        
+        if(!juegoEnCurso)
+            return;
+            
         switch(estadoJuego)
         {
             case EstadoTareaMemory.EligiendoPrimeraTarjeta:
@@ -222,6 +234,7 @@ public class TareaMemory : Tarea
             if(aciertos == tarjetas.Length / 2)
             {
                 JuegoGanado();
+                juegoEnCurso = false; 
             } else {
                 
                 // reiniciamos el estado de la tarea inmediantamente
@@ -238,7 +251,10 @@ public class TareaMemory : Tarea
             StartCoroutine(CorrutinaOcultarPareja());
 
             if(errores >= Nivel.erroresParaPerder)
+            {
                 JuegoPerdido();
+                juegoEnCurso = false; 
+            }
 
         }
         
@@ -266,14 +282,26 @@ public class TareaMemory : Tarea
                 paciente.jugandoNivelDeBonus = true;
                 paciente.contadorNivelesGanadosParaBonus = 0; 
             }
+
+            // comprobar records
+            int tiempoRecord = paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory];
+            int tiempo = FindObjectOfType<Reloj>().Tiempo; 
+            if(tiempo < tiempoRecord)
+            {
+                // hay nuevo record
+                Debug.Log("Nuevo record");
+                paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory] = tiempo; 
+            } else {
+                // mantenemos el record existente
+            }
                
-            int numeroNiveles = 27; 
+            int numeroNiveles = 26; 
             paciente.ultimoNivelDesbloqueadoTareaMemory++;
             if(paciente.ultimoNivelDesbloqueadoTareaMemory >= numeroNiveles)
             {
                 // tarea completa
                 Debug.Log("Todos los niveles de la tarea completos");
-                paciente.ultimoNivelDesbloqueadoTareaMemory = 0; 
+                //paciente.ultimoNivelDesbloqueadoTareaMemory = 0; 
             }     
 
         } else {

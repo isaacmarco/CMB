@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d4100146f333e0468c8a960fc96fe39, type: 3}
-  m_Name: NivelMemory 27
+  m_Name: NivelMemory 0
   m_EditorClassIdentifier: 
-  numeroDelNivel: 27
-  dificultad: 2
+  numeroDelNivel: 0
+  dificultad: 0
   tipoDeNivel: 0
-  anchoMatriz: 5
-  altoMatriz: 6
-  listaEstimulosParaFormarParejas: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  erroresParaPerder: 60
+  anchoMatriz: 4
+  altoMatriz: 1
+  listaEstimulosParaFormarParejas: 0000000001000000
+  erroresParaPerder: 8

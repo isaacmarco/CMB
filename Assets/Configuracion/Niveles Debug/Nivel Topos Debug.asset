@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e66cd84d8b336b64dafb35d741291457, type: 3}
-  m_Name: Nivel Topos 2
+  m_Name: Nivel Topos Debug
   m_EditorClassIdentifier: 
-  numeroDelNivel: 1
+  numeroDelNivel: 11
+  dificultad: 0
   tipoDeNivel: 2
   estimuloObjetivo: 0
-  similitudEntreEstimulos: 0
-  aparicionesAntesDeCambiarEstimuloObjetivo: 0
-  tiempoParaNuevoEstimulo: 4
-  tiempoPermanenciaDelEstimulo: 4
+  similitudEntreEstimulos: 2
+  aparicionesAntesDeCambiarEstimuloObjetivo: 4
+  tiempoParaNuevoEstimulo: 1
+  tiempoPermanenciaDelEstimulo: 2
   aciertosParaSuperarElNivel: 10
   omisionesOErroresParaPerder: 20

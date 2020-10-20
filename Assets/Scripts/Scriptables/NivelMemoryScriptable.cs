@@ -79,7 +79,7 @@ public class NivelMemoryScriptable : NivelScriptable
         }
 
         // si el metodo llega a este punto la configuracion es correcta
-        Debug.Log("La configuracion del nivel es correcta"); 
+        // Debug.Log("La configuracion del nivel es correcta"); 
 
 
     }

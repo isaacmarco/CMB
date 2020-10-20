@@ -14,8 +14,7 @@ public class MenuTareaMemory : MonoBehaviour
     public void Seleccionar(int nivel)
     {
         nivelSeleccionado = nivel; 
-        FindObjectOfType<Menu>().configuracion.pacienteActual.nivelActualTareaMemory = nivel; 
-        //FindObjectOfType<Menu>().Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaMemory = nivel;         
+        FindObjectOfType<Menu>().configuracion.pacienteActual.nivelActualTareaMemory = nivel;         
         CambiarNivelSeleccionado();
     }
 
@@ -31,6 +30,7 @@ public class MenuTareaMemory : MonoBehaviour
 
         // nivel actual seleccionado es el ultimo desbloqueado 
         this.nivelActual.text = (nivelActual+1).ToString();
+        CambiarNivelSeleccionado();
         
         // bloquear niveles no superados ocultandolos 
         int numeroHijos = jerarquiaNiveles.childCount;
@@ -57,6 +57,16 @@ public class MenuTareaMemory : MonoBehaviour
     {
         // los niveles comienzan internamente en 0 no en 1
         this.nivelActual.text = (nivelSeleccionado + 1).ToString();
+
+        int numeroHijos = jerarquiaNiveles.childCount;
+        for(int i=0; i<numeroHijos; i++)
+        {
+            Transform nivel = jerarquiaNiveles.GetChild(i);
+            nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().Desactivar();
+            if( i == nivelSeleccionado)
+                nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().Activar();
+        }
+
     }
 
     public void NivelSiguiente()    

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: NivelMemory 18
   m_EditorClassIdentifier: 
   numeroDelNivel: 18
-  dificultad: 1
+  dificultad: 2
   tipoDeNivel: 0
-  anchoMatriz: 5
-  altoMatriz: 4
-  listaEstimulosParaFormarParejas: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
-  erroresParaPerder: 40
+  anchoMatriz: 8
+  altoMatriz: 3
+  listaEstimulosParaFormarParejas: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
+  erroresParaPerder: 48

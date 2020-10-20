@@ -6,13 +6,16 @@ using TMPro;
 public class MenuTareaTopos : MonoBehaviour
 {
     
-    [SerializeField] private TextMeshPro nivelActual; 
-
+    public TextMeshPro nivelActual; 
+    public TextMeshPro puntuacion; 
+    
     public void Actualizar()
     {
         // mostrar el nivel actual 
         int nivelActual = FindObjectOfType<Menu>().Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos;
-        this.nivelActual.text = nivelActual.ToString();
+        this.nivelActual.text = (nivelActual + 1).ToString();
+        int puntos = FindObjectOfType<Menu>().Configuracion.pacienteActual.puntuacionTareaTopos;
+        this.puntuacion.text = puntos.ToString();
     }
 
 }

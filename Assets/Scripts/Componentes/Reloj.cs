@@ -8,6 +8,7 @@ public class Reloj : MonoBehaviour
     [SerializeField] private Text reloj; 
     
     private int tiempo = 0; 
+    private bool contabilizarTiempo = true; 
 
     public int Tiempo {
         get { return this.tiempo;}
@@ -18,10 +19,17 @@ public class Reloj : MonoBehaviour
         reloj.text = string.Empty; 
     }
 
+    public void Detener()
+    {
+        contabilizarTiempo = false; 
+    }
+
     private IEnumerator CorrutinaReloj()
     {
+        contabilizarTiempo = true; 
+        
         // contamos el timepo que pasa
-        while(true)
+        while(contabilizarTiempo)
         {
             yield return new WaitForSeconds(1f);
             tiempo ++;

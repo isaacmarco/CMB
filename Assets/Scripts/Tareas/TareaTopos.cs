@@ -144,22 +144,23 @@ public class TareaTopos : Tarea
         Debug.Log("Inicio de tarea");
 
         // mensaje de explicacion de los diferentes niveles clave
+        int duracionMensaje = 2; 
         switch(Configuracion.nivelActual.numeroDelNivel)
         {
             case 0:
-            yield return StartCoroutine(MostrarMensaje("Golpea a los topos", 1));
+            yield return StartCoroutine(MostrarMensaje("Golpea a los topos", duracionMensaje));
             break;
             case 4:
-            yield return StartCoroutine(MostrarMensaje("Ahora debes ser más rápido", 1));
+            yield return StartCoroutine(MostrarMensaje("Ahora debes ser más rápido", duracionMensaje));
             break;
             case 6:
-            yield return StartCoroutine(MostrarMensaje("¡Atención! Aparecen otros animales", 1));
+            yield return StartCoroutine(MostrarMensaje("¡Atención! Aparecen otros animales", duracionMensaje));
             break;
             case 11:
-            yield return StartCoroutine(MostrarMensaje("¡Fíjate! Golpea a (nombre)", 1));
+            yield return StartCoroutine(MostrarMensaje("¡Fíjate! Golpea a (nombre)", duracionMensaje));
             break;
             case 36:
-            yield return StartCoroutine(MostrarMensaje("Cuidado, puede cambiar en cualquier momento", 1));
+            yield return StartCoroutine(MostrarMensaje("Cuidado, puede cambiar en cualquier momento", duracionMensaje));
             break;
         }
         
