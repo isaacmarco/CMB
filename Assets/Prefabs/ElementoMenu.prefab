@@ -132,6 +132,7 @@ MonoBehaviour:
     type: 2}
   tiempoRecord: {fileID: 6800741225522451411}
   texto: {fileID: 8051404966311627677}
+  modelo: {fileID: 4820898269971491392}
 --- !u!1 &3782348281625865125
 GameObject:
   m_ObjectHideFlags: 0

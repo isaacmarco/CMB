@@ -4177,7 +4177,7 @@ PrefabInstance:
     - target: {fileID: 8199588675439195704, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
       propertyPath: tipoBoton
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8332047599515100725, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}

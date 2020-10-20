@@ -30,5 +30,16 @@ public class PacienteScriptable : ScriptableObject
     public int[] tiemposRecordPorNivelTareaMemory; 
     
 
+    public void Reiniciar()
+    {
+        ultimoNivelDesbloqueadoTareaMemory = 0;
+        ultimoNivelDesbloqueadoTareaTopos = 0; 
+        nivelActualTareaMemory = 0; 
+        contadorNivelesGanadosParaBonus = 0;
+        jugandoNivelDeBonus = false; 
+        puntuacionTareaMemory = 0; 
+        puntuacionTareaTopos = 0; 
+        tiemposRecordPorNivelTareaMemory = new int[28];
+    }
     
 }

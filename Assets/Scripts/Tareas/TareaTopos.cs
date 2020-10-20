@@ -66,13 +66,57 @@ public class TareaTopos : Tarea
         return cabecera;
     }
 
-    protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
+     /*
+    protected override void Actualizacion()
     {
-        // creamos la matriz
+         
+        // DEBUG !!!!!!!!!!!!!!!!!!!!!
+        // cada tarea ejecuta aqui su propio update()
         EstimulosTareaTopos[] matriz = new EstimulosTareaTopos[estimulos.Length];
         for(int i=0; i<estimulos.Length;i++)
-            matriz[i] = estimulos[i].Estimulo;
-        
+        {
+            // comprobamos que el estimulo este visible
+            if(estimulos[i].VisibleParaRegistrar)
+            {   
+                // si es visible anotamos el estimulo en la matriz
+                matriz[i] = estimulos[i].Estimulo;
+            } else {
+                // en caso contrario lo marcamos como 'ninguno' en la matriz
+                matriz[i] = EstimulosTareaTopos.Ninguno;
+            }
+        }
+        string matrizFormateada = string.Empty; 
+        for(int i=0; i<matriz.Length; i++)
+        {
+            if(i < matriz.Length - 1)
+            {
+                matrizFormateada += matriz[i] + " | ";
+                
+            } else {
+                matrizFormateada += matriz[i];
+            }         
+            
+        }
+        FindObjectOfType<Interfaz>().debug.text = matrizFormateada;
+    }*/
+
+    protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
+    {
+        // creamos la matriz que define el estado actual del tablero 
+        EstimulosTareaTopos[] matriz = new EstimulosTareaTopos[estimulos.Length];
+        for(int i=0; i<estimulos.Length;i++)
+        {
+            // comprobamos que el estimulo este visible
+            if(!estimulos[i].Escondido)
+            {   
+                // si es visible anotamos el estimulo en la matriz
+                matriz[i] = estimulos[i].Estimulo;
+            } else {
+                // en caso contrario lo marcamos como 'ninguno' en la matriz
+                matriz[i] = EstimulosTareaTopos.Ninguno;
+            }
+        }
+        // devolvemos el nuevo registro
         return new RegistroPosicionOcultarTareaTopos(tiempo, x, y, Nivel.estimuloObjetivo, matriz);        
     } 
 

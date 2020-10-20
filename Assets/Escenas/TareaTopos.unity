@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo8
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -307,7 +307,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo4
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -393,7 +393,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo9
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -485,7 +485,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo1
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -1074,7 +1074,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo7
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -1818,15 +1818,15 @@ MonoBehaviour:
   canvasRect: {fileID: 222543681}
   mensaje: {fileID: 5698879802239223642}
   estimulos:
+  - {fileID: 179944140}
+  - {fileID: 1910964644}
+  - {fileID: 1849750457}
   - {fileID: 91383198}
   - {fileID: 1401740331}
   - {fileID: 1594457564}
   - {fileID: 1073720011}
   - {fileID: 66123059}
   - {fileID: 106348284}
-  - {fileID: 1849750457}
-  - {fileID: 1910964644}
-  - {fileID: 179944140}
 --- !u!4 &681659154
 Transform:
   m_ObjectHideFlags: 0
@@ -2064,8 +2064,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 159.2, y: -92.1}
-  m_SizeDelta: {x: 318.3, y: 184.2}
+  m_AnchoredPosition: {x: 710.5, y: -92.1}
+  m_SizeDelta: {x: 1420.8, y: 184.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878778044
 MonoBehaviour:
@@ -2781,7 +2781,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo5
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -3137,7 +3137,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo6
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -3539,7 +3539,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo3
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}
@@ -3631,7 +3631,7 @@ PrefabInstance:
     - target: {fileID: 6344876229659393621, guid: b9c3843325666604c920b943320dce28,
         type: 3}
       propertyPath: m_Name
-      value: Estimulo
+      value: Estimulo2
       objectReference: {fileID: 0}
     - target: {fileID: 7001288963281395434, guid: b9c3843325666604c920b943320dce28,
         type: 3}

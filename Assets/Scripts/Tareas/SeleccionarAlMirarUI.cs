@@ -33,7 +33,7 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	[Header("Especial")]
 	[SerializeField] private TextMeshPro tiempoRecord; 
 	[SerializeField] private TextMeshPro texto; 
-
+	[SerializeField] private GameObject modelo;
 
 	public void MostrarTiempoRecord(int record)
 	{
@@ -56,7 +56,8 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		
 		interfazFijacion.Reiniciar();		
 
-		Renderer renderer = gameObject.transform.GetComponentInChildren<Renderer>();
+		Renderer renderer = modelo.GetComponent<Renderer>();
+		//gameObject.transform.GetComponentInChildren<Renderer>();
 		renderer.material = materialBotonNormal;
 		if( tipoBoton == TipoBotonMenu.Auxliar)
 			renderer.material = materialBotonAuxliar;

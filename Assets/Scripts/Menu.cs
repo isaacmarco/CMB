@@ -24,6 +24,11 @@ public class Menu : MonoBehaviour
         get {return canvasRect;}
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F1))
+            Aplicacion.instancia.BorrarDatos();
+    }
     void Start()
     {
        

@@ -81,6 +81,20 @@ public class Aplicacion : MonoBehaviour
         string json = JsonUtility.ToJson(paciente, true);
         PlayerPrefs.SetString(paciente.codigo, json);
     }
+    
+    public void BorrarDatos()
+    {
+        Debug.Log("Borrando todos los perfiles");
+        
+        for(int i=0; i<configuracion.pacientes.Length; i++)
+        {
+            configuracion.pacientes[i].Reiniciar();
+            GuardarDatosPaciente(configuracion.pacientes[i]);
+        }
+
+
+        CargarPerfilesExistentes();
+    }
 
     public void CargarPerfilesExistentes()
     {

@@ -25,8 +25,14 @@ public class EstimuloTareaTopo : MonoBehaviour
     private bool escondido = true; 
     // se ha golpeado el estimulo 
     private bool golpeado = false; 
-    // el estimulo esta siendo usado por la tarea
-    private bool enUso = false; 
+    // el estimulo esta siendo usado por la tarea    
+    private bool enUso = false;     
+    public bool VisibleParaRegistrar
+    {
+        get {
+            return transform.position.y > 0; 
+        }
+    }
     // tipo de estimulo 
     private EstimulosTareaTopos estimulo = EstimulosTareaTopos.Ninguno; 
     // referencia a la tarea 
