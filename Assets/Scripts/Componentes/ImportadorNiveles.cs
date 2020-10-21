@@ -65,12 +65,24 @@ public class ImportadorNiveles
             // obtener la lista de estimulos separados por comas
             
             EstimulosTareaMemory[] estimulosDisponibles = {
+
+                EstimulosTareaMemory.Puerta, EstimulosTareaMemory.Botella, 
+                EstimulosTareaMemory.Papel, EstimulosTareaMemory.Globos, 
+                EstimulosTareaMemory.Lampara, EstimulosTareaMemory.Guitarra, 
+                EstimulosTareaMemory.Pato, EstimulosTareaMemory.Secador, 
+                EstimulosTareaMemory.Exprimidor, EstimulosTareaMemory.Taza,
+                EstimulosTareaMemory.Cubiertos, EstimulosTareaMemory.Cepillo, 
+                EstimulosTareaMemory.Vaso, EstimulosTareaMemory.Olla, 
+                EstimulosTareaMemory.Rodillo, EstimulosTareaMemory.Percha, 
+                EstimulosTareaMemory.Traba, EstimulosTareaMemory.Helado, 
+                EstimulosTareaMemory.Cerveza, EstimulosTareaMemory.Peine
+                /*
                 EstimulosTareaMemory.Gato, EstimulosTareaMemory.Perro, EstimulosTareaMemory.Zorro, 
                 EstimulosTareaMemory.Rana, EstimulosTareaMemory.Hipo, EstimulosTareaMemory.Koala, 
                 EstimulosTareaMemory.Lemur, EstimulosTareaMemory.Mono, EstimulosTareaMemory.Panda, 
                 EstimulosTareaMemory.Pinguino, EstimulosTareaMemory.Cerdo, EstimulosTareaMemory.Conejo, 
                 EstimulosTareaMemory.Oveja, EstimulosTareaMemory.Zorrillo, EstimulosTareaMemory.Tigre,
-                EstimulosTareaMemory.Lobo
+                EstimulosTareaMemory.Lobo*/
             };
 
             int numeroEstimulos = anchoMatriz * altoMatriz / 2; 

@@ -24,6 +24,28 @@ public enum EstimulosTareaTopos
 
 public enum EstimulosTareaMemory
 {
+    Puerta, 
+    Botella, 
+    Papel,
+    Globos, 
+    Lampara, 
+    Guitarra, 
+    Pato, 
+    Secador, 
+    Exprimidor, 
+    Taza,
+    Cubiertos, 
+    Cepillo, 
+    Vaso, 
+    Olla, 
+    Rodillo, 
+    Percha, 
+    Traba, 
+    Helado, 
+    Cerveza, 
+    Peine
+
+    /*
     Gato, 
     Perro,
     Zorro,
@@ -40,6 +62,7 @@ public enum EstimulosTareaMemory
     Zorrillo, 
     Tigre, 
     Lobo
+    */
 };
 
 public enum SimilitudEstimulos

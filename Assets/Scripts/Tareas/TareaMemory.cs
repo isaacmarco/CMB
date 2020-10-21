@@ -118,16 +118,14 @@ public class TareaMemory : Tarea
 
     private IEnumerator CorrutinaPartida()
     {
-        // mensajes de inicio de niveles 
-        switch(Configuracion.nivelActual.numeroDelNivel)
-        {
-            case 0:
-            yield return StartCoroutine(MostrarMensaje("Busca las parejas", 2));
-            break;
-        }
+        
+        // mensaje por defecto 
+        yield return StartCoroutine(MostrarMensaje("Busca las parejas", 2));
+        
         // mensaje de aviso 
-        if(Configuracion.pacienteActual.jugandoNivelDeBonus)
+        if(Configuracion.pacienteActual.jugandoNivelDeBonus)        
             yield return StartCoroutine(MostrarMensaje("Hazlo lo más rápido que puedas", 2));
+            
 
 
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)

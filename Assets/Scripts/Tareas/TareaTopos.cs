@@ -189,24 +189,31 @@ public class TareaTopos : Tarea
 
         // mensaje de explicacion de los diferentes niveles clave
         int duracionMensaje = 2; 
-        switch(Configuracion.nivelActual.numeroDelNivel)
-        {
-            case 0:
+
+        int nivel = Configuracion.nivelActual.numeroDelNivel;
+        if(nivel == 0)
             yield return StartCoroutine(MostrarMensaje("Golpea a los topos", duracionMensaje));
-            break;
-            case 4:
+        if(nivel == 4)
             yield return StartCoroutine(MostrarMensaje("Ahora debes ser más rápido", duracionMensaje));
-            break;
-            case 6:
+        if(nivel > 6 && nivel < 12)
             yield return StartCoroutine(MostrarMensaje("¡Atención! Aparecen otros animales", duracionMensaje));
-            break;
-            case 11:
-            yield return StartCoroutine(MostrarMensaje("¡Fíjate! Golpea a (nombre)", duracionMensaje));
-            break;
-            case 36:
-            yield return StartCoroutine(MostrarMensaje("Cuidado, puede cambiar en cualquier momento", duracionMensaje));
-            break;
+        if(nivel > 12 && nivel < 37)
+        {
+            string[] frases = 
+            {
+                "¡Fíjate! Golpea al topo",
+                "¡Fíjate! Golpea al pato",
+                "¡Fíjate! Golpea a la oveja",
+                "¡Fíjate! Golpea al pingüino",
+                "¡Fíjate! Golpea al gato"
+            };
+            string frase = frases[(int) Nivel.estimuloObjetivo];            
+            yield return StartCoroutine(MostrarMensaje(frase, duracionMensaje));
         }
+        if(nivel > 36)
+            yield return StartCoroutine(MostrarMensaje("Cuidado, puede cambiar en cualquier momento", duracionMensaje));
+
+       
         
         // mensaje normal de inicia
         yield return StartCoroutine(MostrarMensaje("Comienza la partida", 1));

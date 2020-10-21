@@ -2943,6 +2943,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dc117f966d9f2b1488eb5c6f1d3c1716, type: 3}
   - {fileID: 21300000, guid: 348af818577377e4689712402179f1bc, type: 3}
   - {fileID: 21300000, guid: 4f70624e20e52a749a595fb8ecd73aa6, type: 3}
+  - {fileID: 21300000, guid: 231455f9e95bc564cacd93cb38be90d1, type: 3}
   indicadorEstimulo: {fileID: 1447398520}
 --- !u!1001 &1522123414
 PrefabInstance:
@@ -4162,7 +4163,7 @@ PrefabInstance:
     - target: {fileID: 5008651463861888955, guid: 7a3bd8e64dcd52344b4dd3e301cc19cc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5008651463861888955, guid: 7a3bd8e64dcd52344b4dd3e301cc19cc,
         type: 3}
@@ -4172,7 +4173,7 @@ PrefabInstance:
     - target: {fileID: 5008651463861888955, guid: 7a3bd8e64dcd52344b4dd3e301cc19cc,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5008651463861888955, guid: 7a3bd8e64dcd52344b4dd3e301cc19cc,
         type: 3}
@@ -4182,7 +4183,7 @@ PrefabInstance:
     - target: {fileID: 5008651463861888955, guid: 7a3bd8e64dcd52344b4dd3e301cc19cc,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5008651463861888955, guid: 7a3bd8e64dcd52344b4dd3e301cc19cc,
         type: 3}
