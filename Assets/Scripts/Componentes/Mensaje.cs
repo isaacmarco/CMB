@@ -8,6 +8,7 @@ public class Mensaje : MonoBehaviour
    
     [SerializeField] private Text mensaje; 
     [SerializeField] private Image imagen; 
+    
 
     public void Ocultar()
     {
@@ -29,7 +30,18 @@ public class Mensaje : MonoBehaviour
         }
         
         // hacer el mensaje opaco 
-        GetComponent<CanvasGroup>().alpha = 1f; 
+        StartCoroutine(Alpha());
+        //GetComponent<CanvasGroup>().alpha = 1f; 
+    }
+
+    private IEnumerator Alpha()
+    {
+        while(GetComponent<CanvasGroup>().alpha < 1)
+        {
+            float velocidad = 10f; 
+            GetComponent<CanvasGroup>().alpha += velocidad * Time.deltaTime;
+            yield return null;
+        }        
     }
 
 

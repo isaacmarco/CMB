@@ -15,11 +15,11 @@ MonoBehaviour:
   nombre: Mario
   codigo: 000
   esZurdo: 0
-  ultimoNivelDesbloqueadoTareaTopos: 61
+  ultimoNivelDesbloqueadoTareaTopos: 1
   ultimoNivelDesbloqueadoTareaMemory: 0
   nivelActualTareaMemory: 0
-  contadorNivelesGanadosParaBonus: 2
+  contadorNivelesGanadosParaBonus: 0
   jugandoNivelDeBonus: 0
-  puntuacionTareaTopos: 0
+  puntuacionTareaTopos: 985
   puntuacionTareaMemory: 0
-  tiemposRecordPorNivelTareaMemory: ffffff7f02000000ffffff7fffffff7fffffff7fffffff7f02000000ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f040000000e000000ffffff7fffffff7f
+  tiemposRecordPorNivelTareaMemory: ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f

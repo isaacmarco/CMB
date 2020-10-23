@@ -34,6 +34,7 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	[SerializeField] private TextMeshPro tiempoRecord; 
 	[SerializeField] private TextMeshPro texto; 
 	[SerializeField] private GameObject modelo;
+	[SerializeField] private GameObject iconoCrono;
 
 	public void MostrarTiempoRecord(int record)
 	{
@@ -44,12 +45,14 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 			this.tiempoRecord.text = record.ToString() + "seg.";				
 		}
 		this.tiempoRecord.gameObject.SetActive(true); 
+		iconoCrono.gameObject.SetActive(true);
 	}
 
     void Awake()
 	{
 		// ocultar el tiempo medio 
 		tiempoRecord.gameObject.SetActive(false); 
+		iconoCrono.gameObject.SetActive(false);
 		// creamos las referencias 
 		menu = FindObjectOfType<Menu>();
 		gazeAware = GetComponent<GazeAware>();	
@@ -108,7 +111,13 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 			}
 		}
        
-	}    	
+	}    		
+
+	public void FijarTexto(string texto)
+	{
+		this.texto.fontSize = 5;
+		this.texto.text = texto; 
+	}
 
 	public void Desactivar()
 	{
@@ -116,7 +125,7 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	}
 	public void Activar()
 	{
-		texto.color = Color.white; 
+		texto.color = Color.magenta;
 	}
     private void Seleccionar()
     {

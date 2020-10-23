@@ -9,8 +9,9 @@ public class ControladorIK : MonoBehaviour
     [Header("Configuracion de la IK")]    
     public bool usarIK = true;
     public bool utilizarIzquierda; 
-    [Header("Objetivo de la mano")]
+    [Header("Objetivos de las manos")]
     public Transform objetivoMano = null;
+    public Transform objetivoManoContraria = null;
     protected Animator animator;    
 
     void Start () 
@@ -29,10 +30,17 @@ public class ControladorIK : MonoBehaviour
     {
         if(animator) {
             
-            // seleccionar la mano del IK
+            // obtener las manos del IK
             AvatarIKGoal mano = AvatarIKGoal.RightHand;
+            AvatarIKGoal manoContraria = AvatarIKGoal.LeftHand;
+
+            // si el paciente es zurdo se invierten las referencias
             if(utilizarIzquierda)
+            {
                 mano = AvatarIKGoal.LeftHand; 
+                manoContraria = AvatarIKGoal.RightHand;
+            }
+
 
             // al activar la IK posicionamos los huesos para alcanzar el objetivo
             if(usarIK) {
@@ -42,7 +50,19 @@ public class ControladorIK : MonoBehaviour
                     animator.SetIKRotationWeight(mano,1);  
                     animator.SetIKPosition(mano,objetivoMano.position);
                     animator.SetIKRotation(mano,objetivoMano.rotation);
-                }        
+                }    
+
+                
+                // la mano contraria debe moverse a una posicion 
+                // que no moleste
+                if(objetivoManoContraria != null)
+                {
+                    animator.SetIKPositionWeight(manoContraria,1);
+                    animator.SetIKRotationWeight(manoContraria,1);  
+                    animator.SetIKPosition(manoContraria,objetivoManoContraria.position);
+                    animator.SetIKRotation(manoContraria,objetivoManoContraria.rotation);
+                }
+
                 
             }
                         

@@ -123,13 +123,13 @@ public class Tarea : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
     
-    protected IEnumerator MostrarMensaje(string mensaje, int duracion = 0)
+    protected IEnumerator MostrarMensaje(string mensaje, int duracion = 0, Sprite image = null)
     {
         // si la duracion no se especifica se usa la duracion
         // configurada en el scriptable 
         if(duracion == 0)
             duracion = Configuracion.duracionDeMensajes; 
-        Mensaje.Mostrar(mensaje);        
+        Mensaje.Mostrar(mensaje, image);        
         yield return new WaitForSeconds(duracion); 
         Mensaje.Ocultar();
     }

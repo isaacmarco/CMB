@@ -276,8 +276,10 @@ public class TareaTopos : Tarea
             {
                 Debug.Log("Cambiando estimulo objetivo, ahora es " + Nivel.estimuloObjetivo);
                 
-                // feedback
-                yield return StartCoroutine(MostrarMensaje("El objetivo ha cambiado"));
+                // feedback, mostramos un sprite y un mensaje para indicar
+                // el nuevo estimulo objetivo
+                Sprite spriteEstimuloObjetivo = FindObjectOfType<IndicadorEstimuloObjetivo>().SpriteEstimuloObjetivo;
+                yield return StartCoroutine(MostrarMensaje("El objetivo ha cambiado", 2, spriteEstimuloObjetivo));
 
             } else {
                 // seguimos con el mismo estimulo objetivo que antes porque ha

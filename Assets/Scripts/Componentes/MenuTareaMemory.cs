@@ -29,7 +29,7 @@ public class MenuTareaMemory : MonoBehaviour
         nivelSeleccionado = nivelActual; 
 
         // nivel actual seleccionado es el ultimo desbloqueado 
-        this.nivelActual.text = (nivelActual+1).ToString();
+        this.nivelActual.text = "Nivel " + (nivelActual+1).ToString();
         CambiarNivelSeleccionado();
         
         // bloquear niveles no superados ocultandolos 
@@ -45,6 +45,9 @@ public class MenuTareaMemory : MonoBehaviour
                 int record = paciente.tiemposRecordPorNivelTareaMemory[i];                
                 nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().MostrarTiempoRecord(record);
 
+                // actualizar numero nivel
+                string nombre = "Nivel " + (i+1).ToString();
+                nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().FijarTexto(nombre);
             } else {
                 // bloquear el nivel 
                 nivel.gameObject.SetActive(false);

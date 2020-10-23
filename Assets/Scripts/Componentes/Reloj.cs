@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Reloj : MonoBehaviour
 {
     [SerializeField] private Text reloj; 
-    
+    [SerializeField] private Image spriteReloj; 
+
     private int tiempo = 0; 
     private bool contabilizarTiempo = true; 
 
@@ -17,6 +18,7 @@ public class Reloj : MonoBehaviour
     void Start()
     {
         reloj.text = string.Empty; 
+        spriteReloj.enabled = false; 
     }
 
     public void Detener()
@@ -27,7 +29,9 @@ public class Reloj : MonoBehaviour
     private IEnumerator CorrutinaReloj()
     {
         contabilizarTiempo = true; 
-        
+        spriteReloj.enabled = true; 
+        reloj.text = "0"; 
+
         // contamos el timepo que pasa
         while(contabilizarTiempo)
         {
@@ -39,7 +43,7 @@ public class Reloj : MonoBehaviour
 
     private IEnumerator CorrutinaContraReloj(int tiempoInicio)
     {       
-        
+        spriteReloj.enabled = true; 
         // cuenta atras
         while(tiempoInicio > 0)
         {

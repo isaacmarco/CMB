@@ -9,6 +9,14 @@ public class IndicadorEstimuloObjetivo : MonoBehaviour
     [SerializeField] Sprite[] estimulos; 
     [SerializeField] Image indicadorEstimulo; 
 
+    public Sprite SpriteEstimuloObjetivo
+    {
+        get {
+            TareaTopos t = FindObjectOfType<TareaTopos>();
+            return estimulos[(int) t.Nivel.estimuloObjetivo];
+        }
+    }
+
     private TareaTopos tarea;
 
     void Start()
