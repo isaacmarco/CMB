@@ -93,7 +93,7 @@ public class Tarea : MonoBehaviour
     protected virtual IEnumerator TerminarJuego(bool partidaGanada){
         
         // en este punto se vuelve al menu 
-        Debug.LogError("Juego finalizado");
+        Debug.Log("Juego finalizado");
 
         // detener el tiempo
         Reloj reloj = FindObjectOfType<Reloj>();

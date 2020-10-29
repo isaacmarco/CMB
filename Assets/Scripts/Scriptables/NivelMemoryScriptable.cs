@@ -27,7 +27,7 @@ public class NivelMemoryScriptable : NivelScriptable
 
         if(listaEstimulosParaFormarParejas == null)
         {
-            Debug.LogError("La lista de estimulos esta vacia");
+            Debug.Log("La lista de estimulos esta vacia");
             return; 
         }
 
@@ -37,7 +37,7 @@ public class NivelMemoryScriptable : NivelScriptable
         // en la matriz debe ser par 
         if ( numeroTarjetas % 2 != 0 )
         {            
-            Debug.LogError("El numero de elementos de la matriz debe ser par");
+            Debug.Log("El numero de elementos de la matriz debe ser par");
             return; 
         }
 
@@ -45,7 +45,7 @@ public class NivelMemoryScriptable : NivelScriptable
         if (numeroEstimulos == 0)
         {
             //configuracionCorrecta = false; 
-            Debug.LogError("La lista de estimulos esta vacia");
+            Debug.Log("La lista de estimulos esta vacia");
             return; 
         }
         
@@ -57,13 +57,13 @@ public class NivelMemoryScriptable : NivelScriptable
         // la matriz de tarjetas 
         if( numeroEstimulos < numeroCorrectoEstimulos)
         {           
-            Debug.LogError("No hay suficientes estimulos para esta matriz, deben ser " + numeroCorrectoEstimulos);
+            Debug.Log("No hay suficientes estimulos para esta matriz, deben ser " + numeroCorrectoEstimulos);
             return; 
         }
         
         if( numeroEstimulos > numeroCorrectoEstimulos)
         {
-            Debug.LogError("Hay demasiados estimulos para esta matriz, deben ser " + numeroCorrectoEstimulos);
+            Debug.Log("Hay demasiados estimulos para esta matriz, deben ser " + numeroCorrectoEstimulos);
             return; 
         }
 
@@ -73,7 +73,7 @@ public class NivelMemoryScriptable : NivelScriptable
         {
             if(EstimuloDuplicado(estimulo))
             {
-                Debug.LogError("Hay estimulos duplicados en la lista");
+                Debug.Log("Hay estimulos duplicados en la lista");
                 return;
             }
         }

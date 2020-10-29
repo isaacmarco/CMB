@@ -101,7 +101,7 @@ public class Aplicacion : MonoBehaviour
 
         // crear codigos de pacietes falsos, estos datos deben 
         // configurarse desde algun fichero o menu
-        Debug.LogError("Creando codigos de pacientes para debug");
+        //Debug.LogError("Creando codigos de pacientes para debug");
         PlayerPrefs.SetString("codigoPaciente0", "000");
         PlayerPrefs.SetString("codigoPaciente1", "001");
 
