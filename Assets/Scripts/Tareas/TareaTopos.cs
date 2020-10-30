@@ -129,20 +129,35 @@ public class TareaTopos : Tarea
 
     protected override void GuardarProgreso(bool partidaGanada)
     {        
-        // guardar la puntuacion
-        if(puntuacion > 0)
-            Configuracion.pacienteActual.puntuacionTareaTopos += puntuacion; 
-            
-        int numeroNiveles = 61; 
-        Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos++;
-        if(Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos >= numeroNiveles)
+        Debug.Log("Guardando progreso de partida de topos");
+
+        if(partidaGanada)
         {
-            Debug.Log("Todos los niveles de la tarea completos");
-            // El juego se ha terminado, no hay mas niveles
-            Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos = numeroNiveles; 
+            // guardar la puntuacion
+            if(puntuacion > 0)
+                Configuracion.pacienteActual.puntuacionTareaTopos += puntuacion; 
+
+            // progresar
+            Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos++;
+            
+            // comprobar si hemos terminado todos los niveles
+            int numeroNiveles = 61;             
+            if(Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos >= numeroNiveles)
+            {
+                Debug.Log("Todos los niveles de la tarea completos");
+                // El juego se ha terminado, no hay mas niveles
+                Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos = numeroNiveles; 
+            }        
+
+            // serializar los datos en disco 
+            Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+
+        } else {
+            
+            // no cambiamos el progreso ni guardamos datos
+            Debug.Log("La partida se ha perdido, no se guarda el progreso");
         }
-        
-        Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+
     }
     
     

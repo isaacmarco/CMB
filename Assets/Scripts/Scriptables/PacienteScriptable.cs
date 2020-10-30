@@ -39,7 +39,15 @@ public class PacienteScriptable : ScriptableObject
         jugandoNivelDeBonus = false; 
         puntuacionTareaMemory = 0; 
         puntuacionTareaTopos = 0; 
+
+        // vector de tiempos records
         tiemposRecordPorNivelTareaMemory = new int[28];
+        // iniciamos todo el vector al valor maximo de entero, de modo
+        // que en la primera partida el record siempre se supere
+        for(int i=0; i<tiemposRecordPorNivelTareaMemory.Length; i++)
+            tiemposRecordPorNivelTareaMemory[i] = int.MaxValue;
     }
+
+    
     
 }

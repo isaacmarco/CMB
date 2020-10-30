@@ -17,7 +17,17 @@ public class Menu : MonoBehaviour
     [SerializeField] private Transform jerarquiaMenuTareaTopos;   
     [SerializeField] private Transform jerarquiaMenuTareaMemory;   
     [SerializeField] private Transform jerarquiaMenuPerfiles; 
-    
+    [Header("Debug")]
+    [SerializeField] private Text debug; 
+
+    private void TrazadoProgreso()
+    {        
+        string texto = Serializador.SerializarScriptable(
+            Configuracion.pacienteActual
+        );
+        debug.text = texto; 
+    }
+
 
     public RectTransform CanvasRect 
     {
@@ -26,8 +36,10 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F1))
+        if(Input.GetKeyDown(KeyCode.F12))
             Aplicacion.instancia.BorrarDatos();
+
+        
     }
     void Start()
     {
@@ -49,7 +61,10 @@ public class Menu : MonoBehaviour
             Debug.Log("Paciente actual existente, mostrando menu");
             // mostrar el menu principal a continuacion             
             MostrarMenu(jerarquiaMenuPrincipal);
+            TrazadoProgreso();
         }
+
+       
     }
 
 
@@ -166,7 +181,8 @@ public class Menu : MonoBehaviour
         // Aplicacion.instancia.GuardarDatosPaciente(configuracion.pacienteActual);
 
         // mostrar el menu 
-        MostrarMenu(jerarquiaMenuPrincipal);        
+        MostrarMenu(jerarquiaMenuPrincipal);   
+        TrazadoProgreso();    
     }
 
     

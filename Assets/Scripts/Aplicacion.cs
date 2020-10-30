@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+
 public class Aplicacion : MonoBehaviour
 {
 
@@ -68,7 +70,7 @@ public class Aplicacion : MonoBehaviour
 
     public void CargarNivelTareaMemory(int nivel)
     {
-        string ruta = "Niveles Memory/NivelMemory " + (nivel+1); 
+        string ruta = "Niveles Memory/NivelMemory " + nivel;
         NivelMemoryScriptable nivelmemory = (NivelMemoryScriptable) Resources.Load(ruta); 
         configuracion.nivelActual = nivelmemory; 	
         Debug.Log("Cargado nivel de memory " + nivelmemory.numeroDelNivel);
@@ -78,8 +80,7 @@ public class Aplicacion : MonoBehaviour
     {
         Debug.Log("Guardando datos del paciente " + paciente.codigo);
         // serializamos y guardamos en el prefs 
-        string json = JsonUtility.ToJson(paciente, true);
-        PlayerPrefs.SetString(paciente.codigo, json);
+        Serializador.GuardarFicheroDatos(paciente);
     }
     
     public void BorrarDatos()
@@ -99,39 +100,46 @@ public class Aplicacion : MonoBehaviour
     public void CargarPerfilesExistentes()
     {
 
-        // crear codigos de pacietes falsos, estos datos deben 
-        // configurarse desde algun fichero o menu
-        //Debug.LogError("Creando codigos de pacientes para debug");
-        PlayerPrefs.SetString("codigoPaciente0", "000");
-        PlayerPrefs.SetString("codigoPaciente1", "001");
-
-     
         // cargar las configuraciones de cada uno de los
         // scriptables posibles para pacientes 
-       
+        Debug.Log("Leyendo ficheros JSON de pacientes");
+
+      
+
         for(int i=0; i<configuracion.pacientes.Length; i++)
         {
-            // conseguir el json desde el prefs
+            // construir clave
             string clave = "codigoPaciente" + i;
-            string codigoPaciente = PlayerPrefs.GetString(clave);
-            string json = PlayerPrefs.GetString(codigoPaciente);            
-            // deserializar el json en un paciente scriptable de la
-            // lista de perfiles disponibles 
-            JsonUtility.FromJsonOverwrite(json, configuracion.pacientes[i]);
-            // comprobar si el paciente tiene inciado el 
-            // vector para los tiempos record de cada nivel de memory
-            // si esta vacio creamos el vector en este momento y ya se guardara
-            // mas tarde al completar un nivel 
-            PacienteScriptable paciente = configuracion.pacientes[i];
-            if(paciente.tiemposRecordPorNivelTareaMemory == null || 
-                paciente.tiemposRecordPorNivelTareaMemory.Length == 0)
-                    paciente.tiemposRecordPorNivelTareaMemory = new int[28];
-            
-            // ponemos valores de tiempo superables en la primera partida
-            // para que la primera vez siempre sea record
-            for(int j=0; j<paciente.tiemposRecordPorNivelTareaMemory.Length; j++)
-                if(paciente.tiemposRecordPorNivelTareaMemory[j] == 0)
-                    paciente.tiemposRecordPorNivelTareaMemory[j] = int.MaxValue;
+
+            // devolver la ruta para el fichero
+           
+
+            // obtener JSON desde el fichero de datos
+            bool exito = Serializador.CargarFicheroDatos(
+                configuracion.pacientes[i]
+            );
+
+            if(exito)
+            {
+                // los pacientes se han deserizaliado correctamente
+                // en los scriptables
+                Debug.Log("Paciente cargado correctamente");
+
+            } else {
+                
+                Debug.LogError("Error cargando fichero de datos, creamos un paciente vacio");
+                
+                // no hay datos para deserializar
+                // creamos perfiles vacios de debug
+                PacienteScriptable paciente = configuracion.pacientes[i];                
+                // reiniciamos el perfil
+                paciente.Reiniciar();
+                // creamos el fichero de datos
+                Serializador.GuardarFicheroDatos(
+                    configuracion.pacientes[i]
+                );
+            }
+
 
         }
     }

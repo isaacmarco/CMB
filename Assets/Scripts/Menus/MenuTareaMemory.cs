@@ -13,6 +13,7 @@ public class MenuTareaMemory : MonoBehaviour
     
     public void Seleccionar(int nivel)
     {
+        Debug.Log("Seleccionado nivel " + nivel);
         nivelSeleccionado = nivel; 
         FindObjectOfType<Menu>().configuracion.pacienteActual.nivelActualTareaMemory = nivel;         
         CambiarNivelSeleccionado();
@@ -74,22 +75,24 @@ public class MenuTareaMemory : MonoBehaviour
 
     public void NivelSiguiente()    
     {
+        /*
         Debug.Log("Siguiente nivel");
         if(nivelSeleccionado < 99)
         {
             nivelSeleccionado++; 
             CambiarNivelSeleccionado();
-        }
+        }*/
     }
 
     public void NivelAnterior()
     {
+        /*
         Debug.Log("Nivel anterior");
         if(nivelSeleccionado > 1)
         {
             nivelSeleccionado--; 
             CambiarNivelSeleccionado();
-        }
+        }*/
     }
 
 }

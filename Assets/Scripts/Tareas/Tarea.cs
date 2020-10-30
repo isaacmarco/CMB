@@ -78,15 +78,13 @@ public class Tarea : MonoBehaviour
 
     void Update()
     {
-        if(Application.isEditor)
-        {
+        
             // para el debug 
             if(Input.GetKeyDown(KeyCode.W))
                 JuegoGanado();
             if(Input.GetKeyDown(KeyCode.L))
                 JuegoPerdido();
-        }
-
+        
         Actualizacion();
     }
 

@@ -260,57 +260,80 @@ public class TareaMemory : Tarea
 
     protected override void GuardarProgreso(bool partidaGanada)
     {        
+        Debug.Log("Guardando progreso de tarea de memory");
 
-        PacienteScriptable paciente = Configuracion.pacienteActual;
+        if(partidaGanada)
+        {
+            
+            PacienteScriptable paciente = Configuracion.pacienteActual;
 
-        // guardar la puntuacion
-        if(puntuacion > 0)
-            paciente.puntuacionTareaMemory += puntuacion; 
+            // guardar la puntuacion
+            if(puntuacion > 0)
+                paciente.puntuacionTareaMemory += puntuacion; 
 
-        // comprobar el tipo de partida, en las partidas de bonus
-        // no progresamos en el juego
-        if(!paciente.jugandoNivelDeBonus)
-        {           
-            // registrar el progreso para los niveles de bonus
-            paciente.contadorNivelesGanadosParaBonus++;
-            if(paciente.contadorNivelesGanadosParaBonus >= Configuracion.numeroDeNivelesParaBonus)
-            {
-                Debug.Log("La proxima partida debe ser de bonus");
-                // activamos el flag de nivel bonus y el contador de partidas jugadas
-                paciente.jugandoNivelDeBonus = true;
-                paciente.contadorNivelesGanadosParaBonus = 0; 
-            }
+            // comprobar el tipo de partida, en las partidas de bonus
+            // no progresamos en el juego
+            if(!paciente.jugandoNivelDeBonus)
+            {           
+                // registrar el progreso para los niveles de bonus
+                paciente.contadorNivelesGanadosParaBonus++;
+                
+                if(paciente.contadorNivelesGanadosParaBonus >= Configuracion.numeroDeNivelesParaBonus)
+                {
+                    Debug.Log("La proxima partida debe ser de bonus");
+                    // activamos el flag de nivel bonus y el contador de partidas jugadas
+                    paciente.jugandoNivelDeBonus = true;
+                    paciente.contadorNivelesGanadosParaBonus = 0; 
+                }
 
-            // comprobar records
-            int tiempoRecord = paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory];
-            int tiempo = FindObjectOfType<Reloj>().Tiempo; 
-            if(tiempo < tiempoRecord)
-            {
-                // hay nuevo record
-                Debug.Log("Nuevo record");
-                paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory] = tiempo; 
-            } else {
-                // mantenemos el record existente
-            }
+                // comprobar records
+                int tiempoRecord = paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory];
+                int tiempo = FindObjectOfType<Reloj>().Tiempo; 
+                if(tiempo < tiempoRecord)
+                {
+                    // hay nuevo record
+                    Debug.Log("Nuevo record");
+                    paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory] = tiempo; 
+                } else {
+                    // mantenemos el record existente
+                }
                
-            int numeroNiveles = 26; 
-            paciente.ultimoNivelDesbloqueadoTareaMemory++;
-            if(paciente.ultimoNivelDesbloqueadoTareaMemory >= numeroNiveles)
-            {
-                // tarea completa
-                Debug.Log("Todos los niveles de la tarea completos");
-                //paciente.ultimoNivelDesbloqueadoTareaMemory = 0; 
-            }     
+                // progresamos en el juego, pero solo si este nivel
+                // no ha sido completado antes
+                if(Nivel.numeroDelNivel == paciente.ultimoNivelDesbloqueadoTareaMemory)
+                {
+                    paciente.ultimoNivelDesbloqueadoTareaMemory++;
+                } else {
+                    Debug.Log("No se progresa en el juego, este nivel ya habia sido completado");
+                }
+
+                // comprobamos si hemos terminado la tarea
+                int numeroNiveles = 26;                 
+                if(paciente.ultimoNivelDesbloqueadoTareaMemory >= numeroNiveles)
+                {
+                    // tarea completa, no hay mas niveles
+                    Debug.Log("Todos los niveles de la tarea completos");
+                    Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaMemory = numeroNiveles;
+                }     
+
+            } else {
+            
+                // acabamos de terminar una partida de bonus, reiniciamos el flag
+                paciente.jugandoNivelDeBonus = false; 
+            }
+      
+
+            // guardar los datos serializados   
+            Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
 
         } else {
             
-            // acabamos de terminar una partida de bonus, reiniciamos el flag
-            paciente.jugandoNivelDeBonus = false; 
-        }
-      
+            // no cambiamos el progreso ni guardamos datos
+            Debug.Log("La partida se ha perdido, no se guarda el progreso");
 
-        // guardar los datos serializados   
-        Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+        }
+
+        
     }
 
    
@@ -453,7 +476,21 @@ public class TareaMemory : Tarea
                 Mathf.RoundToInt(puntoFiltrado.y)
             );         
             MoverBrazoVirtual(posicionEntera); 			
-		} 
+
+		} else {
+
+            if(Configuracion.utilizarRatonAdicionalmente)
+            {
+                Vector2 posicionGaze = Input.mousePosition;
+                // interpolamos y redondeamos las coordenadas
+                puntoFiltrado = Vector2.Lerp(puntoFiltrado, posicionGaze, 0.5f);
+			    Vector2 posicionEntera = new Vector2(
+                    Mathf.RoundToInt(puntoFiltrado.x), 
+                    Mathf.RoundToInt(puntoFiltrado.y)
+                );         
+                MoverBrazoVirtual(posicionEntera); 			
+            }
+        }
       
 
     }
@@ -466,7 +503,8 @@ public class TareaMemory : Tarea
         {
             if(hit.collider.gameObject.name == "Mesa")
             {
-                Vector3 posicionColisionPlano = hit.point;
+                Vector3 offsetVertical = new Vector3(0f, 0.1f, 0f);
+                Vector3 posicionColisionPlano = hit.point + offsetVertical;
                 controladorIK.MoverObjetivo(posicionColisionPlano);
             }
 		    
