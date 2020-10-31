@@ -5,20 +5,39 @@ using UnityEngine.UI;
 
 public class Mensaje : MonoBehaviour
 {
+    public enum TipoMensaje
+    {
+        Exito, Fallo, Aviso
+    };
    
     [SerializeField] private Text mensaje; 
     [SerializeField] private Image imagen; 
+    [SerializeField] Image imagenTipoMensaje;    
+    [SerializeField] private Sprite spriteExito, spriteFallo, spriteAviso; 
     
-
     public void Ocultar()
     {
         GetComponent<CanvasGroup>().alpha = 0f; 
     }
 
-    public void Mostrar(string mensaje, Sprite imagen = null)
+    public void Mostrar(string mensaje, Sprite imagen = null, TipoMensaje tipoMensaje = TipoMensaje.Aviso)
     {
         Debug.Log("Mensaje: " + mensaje);        
         
+        // icono segun el tipo de mensaje, por defecto es de tipo aviso 
+        switch(tipoMensaje)
+        {
+            case TipoMensaje.Aviso:
+                imagenTipoMensaje.sprite = spriteAviso; 
+            break;
+            case TipoMensaje.Exito:
+                imagenTipoMensaje.sprite = spriteExito; 
+            break;
+            case TipoMensaje.Fallo:
+                imagenTipoMensaje.sprite = spriteFallo;
+            break;
+        }
+
         // asignar parametros 
         this.mensaje.text = mensaje;
         this.imagen.enabled = false; 
@@ -45,18 +64,5 @@ public class Mensaje : MonoBehaviour
     }
 
 
-    /*
-    // OBSOLETO, ES LA TAREA LA QUE CONTROLA EL 
-    // TIEMPO DE ESPERA DE LOS MENSAJES
-    private IEnumerator CorrutinaMensaje(float duracionMensaje)
-    {
-        // mostramos el mensaje
-        GetComponent<CanvasGroup>().alpha = 1f; 
-        // esperamos el tiempo acordado
-        yield return new WaitForSeconds(duracionMensaje);
-        // ocultamos el mensaje 
-        GetComponent<CanvasGroup>().alpha = 0f; 
-    }
-    */
 
 }

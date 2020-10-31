@@ -58,9 +58,27 @@ public class Menu : MonoBehaviour
         } else {
            
             // ya existe un paciente actual?
-            Debug.Log("Paciente actual existente, mostrando menu");
-            // mostrar el menu principal a continuacion             
-            MostrarMenu(jerarquiaMenuPrincipal);
+            Debug.Log("Paciente actual existente, mostrando menu correspondiente");
+
+            // comprobamos si venimos de jugar una tarea o si acabamos
+            // de entrar en el menu
+            switch(configuracion.tareaActual)
+            {
+                case Tareas.Ninguna:
+                    // mostrar el menu principal a continuacion             
+                    MostrarMenu(jerarquiaMenuPrincipal);
+                break;
+                case Tareas.Topos:
+                    // menu topos
+                    MostrarMenu(jerarquiaMenuTareaTopos);
+                break;
+                case Tareas.Memory:
+                    // menu memory
+                    MostrarMenu(jerarquiaMenuTareaMemory);
+                break;
+            }
+            
+            // hacemos debug del perfil seleccionado en pantalla
             TrazadoProgreso();
         }
 
@@ -71,6 +89,14 @@ public class Menu : MonoBehaviour
     public void MostrarMenu(Transform jerarquia)
     {
         Debug.Log("Mostrando menu " + jerarquia.name);
+
+        if(jerarquia == jerarquiaMenuTareaMemory || jerarquia == jerarquiaMenuTareaTopos)
+        {
+            // actualizar ui dependiendo el progreso
+            FindObjectOfType<MenuTareaTopos>().Actualizar();
+            FindObjectOfType<MenuTareaMemory>().Actualizar();
+        }
+        
         Transform[] jerarquias = {
             jerarquiaMenuPrincipal, jerarquiaMenuTareaTopos, jerarquiaMenuPerfiles,
             jerarquiaMenuTareaMemory
@@ -98,13 +124,13 @@ public class Menu : MonoBehaviour
             case OpcionesSeleccionablesMenu.MenuTareaTopos:
                 // menu de topos
 				MostrarMenu(jerarquiaMenuTareaTopos);
-                FindObjectOfType<MenuTareaTopos>().Actualizar();
+                //FindObjectOfType<MenuTareaTopos>().Actualizar();
             break;
 
             case OpcionesSeleccionablesMenu.MenuTareaMemory:
                 // menu de memory
                 MostrarMenu(jerarquiaMenuTareaMemory);
-                FindObjectOfType<MenuTareaMemory>().Actualizar();
+                //FindObjectOfType<MenuTareaMemory>().Actualizar();
             break;
 
             case OpcionesSeleccionablesMenu.MenuPerfiles:

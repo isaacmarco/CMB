@@ -170,7 +170,10 @@ public class TareaMemory : Tarea
         
         if(!juegoEnCurso)
             return;
-            
+        
+        // omision en esta tarea es el sonido de las tarjetas
+        FindObjectOfType<Audio>().FeedbackOmision();
+
         switch(estadoJuego)
         {
             case EstadoTareaMemory.EligiendoPrimeraTarjeta:
@@ -360,7 +363,7 @@ public class TareaMemory : Tarea
     public override void Error()
     {
         Debug.Log("Error");
-        FindObjectOfType<Audio>().FeedbackOmision();
+        FindObjectOfType<Audio>().FeedbackError();
         errores++;
     }
 

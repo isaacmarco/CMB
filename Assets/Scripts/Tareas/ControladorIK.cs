@@ -17,6 +17,10 @@ public class ControladorIK : MonoBehaviour
     void Start () 
     {
         animator = GetComponent<Animator>();
+        // establecer mano del paciente
+        utilizarIzquierda = FindObjectOfType<TareaMemory>().Configuracion.pacienteActual.esZurdo;
+        if(utilizarIzquierda)
+            Debug.Log("Paciente es zurdo");
     }   
 
     // mueve el objetivo de la mana a la posicion proporcionada

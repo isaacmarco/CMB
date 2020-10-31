@@ -129,6 +129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mensaje: {fileID: 1432341618534913104}
   imagen: {fileID: 2926231154123941934}
+  imagenTipoMensaje: {fileID: 7811309150388040685}
+  spriteExito: {fileID: 21300000, guid: e65fa7746a91fae418bff4d0a38550ce, type: 3}
+  spriteFallo: {fileID: 21300000, guid: c9b2c52dd97a4aa4aaa461a97ba18e20, type: 3}
+  spriteAviso: {fileID: 21300000, guid: 73d5b162343122c47aa27e0f80f23eb5, type: 3}
 --- !u!225 &5544084081656932995
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -266,7 +270,7 @@ GameObject:
   - component: {fileID: 1810808872729349488}
   - component: {fileID: 7811309150388040685}
   m_Layer: 5
-  m_Name: Exclamacion
+  m_Name: ImagenTipoMensaje
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

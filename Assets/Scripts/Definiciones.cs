@@ -98,5 +98,6 @@ public enum OpcionesSeleccionablesMenu
 public enum Tareas
 {
     Ninguna, 
-    Topos
+    Topos,
+    Memory
 }

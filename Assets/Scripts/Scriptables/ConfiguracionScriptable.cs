@@ -9,7 +9,7 @@ public class ConfiguracionScriptable : ScriptableObject
     [Header("Estado del programa")]
     public PacienteScriptable pacienteActual;    
     public NivelScriptable nivelActual;
-
+    public Tareas tareaActual; 
     
     [Header("Configuracion global")]
     public bool utilizarRatonAdicionalmente = true; 

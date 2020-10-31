@@ -57,6 +57,7 @@ public class Aplicacion : MonoBehaviour
         // reiniciamos el estado del programa
         configuracion.pacienteActual = null; 
         configuracion.nivelActual = null; 
+        configuracion.tareaActual = Tareas.Ninguna;
     }
 
     public void CargarNivelTareaTopos(int nivel)
@@ -64,6 +65,7 @@ public class Aplicacion : MonoBehaviour
         string ruta = "Niveles Topos/NivelTopos " + nivel; 
         NivelToposScriptable nivelTopos = (NivelToposScriptable) Resources.Load(ruta); 
         configuracion.nivelActual = nivelTopos; 		
+        configuracion.tareaActual = Tareas.Topos;
         Debug.Log("Cargado nivel de topos " + nivelTopos.numeroDelNivel);
     }
 
@@ -72,7 +74,8 @@ public class Aplicacion : MonoBehaviour
     {
         string ruta = "Niveles Memory/NivelMemory " + nivel;
         NivelMemoryScriptable nivelmemory = (NivelMemoryScriptable) Resources.Load(ruta); 
-        configuracion.nivelActual = nivelmemory; 	
+        configuracion.nivelActual = nivelmemory; 
+        configuracion.tareaActual = Tareas.Memory;	
         Debug.Log("Cargado nivel de memory " + nivelmemory.numeroDelNivel);
     }
 

@@ -5,12 +5,25 @@ using UnityEngine;
 public class Audio : MonoBehaviour
 {
     // referencias a los audiosources
-    [SerializeField] private AudioSource ASfeedbackAcierto, ASfeedbackError, ASfeedbackOmision;     
+    [SerializeField] private AudioSource ASfeedbackAcierto, ASfeedbackError, ASfeedbackOmision,
+    ASfeedbackPartidaGanada, ASfeedbackPartidaPerdida;     
     private Tarea tarea;
     
     void Start()
     {
         tarea = FindObjectOfType<Tarea>();
+    }
+
+    public void FeedbackPartidaGanada()
+    {
+        ASfeedbackPartidaGanada.volume = tarea.Configuracion.volumenDelFeedback; 
+        ASfeedbackPartidaGanada.Play();
+    }
+
+    public void FeedbackPartidaPerdida()
+    {
+        ASfeedbackPartidaPerdida.volume = tarea.Configuracion.volumenDelFeedback; 
+        ASfeedbackPartidaPerdida.Play();
     }
     
     public void FeedbackOmision()

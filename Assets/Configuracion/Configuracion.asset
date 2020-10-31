@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0129b03419a1c1a49a32165758b92eb1, type: 3}
   m_Name: Configuracion
   m_EditorClassIdentifier: 
-  pacienteActual: {fileID: 11400000, guid: 53c8f888e144f8a46812e5aaabdd9067, type: 2}
-  nivelActual: {fileID: 11400000, guid: 6771768b780101f4999d809857759d98, type: 2}
+  pacienteActual: {fileID: 0}
+  nivelActual: {fileID: 0}
+  tareaActual: 0
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
   registrarMovimientoOcularEnDiario: 1

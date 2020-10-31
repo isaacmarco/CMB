@@ -47,17 +47,16 @@ public class Tarea : MonoBehaviour
     }
 
     protected void JuegoGanado(){
+        FindObjectOfType<Audio>().FeedbackPartidaGanada();
         FinalizarRegistro();
         StopAllCoroutines();
         StartCoroutine(TerminarJuego(true)); 
     }
 
     protected void JuegoPerdido(){
-
-        
+        FindObjectOfType<Audio>().FeedbackPartidaPerdida();
         // reiniciamos el flag de nivel de bonus
         Configuracion.pacienteActual.jugandoNivelDeBonus = false; 
-
         FinalizarRegistro();
         StopAllCoroutines();        
         StartCoroutine(TerminarJuego(false)); 
@@ -101,9 +100,9 @@ public class Tarea : MonoBehaviour
         // mostrar feedback dependiendo del resultado 
         if(partidaGanada)
         {
-            yield return StartCoroutine(MostrarMensaje("Partida Ganada"));
+            yield return StartCoroutine(MostrarMensaje("Partida Ganada",0,null,Mensaje.TipoMensaje.Exito));
         } else {
-            yield return StartCoroutine(MostrarMensaje("Partida perdida"));
+            yield return StartCoroutine(MostrarMensaje("Partida perdida",0,null,Mensaje.TipoMensaje.Fallo));
         }
 
         // guardar el progreso del paciente, este metodo se implemente
@@ -121,13 +120,16 @@ public class Tarea : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
     
-    protected IEnumerator MostrarMensaje(string mensaje, int duracion = 0, Sprite image = null)
+    protected IEnumerator MostrarMensaje(
+        string mensaje, int duracion = 0, Sprite image = null, 
+        Mensaje.TipoMensaje tipoMensaje = Mensaje.TipoMensaje.Aviso
+    )
     {
         // si la duracion no se especifica se usa la duracion
         // configurada en el scriptable 
         if(duracion == 0)
             duracion = Configuracion.duracionDeMensajes; 
-        Mensaje.Mostrar(mensaje, image);        
+        Mensaje.Mostrar(mensaje, image, tipoMensaje);        
         yield return new WaitForSeconds(duracion); 
         Mensaje.Ocultar();
     }
