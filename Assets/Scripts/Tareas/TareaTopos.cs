@@ -32,9 +32,6 @@ public class TareaTopos : Tarea
         return "Tarea topos";
     }
     
-
-    
-
     protected override string ObtenerCabeceraTarea()
     {
         string cabecera = string.Empty;
@@ -66,40 +63,6 @@ public class TareaTopos : Tarea
         return cabecera;
     }
 
-     /*
-    protected override void Actualizacion()
-    {
-         
-        // DEBUG !!!!!!!!!!!!!!!!!!!!!
-        // cada tarea ejecuta aqui su propio update()
-        EstimulosTareaTopos[] matriz = new EstimulosTareaTopos[estimulos.Length];
-        for(int i=0; i<estimulos.Length;i++)
-        {
-            // comprobamos que el estimulo este visible
-            if(estimulos[i].VisibleParaRegistrar)
-            {   
-                // si es visible anotamos el estimulo en la matriz
-                matriz[i] = estimulos[i].Estimulo;
-            } else {
-                // en caso contrario lo marcamos como 'ninguno' en la matriz
-                matriz[i] = EstimulosTareaTopos.Ninguno;
-            }
-        }
-        string matrizFormateada = string.Empty; 
-        for(int i=0; i<matriz.Length; i++)
-        {
-            if(i < matriz.Length - 1)
-            {
-                matrizFormateada += matriz[i] + " | ";
-                
-            } else {
-                matrizFormateada += matriz[i];
-            }         
-            
-        }
-        FindObjectOfType<Interfaz>().debug.text = matrizFormateada;
-    }*/
-
     protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
     {
         // creamos la matriz que define el estado actual del tablero 
@@ -127,7 +90,7 @@ public class TareaTopos : Tarea
         corrutinaJuego = StartCoroutine(CorrutinaPartida());       
     }
 
-    protected override void GuardarProgreso(bool partidaGanada)
+    protected override bool GuardarProgreso(bool partidaGanada)
     {        
         Debug.Log("Guardando progreso de partida de topos");
 
@@ -158,6 +121,9 @@ public class TareaTopos : Tarea
             Debug.Log("La partida se ha perdido, no se guarda el progreso");
         }
 
+        // devolvemos falso porque no se conceden premios adicionales
+        return false; 
+
     }
     
     
@@ -166,7 +132,7 @@ public class TareaTopos : Tarea
     {        
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertos++;
-        AgregarPuntuacion(100);
+        AgregarPuntuacion(Configuracion.puntuacionAciertoTopo);
         if(aciertos >= Nivel.aciertosParaSuperarElNivel)
             JuegoGanado();
     }
@@ -176,7 +142,7 @@ public class TareaTopos : Tarea
     {
         FindObjectOfType<Audio>().FeedbackOmision();
         omisiones++;
-        AgregarPuntuacion(-15);
+        AgregarPuntuacion(Configuracion.penalizacionOmisionTopo);
         ComprobarOmisionError();
     }    
 
@@ -185,7 +151,7 @@ public class TareaTopos : Tarea
     {
         FindObjectOfType<Audio>().FeedbackError();
         errores++;
-        AgregarPuntuacion(-25);
+        AgregarPuntuacion(Configuracion.penalizacionErrorTopo);
         ComprobarOmisionError();
     }
 

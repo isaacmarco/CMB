@@ -133,6 +133,8 @@ MonoBehaviour:
   spriteExito: {fileID: 21300000, guid: e65fa7746a91fae418bff4d0a38550ce, type: 3}
   spriteFallo: {fileID: 21300000, guid: c9b2c52dd97a4aa4aaa461a97ba18e20, type: 3}
   spriteAviso: {fileID: 21300000, guid: 73d5b162343122c47aa27e0f80f23eb5, type: 3}
+  spriteBonus: {fileID: 21300000, guid: 92a88c29dc5898243af5223faab57390, type: 3}
+  spriteRecord: {fileID: 21300000, guid: 1befe3adbb1449449acde61c811d34ce, type: 3}
 --- !u!225 &5544084081656932995
 CanvasGroup:
   m_ObjectHideFlags: 0

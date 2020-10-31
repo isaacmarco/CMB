@@ -7,13 +7,13 @@ public class Mensaje : MonoBehaviour
 {
     public enum TipoMensaje
     {
-        Exito, Fallo, Aviso
+        Exito, Fallo, Aviso, Bonus, Record
     };
    
     [SerializeField] private Text mensaje; 
     [SerializeField] private Image imagen; 
     [SerializeField] Image imagenTipoMensaje;    
-    [SerializeField] private Sprite spriteExito, spriteFallo, spriteAviso; 
+    [SerializeField] private Sprite spriteExito, spriteFallo, spriteAviso, spriteBonus, spriteRecord; 
     
     public void Ocultar()
     {
@@ -35,6 +35,12 @@ public class Mensaje : MonoBehaviour
             break;
             case TipoMensaje.Fallo:
                 imagenTipoMensaje.sprite = spriteFallo;
+            break;
+            case TipoMensaje.Bonus:
+                imagenTipoMensaje.sprite = spriteBonus;
+            break;
+            case TipoMensaje.Record:
+                imagenTipoMensaje.sprite = spriteRecord;
             break;
         }
 

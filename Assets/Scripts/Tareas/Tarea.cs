@@ -40,10 +40,16 @@ public class Tarea : MonoBehaviour
     public virtual void Error(){}
     public virtual void Omision(){}
     public virtual void TiempoExcedido(){}
-    protected virtual void GuardarProgreso(bool partidaGanada){}
+    
+    protected virtual bool GuardarProgreso(bool partidaGanada)
+    {
+        return false; 
+    }
+
     public virtual void AgregarPuntuacion(int puntuacion)
     {
-        this.puntuacion += puntuacion; 
+        Debug.Log("Puntos recibidos " + puntuacion );
+        this.puntuacion += puntuacion;         
     }
 
     protected void JuegoGanado(){
@@ -100,15 +106,18 @@ public class Tarea : MonoBehaviour
         // mostrar feedback dependiendo del resultado 
         if(partidaGanada)
         {
-            yield return StartCoroutine(MostrarMensaje("Partida Ganada",0,null,Mensaje.TipoMensaje.Exito));
+            yield return StartCoroutine(MostrarMensaje("Partida Ganada", 0, null, Mensaje.TipoMensaje.Exito));
         } else {
-            yield return StartCoroutine(MostrarMensaje("Partida perdida",0,null,Mensaje.TipoMensaje.Fallo));
+            yield return StartCoroutine(MostrarMensaje("Partida perdida", 0, null, Mensaje.TipoMensaje.Fallo));
         }
 
-        // guardar el progreso del paciente, este metodo se implemente
-        // en cada tarea 
-        GuardarProgreso(partidaGanada);
-        
+        // calcula el progreso del paciente, puntos, niveles, etc
+        // y los guarda
+        bool premioExtra = GuardarProgreso(partidaGanada);
+        if(premioExtra)
+            yield return StartCoroutine(
+                MostrarMensaje("¡Nuevo record!", 0, null, Mensaje.TipoMensaje.Record)
+            );
 
         // esperar 1 seg antes de lanzar el menu
         yield return new WaitForSeconds(1f);

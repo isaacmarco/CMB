@@ -124,7 +124,9 @@ public class TareaMemory : Tarea
         
         // mensaje de aviso 
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)        
-            yield return StartCoroutine(MostrarMensaje("Hazlo lo más rápido que puedas", 2));
+            yield return StartCoroutine(
+                MostrarMensaje("Nivel de bonus ¡Hazlo lo más rápido que puedas!", 2, null, Mensaje.TipoMensaje.Bonus)
+            );
             
 
 
@@ -261,9 +263,11 @@ public class TareaMemory : Tarea
         
     }
 
-    protected override void GuardarProgreso(bool partidaGanada)
+    protected override bool GuardarProgreso(bool partidaGanada)
     {        
         Debug.Log("Guardando progreso de tarea de memory");
+
+        bool premioExtraRecordConcedido = false; 
 
         if(partidaGanada)
         {
@@ -297,6 +301,9 @@ public class TareaMemory : Tarea
                     // hay nuevo record
                     Debug.Log("Nuevo record");
                     paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory] = tiempo; 
+                    AgregarPuntuacion(Configuracion.puntuacionNuevoRecod);
+                    premioExtraRecordConcedido = true; 
+
                 } else {
                     // mantenemos el record existente
                 }
@@ -323,6 +330,12 @@ public class TareaMemory : Tarea
             
                 // acabamos de terminar una partida de bonus, reiniciamos el flag
                 paciente.jugandoNivelDeBonus = false; 
+                // damos puntos por la victoria
+                AgregarPuntuacion(Configuracion.puntuacionNivelBonus);
+                // guardar la puntuacion
+                if(puntuacion > 0)
+                    paciente.puntuacionTareaMemory += puntuacion; 
+                
             }
       
 
@@ -336,6 +349,7 @@ public class TareaMemory : Tarea
 
         }
 
+        return premioExtraRecordConcedido; 
         
     }
 
@@ -358,12 +372,15 @@ public class TareaMemory : Tarea
     {
         Debug.Log("Acierto");
         FindObjectOfType<Audio>().FeedbackAcierto();
+        AgregarPuntuacion(Configuracion.puntuacionAciertojaMemory);
         aciertos++;
     }
+
     public override void Error()
     {
         Debug.Log("Error");
         FindObjectOfType<Audio>().FeedbackError();
+        AgregarPuntuacion(Configuracion.penalizacionErrorMemory);
         errores++;
     }
 

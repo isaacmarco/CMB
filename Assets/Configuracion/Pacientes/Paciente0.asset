@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f583e52aba783174f8bd9e8874401f90, type: 3}
   m_Name: Paciente0
   m_EditorClassIdentifier: 
-  nombre: Mario
+  nombre: Alfredo
   codigo: 000
   esZurdo: 0
-  ultimoNivelDesbloqueadoTareaTopos: 1
-  ultimoNivelDesbloqueadoTareaMemory: 0
-  nivelActualTareaMemory: 0
-  contadorNivelesGanadosParaBonus: 0
+  ultimoNivelDesbloqueadoTareaTopos: 4
+  ultimoNivelDesbloqueadoTareaMemory: 5
+  nivelActualTareaMemory: 5
+  contadorNivelesGanadosParaBonus: 4
   jugandoNivelDeBonus: 0
-  puntuacionTareaTopos: 985
-  puntuacionTareaMemory: 0
-  tiemposRecordPorNivelTareaMemory: ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f
+  puntuacionTareaTopos: 0
+  puntuacionTareaMemory: 2500
+  tiemposRecordPorNivelTareaMemory: 0000000000000000000000000000000001000000ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f

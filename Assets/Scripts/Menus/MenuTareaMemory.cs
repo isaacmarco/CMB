@@ -7,6 +7,7 @@ public class MenuTareaMemory : MonoBehaviour
 {
 
     [SerializeField] private TextMeshPro nivelActual; 
+    [SerializeField] private TextMeshPro puntuacion; 
     [SerializeField] private Transform jerarquiaNiveles; 
 
     private int nivelSeleccionado; 
@@ -23,6 +24,13 @@ public class MenuTareaMemory : MonoBehaviour
     {
         // obtner el paciente actual 
         PacienteScriptable paciente = FindObjectOfType<Menu>().configuracion.pacienteActual; 
+
+        // puntuacion 
+        int puntos = paciente.puntuacionTareaMemory;
+        this.puntuacion.text = puntos.ToString();
+
+
+
         // mostrar el nivel actual, al abrir este menu corresponde
         // al ultimo nivel desbloqueado
         int nivelActual = paciente.ultimoNivelDesbloqueadoTareaMemory;

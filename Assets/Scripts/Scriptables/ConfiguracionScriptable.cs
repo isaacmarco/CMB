@@ -19,7 +19,14 @@ public class ConfiguracionScriptable : ScriptableObject
     public float intervaloRegistroOcularEnHZ = 60f;
     [Range(0, 1)]
     public float volumenDelFeedback = 1f; 
-
+    [Header("Sistema de puntuaciones")]
+    public int puntuacionAciertoTopo = 100;
+    public int penalizacionErrorTopo = -75;    
+    public int penalizacionOmisionTopo = -25; 
+    public int puntuacionAciertojaMemory = 100;
+    public int penalizacionErrorMemory = -25;
+    public int puntuacionNuevoRecod = 250; 
+    public int puntuacionNivelBonus = 1000; 
 
     [Header("Configuracion tarea de topos")]
     public float tiempoParaSeleccion = 1f; 
