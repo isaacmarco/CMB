@@ -6,11 +6,12 @@ using TMPro;
 
 public class SeleccionarAlMirarUI : MonoBehaviour
 {
+	/*
     public enum TipoBotonMenu
 	{
 		Normal, 
 		Auxliar
-	};
+	};*/
 
     // componente tobii
 	private GazeAware gazeAware;	
@@ -23,47 +24,60 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 	private InterfazFijacion interfazFijacion; 
     // nombre del metodo que se ejecutara al mirar
 	[Header("Configuracion")]
-    [SerializeField] private OpcionesSeleccionablesMenu opcion; 
-	[SerializeField] private Tareas tarea;
-	[SerializeField] private int nivelACargar;
-	public TipoBotonMenu tipoBoton; 
-	[Header("Materiales")]
-	[SerializeField] private Material materialBotonNormal;
-	[SerializeField] private Material materialBotonAuxliar; 
-	[Header("Especial")]
-	[SerializeField] private TextMeshPro tiempoRecord; 
-	[SerializeField] private TextMeshPro texto; 
-	[SerializeField] private GameObject modelo;
-	[SerializeField] private GameObject iconoCrono;
-
-	public void MostrarTiempoRecord(int record)
-	{
-		if(record == int.MaxValue)
-		{
-			this.tiempoRecord.text = "--";
+    [SerializeField] protected OpcionesSeleccionablesMenu opcion; 	
+	
+	
+	private void ContinuarFijacion()
+	{		
+		elementoUIMirado = true; 
+		// comprobar el tiempo
+		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
+		// actualizar barra de tiempo
+		float tiempoNecesario = menu.Configuracion.tiempoParaSeleccionEnMenus;
+		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;
+		// actualizar la ui de fijacion 
+		interfazFijacion.Actualizar(tiempoNormalizado);
+		if(tiempoFijacionTranscurrido > tiempoNecesario)
+		{			
+			// ya hemos terminado
+			Seleccionar();
+			DetenerFijacion();
 		} else {
-			this.tiempoRecord.text = record.ToString() + "seg.";				
+			// debemos seguir mirando 
 		}
-		this.tiempoRecord.gameObject.SetActive(true); 
-		iconoCrono.gameObject.SetActive(true);
 	}
+
+	private void ComenzarFijacion()
+	{		
+		tiempoInicioFijacion = Time.unscaledTime;
+		elementoUIMirado = true;		
+	}
+	
+	
+	private void DetenerFijacion()
+	{			
+		elementoUIMirado = false; 
+		interfazFijacion.Reiniciar();		
+	}
+
+	protected virtual void Inicio()
+	{}
 
     void Awake()
 	{
-		// ocultar el tiempo medio 
-		tiempoRecord.gameObject.SetActive(false); 
-		iconoCrono.gameObject.SetActive(false);
+		Inicio();
+		
 		// creamos las referencias 
 		menu = FindObjectOfType<Menu>();
 		gazeAware = GetComponent<GazeAware>();	
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		
 		interfazFijacion.Reiniciar();		
-
+		/*
 		Renderer renderer = modelo.GetComponent<Renderer>();
-		//gameObject.transform.GetComponentInChildren<Renderer>();
 		renderer.material = materialBotonNormal;
 		if( tipoBoton == TipoBotonMenu.Auxliar)
 			renderer.material = materialBotonAuxliar;
+		*/
 	}
 
 
@@ -111,58 +125,11 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 			}
 		}
        
-	}    		
+	}    	
 
-	public void FijarTexto(string texto)
-	{
-		this.texto.fontSize = 5;
-		this.texto.text = texto; 
-	}
-
-	public void Desactivar()
-	{
-		texto.color = Color.black; 
-	}
-	public void Activar()
-	{
-		texto.color = Color.magenta;
-	}
-    private void Seleccionar()
+    protected virtual void Seleccionar()
     {
-		FindObjectOfType<Menu>().EjecutarOpcionMenu(opcion, tarea, nivelACargar);
-	}
-
-	private void ContinuarFijacion()
-	{		
-		elementoUIMirado = true; 
-		// comprobar el tiempo
-		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
-		// actualizar barra de tiempo
-		float tiempoNecesario = menu.Configuracion.tiempoParaSeleccionEnMenus;
-		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;
-		// actualizar la ui de fijacion 
-		interfazFijacion.Actualizar(tiempoNormalizado);
-		if(tiempoFijacionTranscurrido > tiempoNecesario)
-		{			
-			// ya hemos terminado
-			Seleccionar();
-			DetenerFijacion();
-		} else {
-			// debemos seguir mirando 
-		}
-	}
-
-	private void ComenzarFijacion()
-	{		
-		tiempoInicioFijacion = Time.unscaledTime;
-		elementoUIMirado = true;		
-	}
-	
-	
-	private void DetenerFijacion()
-	{			
-		elementoUIMirado = false; 
-		interfazFijacion.Reiniciar();		
+		FindObjectOfType<Menu>().EjecutarOpcionMenu(opcion);
 	}
 
 

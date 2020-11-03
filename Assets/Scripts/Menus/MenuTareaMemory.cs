@@ -9,6 +9,7 @@ public class MenuTareaMemory : MonoBehaviour
     [SerializeField] private TextMeshPro nivelActual; 
     [SerializeField] private TextMeshPro puntuacion; 
     [SerializeField] private Transform jerarquiaNiveles; 
+    [SerializeField] private GameObject prefabNivelMemory; 
 
     private int nivelSeleccionado; 
     
@@ -20,8 +21,46 @@ public class MenuTareaMemory : MonoBehaviour
         CambiarNivelSeleccionado();
     }
 
+    private void InstanciarNiveles()
+    {
+        int contadorColumnas = 0; 
+        int contadorFilas = 0; 
+
+        for(int i=0; i<27; i++)
+        {
+
+            GameObject nuevoNivel = (GameObject) Instantiate(prefabNivelMemory, jerarquiaNiveles);
+            nuevoNivel.transform.localPosition = Vector3.zero; 
+
+
+            Vector3 posicion = new Vector3(
+                contadorColumnas * 2, -contadorFilas * 2 , 0
+            );
+
+            nuevoNivel.transform.transform.localPosition = posicion; 
+
+            nuevoNivel.name = "Nivel" + i;
+            UINivelMemory ui = nuevoNivel.GetComponent<UINivelMemory>();
+            ui.Configurar(i);
+
+            
+            // posicionamiento en la matriz
+            contadorColumnas++;
+
+            if(contadorColumnas > 6)
+            {
+                contadorFilas++;
+                contadorColumnas = 0;
+            }
+
+        }
+    }
+
     public void Actualizar()
     {
+        
+        InstanciarNiveles();
+
         // obtner el paciente actual 
         PacienteScriptable paciente = FindObjectOfType<Menu>().configuracion.pacienteActual; 
 
@@ -50,13 +89,15 @@ public class MenuTareaMemory : MonoBehaviour
             {
                 // desbloquer el nivel y cargar el tiempo record
                 nivel.gameObject.SetActive(true); 
+
+
                 // recuperamos el record y lo mostramos
                 int record = paciente.tiemposRecordPorNivelTareaMemory[i];                
-                nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().MostrarTiempoRecord(record);
+                nivel.gameObject.GetComponent<UINivelMemory>().MostrarTiempoRecord(record);
 
                 // actualizar numero nivel
-                string nombre = "Nivel " + (i+1).ToString();
-                nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().FijarTexto(nombre);
+                //string nombre = "Nivel " + (i+1).ToString();
+                //nivel.gameObject.GetComponent<UINivelMemory>().FijarTexto( (i+1) );
             } else {
                 // bloquear el nivel 
                 nivel.gameObject.SetActive(false);
@@ -74,33 +115,12 @@ public class MenuTareaMemory : MonoBehaviour
         for(int i=0; i<numeroHijos; i++)
         {
             Transform nivel = jerarquiaNiveles.GetChild(i);
-            nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().Desactivar();
+            nivel.gameObject.GetComponent<UINivelMemory>().Desactivar();
             if( i == nivelSeleccionado)
-                nivel.gameObject.GetComponent<SeleccionarAlMirarUI>().Activar();
+                nivel.gameObject.GetComponent<UINivelMemory>().Activar();
         }
 
     }
 
-    public void NivelSiguiente()    
-    {
-        /*
-        Debug.Log("Siguiente nivel");
-        if(nivelSeleccionado < 99)
-        {
-            nivelSeleccionado++; 
-            CambiarNivelSeleccionado();
-        }*/
-    }
-
-    public void NivelAnterior()
-    {
-        /*
-        Debug.Log("Nivel anterior");
-        if(nivelSeleccionado > 1)
-        {
-            nivelSeleccionado--; 
-            CambiarNivelSeleccionado();
-        }*/
-    }
 
 }

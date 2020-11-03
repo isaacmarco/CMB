@@ -109,9 +109,9 @@ public class Menu : MonoBehaviour
 
     }
 
-    public void EjecutarOpcionMenu(OpcionesSeleccionablesMenu opcion, Tareas tarea, int nivelACargar = -1)
+    public void EjecutarOpcionMenu(OpcionesSeleccionablesMenu opcion, int nivelACargar = -1)
     {
-        tareaActual = tarea; 
+      
 
         // reproducir el metodo apropiado
         switch(opcion)
@@ -160,15 +160,16 @@ public class Menu : MonoBehaviour
                 SceneManager.LoadScene("TareaMemory");
             break;
 
+            /*
             case OpcionesSeleccionablesMenu.SiguienteNivel:
                 // para la tarea de memory de momento
-                FindObjectOfType<MenuTareaMemory>().NivelSiguiente();
+                //FindObjectOfType<MenuTareaMemory>().NivelSiguiente();
             break;
 
             case OpcionesSeleccionablesMenu.AnteriorNivel:
                 // para la tarea de memory de momento
-                FindObjectOfType<MenuTareaMemory>().NivelAnterior();
-            break;
+                //FindObjectOfType<MenuTareaMemory>().NivelAnterior();
+            break;*/
             
             case OpcionesSeleccionablesMenu.SeleccionarPaciente1:
                 SeleccionarPaciente(0);
@@ -178,7 +179,7 @@ public class Menu : MonoBehaviour
                 SeleccionarPaciente(1);
             break;
 
-            case OpcionesSeleccionablesMenu.SeleccionarNivel:
+            case OpcionesSeleccionablesMenu.SeleccionarNivelMemory:
                 Debug.Log("Seleccionado nivel " + nivelACargar);
                 // establecer un nivel como seleccionado
                 FindObjectOfType<MenuTareaMemory>().Seleccionar(nivelACargar);

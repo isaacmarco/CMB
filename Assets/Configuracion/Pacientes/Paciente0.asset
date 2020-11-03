@@ -16,10 +16,10 @@ MonoBehaviour:
   codigo: 000
   esZurdo: 0
   ultimoNivelDesbloqueadoTareaTopos: 4
-  ultimoNivelDesbloqueadoTareaMemory: 5
-  nivelActualTareaMemory: 5
-  contadorNivelesGanadosParaBonus: 4
-  jugandoNivelDeBonus: 0
+  ultimoNivelDesbloqueadoTareaMemory: 6
+  nivelActualTareaMemory: 6
+  contadorNivelesGanadosParaBonus: 0
+  jugandoNivelDeBonus: 1
   puntuacionTareaTopos: 0
-  puntuacionTareaMemory: 2500
-  tiemposRecordPorNivelTareaMemory: 0000000000000000000000000000000001000000ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f
+  puntuacionTareaMemory: 3775
+  tiemposRecordPorNivelTareaMemory: 00000000000000000000000000000000010000001e000000ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f
