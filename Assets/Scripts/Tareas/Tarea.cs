@@ -65,6 +65,8 @@ public class Tarea : MonoBehaviour
     {
         Debug.Log("Puntos recibidos " + puntuacion );
         this.puntuacion += puntuacion;         
+        if(this.puntuacion < 0 )
+            this.puntuacion = 0; 
     }
 
     protected void JuegoGanado(){

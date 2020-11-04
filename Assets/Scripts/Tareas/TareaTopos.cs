@@ -196,7 +196,7 @@ public class TareaTopos : Tarea
        
         
         // mensaje normal de inicia
-        yield return StartCoroutine(MostrarMensaje("Comienza la partida"));
+        yield return StartCoroutine(MostrarMensaje("Comienza la partida", 0, null, Mensaje.TipoMensaje.Comienzo));
 
         // tiempo de espera inicial
         yield return new WaitForSeconds(1f);
@@ -225,8 +225,8 @@ public class TareaTopos : Tarea
     private IEnumerator CorrutinaCambioEstimuloObjetivo()
     {        
         // comprobamos si ya han aparecido suficientes estimulos
-        // objetivos del tipo actual                 
-        if(contadorEstimulosMostrados >= Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
+        // objetivos del tipo actual                         
+        if(contadorEstimulosMostrados >= 10) // Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
         {                     
 
             // se han mostrado suficientes estimulos para hacer un cambio, 

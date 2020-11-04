@@ -139,6 +139,7 @@ MonoBehaviour:
   spriteReloj: {fileID: 21300000, guid: 6a20565f291d626489d8eb2ce566e831, type: 3}
   spriteTopos: {fileID: 21300000, guid: 0bd3c67c6d929ed41b243c931dab204b, type: 3}
   spriteMemory: {fileID: 21300000, guid: c57631a5ee8754a41b7d27eaa8b25fe5, type: 3}
+  spriteComienzo: {fileID: 21300000, guid: c59ae1823d01c9145bb0df8f221d9812, type: 3}
 --- !u!225 &5544084081656932995
 CanvasGroup:
   m_ObjectHideFlags: 0

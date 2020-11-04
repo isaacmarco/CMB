@@ -146,7 +146,7 @@ public class TareaMemory : Tarea
         // mensaje de aviso 
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)        
             yield return StartCoroutine(
-                MostrarMensaje("Nivel de bonus ¡Hazlo lo más rápido que puedas!", 4, null, Mensaje.TipoMensaje.Bonus)
+                MostrarMensaje("Nivel de bonus. ¡Hazlo lo más rápido que puedas!", 4, null, Mensaje.TipoMensaje.Bonus)
             );
             
 

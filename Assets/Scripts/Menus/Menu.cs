@@ -95,6 +95,14 @@ public class Menu : MonoBehaviour
             // actualizar ui dependiendo el progreso
             FindObjectOfType<MenuTareaTopos>().Actualizar();
             FindObjectOfType<MenuTareaMemory>().Actualizar();
+            // feedback
+            FindObjectOfType<Audio>().FeedbackElegirTarea();
+        }
+
+        if(jerarquia == jerarquiaMenuPerfiles)
+        {
+            // actualizar la ui de perfiles
+            FindObjectOfType<MenuPerfilesPacientes>().ActualizarPerfiles();
         }
         
         Transform[] jerarquias = {
@@ -124,13 +132,11 @@ public class Menu : MonoBehaviour
             case OpcionesSeleccionablesMenu.MenuTareaTopos:
                 // menu de topos
 				MostrarMenu(jerarquiaMenuTareaTopos);
-                //FindObjectOfType<MenuTareaTopos>().Actualizar();
             break;
 
             case OpcionesSeleccionablesMenu.MenuTareaMemory:
                 // menu de memory
                 MostrarMenu(jerarquiaMenuTareaMemory);
-                //FindObjectOfType<MenuTareaMemory>().Actualizar();
             break;
 
             case OpcionesSeleccionablesMenu.MenuPerfiles:
@@ -192,20 +198,12 @@ public class Menu : MonoBehaviour
     private void SeleccionarPaciente(int indice)
     {
         Debug.Log("Paciente seleccionado " + indice);
-        /*
-        // obtener el codigo del paciente desde el prefs
-        string clave = "codigoPaciente" + indice; 
-        string codigoPaciente = PlayerPrefs.GetString(clave);
-        // cargar el paciente actual         
-        Aplicacion.instancia.CargarDatosPaciente(codigoPaciente);
-        // indicar que ya hay un perfil seleccionado
-        Configuracion.hayPacienteActivo = true; */
-
+      
         // establecer el paciente actual 
         Configuracion.pacienteActual = configuracion.pacientes[indice];
 
-        // test para guardar el paciente actual 
-        // Aplicacion.instancia.GuardarDatosPaciente(configuracion.pacienteActual);
+        // feedback
+        FindObjectOfType<Audio>().FeedbackElegirPerfil();
 
         // mostrar el menu 
         MostrarMenu(jerarquiaMenuPrincipal);   
