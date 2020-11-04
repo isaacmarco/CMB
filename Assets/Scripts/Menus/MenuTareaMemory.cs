@@ -43,6 +43,10 @@ public class MenuTareaMemory : MonoBehaviour
             UINivelMemory ui = nuevoNivel.GetComponent<UINivelMemory>();
             ui.Configurar(i);
 
+            // comprobar record
+            PacienteScriptable paciente = FindObjectOfType<Aplicacion>().configuracion.pacienteActual; 
+            if(paciente.nivelesConRecordTareaMemory[i])
+                ui.MarcarComoRecord();
             
             // posicionamiento en la matriz
             contadorColumnas++;
@@ -92,8 +96,8 @@ public class MenuTareaMemory : MonoBehaviour
 
 
                 // recuperamos el record y lo mostramos
-                int record = paciente.tiemposRecordPorNivelTareaMemory[i];                
-                nivel.gameObject.GetComponent<UINivelMemory>().MostrarTiempoRecord(record);
+                //int record = paciente.tiemposRecordPorNivelTareaMemory[i];                
+                //nivel.gameObject.GetComponent<UINivelMemory>().MarcarComoRecord();
 
                 // actualizar numero nivel
                 //string nombre = "Nivel " + (i+1).ToString();

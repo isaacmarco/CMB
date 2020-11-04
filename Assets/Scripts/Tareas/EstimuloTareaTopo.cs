@@ -99,45 +99,8 @@ public class EstimuloTareaTopo : MonoBehaviour
             GenerarDiferentesEstimulos();
             break;
 
-            /*
-            case SimilitudEstimulos.DiferentesEstimulosConElColorDelObjetivo:
-            // estimulos aleatorios que pueden tener el color
-            // del estimulo objetivo 
-            estimulo = (Estimulos) (Random.Range(0, 4));            
-            esObjetivo = estimulo == nivel.estimuloObjetivo; 
-            if(!esObjetivo)
-            {
-                // TODO
-                // cambiar textura aleatoria
-            }
-            break;
-
-            case SimilitudEstimulos.EstimuloObjetivoConColorCambiante:
-            // estimulos aleatorios y el estimulo objetivo puede tener
-            // color cambiante
-            estimulo = (Estimulos) (Random.Range(0, 4));
-            // TODO
-            // cambiar textura aleatoria de cualquier tipo de estimulo
-            break;
-
-            case SimilitudEstimulos.EstimuloObjetivoConDetallesCambiantes:
-            // estimulos aleatorios y el estimulo objetivo puede tener color
-            // cambiante, ademas cambian detalles en el estimulo objetivo 
-             // estimulos aleatorios y el estimulo objetivo puede tener
-            // color cambiante
-            estimulo = (Estimulos) (Random.Range(0, 4));
-            // TODO
-            // cambiar textura aleatoria de cualquier tipo de estimulo
-            // TODO
-            // cambiar detalles en el estimulo objetivo
-            break;
-            */
         }
 
-
-        //this.estimulo = estimulo;         
-        // comprobar si el estimulo es objetivo 
-        //esObjetivo = estimulo == tarea.nivel.estimuloObjetivo;
         // iniciar la tarea de mostrar el estimulo 
         corrutinaSalida = StartCoroutine(CorrutinaSalirExterior(estimulo));
     }

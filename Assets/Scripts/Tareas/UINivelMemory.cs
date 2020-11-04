@@ -6,8 +6,8 @@ public class UINivelMemory : SeleccionarAlMirarUI
 {
     [SerializeField] private int nivelACargar;
     [Header("Referencias")]
-    [SerializeField] private TextMeshPro tiempoRecord; 
-    [SerializeField] private GameObject iconoCrono;
+    //[SerializeField] private TextMeshPro tiempoRecord; 
+    [SerializeField] private GameObject iconoTrofeo;
     [SerializeField] private TextMeshPro texto; 
     
 
@@ -15,6 +15,7 @@ public class UINivelMemory : SeleccionarAlMirarUI
     {
         this.nivelACargar = nivelACargar; 
         this.texto.text = (nivelACargar + 1).ToString();
+		iconoTrofeo.gameObject.SetActive(false);
     }
 
     protected override void Seleccionar()
@@ -26,18 +27,9 @@ public class UINivelMemory : SeleccionarAlMirarUI
     protected override void Inicio()
     {
         base.Inicio();
-        // ocultar el tiempo medio 
-		//tiempoRecord.gameObject.SetActive(false); 
-		//iconoCrono.gameObject.SetActive(false);
+	
     }    
-    
-    /*
-	public void FijarTexto(string texto)
-	{
-		this.texto.fontSize = 5;
-		this.texto.text = texto; 
-	}*/
-
+   
 
 	public void Desactivar()
 	{
@@ -49,17 +41,18 @@ public class UINivelMemory : SeleccionarAlMirarUI
 		texto.color = Color.white;
 	}
 
-	public void MostrarTiempoRecord(int record)
+	public void MarcarComoRecord()
 	{       
+		/*
 		if(record == int.MaxValue)
 		{
-			tiempoRecord.text = "--";
+			//tiempoRecord.text = "--";
 		} else {
-			tiempoRecord.text = record.ToString() + "seg.";				
-		}
+			//tiempoRecord.text = record.ToString() + "seg.";				
+		}*/
 
-		tiempoRecord.gameObject.SetActive(true); 
-		iconoCrono.gameObject.SetActive(true);
+		//tiempoRecord.gameObject.SetActive(true); 
+		iconoTrofeo.gameObject.SetActive(true);
 	}
     
 }

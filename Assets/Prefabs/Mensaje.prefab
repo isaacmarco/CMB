@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 5544084081656932995}
   - component: {fileID: 4702857677448227417}
   - component: {fileID: 5000614836438278574}
+  - component: {fileID: 1547180388812440032}
   m_Layer: 5
   m_Name: Mensaje
   m_TagString: Untagged
@@ -135,6 +136,9 @@ MonoBehaviour:
   spriteAviso: {fileID: 21300000, guid: 73d5b162343122c47aa27e0f80f23eb5, type: 3}
   spriteBonus: {fileID: 21300000, guid: 92a88c29dc5898243af5223faab57390, type: 3}
   spriteRecord: {fileID: 21300000, guid: 1befe3adbb1449449acde61c811d34ce, type: 3}
+  spriteReloj: {fileID: 21300000, guid: 6a20565f291d626489d8eb2ce566e831, type: 3}
+  spriteTopos: {fileID: 21300000, guid: 0bd3c67c6d929ed41b243c931dab204b, type: 3}
+  spriteMemory: {fileID: 21300000, guid: c57631a5ee8754a41b7d27eaa8b25fe5, type: 3}
 --- !u!225 &5544084081656932995
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -183,6 +187,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &1547180388812440032
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5847604751591427730}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f6747caaa49b8374593e2b036775ace7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6210299287744304434
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +241,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1344.7, y: 350.5}
+  m_SizeDelta: {x: 1194.7, y: 350.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2408485744802336220
 CanvasRenderer:
@@ -250,7 +273,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 33a474e932d3a654790e3035b35b33d1, type: 3}
     m_FontSize: 100
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 109
     m_Alignment: 4

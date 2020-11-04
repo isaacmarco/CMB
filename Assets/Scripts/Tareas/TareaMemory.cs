@@ -120,12 +120,37 @@ public class TareaMemory : Tarea
     {
         
         // mensaje por defecto 
-        yield return StartCoroutine(MostrarMensaje("Busca las parejas", 2));
+        yield return StartCoroutine(MostrarMensaje("¡Busca las parejas!",0, null, Mensaje.TipoMensaje.Memory));
         
+        // mensaje de timepo, comprobar si ya hemos jugdo este nivel 
+        PacienteScriptable paciente = Configuracion.pacienteActual;
+        int nivelEnJuego = paciente.nivelActualTareaMemory; 
+
+        // solo se puedne hacer recods en partidas que no sean de bonus
+        if(!Configuracion.pacienteActual.jugandoNivelDeBonus)
+        {
+            if(paciente.tiemposRecordPorNivelTareaMemory[nivelEnJuego] == int.MaxValue)
+            {
+                // no hemos jguado todavia
+                Debug.Log("No se ha jugado este nivel");
+
+            } else {
+
+                Debug.Log("Ya se ha jugado este nivel"); 
+
+                // ya hemos jugado, mostramos mensaje con el tiempo anterior
+                int ultimoTiempo = paciente.tiemposRecordPorNivelTareaMemory[nivelEnJuego];
+                yield return StartCoroutine(MostrarMensaje("Tu último tiempo en este nivel fue de " + ultimoTiempo + 
+                " segundos ", 5, null, Mensaje.TipoMensaje.Tiempo));
+            }
+        }
+        
+
+
         // mensaje de aviso 
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)        
             yield return StartCoroutine(
-                MostrarMensaje("Nivel de bonus ¡Hazlo lo más rápido que puedas!", 2, null, Mensaje.TipoMensaje.Bonus)
+                MostrarMensaje("Nivel de bonus ¡Hazlo lo más rápido que puedas!", 4, null, Mensaje.TipoMensaje.Bonus)
             );
             
 
@@ -296,16 +321,33 @@ public class TareaMemory : Tarea
                 // comprobar records
                 int tiempoRecord = paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory];
                 int tiempo = FindObjectOfType<Reloj>().Tiempo; 
-                if(tiempo < tiempoRecord)
+
+                // la primera vez siempre tendras un tiempo mas bajo, ya que
+                // se compara con el valor maximo de un entero. No hay que dar
+                // record en esa primera vez
+                if(tiempoRecord == int.MaxValue)
                 {
-                    // hay nuevo record
-                    Debug.Log("Nuevo record");
+                    // es la primera vez que se juega el nivel, 
+                    // anotamos el tiempo pero no damos record
                     paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory] = tiempo; 
-                    AgregarPuntuacion(Configuracion.puntuacionNuevoRecod);
-                    premioExtraRecordConcedido = true; 
 
                 } else {
-                    // mantenemos el record existente
+                    
+                    // hemos vuelto a jugar, comprobamos si hay record                    
+                    if(tiempo < tiempoRecord)
+                    {
+                        // hay nuevo record
+                        Debug.Log("Nuevo record");
+                        paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory] = tiempo; 
+                        AgregarPuntuacion(Configuracion.puntuacionNuevoRecod);
+                        // marcamos el record
+                        paciente.nivelesConRecordTareaMemory[paciente.nivelActualTareaMemory] = true; 
+                        premioExtraRecordConcedido = true; 
+
+                    } else {
+                        // mantenemos el record existente
+                    }
+
                 }
                
                 // progresamos en el juego, pero solo si este nivel

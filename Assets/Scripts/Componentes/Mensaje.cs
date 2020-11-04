@@ -7,23 +7,51 @@ public class Mensaje : MonoBehaviour
 {
     public enum TipoMensaje
     {
-        Exito, Fallo, Aviso, Bonus, Record
+        Exito, Fallo, Aviso, Bonus, Record, Tiempo, Topos, Memory
     };
    
     [SerializeField] private Text mensaje; 
     [SerializeField] private Image imagen; 
     [SerializeField] Image imagenTipoMensaje;    
-    [SerializeField] private Sprite spriteExito, spriteFallo, spriteAviso, spriteBonus, spriteRecord; 
+    [SerializeField] private Sprite spriteExito, spriteFallo, 
+    spriteAviso, spriteBonus, spriteRecord, spriteReloj, spriteTopos, spriteMemory; 
     
+    void Awake()
+    {
+
+    }
+
     public void Ocultar()
     {
+        gameObject.SetActive(false); 
         GetComponent<CanvasGroup>().alpha = 0f; 
+    }
+
+    private IEnumerator Animar()
+    {
+        Vector2 posicionOriginal = new Vector2(0, 400);
+        gameObject.GetComponent<RectTransform>().anchoredPosition = posicionOriginal; 
+        
+        
+        while(GetComponent<RectTransform>().anchoredPosition.y > 0)
+        {
+            // bajar la ui
+            Vector2 posicion = GetComponent<RectTransform>().anchoredPosition; 
+            posicion.y -= 100 * Time.deltaTime; 
+            GetComponent<RectTransform>().anchoredPosition = posicion; 
+            yield return null; 
+        }       
     }
 
     public void Mostrar(string mensaje, Sprite imagen = null, TipoMensaje tipoMensaje = TipoMensaje.Aviso)
     {
-        Debug.Log("Mensaje: " + mensaje);        
         
+        gameObject.SetActive(true);
+        Debug.Log("Mensaje: " + mensaje);        
+
+      
+        // StartCoroutine(Animar());
+
         // icono segun el tipo de mensaje, por defecto es de tipo aviso 
         switch(tipoMensaje)
         {
@@ -42,6 +70,15 @@ public class Mensaje : MonoBehaviour
             case TipoMensaje.Record:
                 imagenTipoMensaje.sprite = spriteRecord;
             break;
+            case TipoMensaje.Tiempo:
+                imagenTipoMensaje.sprite = spriteReloj; 
+            break;
+            case TipoMensaje.Topos:
+                imagenTipoMensaje.sprite = spriteTopos;
+            break;
+            case TipoMensaje.Memory:
+                imagenTipoMensaje.sprite = spriteMemory;
+            break;
         }
 
         // asignar parametros 
@@ -55,8 +92,8 @@ public class Mensaje : MonoBehaviour
         }
         
         // hacer el mensaje opaco 
-        StartCoroutine(Alpha());
-        //GetComponent<CanvasGroup>().alpha = 1f; 
+        //StartCoroutine(Alpha());
+        GetComponent<CanvasGroup>().alpha = 1f; 
     }
 
     private IEnumerator Alpha()
