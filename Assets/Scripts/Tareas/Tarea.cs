@@ -189,36 +189,71 @@ public class Tarea : MonoBehaviour
         // obtener fecha
         fechaRegistro = System.DateTime.Now.ToString("dddd, dd MMMM yyyy HH-mm-ss");
 
+        // si estamos en la escritura de emergencia cambiamos el nombre del fichero 
+        if(escrituraFallidaEnDisco)
+            fechaRegistro += "_grabado de emergencia_";
+
         // devolver la ruta para el fichero
         return rutaDirectorioRegistros + "\\" + codigoPaciente + "-" + nombreTarea + "-" + 
         fechaRegistro + ".txt";
+
+        //return rutaDirectorioRegistros + "\\" + codigoPaciente + ".txt";
+    }
+
+    private bool escrituraFallidaEnDisco = false; 
+
+    private void EscrituraEmergencia()
+    {
+        Debug.LogError("Realizando escritura de emergencia");
+        escrituraFallidaEnDisco = true; 
+        EscribirDiarioEnDisco();
     }
 
     private void EscribirDiarioEnDisco()
     {
         Debug.Log("Escribiendo diario en disco");
         string nombreFichero = ObtenerNombreFichero();
-        
-        
-        using (StreamWriter sw = new StreamWriter(nombreFichero))
+            
+        try
         {
-            // cabecera general 
-            sw.WriteLine("codigo del paciente: " + configuracion.pacienteActual.codigo);            
-            sw.WriteLine("fecha de registro: " + fechaRegistro);
-            // cabcera propia de la tarea
-            sw.WriteLine(ObtenerCabeceraTarea());
 
-
-            // comienzo de datos, escribimos cada registro en una nueva linea
-            for(int i=0; i<listaRegistrosOculares.Count; i++)
+        
+            using (StreamWriter sw = new StreamWriter(nombreFichero))
             {
-                // obtenemos el registro 
-                RegistroPosicionOcular registro = (RegistroPosicionOcular) listaRegistrosOculares[i];
-                sw.WriteLine(registro.RegistroFormateadoParaEscribirEnDisco());
+                // cabecera general 
+                sw.WriteLine("codigo del paciente: " + configuracion.pacienteActual.codigo);            
+                sw.WriteLine("fecha de registro: " + fechaRegistro);
+                // cabcera propia de la tarea
+                sw.WriteLine(ObtenerCabeceraTarea());
+                // comienzo de datos, escribimos cada registro en una nueva linea
+                for(int i=0; i<listaRegistrosOculares.Count; i++)
+                {
+                    // obtenemos el registro 
+                    RegistroPosicionOcular registro = (RegistroPosicionOcular) listaRegistrosOculares[i];
+                    sw.WriteLine(registro.RegistroFormateadoParaEscribirEnDisco());
+                }
+           
+                // sw.Flush(); // ??
             }
-           
-           
-            sw.Flush();
+
+        } catch (Exception e)
+        {            
+            if (e is IOException)
+            {
+
+            }
+
+            if(e is IOException)
+            {
+
+            }
+
+            Debug.LogError("Error escribiendo el fichero, imprimiendo la informacion");
+            Debug.LogError(e.ToString());            
+            Debug.LogError("Repetimos la operacion de guardado de datos en otro fichero diferente");   
+            // repetimos la escritura, pero solo una vez mas
+            if(!escrituraFallidaEnDisco)         
+                EscrituraEmergencia();
         }
     }
 
