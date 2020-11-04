@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Interfaz : MonoBehaviour
 {
     public Text debug; 
+    public Text puntuacion; 
     private TareaTopos tarea; 
 
     void Start()
@@ -22,6 +23,8 @@ public class Interfaz : MonoBehaviour
   
             string informacion = "aciertos " + tarea.Aciertos + "\n" + "errores " + tarea.Errores + "\n" + "omisiones " + tarea.Omisiones; 
             debug.text = informacion; 
+
+            puntuacion.text = tarea.Puntuacion.ToString(); 
 
         }
    

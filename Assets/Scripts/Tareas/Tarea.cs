@@ -8,8 +8,15 @@ using System;
 
 public class Tarea : MonoBehaviour
 {
+    protected bool tareaBloqueada;
     private ArrayList listaRegistrosOculares; 
     private bool registrarEnDiario = true; 
+    
+    // fecha para registrar los datosw 
+    private string fechaRegistro = string.Empty; 
+
+    private bool escrituraFallidaEnDisco = false; 
+    
     protected int puntuacion; 
     protected string nombreTarea; 
     protected GazeAware gazeAware;
@@ -17,6 +24,14 @@ public class Tarea : MonoBehaviour
     [SerializeField] private RectTransform canvasRect; 
     [SerializeField] private Mensaje mensaje; 
     
+    public int Puntuacion
+    {
+        get { return puntuacion; }
+    }
+    public bool TareaBloqueada {
+        get { return tareaBloqueada;}
+    }
+
     public Mensaje Mensaje {
         get { return mensaje;}
     } 
@@ -146,7 +161,8 @@ public class Tarea : MonoBehaviour
     void Awake()
     {
         Mensaje.Ocultar();
-        
+        // bloquear la tarea siempre al incio
+        BloquearTarea();
         // inicio de la tarea (virtual)
         Inicio();
         // iniciar la corrutina del diario
@@ -155,12 +171,15 @@ public class Tarea : MonoBehaviour
             
     }
 
-    void OnApplicationQuit()
+    protected void BloquearTarea()
     {
-        // solo para grabar el test de registro de la tarea
-        // si cerramos el editor
-        //EscribirDiarioEnDisco();        
+        tareaBloqueada = true; 
     }
+    protected void DesbloquearTarea()
+    {
+        tareaBloqueada = false; 
+    }
+
 
     protected virtual void Inicio()
     {
@@ -168,10 +187,6 @@ public class Tarea : MonoBehaviour
     }   
     
 
-    // fecha para registrar los datosw 
-    private string fechaRegistro = string.Empty; 
-
-    
 
     private string ObtenerNombreFichero()
     {
@@ -200,7 +215,6 @@ public class Tarea : MonoBehaviour
         //return rutaDirectorioRegistros + "\\" + codigoPaciente + ".txt";
     }
 
-    private bool escrituraFallidaEnDisco = false; 
 
     private void EscrituraEmergencia()
     {

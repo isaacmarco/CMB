@@ -17,5 +17,5 @@ MonoBehaviour:
   tipoDeNivel: 0
   anchoMatriz: 4
   altoMatriz: 3
-  listaEstimulosParaFormarParejas: 000000000100000002000000030000000400000005000000
+  listaEstimulosParaFormarParejas: 0500000004000000130000000d0000000f0000000c000000
   erroresParaPerder: 24

@@ -12,7 +12,9 @@ public class ControladorIK : MonoBehaviour
     [Header("Objetivos de las manos")]
     public Transform objetivoMano = null;
     public Transform objetivoManoContraria = null;
-    protected Animator animator;    
+    protected Animator animator;   
+    [Header("Referencias a otros huesos")] 
+    public Transform huesoMano; 
 
     void Start () 
     {
@@ -23,10 +25,21 @@ public class ControladorIK : MonoBehaviour
             Debug.Log("Paciente es zurdo");
     }   
 
-    // mueve el objetivo de la mana a la posicion proporcionada
+    // mueve el objetivo de la mano a la posicion proporcionada
     public void MoverObjetivo(Vector3 posicion)
     {
         objetivoMano.position = posicion; 
+    }
+
+    void LateUpdate()
+    {
+        // orientacion por defecto de la mano
+        // Vector3 porDefecto = new Vector3(40f,10f, 6f);
+
+        // inclinacion forzada de la mano para dejar mas visibilidad
+        // de las tarjetas
+        Vector3 inclinacion = new Vector3(37f, -15f, -30f);
+        huesoMano.localEulerAngles = inclinacion;
     }
 
     // callback del animator    

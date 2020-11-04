@@ -44,11 +44,15 @@ public class Aplicacion : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        // reiniciar estado 
         ReiniciarEstadoPrograma();
-
         // establecer resolucion
         Screen.SetResolution(1920, 1080, true);
-
+        // no permitir el uso de raton fuera del editor
+        if(!Application.isEditor)
+        {
+            configuracion.utilizarRatonAdicionalmente = false; 
+        }
     }
 
 

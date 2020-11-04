@@ -18,7 +18,7 @@ MonoBehaviour:
   estimuloObjetivo: 0
   similitudEntreEstimulos: 2
   aparicionesAntesDeCambiarEstimuloObjetivo: 0
-  tiempoParaNuevoEstimulo: 1.5
-  tiempoPermanenciaDelEstimulo: 2
-  aciertosParaSuperarElNivel: 10
-  omisionesOErroresParaPerder: 20
+  tiempoParaNuevoEstimulo: 1
+  tiempoPermanenciaDelEstimulo: 1.5
+  aciertosParaSuperarElNivel: 20
+  omisionesOErroresParaPerder: 10

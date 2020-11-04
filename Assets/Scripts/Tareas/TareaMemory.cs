@@ -24,11 +24,7 @@ public class TareaMemory : Tarea
     private Vector2 puntoFiltrado; 
     private EstadoTareaMemory estadoJuego;
     private TarjetaTareaMemory primeraTarjetaElegida, segundaTarjetaElegida; 
-    private bool juegoEnCurso;
-    public bool JuegoEnCurso
-    {
-        get { return juegoEnCurso; }
-    }
+     
     public NivelMemoryScriptable Nivel { 
         get { return (NivelMemoryScriptable) Configuracion.nivelActual;} 
     }
@@ -165,7 +161,8 @@ public class TareaMemory : Tarea
             FindObjectOfType<Reloj>().IniciarReloj();
         } 
 
-        juegoEnCurso = true; 
+        DesbloquearTarea();
+        //juegoEnCurso = true; 
     }
 
     protected override void Inicio()
@@ -186,7 +183,7 @@ public class TareaMemory : Tarea
         // metodo llamado por el cronometro cuando el tiempo
         // se termina en el nivel de bonus
         Debug.Log("Tiempo excedido");
-        juegoEnCurso = false; 
+        BloquearTarea();
         JuegoPerdido();
     }
     
@@ -195,8 +192,8 @@ public class TareaMemory : Tarea
     public void VoltearTarjeta(TarjetaTareaMemory tarjeta)
     {
         
-        if(!juegoEnCurso)
-            return;
+        if(TareaBloqueada)
+            return; 
         
         // omision en esta tarea es el sonido de las tarjetas
         FindObjectOfType<Audio>().FeedbackOmision();
@@ -262,7 +259,8 @@ public class TareaMemory : Tarea
             if(aciertos == tarjetas.Length / 2)
             {
                 JuegoGanado();
-                juegoEnCurso = false; 
+                BloquearTarea();
+                
             } else {
                 
                 // reiniciamos el estado de la tarea inmediantamente
@@ -281,7 +279,8 @@ public class TareaMemory : Tarea
             if(errores >= Nivel.erroresParaPerder)
             {
                 JuegoPerdido();
-                juegoEnCurso = false; 
+                BloquearTarea();
+                
             }
 
         }
@@ -468,12 +467,13 @@ public class TareaMemory : Tarea
         float distanciaCentroTarjeta = 0.5f; 
         float desplazamientoX = (Nivel.anchoMatriz / 2f - distanciaCentroTarjeta) * escalaJerarquia; 
         float desplazamientoY = (Nivel.altoMatriz / 2f - distanciaCentroTarjeta) * escalaJerarquia;
+        float desplazamientoCorreccion = -0.03f;
         // cambiamos la posicion de la jerarquia
         jerarquiaTarjetas.transform.position = new Vector3
         (
             -desplazamientoX,
             0.135f,
-            desplazamientoY
+            desplazamientoY + desplazamientoCorreccion
         );
      
 
@@ -507,11 +507,7 @@ public class TareaMemory : Tarea
             lista[i] = t; 
         }
     }
-
-    // todo algoritmo pescador aqui!
-
-
-
+  
     protected override void Actualizacion()
     {
         if(controladorIK!=null)
@@ -519,7 +515,6 @@ public class TareaMemory : Tarea
             ActualizarBrazoVirtual();
         }
     }
-
     
     private void ActualizarBrazoVirtual()
     {
@@ -556,19 +551,21 @@ public class TareaMemory : Tarea
       
 
     }
+
+
     private void MoverBrazoVirtual(Vector2 posicionEnPantalla)
     {        
         Ray ray;
      	RaycastHit hit;
-		ray = Camera.main.ScreenPointToRay(posicionEnPantalla); // Input.mousePosition);	
+		ray = Camera.main.ScreenPointToRay(posicionEnPantalla);  
         if(Physics.Raycast(ray, out hit))
         {
-            if(hit.collider.gameObject.name == "Mesa")
-            {
+            //if(hit.collider.gameObject.name == "Mesa")
+            //{
                 Vector3 offsetVertical = new Vector3(0f, 0.1f, 0f);
                 Vector3 posicionColisionPlano = hit.point + offsetVertical;
                 controladorIK.MoverObjetivo(posicionColisionPlano);
-            }
+            //}
 		    
         }
 

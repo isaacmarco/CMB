@@ -36,6 +36,8 @@ public class ImportadorNiveles
 
         for(int i=0; i<lineas.Length; i++)
         {
+            Debug.Log("Importando nivel " + i);
+            
             // para cada linea, partir la linea en campos
             string[] campos = lineas[i].Split('\t');
 
@@ -85,6 +87,7 @@ public class ImportadorNiveles
                 EstimulosTareaMemory.Lobo*/
             };
 
+            
             int numeroEstimulos = anchoMatriz * altoMatriz / 2; 
             EstimulosTareaMemory[] estimulos = new EstimulosTareaMemory[numeroEstimulos];
             string[] listaEstimulosCadena = campos[3].Split(','); 

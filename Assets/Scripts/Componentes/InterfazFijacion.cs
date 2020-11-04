@@ -7,13 +7,18 @@ public class InterfazFijacion : MonoBehaviour
 {
     // referencia al rect transform del canvas de esta interfaz
     private RectTransform canvasRect; 
-
+    private Tarea tarea; 
+  
     void Start()
     {
+        // intentamos obtener una referencia a la tarea, 
+        // si no la encontramos estamos en el menu 
+        tarea = FindObjectOfType<Tarea>();                   
+        
         // obtenemos el rect del canvas para calculos de coordenadas
         Canvas canvas = GetComponentInParent<Canvas>();
         // comprobar si la interfaz es de menu o de tarea
-        if(FindObjectOfType<Tarea>() != null)
+        if(tarea != null)
         {
             canvasRect = FindObjectOfType<Tarea>().CanvasRect; 
         } else {
@@ -35,6 +40,11 @@ public class InterfazFijacion : MonoBehaviour
 
     void Update()
     {
+        // si estamos en una tarea, no debemos mostrar esta interfaz
+        // de seleccion mientras la tarea este bloqueada
+        if(tarea!=null)
+        {
+        }
         // coloca la interfaz de progreso sobre el estimulo 3D        
         ConvertirCoordenadasYPosicionarInterfaz();
     }
