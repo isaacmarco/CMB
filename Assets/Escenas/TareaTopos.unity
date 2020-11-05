@@ -975,6 +975,8 @@ MonoBehaviour:
   ASfeedbackOmision: {fileID: 563363725}
   ASfeedbackPartidaGanada: {fileID: 563363727}
   ASfeedbackPartidaPerdida: {fileID: 563363726}
+  ASelegirPerfil: {fileID: 0}
+  ASelegirTarea: {fileID: 0}
 --- !u!4 &563363724
 Transform:
   m_ObjectHideFlags: 0

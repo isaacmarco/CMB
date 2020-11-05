@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 819, y: 0}
+  m_AnchoredPosition: {x: 785, y: 0}
   m_SizeDelta: {x: 573, y: 471}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &960903851776330588
@@ -140,6 +140,7 @@ MonoBehaviour:
   spriteTopos: {fileID: 21300000, guid: 0bd3c67c6d929ed41b243c931dab204b, type: 3}
   spriteMemory: {fileID: 21300000, guid: c57631a5ee8754a41b7d27eaa8b25fe5, type: 3}
   spriteComienzo: {fileID: 21300000, guid: c59ae1823d01c9145bb0df8f221d9812, type: 3}
+  spriteOjo: {fileID: 21300000, guid: 1c5d9a2b3a694a94cbd8b5491b8aa3ae, type: 3}
 --- !u!225 &5544084081656932995
 CanvasGroup:
   m_ObjectHideFlags: 0

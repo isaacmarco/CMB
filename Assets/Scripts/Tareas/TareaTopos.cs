@@ -172,31 +172,31 @@ public class TareaTopos : Tarea
       
         int nivel = Configuracion.nivelActual.numeroDelNivel;
         if(nivel == 0)
-            yield return StartCoroutine(MostrarMensaje("Golpea a los topos",0,null,Mensaje.TipoMensaje.Topos));
-        if(nivel == 4)
-            yield return StartCoroutine(MostrarMensaje("Ahora debes ser más rápido"));
+            yield return StartCoroutine(MostrarMensaje("Mira al topo",0,null,Mensaje.TipoMensaje.Topos));
+        //if(nivel == 4)
+          //  yield return StartCoroutine(MostrarMensaje("Ahora debes ser más rápido"));
         if(nivel > 6 && nivel < 12)
             yield return StartCoroutine(MostrarMensaje("¡Atención! Aparecen otros animales"));
         if(nivel > 12 && nivel < 37)
         {
             string[] frases = 
             {
-                "¡Fíjate! Golpea al topo",
-                "¡Fíjate! Golpea al pato",
-                "¡Fíjate! Golpea a la oveja",
-                "¡Fíjate! Golpea al pingüino",
-                "¡Fíjate! Golpea al gato"
+                "Mira al topo",
+                "Mira al pato", 
+                "Mira a la oveja",
+                "Mira al pingüino",
+                "Mira al gato"
             };
             string frase = frases[(int) Nivel.estimuloObjetivo];            
             yield return StartCoroutine(MostrarMensaje(frase));
         }
         if(nivel > 36)
-            yield return StartCoroutine(MostrarMensaje("Cuidado, puede cambiar en cualquier momento"));
+            yield return StartCoroutine(MostrarMensaje("¡Ahora vamos a ir cambiando!"));
 
        
         
         // mensaje normal de inicia
-        yield return StartCoroutine(MostrarMensaje("Comienza la partida", 0, null, Mensaje.TipoMensaje.Comienzo));
+        yield return StartCoroutine(MostrarMensaje("Comenzamos", 0, null, Mensaje.TipoMensaje.Comienzo));
 
         // tiempo de espera inicial
         yield return new WaitForSeconds(1f);
@@ -226,7 +226,7 @@ public class TareaTopos : Tarea
     {        
         // comprobamos si ya han aparecido suficientes estimulos
         // objetivos del tipo actual                         
-        if(contadorEstimulosMostrados >= 10) // Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
+        if(contadorEstimulosMostrados >= 5) // Nivel.aparicionesAntesDeCambiarEstimuloObjetivo)
         {                     
 
             // se han mostrado suficientes estimulos para hacer un cambio, 
@@ -259,7 +259,8 @@ public class TareaTopos : Tarea
                 // feedback, mostramos un sprite y un mensaje para indicar
                 // el nuevo estimulo objetivo
                 Sprite spriteEstimuloObjetivo = FindObjectOfType<IndicadorEstimuloObjetivo>().SpriteEstimuloObjetivo;
-                yield return StartCoroutine(MostrarMensaje("El objetivo ha cambiado", 4, spriteEstimuloObjetivo));
+                yield return StartCoroutine(MostrarMensaje(
+                    "Tu nuevo objetivo", 4, spriteEstimuloObjetivo, Mensaje.TipoMensaje.Ojo));
 
             } else {
                 // seguimos con el mismo estimulo objetivo que antes porque ha

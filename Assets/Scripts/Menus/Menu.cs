@@ -20,12 +20,17 @@ public class Menu : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private Text debug; 
 
+    private bool mostrarDebug = false; 
+
     private void TrazadoProgreso()
     {        
+        if(Configuracion.pacienteActual==null)
+            return; 
+
         string texto = Serializador.SerializarScriptable(
             Configuracion.pacienteActual
         );
-        debug.text = texto; 
+        debug.text = texto;         
     }
 
 
@@ -39,8 +44,15 @@ public class Menu : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F12))
             Aplicacion.instancia.BorrarDatos();
 
-        
+        // debug
+        if(Input.GetKeyDown(KeyCode.F1))
+            mostrarDebug = !mostrarDebug;
+        if(mostrarDebug)
+            TrazadoProgreso();        
+        debug.gameObject.SetActive(mostrarDebug);
+
     }
+
     void Start()
     {
        
@@ -79,7 +91,7 @@ public class Menu : MonoBehaviour
             }
             
             // hacemos debug del perfil seleccionado en pantalla
-            TrazadoProgreso();
+            // TrazadoProgreso();
         }
 
        
@@ -87,7 +99,8 @@ public class Menu : MonoBehaviour
 
 
     public void MostrarMenu(Transform jerarquia)
-    {
+    {                
+      
         Debug.Log("Mostrando menu " + jerarquia.name);
 
         if(jerarquia == jerarquiaMenuTareaMemory || jerarquia == jerarquiaMenuTareaTopos)
@@ -207,7 +220,7 @@ public class Menu : MonoBehaviour
 
         // mostrar el menu 
         MostrarMenu(jerarquiaMenuPrincipal);   
-        TrazadoProgreso();    
+      
     }
 
     

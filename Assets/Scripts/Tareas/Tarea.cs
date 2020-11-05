@@ -123,9 +123,9 @@ public class Tarea : MonoBehaviour
         // mostrar feedback dependiendo del resultado 
         if(partidaGanada)
         {
-            yield return StartCoroutine(MostrarMensaje("Partida Ganada", 0, null, Mensaje.TipoMensaje.Exito));
+            yield return StartCoroutine(MostrarMensaje("¡Muy bien!", 0, null, Mensaje.TipoMensaje.Exito));
         } else {
-            yield return StartCoroutine(MostrarMensaje("Partida perdida", 0, null, Mensaje.TipoMensaje.Fallo));
+            yield return StartCoroutine(MostrarMensaje("Has perdido", 0, null, Mensaje.TipoMensaje.Fallo));
         }
 
         // calcula el progreso del paciente, puntos, niveles, etc
