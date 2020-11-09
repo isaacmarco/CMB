@@ -41,8 +41,9 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
+        /*
         if(Input.GetKeyDown(KeyCode.F12))
-            Aplicacion.instancia.BorrarDatos();
+            Aplicacion.instancia.BorrarDatos();*/
 
         // debug
         if(Input.GetKeyDown(KeyCode.F1))

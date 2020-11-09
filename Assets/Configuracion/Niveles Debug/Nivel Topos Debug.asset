@@ -20,5 +20,5 @@ MonoBehaviour:
   aparicionesAntesDeCambiarEstimuloObjetivo: 4
   tiempoParaNuevoEstimulo: 1
   tiempoPermanenciaDelEstimulo: 2
-  aciertosParaSuperarElNivel: 10
-  omisionesOErroresParaPerder: 20
+  aciertosParaSuperarElNivel: 1
+  omisionesOErroresParaPerder: 2

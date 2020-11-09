@@ -202,7 +202,8 @@ public class TareaTopos : Tarea
         yield return new WaitForSeconds(1f);
 
         Debug.Log("Comienzo de juego");
-       
+
+        DesbloquearTarea();
 
         // comienzo del game loop
         while(true)

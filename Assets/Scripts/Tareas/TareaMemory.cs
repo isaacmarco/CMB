@@ -162,7 +162,6 @@ public class TareaMemory : Tarea
         } 
 
         DesbloquearTarea();
-        //juegoEnCurso = true; 
     }
 
     protected override void Inicio()
@@ -473,7 +472,7 @@ public class TareaMemory : Tarea
         (
             -desplazamientoX,
             0.135f,
-            desplazamientoY + desplazamientoCorreccion
+            desplazamientoY //+ desplazamientoCorreccion
         );
      
 

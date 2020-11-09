@@ -10,9 +10,11 @@ public class EstimuloTareaTopo : MonoBehaviour
     public bool Escondido {
         get{ return escondido; }
     }
+
     public bool EnUso {
         get { return enUso; }
     }
+
     public bool Golpeado {
         get { return golpeado;}
     }
@@ -170,9 +172,7 @@ public class EstimuloTareaTopo : MonoBehaviour
 
         foreach(GameObject modelo in modelos)
             modelo.SetActive(false);
-    }
-
-    
+    }    
 
     private IEnumerator CorrutinaSalirExterior(EstimulosTareaTopos tipo)
     {

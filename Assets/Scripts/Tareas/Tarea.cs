@@ -28,6 +28,7 @@ public class Tarea : MonoBehaviour
     {
         get { return puntuacion; }
     }
+
     public bool TareaBloqueada {
         get { return tareaBloqueada;}
     }
@@ -63,6 +64,10 @@ public class Tarea : MonoBehaviour
 
     public virtual void AgregarPuntuacion(int puntuacion)
     {
+        // no modificar la puntuacion si el juego ya ha terminado 
+        if(TareaBloqueada)
+            return; 
+
         Debug.Log("Puntos recibidos " + puntuacion );
         this.puntuacion += puntuacion;         
         if(this.puntuacion < 0 )
@@ -70,6 +75,7 @@ public class Tarea : MonoBehaviour
     }
 
     protected void JuegoGanado(){
+        BloquearTarea();
         FindObjectOfType<Audio>().FeedbackPartidaGanada();
         FinalizarRegistro();
         StopAllCoroutines();
@@ -77,6 +83,7 @@ public class Tarea : MonoBehaviour
     }
 
     protected void JuegoPerdido(){
+        BloquearTarea();
         FindObjectOfType<Audio>().FeedbackPartidaPerdida();
         // reiniciamos el flag de nivel de bonus
         Configuracion.pacienteActual.jugandoNivelDeBonus = false; 
@@ -177,18 +184,16 @@ public class Tarea : MonoBehaviour
     {
         tareaBloqueada = true; 
     }
+
     protected void DesbloquearTarea()
     {
         tareaBloqueada = false; 
     }
 
-
     protected virtual void Inicio()
     {
         // cada tarea implementa su propio metodo Inicio()
     }   
-    
-
 
     private string ObtenerNombreFichero()
     {
@@ -294,8 +299,6 @@ public class Tarea : MonoBehaviour
         float tiempoEspera = 1 / Configuracion.intervaloRegistroOcularEnHZ;
         listaRegistrosOculares = new ArrayList();
         float tiempoInicio = Time.time;
-
-        //StartCoroutine(TestRegistro());
 
         while(registrarEnDiario)
         {           

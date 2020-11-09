@@ -51,6 +51,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 
 	void Update()
 	{
+	
 		// si el estimulo no esta en uso, esta escondido o ya ha
 		// sido golpeado abortamos la funcion 
 		if(!estimulo.EnUso || estimulo.Escondido || estimulo.Golpeado)
@@ -67,7 +68,8 @@ public class SeleccionaAlMirar : MonoBehaviour
 			// empezamos a mirarlo 
 			if(!estimuloMirado)
 			{
-				ComenzarFijacion();
+				if(!tarea.TareaBloqueada)
+					ComenzarFijacion();
 			} else {
 				// ya estamos mirando el estimulo 
 				ContinuarFijacion();
