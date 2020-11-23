@@ -15,12 +15,12 @@ MonoBehaviour:
   nombre: Alfredo
   codigo: 000
   esZurdo: 0
-  ultimoNivelDesbloqueadoTareaTopos: 0
-  ultimoNivelDesbloqueadoTareaMemory: 1
-  nivelActualTareaMemory: 1
-  contadorNivelesGanadosParaBonus: 1
+  ultimoNivelDesbloqueadoTareaTopos: 1
+  ultimoNivelDesbloqueadoTareaMemory: 0
+  nivelActualTareaMemory: 0
+  contadorNivelesGanadosParaBonus: 5
   jugandoNivelDeBonus: 0
   puntuacionTareaTopos: 0
-  puntuacionTareaMemory: 0
-  tiemposRecordPorNivelTareaMemory: 060000000f000000ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f
-  nivelesConRecordTareaMemory: 00010101000000000000000000000000000000000000000000000000
+  puntuacionTareaMemory: 1200
+  tiemposRecordPorNivelTareaMemory: ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f
+  nivelesConRecordTareaMemory: 00000000000000000000000000000000000000000000000000000000

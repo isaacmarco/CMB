@@ -23,7 +23,8 @@ public class Reloj : MonoBehaviour
 
     public void Detener()
     {
-        contabilizarTiempo = false; 
+        // contabilizarTiempo = false; 
+        StopAllCoroutines();
     }
 
     private IEnumerator CorrutinaReloj()
