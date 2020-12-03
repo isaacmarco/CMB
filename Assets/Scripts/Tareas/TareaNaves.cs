@@ -6,6 +6,7 @@ public class TareaNaves : Tarea
 {
     [Header("Instanciado")]
     [SerializeField] private GameObject prefabNaveEnemiga; 
+    [SerializeField] private GameObject prefabMina; 
     [Header("Ruta")]
     [SerializeField] private Transform[] puntosRecorrido;
 
@@ -35,7 +36,7 @@ public class TareaNaves : Tarea
         GenerarCurvaRecorrido();
         // iniciamos la generacion de enemigos durante toda la partida 
         // corutinaGeneracionEnemigos = StartCoroutine(CorutinaGeneracionEnemigos());
-
+        StartCoroutine(CorutinaGeneracionMinas());
     }
 
     private void GenerarCurvaRecorrido()
@@ -71,20 +72,10 @@ public class TareaNaves : Tarea
         Debug.Log(curvaRecorridoX.length + " puntos añadidos");
 
         // volvemos a insertar el primer punto al final
-        // para loopear el recorrido
-        
+        // para loopear el recorrido        
         //Vector3 primerPunto = puntosRecorrido[0].position; 
         //curvaRecorridoX.AddKey(curvaRecorridoX.length, primerPunto.x);
         //curvaRecorridoZ.AddKey(curvaRecorridoX.length, primerPunto.z);
-
-        // suavizar la tangente para empatar correctamente la
-        // curva en el fin-inicio
-       
-        //curvaRecorridoX.SmoothTangents(0, 0);
-        //curvaRecorridoZ.SmoothTangents(0, 0); /*
-       // curvaRecorridoX.SmoothTangents(puntosRecorrido.Length, 1);
-        //curvaRecorridoZ.SmoothTangents(puntosRecorrido.Length, 1);
-
     }
 
     public void EnemigoDestruido()
@@ -93,6 +84,30 @@ public class TareaNaves : Tarea
 
     private void InstanciarEnemigo()
     {
+    }
+
+    private void InstanciarMina(float momento)
+    {
+        // evalusmo la curva para obtener la posicion
+        Vector3 posicion = EvaluarCurvas(momento);
+        posicion.y = 1; 
+        GameObject mina = (GameObject) Instantiate(prefabMina);
+        mina.name = "mina";
+        mina.transform.position = posicion; 
+        mina.GetComponent<Mina>().Iniciar(momento);
+    }
+
+    private IEnumerator CorutinaGeneracionMinas()
+    {
+        while(true)
+        {
+            float tiempoDecision = 3f; 
+            yield return new WaitForSeconds(tiempoDecision);
+            // obtenemos la posicion de la mina en t+1
+            float incrementoTiempo = 1f; 
+            float t = FindObjectOfType<NaveJugador>().Tiempo + incrementoTiempo; 
+            InstanciarMina(t);
+        }
     }
 
     private IEnumerator CorutinaGeneracionEnemigos()

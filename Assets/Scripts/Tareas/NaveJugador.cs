@@ -14,6 +14,10 @@ public class NaveJugador : MonoBehaviour
     private bool disparando = false; 
     private Vector3 posicionObjetivo; 
 
+    public float Tiempo
+    {
+        get { return this.tiempo;}
+    }
     private void InstanciarLaser()
     {
         // instanciamos un nuevo disparo  y hacemos
@@ -49,10 +53,14 @@ public class NaveJugador : MonoBehaviour
         tarea = FindObjectOfType<TareaNaves>(); 
         gameObject.transform.position = tarea.PosicionInicial; 
         StartCoroutine(GeneracionDisparos());
+
     }
 
     void FixedUpdate()
     {
+                // configraucion de la nave
+        velocidad = tarea.Configuracion.velocidadDeLaNave;
+        
         // calcular el momento actual
         tiempo += Time.deltaTime * velocidad; 
         // calcular momento siguiente
