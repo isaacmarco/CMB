@@ -36,6 +36,9 @@ public class ConfiguracionScriptable : ScriptableObject
     [Header("Configuracion tarea de memoria")]
     public float tiempoParaOcultarPareja = 2f; 
     public int numeroDeNivelesParaBonus = 2; 
+    [Header("Configuracion tarea de naves")]
+    [Range(0, 1)]
+    public float velocidadDeLaNave = 1f; 
     
     [Header("Lista de pacientes")]   
     public PacienteScriptable[] pacientes;
