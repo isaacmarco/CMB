@@ -4,10 +4,13 @@ using UnityEngine;
 
 [CreateAssetMenu]
 public class NivelNavesScriptable : NivelScriptable
-{
-  
+{  
     [Header("Dificultad")]
-    public int t1;
+    [Range(1, 100)]
+    public int vidaMinas;
+    [Range(1, 100)]
+    public int potenciaLaserJugador; 
+    
     [Header("Requisitos para la superacion")]
     public int t2; 
 }

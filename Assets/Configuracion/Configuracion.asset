@@ -32,6 +32,7 @@ MonoBehaviour:
   probabilidadAparicionEstimuloObjetio: 0.604
   tiempoParaOcultarPareja: 2
   numeroDeNivelesParaBonus: 5
+  velocidadDeLaNave: 0.019
   pacientes:
   - {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
   - {fileID: 11400000, guid: 53c8f888e144f8a46812e5aaabdd9067, type: 2}

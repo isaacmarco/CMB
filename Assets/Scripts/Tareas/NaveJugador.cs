@@ -18,13 +18,35 @@ public class NaveJugador : MonoBehaviour
     {
         get { return this.tiempo;}
     }
+
+    private bool alterno = false; 
+
     private void InstanciarLaser()
     {
         // instanciamos un nuevo disparo  y hacemos
         // que se diriga al objetivo actual
         GameObject laser = (GameObject) Instantiate(laserPrefab);
         laser.name = "laser";
+
+        laser.transform.parent = gameObject.transform; 
+        laser.transform.localPosition = Vector3.zero; 
         laser.transform.position = gameObject.transform.position; 
+        
+        float separacionLaser = 0.2f; 
+        laser.transform.localPosition = new Vector3
+        (separacionLaser, 0, 0);
+
+        if(alterno)
+        {
+            laser.transform.localPosition = new Vector3
+            (-separacionLaser, 0, 0);
+            alterno = false; 
+        } else {
+            alterno = true; 
+        }
+        
+        laser.transform.parent = null; 
+
         laser.GetComponent<Laser>().Disparar(posicionObjetivo);
     }
 
@@ -32,8 +54,10 @@ public class NaveJugador : MonoBehaviour
     {
         while(true)
         {
+            
             if(disparando && Random.value > 0.8f)
             {
+                yield return new WaitForSeconds(0.1f);
                 InstanciarLaser();
             }
             disparando = false; 
@@ -93,6 +117,7 @@ public class NaveJugador : MonoBehaviour
                     Vector3 posicion =  gameObject.transform.position;
                     posicion.y = altura + desplazamiento; 
                     gameObject.transform.position = posicion; 
+                    
                 }
             }
                 

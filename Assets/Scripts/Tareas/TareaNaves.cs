@@ -6,7 +6,7 @@ public class TareaNaves : Tarea
 {
     [Header("Instanciado")]
     [SerializeField] private GameObject prefabNaveEnemiga; 
-    [SerializeField] private GameObject prefabMina; 
+    [SerializeField] private GameObject prefabMina;     
     [Header("Ruta")]
     [SerializeField] private Transform[] puntosRecorrido;
 
@@ -66,7 +66,7 @@ public class TareaNaves : Tarea
                 // la altura en cada punto se calcula sobre el terreno
                 // mediante raycasting ...
                 indice++;
-                Debug.Log("Añadido punto " + posicion.x + ", " + posicion.z + " en momento t " + indice);
+                //Debug.Log("Añadido punto " + posicion.x + ", " + posicion.z + " en momento t " + indice);
             }
         }
         Debug.Log(curvaRecorridoX.length + " puntos añadidos");
@@ -89,23 +89,31 @@ public class TareaNaves : Tarea
     private void InstanciarMina(float momento)
     {
         // evalusmo la curva para obtener la posicion
-        Vector3 posicion = EvaluarCurvas(momento);
-        posicion.y = 1; 
+        
         GameObject mina = (GameObject) Instantiate(prefabMina);
-        mina.name = "mina";
-        mina.transform.position = posicion; 
+        mina.name = "Mina";
+        //mina.transform.position = posicion; 
         mina.GetComponent<Mina>().Iniciar(momento);
+
     }
 
     private IEnumerator CorutinaGeneracionMinas()
     {
         while(true)
         {
-            float tiempoDecision = 3f; 
-            yield return new WaitForSeconds(tiempoDecision);
+            
+            float velocidadNormalizada = Mathf.Lerp(
+                0f, 1f, Configuracion.velocidadDeLaNave
+            );
+            
+            float tiempoParaNuevaMina = Mathf.InverseLerp(
+                15f, 5f, velocidadNormalizada
+            );
+            
+            yield return new WaitForSeconds(tiempoParaNuevaMina);
             // obtenemos la posicion de la mina en t+1
-            float incrementoTiempo = 1f; 
-            float t = FindObjectOfType<NaveJugador>().Tiempo + incrementoTiempo; 
+            float incrementoT = 0.5f; 
+            float t = FindObjectOfType<NaveJugador>().Tiempo + incrementoT; 
             InstanciarMina(t);
         }
     }
