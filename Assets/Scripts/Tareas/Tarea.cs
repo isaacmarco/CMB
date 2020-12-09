@@ -86,7 +86,7 @@ public class Tarea : MonoBehaviour
         BloquearTarea();
         FindObjectOfType<Audio>().FeedbackPartidaPerdida();
         // reiniciamos el flag de nivel de bonus
-        Configuracion.pacienteActual.jugandoNivelDeBonus = false; 
+        //Configuracion.pacienteActual.jugandoNivelDeBonus = false; 
         FinalizarRegistro();
         StopAllCoroutines();        
         StartCoroutine(TerminarJuego(false)); 

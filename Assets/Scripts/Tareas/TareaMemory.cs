@@ -291,11 +291,10 @@ public class TareaMemory : Tarea
         Debug.Log("Guardando progreso de tarea de memory");
 
         bool premioExtraRecordConcedido = false; 
+        PacienteScriptable paciente = Configuracion.pacienteActual;
 
         if(partidaGanada)
-        {
-            
-            PacienteScriptable paciente = Configuracion.pacienteActual;
+        {                      
 
             // guardar la puntuacion
             if(puntuacion > 0)
@@ -369,7 +368,9 @@ public class TareaMemory : Tarea
             } else {
             
                 // acabamos de terminar una partida de bonus, reiniciamos el flag
+                // y el contador de partidas para bonus
                 paciente.jugandoNivelDeBonus = false; 
+                paciente.contadorNivelesGanadosParaBonus = 0; 
                 // damos puntos por la victoria
                 AgregarPuntuacion(Configuracion.puntuacionNivelBonus);
                 // guardar la puntuacion
@@ -377,17 +378,23 @@ public class TareaMemory : Tarea
                     paciente.puntuacionTareaMemory += puntuacion; 
                 
             }
-      
-
-            // guardar los datos serializados   
-            Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+            
 
         } else {
-            
-            // no cambiamos el progreso ni guardamos datos
-            Debug.Log("La partida se ha perdido, no se guarda el progreso");
+                        
+            Debug.Log("La partida se ha perdido");            
+
+            // reiniciamos las flags del bonus     
+            if(paciente.jugandoNivelDeBonus)
+            {
+                paciente.jugandoNivelDeBonus = false; 
+                paciente.contadorNivelesGanadosParaBonus = 0; 
+            }
 
         }
+     
+        // guardar los datos serializados   
+        Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
 
         return premioExtraRecordConcedido; 
         
