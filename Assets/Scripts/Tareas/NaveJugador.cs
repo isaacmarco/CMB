@@ -113,7 +113,7 @@ public class NaveJugador : MonoBehaviour
                     // obtenemos la altura, le añadimos un desplazamiento
                     // y la asignamos a la nave
                     float altura = hit.point.y; 
-                    float desplazamiento = 1f; 
+                    float desplazamiento = 4f; 
                     Vector3 posicion =  gameObject.transform.position;
                     posicion.y = altura + desplazamiento; 
                     gameObject.transform.position = posicion; 

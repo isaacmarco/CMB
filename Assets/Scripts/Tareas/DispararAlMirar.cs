@@ -43,17 +43,26 @@ public class DispararAlMirar : MonoBehaviour
 			);
 	}
     
-    void Update()
+    void __Update()
     {
         if(MirandoObjetivo())
         {
             Disparar();
+			ActualizarVidaEnLaInterfazFijacion();
         }
     }
 
 
+
+	private void ActualizarVidaEnLaInterfazFijacion()
+	{
+		float porcentaje = mina.Vida / 1f; 
+		interfazFijacion.Actualizar(porcentaje);		
+	}
+
+	 
     
-	void _Update()
+	void Update()
 	{
 		
 		// si la tarea esta bloqueada no deberiamos usar
@@ -74,6 +83,7 @@ public class DispararAlMirar : MonoBehaviour
 			} else {
 				// ya estamos mirando el estimulo 
 				ContinuarFijacion();
+				Disparar();
 			}
 							
 		} else {
@@ -81,7 +91,7 @@ public class DispararAlMirar : MonoBehaviour
 			if(objetivoMirado)
 			{
 				// lo estabamos mirando y paramos 
-				DetenerFijacion();
+				// DetenerFijacion();
 			} else {
 					
 				// nunca lo  hemos mirado 
@@ -94,6 +104,10 @@ public class DispararAlMirar : MonoBehaviour
 	private void ContinuarFijacion()
 	{
 		objetivoMirado = true; 
+		
+		interfazFijacion.Actualizar(mina.Vida / 100f);
+
+		/*
 		// comprobar el tiempo
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
@@ -108,7 +122,7 @@ public class DispararAlMirar : MonoBehaviour
 			DetenerFijacion();
 		} else {
 			// debemos seguir mirando 
-		}
+		}*/
 	}
     
     private void Disparar()

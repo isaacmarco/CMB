@@ -13,6 +13,10 @@ public class TareaNaves : Tarea
     private NaveJugador jugador; 
     private Coroutine corutinaGeneracionEnemigos; 
     private int numeroMaximoDeEnemigos = 5; 
+    private int numeroMaximoDeDianas = 2;
+    private int errores; 
+    private int aciertos; 
+
     [SerializeField]  private AnimationCurve curvaRecorridoX, curvaRecorridoZ; 
 
     public Vector3 PosicionInicial
@@ -27,8 +31,14 @@ public class TareaNaves : Tarea
         );
     }   
     
-    public override void Acierto(){}
-    public override void Error(){} // cuando haya objetivos aliados o civiles?
+    public override void Acierto()
+    {
+        aciertos++;
+    }
+    public override void Error()
+    {
+        errores++;
+    } 
 
     protected override void Inicio()
     {              
@@ -91,9 +101,12 @@ public class TareaNaves : Tarea
         // evalusmo la curva para obtener la posicion
         
         GameObject mina = (GameObject) Instantiate(prefabMina);
+        float escala = 1.5f; 
+        mina.transform.localScale = new Vector3(escala, escala, escala);
         mina.name = "Mina";
         //mina.transform.position = posicion; 
         mina.GetComponent<Mina>().Iniciar(momento);
+
 
     }
 
@@ -112,9 +125,11 @@ public class TareaNaves : Tarea
             
             yield return new WaitForSeconds(tiempoParaNuevaMina);
             // obtenemos la posicion de la mina en t+1
-            float incrementoT = 0.5f; 
+            float incrementoT = 0.1f; 
             float t = FindObjectOfType<NaveJugador>().Tiempo + incrementoT; 
-            InstanciarMina(t);
+
+            if (GameObject.FindGameObjectsWithTag("Diana").Length < numeroMaximoDeDianas)
+                InstanciarMina(t);
         }
     }
 

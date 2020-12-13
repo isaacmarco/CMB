@@ -35,7 +35,7 @@ public class Laser : MonoBehaviour
 
     private IEnumerator Destruir()
     {
-        float tiempoAntesDeDestruir = 3f; 
+        float tiempoAntesDeDestruir = 1f; 
         yield return new WaitForSeconds(tiempoAntesDeDestruir);
         Destroy(this.gameObject);
     }

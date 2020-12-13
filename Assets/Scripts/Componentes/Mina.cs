@@ -6,6 +6,11 @@ public class Mina : MonoBehaviour
 {    
     private float momento; 
     private float vida = 100; 
+  
+
+    public float Vida {
+        get { return this.vida; }
+    }
 
     public void Iniciar(float momento)
     {
@@ -17,7 +22,7 @@ public class Mina : MonoBehaviour
         Vector3 posicionEnCurva = FindObjectOfType<TareaNaves>().EvaluarCurvas(momento);
         // aleatorizamos
         posicionEnCurva += new Vector3(
-            Random.Range(-4, 5), 0, Random.Range(-4, 5)
+            Random.Range(-8, 9),  0, Random.Range(-8, 9)
         );
         //gameObject.transform.position = posicionEnCurva; 
         
@@ -35,14 +40,17 @@ public class Mina : MonoBehaviour
                 // obtenemos la altura, le añadimos un desplazamiento
                 // y la asignamos a la nave
                 float altura = hit.point.y; 
-                float desplazamiento = 1f;                     
-                posicionEnCurva.y = altura + desplazamiento; 
-                gameObject.transform.position = posicionEnCurva; 
-                //Debug.Log("colision mina " + altura + ";" + gameObject.transform.position.y);
+                float desplazamiento = 1f;                   
+                float alturaRandom = Random.Range(0, 9) ;
+                posicionEnCurva.y = altura + desplazamiento + alturaRandom; 
+                gameObject.transform.position = posicionEnCurva;                 
             }
         }
 
         gameObject.GetComponent<Collider>().enabled = true; 
+
+        // la diana mira a la camara
+        gameObject.transform.LookAt(Camera.main.transform.position);
 
         rotacion = new Vector3(
             Random.Range(-90, 90),
@@ -57,17 +65,24 @@ public class Mina : MonoBehaviour
         // si el jugador esta en un momento posterior
         // a la mina, se destruye
         if(FindObjectOfType<NaveJugador>().Tiempo > momento)
-            Destruir();
+            DestruirPorOmision();
 
         float velocidadRotacion = 1f; 
-        gameObject.transform.Rotate(rotacion * velocidadRotacion * Time.deltaTime);
+        /*
+        gameObject.transform.Rotate(rotacion * velocidadRotacion * Time.deltaTime);*/
     }
 
-    private void Destruir()
+    private void DestruirPorOmision()
     {
+        FindObjectOfType<TareaNaves>().Error();
         Destroy(this.gameObject);
     }
 
+    private void DestruirPorImpacto()
+    {
+        FindObjectOfType<TareaNaves>().Acierto();
+        Destroy(this.gameObject);
+    }
     
     public void RecibirImpacto()
     {
@@ -75,7 +90,7 @@ public class Mina : MonoBehaviour
         float vidaPorImpacto = 150;         
         vida -= vidaPorImpacto * Time.deltaTime;        
         if(vida <= 0)
-            Destruir();
+            DestruirPorImpacto();
         
     }
 }
