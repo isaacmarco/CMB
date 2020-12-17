@@ -101,7 +101,7 @@ public class TareaNaves : Tarea
         // evalusmo la curva para obtener la posicion
         
         GameObject mina = (GameObject) Instantiate(prefabMina);
-        float escala = 1.5f; 
+        float escala = 2.5f; 
         mina.transform.localScale = new Vector3(escala, escala, escala);
         mina.name = "Mina";
         //mina.transform.position = posicion; 
@@ -123,9 +123,11 @@ public class TareaNaves : Tarea
                 15f, 5f, velocidadNormalizada
             );
             
+            tiempoParaNuevaMina = 2f; 
+
             yield return new WaitForSeconds(tiempoParaNuevaMina);
             // obtenemos la posicion de la mina en t+1
-            float incrementoT = 0.1f; 
+            float incrementoT = 0.15f; 
             float t = FindObjectOfType<NaveJugador>().Tiempo + incrementoT; 
 
             if (GameObject.FindGameObjectsWithTag("Diana").Length < numeroMaximoDeDianas)
