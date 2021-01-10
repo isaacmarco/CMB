@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Configuracion
   m_EditorClassIdentifier: 
   pacienteActual: {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
-  nivelActual: {fileID: 11400000, guid: 9232c58fdf2048941af9ff306889dd16, type: 2}
-  tareaActual: 1
+  nivelActual: {fileID: 11400000, guid: c53c88462bc9e0c4c90f8530257852bd, type: 2}
+  tareaActual: 0
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
   registrarMovimientoOcularEnDiario: 1
@@ -33,6 +33,9 @@ MonoBehaviour:
   tiempoParaOcultarPareja: 2
   numeroDeNivelesParaBonus: 5
   velocidadDeLaNave: 0.019
+  numberoDeBloquesDeEvaluacion: 3
+  duracionDelBloqueDeEvaluacion: 10
+  duracionEstimuloFijacionEvaluacion: 1
   pacientes:
   - {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
   - {fileID: 11400000, guid: 53c8f888e144f8a46812e5aaabdd9067, type: 2}

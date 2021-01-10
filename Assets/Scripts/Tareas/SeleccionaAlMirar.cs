@@ -7,19 +7,24 @@ using Tobii.Gaming;
 public class SeleccionaAlMirar : MonoBehaviour
 {	
 	// componente tobii
-	private GazeAware gazeAware;	
+	protected GazeAware gazeAware;	
 	// referencia al estimulo 
     private EstimuloTareaTopo estimulo;
 	// referecia a la tarea 
-	private Tarea tarea; 	    
+	protected Tarea tarea; 	    
 	// si estamos mirando el estimulo en este frame
-	private bool estimuloMirado; 
+	protected bool estimuloMirado; 
 	// momento en el que empezamos a mirar este estimulo	
-	private float tiempoInicioFijacion; 
+	protected float tiempoInicioFijacion; 
 	// interfaz para el progreso de fijacion 
-	private InterfazFijacion interfazFijacion; 
+	protected InterfazFijacion interfazFijacion; 
 
 	void Awake()
+	{		
+		Inicio();
+	}
+
+	protected virtual void Inicio()
 	{
 		// creamos las referencias 
 		tarea = FindObjectOfType<Tarea>();
@@ -28,7 +33,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();		
 	}
 
-    public void SeleccionarEstimulo()
+    protected virtual void SeleccionarEstimulo()
     {	
         estimulo.Golpedo();       
     }
@@ -97,8 +102,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
 		float tiempoNecesario = tarea.Configuracion.tiempoParaSeleccion;
-		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;
-		// TODO AQUI SE ESTA DANDO UN NULL Y NO SE LA RAZON
+		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;		
 		interfazFijacion.Actualizar(tiempoNormalizado);
 		if(tiempoFijacionTranscurrido > tiempoNecesario)
 		{
@@ -118,7 +122,7 @@ public class SeleccionaAlMirar : MonoBehaviour
 	}
 	
 	
-	private void DetenerFijacion()
+	protected void DetenerFijacion()
 	{
 		//Debug.Log("Fijacion detenida");
 		estimuloMirado = false; 

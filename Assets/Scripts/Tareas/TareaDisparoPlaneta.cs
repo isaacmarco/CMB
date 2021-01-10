@@ -2,14 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TareaNaves : Tarea
+public class TareaDisparoPlaneta : Tarea
 {
+    [Header("Jerarquia de localizaciones")]
+    [SerializeField] public GameObject baseEntrenamiento;
+    [SerializeField] public GameObject espacio;
+    [SerializeField] public GameObject planeta;
+
     [Header("Instanciado")]
     [SerializeField] private GameObject prefabNaveEnemiga; 
-    [SerializeField] private GameObject prefabMina;     
-    [Header("Ruta")]
-    [SerializeField] private Transform[] puntosRecorrido;
+    [SerializeField] private GameObject prefabMina;  
+    [SerializeField] private GameObject prefabDiana;
+    [SerializeField] private GameObject prefabSilueta;
 
+    [Header("Ruta")]
+    [SerializeField] private Transform[] puntosRecorrido;   
+    [SerializeField] private AnimationCurve curvaRecorridoX, curvaRecorridoZ; 
+     
+    public NivelDisparoScriptable Nivel { 
+        get { return (NivelDisparoScriptable) Configuracion.nivelActual;} 
+
+    }
     private NaveJugador jugador; 
     private Coroutine corutinaGeneracionEnemigos; 
     private int numeroMaximoDeEnemigos = 5; 
@@ -17,7 +30,29 @@ public class TareaNaves : Tarea
     private int errores; 
     private int aciertos; 
 
-    [SerializeField]  private AnimationCurve curvaRecorridoX, curvaRecorridoZ; 
+    /*
+        en la base de entrenamiento:
+        1. aparecen dianas
+        2. aparecen siluetas
+        3. aparecen dianas y siluetas
+
+        pueden aparecer por diferentes puntos con una animacion, 
+        y estan visibles una determinada cantidad de tiempo
+    */
+
+    /*
+        espacio:
+        1. aparecen asteroides
+        2. aparecen naves
+        3. minerales
+    */
+
+    /*
+        nave:
+        1. aparecen minas
+        2. aparecen naves
+        3. aparecen minerales
+    */
 
     public Vector3 PosicionInicial
     {
@@ -41,13 +76,57 @@ public class TareaNaves : Tarea
     } 
 
     protected override void Inicio()
-    {              
+    {           
+
+        switch(Nivel.localizacionDelNivel)
+        {
+            case LocalizacionTareaDisparo.Entrenamiento:
+                StartCoroutine(CorrutinaBaseEntrenamiento());
+            break;
+            case LocalizacionTareaDisparo.Espacio:
+            break;
+            case LocalizacionTareaDisparo.Planeta:
+            break;
+        }
+
         // creamos el recorrido 
         GenerarCurvaRecorrido();
         // iniciamos la generacion de enemigos durante toda la partida 
         // corutinaGeneracionEnemigos = StartCoroutine(CorutinaGeneracionEnemigos());
         StartCoroutine(CorutinaGeneracionMinas());
     }
+
+    private void InstanciarDiana()
+    {               
+        GameObject diana = (GameObject) Instantiate(prefabDiana);
+        float escala = 1f; 
+        diana.transform.localScale = new Vector3(escala, escala, escala);
+        diana.name = "Diana";
+    }
+    private void InstanciarSilueta()
+    {
+        GameObject silueta = (GameObject) Instantiate(prefabSilueta);
+        float escala = 1f; 
+        silueta.transform.localScale = new Vector3(escala, escala, escala);
+        silueta.name = "Silueta";
+    }
+
+    private IEnumerator CorrutinaBaseEntrenamiento()
+    {
+        // instanciar base
+
+        // colocar camara
+
+        // fades de camara aqui?
+
+        // comenzar la partida
+        while(true)
+        {
+            // instanciar diana o silueta dependiendo del nivel
+            yield return new WaitForSeconds(1f);
+        }        
+    }
+
 
     private void GenerarCurvaRecorrido()
     {

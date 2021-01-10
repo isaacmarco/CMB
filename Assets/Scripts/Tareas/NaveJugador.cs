@@ -5,7 +5,7 @@ using UnityEngine;
 public class NaveJugador : MonoBehaviour
 {    
     [SerializeField] private GameObject laserPrefab; 
-    private TareaNaves tarea; 
+    private TareaDisparoPlaneta tarea; 
     // energia de la nave 
     private int vida = 100; 
     // el momento actual para evaluar las curvas
@@ -74,7 +74,7 @@ public class NaveJugador : MonoBehaviour
     
     void Start()
     {
-        tarea = FindObjectOfType<TareaNaves>(); 
+        tarea = FindObjectOfType<TareaDisparoPlaneta>(); 
         gameObject.transform.position = tarea.PosicionInicial; 
         StartCoroutine(GeneracionDisparos());
 

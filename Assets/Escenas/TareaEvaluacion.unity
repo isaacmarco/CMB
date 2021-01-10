@@ -1013,10 +1013,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 681659152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0022ffbdefa75ff47a7f1d7c64627ecc, type: 3}
+  m_Script: {fileID: 11500000, guid: 37480145b7fb2a949889f742e2e42f42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelota: {fileID: 699372020}
+  configuracion: {fileID: 11400000, guid: 8a004bd6daf7d0b4a844e28acce744f8, type: 2}
+  canvasRect: {fileID: 222543681}
+  mensaje: {fileID: 1269571273}
+  estimulo: {fileID: 699372019}
+  estimuloFijacion: {fileID: 79531422}
   amplitud: 9
 --- !u!4 &681659154
 Transform:
@@ -1105,6 +1109,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699372019}
   m_CullTransparentMesh: 0
+--- !u!114 &1269571273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5482892694341216277, guid: 7a3bd8e64dcd52344b4dd3e301cc19cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1518980155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd73d604dedaed849bc0b85c7e7bb284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1518980155
 PrefabInstance:
   m_ObjectHideFlags: 0

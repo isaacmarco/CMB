@@ -5,11 +5,38 @@
     Dificil
 };
 
+public enum LocalizacionTareaDisparo
+{
+    Entrenamiento, 
+    Espacio, 
+    Planeta
+};
+
+public enum EstimulosTareaDisparoEntrenamiento
+{
+    SoloDianaObjetivo,
+    VariasDianas,
+    SoloSiluetaObjetivo,
+    VariasSiluetas
+};
+
+public enum TipoTareaDisparoEntrenamiento
+{
+    GaleriaTiro,
+    MovimientoBaseEntrenamiento
+};
+
 public enum TipoNivel 
 {
     Normal, 
     Demostracion,
     Tutorial
+};
+
+public enum EstimuloTareaNaves
+{
+    Diana, 
+    Silueta
 };
 
 public enum EstimulosTareaTopos
@@ -84,18 +111,23 @@ public enum OpcionesSeleccionablesMenu
     SalirAplicacion = 2,
     MenuTareaTopos = 3, 
     MenuTareaMemory = 4, 
+    MenuTareaEvaluacion = 12,
     ComenzarTareaTopos = 5,
     ComenzarTareaMemory = 6,        
+    ComenzarTareaEvaluacion = 13,
     SeleccionarPaciente1 = 7, 
     SeleccionarPaciente2 = 8,
     SeleccionarPaciente3 = 9,
     SeleccionarPaciente4 = 10,   
     SeleccionarNivelMemory = 11
+
 }
 
 public enum Tareas
 {
     Ninguna, 
     Topos,
-    Memory
+    Memory,
+    Naves,
+    Evaluacion
 }

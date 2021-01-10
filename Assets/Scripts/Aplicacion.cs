@@ -64,6 +64,12 @@ public class Aplicacion : MonoBehaviour
         configuracion.tareaActual = Tareas.Ninguna;
     }
 
+    public void CargarNivelTareaEvaluacion()
+    {
+        // TODO 
+        // CARGAR AQUI EL NIVEL CONFIGURADO
+    }
+
     public void CargarNivelTareaTopos(int nivel)
     {
         string ruta = "Niveles Topos/NivelTopos " + nivel; 

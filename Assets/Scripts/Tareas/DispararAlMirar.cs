@@ -8,9 +8,9 @@ public class DispararAlMirar : MonoBehaviour
     // componente tobii
 	private GazeAware gazeAware;	
     // referencia a la tarea
-    private TareaNaves tarea;     
-    private Mina mina; 
-    private bool objetivoMirado;
+    private Tarea tarea;     
+    private ObjetivoTareaDisparo estimulo; 
+    private bool estimuloMirado;
 	// momento en el que empezamos a mirar este estimulo	
 	private float tiempoInicioFijacion; 
 	// interfaz para el progreso de fijacion 
@@ -19,18 +19,18 @@ public class DispararAlMirar : MonoBehaviour
     void Awake()
 	{
 		// creamos las referencias 
-		tarea = FindObjectOfType<TareaNaves>();
+		tarea = FindObjectOfType<Tarea>();
 		gazeAware = GetComponent<GazeAware>();	        
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();	
-        mina = gameObject.GetComponent<Mina>(); 
+        estimulo = GetComponent<ObjetivoTareaDisparo>(); 
         // reiniciarmos la interfaz de fijacion
         DetenerFijacion();	
 	}
 
-    
+
 	// devuelve verdadero si estamos fijando la vista sobre
 	// el modelo 3D del estimulo 
-	private bool MirandoObjetivo()
+	private bool MirandoEstimulo()
 	{	
 		Ray ray;
      	RaycastHit hit;
@@ -43,20 +43,11 @@ public class DispararAlMirar : MonoBehaviour
 			);
 	}
     
-    void __Update()
-    {
-        if(MirandoObjetivo())
-        {
-            Disparar();
-			ActualizarVidaEnLaInterfazFijacion();
-        }
-    }
-
 
 
 	private void ActualizarVidaEnLaInterfazFijacion()
 	{
-		float porcentaje = mina.Vida / 1f; 
+		float porcentaje = estimulo.vida / 1f; 
 		interfazFijacion.Actualizar(porcentaje);		
 	}
 
@@ -66,20 +57,24 @@ public class DispararAlMirar : MonoBehaviour
 	{
 		
 		// si la tarea esta bloqueada no deberiamos usar
-		// esta interfaz
-		//if(tarea.TareaBloqueada)
-		//	return; 
-			     
-
+		// esta interfaz o si el estimulo no esta en uso		
+		if(tarea.TareaBloqueada) //  || !estimulo.Visible)
+		{
+			
+			DetenerFijacion();
+			return; 
+		}
+		
 		// comprobamos si tenemos la vista sobre este
 		// estimulo 
-		if(MirandoObjetivo() )
+		if(MirandoEstimulo() )
 		{				
 			// si no estabamos mirando el estimulo entonces
 			// empezamos a mirarlo 
-			if(!objetivoMirado)
+			if(!estimuloMirado)
 			{
-				ComenzarFijacion();
+				if(!tarea.TareaBloqueada)
+					ComenzarFijacion();
 			} else {
 				// ya estamos mirando el estimulo 
 				ContinuarFijacion();
@@ -88,10 +83,10 @@ public class DispararAlMirar : MonoBehaviour
 							
 		} else {
 
-			if(objetivoMirado)
+			if(estimuloMirado)
 			{
 				// lo estabamos mirando y paramos 
-				// DetenerFijacion();
+				DetenerFijacion();
 			} else {
 					
 				// nunca lo  hemos mirado 
@@ -101,47 +96,52 @@ public class DispararAlMirar : MonoBehaviour
 	}    	
 
 
+    
+	
 	private void ContinuarFijacion()
 	{
-		objetivoMirado = true; 
-		
-		interfazFijacion.Actualizar(mina.Vida / 100f);
-
-		/*
+		estimuloMirado = true; 
 		// comprobar el tiempo
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
 		float tiempoNecesario = tarea.Configuracion.tiempoParaSeleccion;
-		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;
-		// TODO AQUI SE ESTA DANDO UN NULL Y NO SE LA RAZON
+		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;		
 		interfazFijacion.Actualizar(tiempoNormalizado);
 		if(tiempoFijacionTranscurrido > tiempoNecesario)
 		{
 			// ya hemos terminado
-			Disparar();
+			//Disparar();
+			estimulo.Destruir();
 			DetenerFijacion();
 		} else {
 			// debemos seguir mirando 
-		}*/
+		}
 	}
-    
-    private void Disparar()
-    {
-        mina.RecibirImpacto();
-    }
 
 	private void ComenzarFijacion()
 	{
 		tiempoInicioFijacion = Time.unscaledTime;
-		objetivoMirado = true; 
+		estimuloMirado = true; 
 	}
 	
-	
-	private void DetenerFijacion()
+	/*
+	private void ContinuarFijacion()
 	{
-		objetivoMirado = false; 
+		estimuloMirado = true; 		
+		interfazFijacion.Actualizar(estimulo.vida / 100f);
+	}*/
+
+	protected void DetenerFijacion()
+	{		
+		estimuloMirado = false; 
 		interfazFijacion.Reiniciar();
 	}
+    
+    private void Disparar()
+    {
+        estimulo.RecibirDisparo();
+    }
+
 
 
 }

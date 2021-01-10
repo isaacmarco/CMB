@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestEvaluacion : MonoBehaviour
 {
 
-    public Transform pelota;
+    public GameObject estimulo;
 
     float intervaloActualizacion = 0.016f; // 60HZ
     private int nTimerTicks = 0;     
@@ -28,11 +28,38 @@ public class TestEvaluacion : MonoBehaviour
 
     void Start()
     {       
-      
-        StartCoroutine(Tick());        
+        StartCoroutine(ProcesarBloques());
+        //StartCoroutine(Tarea());        
     }
 
-    private IEnumerator Tick()
+    private IEnumerator ProcesarBloques()
+    {
+        Debug.Log("Inicio de la evaluacion");
+
+        int numeroBloques = 3;
+        float duracionDelBloque = 3;
+
+        for(int i=0; i<numeroBloques; i++)
+        {
+            Debug.Log("Nuevo bloque");
+            // para cada bloque
+            float tiempoInicioBloque = Time.time;
+            // mostrar fijacion
+            Debug.Log("Mostrando fijacion y esperando");
+            // esperar
+            yield return new WaitForSeconds(1f);
+            // bucle de tarea
+            Debug.Log("Movimiendo estimulo");
+            while(Time.time < tiempoInicioBloque + duracionDelBloque)
+            {
+                yield return null;
+            }
+            Debug.Log("Bloque terminado");
+        }
+        Debug.Log("Final de la evaluacion");
+    }
+
+    private IEnumerator Tarea()
     {
 
         while(true)
@@ -62,7 +89,7 @@ public class TestEvaluacion : MonoBehaviour
                 )
             );
          
-            pelota.GetComponent<RectTransform>().anchoredPosition = new Vector2
+            estimulo.GetComponent<RectTransform>().anchoredPosition = new Vector2
             (
                 xTarget + centroX, centroY
             );

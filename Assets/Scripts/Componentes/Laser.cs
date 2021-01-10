@@ -9,12 +9,19 @@ public class Laser : MonoBehaviour
     public void Disparar(Vector3 objetivo)
     {
         // inicialmente se orienta al objetivo y
-        // se programa su destruccion         
+        // se programa su destruccion  
+         /*     
         Vector3 error = new Vector3(
             Random.Range(-0.3f, 0.4f),
             Random.Range(-0.3f, 0.4f),
             Random.Range(-0.3f, 0.4f)
-        ); 
+        );*/
+        float f = 0.1f;
+        Vector3 error = new Vector3(
+            Random.Range(-f, f),
+            Random.Range(-f, f),
+            Random.Range(-f, f)
+        );
         gameObject.transform.LookAt(objetivo + error);
         StartCoroutine(Destruir());
     }
@@ -23,14 +30,17 @@ public class Laser : MonoBehaviour
     {
         // el laser va siempre hacia delante, ya que
         // inicialmente se oriento hacia el objetivo
-        float velocidad = 150f; 
+        float velocidad = 50f; 
         gameObject.transform.Translate(Vector3.forward * velocidad * Time.deltaTime);    
     }
     
-    void OnTriggerExit(Collider other)
+    
+    void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Mina")
+        if(other.gameObject.name == "Diana")
+        {
             Destroy(this.gameObject);
+        }
     }
 
     private IEnumerator Destruir()

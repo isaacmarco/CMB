@@ -47,7 +47,7 @@ public class Mina : MonoBehaviour
         gameObject.GetComponent<Collider>().enabled = false; 
 
         this.momento = momento;         
-        Vector3 posicionEnCurva = FindObjectOfType<TareaNaves>().EvaluarCurvas(momento);
+        Vector3 posicionEnCurva = FindObjectOfType<TareaDisparoPlaneta>().EvaluarCurvas(momento);
         // aleatorizamos
         posicionEnCurva += new Vector3(
             Random.Range(-12, 13),  0, Random.Range(-20, 21) // profundiad es x, lateral es z
@@ -148,13 +148,13 @@ public class Mina : MonoBehaviour
 
     private void DestruirPorOmision()
     {
-        FindObjectOfType<TareaNaves>().Error();
+        FindObjectOfType<TareaDisparoPlaneta>().Error();
         Destroy(this.gameObject);
     }
 
     private void DestruirPorImpacto()
     {
-        FindObjectOfType<TareaNaves>().Acierto();
+        FindObjectOfType<TareaDisparoPlaneta>().Acierto();
         Destroy(this.gameObject);
     }
     

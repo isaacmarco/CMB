@@ -7,6 +7,8 @@ public class Audio : MonoBehaviour
     // referencias a los audiosources
     [SerializeField] private AudioSource ASfeedbackAcierto, ASfeedbackError, ASfeedbackOmision,
     ASfeedbackPartidaGanada, ASfeedbackPartidaPerdida;     
+    [SerializeField] private AudioSource ASaparicionEstimulo;
+    public AudioSource ASinteraccion;
     [Header("Audio para el menu")]
     [SerializeField] private AudioSource ASelegirPerfil;
     [SerializeField] private AudioSource ASelegirTarea;  
@@ -18,6 +20,14 @@ public class Audio : MonoBehaviour
         tarea = FindObjectOfType<Tarea>();
     }
 
+    public void FeedbackInteraccion()
+    {
+        ASinteraccion.Play();
+    }
+    public void FeedbackAparicionEstimulo()
+    {
+        ASaparicionEstimulo.Play();
+    }
     public void FeedbackElegirPerfil()
     {
         ASelegirPerfil.Play();

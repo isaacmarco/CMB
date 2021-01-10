@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Diana
+  - DianaPrimerBloque
+  - DianaSegundoBloque
+  - DianaTercerBloque
   layers:
   - Default
   - TransparentFX

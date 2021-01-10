@@ -39,7 +39,10 @@ public class ConfiguracionScriptable : ScriptableObject
     [Header("Configuracion tarea de naves")]
     [Range(0, 1)]
     public float velocidadDeLaNave = 1f; 
-    
+    [Header("Configuracion tarea de evaluacion")]
+    public int numberoDeBloquesDeEvaluacion = 3;    
+    public int duracionDelBloqueDeEvaluacion = 10;    
+    public int duracionEstimuloFijacionEvaluacion = 1;    
     [Header("Lista de pacientes")]   
     public PacienteScriptable[] pacientes;
   
