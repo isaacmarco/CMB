@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class TareaDisparoEntrenamientoGaleria : Tarea
+public class TareaGaleriaTiro : Tarea
 {   
     
     [Header("Marcador")]
@@ -32,7 +32,7 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
         InstanciarEscenario();
         // comenzar la tarea        
         DesbloquearTarea();
-        StartCoroutine(CorrutinaBaseEntrenamiento());       
+        StartCoroutine(CorrutinaTareaDisparo());       
     }
 
     private GameObject[] dianasPrimerBloque; 
@@ -42,7 +42,7 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
     private void InstanciarEscenario()
     {
         // instanciar el prefab del nivel        
-        string ruta = "Escenarios/Escenario" + Nivel.escenario;
+        string ruta = "Escenarios/Escenario" + Nivel.numeroDelNivel;
         GameObject escenarioPrefab = (GameObject) Resources.Load(ruta);
         GameObject escenario = (GameObject) Instantiate(escenarioPrefab);
         escenario.transform.position = Vector3.zero;
@@ -67,7 +67,7 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
     private int bloqueActual = 0; 
     private bool camaraMoviendose = false; 
 
-    private IEnumerator CorrutinaBaseEntrenamiento()
+    private IEnumerator CorrutinaTareaDisparo()
     {
    
 
@@ -101,9 +101,8 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
 
     private IEnumerator CorrutinaBloqueDeDianas()
     {                   
-        Debug.Log("Nuevo bloque de dianas");      
-        float duracionBloque = 10f; 
-        float tiempoFinBloque = Time.time + duracionBloque;     
+        Debug.Log("Nuevo bloque de dianas");              
+        float tiempoFinBloque = Time.time + Nivel.duracionDeCadaBloqueDeDianas;     
         // permanecemos en el bloque de dianas hasta cuando se haya
         // pasado el tiempo y haya dianas visibles           
         while(Time.time < tiempoFinBloque) // && HayEstimulosVisibles())
@@ -146,25 +145,22 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
         // comprobar si ya esta en uso 
         if(objetivo.EnUso)
             return; 
-
-        // obtener la posicion para la nueva diana
-        //Vector3 posicion = galeriaPosiciones[indice].position; 
+        
         
         switch(Nivel.estimulos)
         {
             case EstimulosTareaDisparoEntrenamiento.SoloDianaObjetivo:
-                // la diana es objetivio
-                //InstanciarDiana(posicion);
+                // la diana es objetivio                
                 objetivo.esObjetivo = true; 
                 objetivo.Mostrar();
             break;
 
-            case EstimulosTareaDisparoEntrenamiento.VariasDianas:
+            case EstimulosTareaDisparoEntrenamiento.VariosTiposDiana:
                 // las dianas pueden ser no objetivos
                 objetivo.esObjetivo = Random.value < Nivel.probabilidadAparicionEstimuloErroneo;
                 objetivo.Mostrar();
             break;
-            // TODO: siluetas?            
+
         }
 
         FindObjectOfType<Audio>().FeedbackAparicionEstimulo();
@@ -176,7 +172,7 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
         aciertos++;
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertosUI.text = "Aciertos " + aciertos.ToString();
-        //Debug.Log("Acierto");
+        
     }
 
     public override void Error()
@@ -184,7 +180,7 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
         errores++;
         FindObjectOfType<Audio>().FeedbackError();
         erroresUI.text = "Errores " + errores.ToString();
-        //Debug.Log("Error");
+        
     } 
 
     public override void Omision()
@@ -192,7 +188,7 @@ public class TareaDisparoEntrenamientoGaleria : Tarea
         omisiones++;
         FindObjectOfType<Audio>().FeedbackOmision();
         omisionesUI.text = "Omisiones " + omisiones.ToString();
-        //Debug.Log("Omision");
+        
     }
 
 }

@@ -77,7 +77,7 @@ public class TareaDisparoPlaneta : Tarea
 
     protected override void Inicio()
     {           
-
+        /*
         switch(Nivel.localizacionDelNivel)
         {
             case LocalizacionTareaDisparo.Entrenamiento:
@@ -87,7 +87,8 @@ public class TareaDisparoPlaneta : Tarea
             break;
             case LocalizacionTareaDisparo.Planeta:
             break;
-        }
+        }*/
+
 
         // creamos el recorrido 
         GenerarCurvaRecorrido();

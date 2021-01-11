@@ -65,7 +65,7 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     protected virtual IEnumerator CorrtuinaMostrarObjetivo()
     {
         // obtener la duracion del objetivo en pantalla
-        float duracion = FindObjectOfType<TareaDisparoEntrenamientoGaleria>().Nivel.duracionEstimuloEntrenamiento;
+        float duracion = FindObjectOfType<TareaGaleriaTiro>().Nivel.duracionEstimuloEntrenamiento;
         
         // esperamos
         yield return new WaitForSecondsRealtime(duracion);   

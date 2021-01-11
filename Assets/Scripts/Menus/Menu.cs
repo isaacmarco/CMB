@@ -16,8 +16,10 @@ public class Menu : MonoBehaviour
     [SerializeField] private Transform jerarquiaMenuPrincipal;
     [SerializeField] private Transform jerarquiaMenuTareaTopos;   
     [SerializeField] private Transform jerarquiaMenuTareaMemory;   
+    [SerializeField] private Transform jerarquiaMenuTareaGaleriaTiro;
     [SerializeField] private Transform jerarquiaMenuTareaEvaluacion;
-    [SerializeField] private Transform jerarquiaMenuPerfiles; 
+    
+    [SerializeField] private Transform jerarquiaMenuPerfiles;     
     [Header("Debug")]
     [SerializeField] private Text debug; 
 
@@ -89,11 +91,14 @@ public class Menu : MonoBehaviour
                 case Tareas.Memory:
                     // menu memory
                     MostrarMenu(jerarquiaMenuTareaMemory);
+                break;                
+                case Tareas.GaleriaTiro:
+                    // menu de la galeria de tiro
+                    MostrarMenu(jerarquiaMenuTareaGaleriaTiro);
                 break;
+                
             }
-            
-            // hacemos debug del perfil seleccionado en pantalla
-            // TrazadoProgreso();
+           
         }
 
        
@@ -105,11 +110,13 @@ public class Menu : MonoBehaviour
       
         Debug.Log("Mostrando menu " + jerarquia.name);
 
-        if(jerarquia == jerarquiaMenuTareaMemory || jerarquia == jerarquiaMenuTareaTopos)
+        if(jerarquia == jerarquiaMenuTareaMemory || jerarquia == jerarquiaMenuTareaTopos || 
+        jerarquia == jerarquiaMenuTareaGaleriaTiro)
         {
             // actualizar ui dependiendo el progreso
             FindObjectOfType<MenuTareaTopos>().Actualizar();
             FindObjectOfType<MenuTareaMemory>().Actualizar();
+            FindObjectOfType<MenuTareaGaleriaTiro>().Actualizar();
             // feedback
             FindObjectOfType<Audio>().FeedbackElegirTarea();
         }
@@ -122,7 +129,8 @@ public class Menu : MonoBehaviour
         
         Transform[] jerarquias = {
             jerarquiaMenuPrincipal, jerarquiaMenuTareaTopos, jerarquiaMenuPerfiles,
-            jerarquiaMenuTareaMemory, jerarquiaMenuTareaEvaluacion
+            jerarquiaMenuTareaMemory, jerarquiaMenuTareaEvaluacion, 
+            jerarquiaMenuTareaGaleriaTiro
         };
         // desactivamos menus
         foreach(Transform j in jerarquias)
