@@ -47,8 +47,8 @@ public class DispararObjetivoAlMirar : MonoBehaviour
 
 	private void ActualizarVidaEnLaInterfazFijacion()
 	{
-		float porcentaje = objetivo.vida / 1f; 
-		interfazFijacion.Actualizar(porcentaje);		
+		//float porcentaje = objetivo.vida / 1f; 
+		//interfazFijacion.Actualizar(porcentaje);		
 	}
  
     
@@ -92,8 +92,8 @@ public class DispararObjetivoAlMirar : MonoBehaviour
 
 	private void ContinuarFijacion()
 	{
-		objetivoMirado = true; 		
-		interfazFijacion.Actualizar(objetivo.vida / 100f);
+		//objetivoMirado = true; 		
+		//interfazFijacion.Actualizar(objetivo.vida / 100f);
 	}
     
     private void Disparar()

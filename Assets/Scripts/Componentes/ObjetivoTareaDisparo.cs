@@ -5,8 +5,9 @@ using UnityEngine;
 public class ObjetivoTareaDisparo : MonoBehaviour
 {
        
-    public float vida = 100;
+    //public float vida = 100;
     public bool esObjetivo;
+    public bool esGema; 
     private bool enUso = false;
     public bool EnUso {
         get { return this.enUso;}
@@ -31,7 +32,7 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     public virtual void RecibirDisparo()
     {       
         // instanciar disparos
-        FindObjectOfType<JugadorTareaDisparo>().Disparar(gameObject.transform.position);
+        FindObjectOfType<JugadorTareaGaleriaTiro>().Disparar(gameObject.transform.position);
     }
     
     public virtual void Destruir()
@@ -40,7 +41,13 @@ public class ObjetivoTareaDisparo : MonoBehaviour
         // comprobar el tipo de diana
         if(esObjetivo)
         {
-            FindObjectOfType<Tarea>().Acierto();
+            if(esGema)
+            {
+                FindObjectOfType<TareaGaleriaTiro>().Bonus();
+            } else {
+                FindObjectOfType<TareaGaleriaTiro>().Acierto();
+            }
+            
         } else {
             FindObjectOfType<Tarea>().Error();
         }
@@ -65,14 +72,14 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     protected virtual IEnumerator CorrtuinaMostrarObjetivo()
     {
         // obtener la duracion del objetivo en pantalla
-        float duracion = FindObjectOfType<TareaGaleriaTiro>().Nivel.duracionEstimuloEntrenamiento;
+        float duracion = FindObjectOfType<TareaGaleriaTiro>().Nivel.duracionDiana;
         
         // esperamos
         yield return new WaitForSecondsRealtime(duracion);   
 
         // contabilizamos la omision si llegamos a este punto
-        // y si el estimulo era objetivo
-        if(esObjetivo)
+        // y si el estimulo era objetivo. Las gemas no cuentan como omision
+        if(esObjetivo && !esGema)
             FindObjectOfType<Tarea>().Omision();
             
 

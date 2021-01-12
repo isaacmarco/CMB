@@ -44,10 +44,7 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
-        /*
-        if(Input.GetKeyDown(KeyCode.F12))
-            Aplicacion.instancia.BorrarDatos();*/
-
+     
         // debug
         if(Input.GetKeyDown(KeyCode.F1))
             mostrarDebug = !mostrarDebug;
@@ -162,6 +159,10 @@ public class Menu : MonoBehaviour
                 MostrarMenu(jerarquiaMenuTareaMemory);
             break;
 
+            case OpcionesSeleccionablesMenu.MenuTareaGaleriaTiro:
+                MostrarMenu(jerarquiaMenuTareaGaleriaTiro);
+            break;
+
             case OpcionesSeleccionablesMenu.MenuTareaEvaluacion:
                 // menu de evaluacion
                 MostrarMenu(jerarquiaMenuTareaEvaluacion);
@@ -189,6 +190,13 @@ public class Menu : MonoBehaviour
                 // lanzamos la tarea topos
                 SceneManager.LoadScene("TareaTopos");    
             break;
+
+            case OpcionesSeleccionablesMenu.ComenzarTareaGaleriaTiro:
+                Aplicacion.instancia.CargarNivelTareaGaleriaTiro(
+                    Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaGaleriaTiro                    
+                );
+                SceneManager.LoadScene("TareaGaleriaTiro");
+                break;
 
             case OpcionesSeleccionablesMenu.ComenzarTareaMemory:
                 Aplicacion.instancia.CargarNivelTareaMemory(

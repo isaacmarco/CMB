@@ -47,8 +47,8 @@ public class DispararAlMirar : MonoBehaviour
 
 	private void ActualizarVidaEnLaInterfazFijacion()
 	{
-		float porcentaje = estimulo.vida / 1f; 
-		interfazFijacion.Actualizar(porcentaje);		
+		//float porcentaje = estimulo.vida / 1f; 
+		//interfazFijacion.Actualizar(porcentaje);		
 	}
 
 	 
@@ -61,6 +61,20 @@ public class DispararAlMirar : MonoBehaviour
 		if(tarea.TareaBloqueada) //  || !estimulo.Visible)
 		{
 			
+			DetenerFijacion();
+			return; 
+		}
+
+		// no disparar si estamos recargando
+		if(FindObjectOfType<TareaGaleriaTiro>().Recargando)
+		{
+			DetenerFijacion();
+			return;
+		}
+
+		// si no hay municion no disparamos
+		if(!FindObjectOfType<JugadorTareaGaleriaTiro>().HayMunicion())
+		{
 			DetenerFijacion();
 			return; 
 		}

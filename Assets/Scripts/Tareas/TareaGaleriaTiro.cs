@@ -10,12 +10,19 @@ public class TareaGaleriaTiro : Tarea
     public Text aciertosUI;
     public Text erroresUI;
     public Text omisionesUI;
-  
+    public GameObject interfazRecarga2D; 
+    public GameObject avisoRecarga; 
+   
+    [Header("Arma")]
+    public GameObject interfazRecarga;
+    public GameObject arma; 
+    
+
     // posicion de dianas y camaras para este nivel instanciado
     private BloqueTareaDisparo bloqueTareaDisparo; 
 
-    public NivelDisparoScriptable Nivel { 
-        get { return (NivelDisparoScriptable) Configuracion.nivelActual;} 
+    public NivelGaleriaTiroScriptable Nivel { 
+        get { return (NivelGaleriaTiroScriptable) Configuracion.nivelActual;} 
     }
    
 
@@ -26,13 +33,65 @@ public class TareaGaleriaTiro : Tarea
     private float tiempoEntreCambiosCamara = 5f;
     private float tiempoDelUltimoCambioCamara; 
 
+    public void MostrarInterfazRecarga()
+    {
+        
+        interfazRecarga.SetActive(true);
+        avisoRecarga.SetActive(true);
+    }
+    public void Recargar()
+    {   
+        StartCoroutine(CorrutinaRecarga());        
+    }
+
+    private bool recargando = false; 
+    public bool Recargando{
+        get{ return this.recargando;}
+    }
+    private IEnumerator CorrutinaRecarga()
+    {
+        
+        // ocultar la interfaz de recarga
+        interfazRecarga.SetActive(false);
+        avisoRecarga.SetActive(false);
+        // reponer municion
+        FindObjectOfType<JugadorTareaGaleriaTiro>().Recargar();
+
+        recargando = true; 
+        // animaciones de recarga
+        arma.SetActive(true);
+        // esperamos a que termina la animacion 
+        yield return new WaitForSeconds(1.33f);
+        recargando = false; 
+        // ocultamos el arma
+        arma.SetActive(false);
+    }
+
+    private IEnumerator CorrutinaMunicion()
+    {
+        JugadorTareaGaleriaTiro jugador = FindObjectOfType<JugadorTareaGaleriaTiro>();
+        while(true)
+        {            
+            if(!jugador.HayMunicion())
+            {
+                MostrarInterfazRecarga();
+            }
+            yield return null; 
+        }
+    }
+
     protected override void Inicio()
     {          
         // crear el escenario
         InstanciarEscenario();
+        interfazRecarga.SetActive(false);
+        avisoRecarga.SetActive(false);
+        Recargar();
+        
         // comenzar la tarea        
         DesbloquearTarea();
-        StartCoroutine(CorrutinaTareaDisparo());       
+        StartCoroutine(CorrutinaTareaDisparo());  
+        StartCoroutine(CorrutinaMunicion());
     }
 
     private GameObject[] dianasPrimerBloque; 
@@ -99,19 +158,74 @@ public class TareaGaleriaTiro : Tarea
 
     }
 
+    private bool haciendoMovimientosAleatorios = false; 
+
+    private IEnumerator CorrutinaMovimientosAleatorios()
+    {
+        while(true)
+        {
+
+            // espera entre movimientos
+            yield return new WaitForSeconds(1f);
+            //if(!haciendoMovimientosAleatorios)        
+            //{
+                haciendoMovimientosAleatorios = true; 
+
+                float cantidad = 0.4f;
+                Vector3 posicionAgachado = new Vector3(0f, -cantidad, 0f);
+                Vector3 posicionDerecha = new Vector3(cantidad, 0f, 0f);
+                Vector3 posicionIzquierda = new Vector3(-cantidad, 0f, 0f);
+                Vector3 posicionAdelantada = new Vector3(0f, 0f, cantidad);
+                Vector3 posicionAtrasada = new Vector3(0f, 0f, -cantidad);
+
+                Vector3[] posiciones = {
+                    posicionAgachado, posicionDerecha, posicionIzquierda, 
+                    posicionAdelantada, posicionAtrasada
+                };
+
+                Vector3 pR = new Vector3(
+                    Random.Range(-0.1f, 0.2f), Random.Range(-0.3f, 0f), Random.Range(-0.1f, 0.2f)
+                );
+
+                GameObject jugador = Camera.main.gameObject; 
+                Vector3 posicionOriginal = jugador.transform.position;
+                Vector3 posicionDestino = posicionOriginal + posiciones[Random.Range(0, posiciones.Length)] + pR;
+
+                float duracionAnimacionCamara = 2f;
+                iTween.MoveTo(jugador, posicionDestino, duracionAnimacionCamara);
+                yield return new WaitForSeconds(duracionAnimacionCamara);
+                iTween.MoveTo(jugador, posicionOriginal, duracionAnimacionCamara);
+                yield return new WaitForSeconds(duracionAnimacionCamara);
+
+                haciendoMovimientosAleatorios = false; 
+
+            //}
+            yield return null; 
+        }
+    }
+
     private IEnumerator CorrutinaBloqueDeDianas()
     {                   
         Debug.Log("Nuevo bloque de dianas");              
+
+        // iniciamos la corrutina de movimientos aleatorios
+        // solo son para dar mas variedad al juego 
+        Coroutine tareaMoverCamaraAleatoriamente = StartCoroutine(CorrutinaMovimientosAleatorios());
+
+        // calculamos el tiempo de permanencia del bloque 
         float tiempoFinBloque = Time.time + Nivel.duracionDeCadaBloqueDeDianas;     
         // permanecemos en el bloque de dianas hasta cuando se haya
         // pasado el tiempo y haya dianas visibles           
-        while(Time.time < tiempoFinBloque) // && HayEstimulosVisibles())
+        while(Time.time < tiempoFinBloque)
         {              
             // instanciar un nuevo estimulo despues de esperar el tiempo                       
-            yield return new WaitForSeconds(1f); // Nivel.tiempoParaNuevoEstimuloEntrenamiento);           
+            yield return new WaitForSeconds(Nivel.tiempoParaNuevaDiana);
             MostrarNuevoObjetivo();            
             yield return null; 
         }  
+
+        // detenmos los movimientos de camara
+        StopCoroutine(tareaMoverCamaraAleatoriamente);
 
         while(HayEstimulosVisibles())
         {
@@ -147,25 +261,43 @@ public class TareaGaleriaTiro : Tarea
             return; 
         
         
-        switch(Nivel.estimulos)
+        switch(Nivel.dianas)
         {
-            case EstimulosTareaDisparoEntrenamiento.SoloDianaObjetivo:
+            case EstimulosTareaGaleriaTiro.SoloDianaObjetivo:
                 // la diana es objetivio                
                 objetivo.esObjetivo = true; 
-                objetivo.Mostrar();
+                
+                
             break;
 
-            case EstimulosTareaDisparoEntrenamiento.VariosTiposDiana:
+            case EstimulosTareaGaleriaTiro.VariosTiposDiana:
                 // las dianas pueden ser no objetivos
-                objetivo.esObjetivo = Random.value < Nivel.probabilidadAparicionEstimuloErroneo;
-                objetivo.Mostrar();
+                objetivo.esObjetivo = Random.value > Nivel.probabilidadAparicionDianaErronea;
+                
             break;
 
         }
 
+        // comprobamos si es una gema de bonus
+        if(objetivo.esObjetivo)
+        {
+            bool esGema = Random.value < Nivel.probabilidadAparicionGema;
+            objetivo.esGema = esGema;
+        }
+
+        objetivo.Mostrar();
+
         FindObjectOfType<Audio>().FeedbackAparicionEstimulo();
         
     }   
+
+    public void Bonus()
+    {
+        // cuando se alcanza una gema
+        aciertos++;
+        FindObjectOfType<Audio>().FeedbackAcierto();
+        aciertosUI.text = "Aciertos " + aciertos.ToString();
+    }
   
     public override void Acierto()
     {

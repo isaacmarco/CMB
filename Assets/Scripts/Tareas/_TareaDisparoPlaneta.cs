@@ -19,8 +19,8 @@ public class TareaDisparoPlaneta : Tarea
     [SerializeField] private Transform[] puntosRecorrido;   
     [SerializeField] private AnimationCurve curvaRecorridoX, curvaRecorridoZ; 
      
-    public NivelDisparoScriptable Nivel { 
-        get { return (NivelDisparoScriptable) Configuracion.nivelActual;} 
+    public NivelGaleriaTiroScriptable Nivel { 
+        get { return (NivelGaleriaTiroScriptable) Configuracion.nivelActual;} 
 
     }
     private NaveJugador jugador; 

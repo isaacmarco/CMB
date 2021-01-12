@@ -6,7 +6,7 @@
 };
 
 
-public enum EstimulosTareaDisparoEntrenamiento
+public enum EstimulosTareaGaleriaTiro
 {
     SoloDianaObjetivo,
     VariosTiposDiana

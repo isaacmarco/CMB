@@ -16,6 +16,7 @@ public class PacienteScriptable : ScriptableObject
     [Header("Progreso del jugador")]
     public int ultimoNivelDesbloqueadoTareaTopos; 
     public int ultimoNivelDesbloqueadoTareaMemory;
+    public int ultimoNivelDesbloqueadoTareaGaleriaTiro;
     public int nivelActualTareaMemory; 
     // lleva la cuenta de niveles ganados para lanzar un nivel de bonus
     public int contadorNivelesGanadosParaBonus; 
@@ -25,6 +26,7 @@ public class PacienteScriptable : ScriptableObject
     [Header("Puntuaciones")]
     public int puntuacionTareaTopos;
     public int puntuacionTareaMemory; 
+    public int puntuacionTareaGaleriaTiro;
     
     [Header("Tiempos record para tarea memory")]
     public int[] tiemposRecordPorNivelTareaMemory; 
@@ -34,11 +36,13 @@ public class PacienteScriptable : ScriptableObject
     {
         ultimoNivelDesbloqueadoTareaMemory = 0;
         ultimoNivelDesbloqueadoTareaTopos = 0; 
+        ultimoNivelDesbloqueadoTareaGaleriaTiro = 0;
         nivelActualTareaMemory = 0; 
         contadorNivelesGanadosParaBonus = 0;
         jugandoNivelDeBonus = false; 
         puntuacionTareaMemory = 0; 
         puntuacionTareaTopos = 0; 
+        puntuacionTareaGaleriaTiro = 0;
 
         // vector de tiempos records
         tiemposRecordPorNivelTareaMemory = new int[28];

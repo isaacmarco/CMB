@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class InterfazFijacion : MonoBehaviour
 {
     // referencia al rect transform del canvas de esta interfaz
-    private RectTransform canvasRect; 
-    private Tarea tarea; 
+    protected RectTransform canvasRect; 
+    protected Tarea tarea; 
   
     void Start()
     {
@@ -51,7 +51,7 @@ public class InterfazFijacion : MonoBehaviour
 
     // converite las coordenadas desde el espacio 3D a coordenadas
     // de pantalla
-    private void ConvertirCoordenadasYPosicionarInterfaz()
+    protected virtual void ConvertirCoordenadasYPosicionarInterfaz()
     {
         // transformacion de coordenadas de 2D a 3D
         Vector3 posicion3D = gameObject.transform.parent.parent.position;                  

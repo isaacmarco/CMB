@@ -70,6 +70,15 @@ public class Aplicacion : MonoBehaviour
         // CARGAR AQUI EL NIVEL CONFIGURADO
     }
 
+    public void CargarNivelTareaGaleriaTiro(int nivel)
+    {
+        string ruta = "Niveles GaleriaTiro/NivelGaleriaTiro " + nivel; 
+        NivelGaleriaTiroScriptable nivelGaleriaTiro = (NivelGaleriaTiroScriptable) Resources.Load(ruta); 
+        configuracion.nivelActual = nivelGaleriaTiro; 		
+        configuracion.tareaActual = Tareas.GaleriaTiro;
+        Debug.Log("Cargado nivel de galeria de tiros " + nivelGaleriaTiro.numeroDelNivel);
+    }
+
     public void CargarNivelTareaTopos(int nivel)
     {
         string ruta = "Niveles Topos/NivelTopos " + nivel; 

@@ -8,6 +8,12 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
     [Header("Modelos 3D")]
     public GameObject modeloDianaCorrecta;
     public GameObject modeloDianaIncorrecta;
+    [Header("Gemas")]
+    public GameObject gemaA; 
+    public GameObject gemaB;
+    public GameObject gemaC;
+    [Header("Recarga")]
+    public GameObject recarga; 
 
     protected override void Iniciar()
     {
@@ -19,12 +25,31 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
     public override void Mostrar()
     {
         OcultarModelos();
+        
         base.Mostrar();
-        // mostrar la diana correspondiente
+
+        // mostrar la diana correspondiente o gema
         if(esObjetivo)
         {
-            modeloDianaCorrecta.SetActive(true);
+            if(esGema)
+            {
+                // es gema, elegir una al azar
+                GameObject[] gemas = {
+                    gemaA, gemaB, gemaC
+                };
+
+                GameObject gema = gemas[Random.Range(0, gemas.Length)];
+                gema.SetActive(true);
+
+            } else {
+
+                // diana azul 
+                modeloDianaCorrecta.SetActive(true);
+
+            }
+            
         } else {
+            // diana roja
             modeloDianaIncorrecta.SetActive(true);
         }
     }    
@@ -45,6 +70,10 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
     {
         modeloDianaCorrecta.SetActive(false);
         modeloDianaIncorrecta.SetActive(false);        
+        gemaA.SetActive(false);
+        gemaB.SetActive(false);
+        gemaC.SetActive(false);
+        recarga.SetActive(false);
     }
 
 

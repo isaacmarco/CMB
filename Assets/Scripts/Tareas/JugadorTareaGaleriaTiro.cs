@@ -2,16 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JugadorTareaDisparo : MonoBehaviour
+public class JugadorTareaGaleriaTiro : MonoBehaviour
 {
     
     [SerializeField] private GameObject laserPrefab; 
+    [SerializeField] private GameObject arma; 
+    //[SerializeField] private GameObject bocaArma; 
     private bool alterno = false; 
     private bool disparando = false; 
     private Vector3 posicionObjetivo; 
+    
+
+    private float municion = 100f; 
+    
+    public bool HayMunicion()
+    {
+        return municion > 0; 
+    }
+
+    public void Recargar()
+    {       
+        municion = FindObjectOfType<TareaGaleriaTiro>().Nivel.municionCargador; 
+    }
 
     void Start()
-    {        
+    {                   
+        municion = FindObjectOfType<TareaGaleriaTiro>().Nivel.municionCargador; 
         StartCoroutine(GeneracionDisparos());
     }
 
@@ -22,14 +38,12 @@ public class JugadorTareaDisparo : MonoBehaviour
         GameObject laser = (GameObject) Instantiate(laserPrefab);
         laser.name = "laser";
 
-        laser.transform.parent = gameObject.transform; 
-        laser.transform.localPosition = Vector3.zero; 
+        laser.transform.parent = gameObject.transform;
         laser.transform.position = gameObject.transform.position; 
-        
+       
+      
         float separacionLaser = 0.2f; 
-
         separacionLaser = 0.05f;
-
         laser.transform.localPosition = new Vector3
         (separacionLaser, 0, 0);
 
@@ -60,7 +74,7 @@ public class JugadorTareaDisparo : MonoBehaviour
         }
     }
 
-      private IEnumerator GeneracionDisparos()
+    private IEnumerator GeneracionDisparos()
     {
         while(true)
         {
@@ -69,11 +83,21 @@ public class JugadorTareaDisparo : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.1f);
                 InstanciarLaser();
+                ControlMunicion();
+                
+
             }
             disparando = false; 
             yield return null;             
         }
     }
+    private void ControlMunicion()
+    {
+        // actualizar municion  
+        float gasto = 10f;        
+        municion -= gasto; 
+    }
+    
     public void Disparar(Vector3 posicion)
     {        
         // estamos mirando al objetivo, instanciamos

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Configuracion
   m_EditorClassIdentifier: 
   pacienteActual: {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
-  nivelActual: {fileID: 11400000, guid: c53c88462bc9e0c4c90f8530257852bd, type: 2}
+  nivelActual: {fileID: 11400000, guid: ca8fb8d38a675dc40bbb113e8c054941, type: 2}
   tareaActual: 0
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
