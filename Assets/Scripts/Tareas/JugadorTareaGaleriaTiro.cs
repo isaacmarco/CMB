@@ -19,6 +19,9 @@ public class JugadorTareaGaleriaTiro : MonoBehaviour
     {
         return municion > 0; 
     }
+    public int Municion {
+        get { return (int) municion;}
+    }
 
     public void Recargar()
     {       

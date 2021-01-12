@@ -10,6 +10,7 @@ public class TareaGaleriaTiro : Tarea
     public Text aciertosUI;
     public Text erroresUI;
     public Text omisionesUI;
+    public Text municionUI;
     public GameObject interfazRecarga2D; 
     public GameObject avisoRecarga; 
    
@@ -65,13 +66,32 @@ public class TareaGaleriaTiro : Tarea
         recargando = false; 
         // ocultamos el arma
         arma.SetActive(false);
+        interfazRecarga.SetActive(true);
     }
 
     private IEnumerator CorrutinaMunicion()
     {
         JugadorTareaGaleriaTiro jugador = FindObjectOfType<JugadorTareaGaleriaTiro>();
         while(true)
-        {            
+        {           
+
+            // actualizamos el marcador de municion 
+            int municion = jugador.Municion;
+            string ceros = string.Empty; 
+
+            if(municion <= 0)            
+            {
+                municionUI.text = "000";
+            } else {
+                if(municion < 100)
+                    ceros += "0";            
+                if(municion < 10)
+                    ceros += "0";
+                municionUI.text = ceros + jugador.Municion.ToString();
+            }
+            
+            
+
             if(!jugador.HayMunicion())
             {
                 MostrarInterfazRecarga();
@@ -84,7 +104,7 @@ public class TareaGaleriaTiro : Tarea
     {          
         // crear el escenario
         InstanciarEscenario();
-        interfazRecarga.SetActive(false);
+        //interfazRecarga.SetActive(false);
         avisoRecarga.SetActive(false);
         Recargar();
         

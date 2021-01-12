@@ -21,5 +21,5 @@ MonoBehaviour:
   duracionDeCadaBloqueDeDianas: 15
   probabilidadAparicionGema: 0.3
   probabilidadAparicionDianaErronea: 0.5
-  municionCargador: 201
+  municionCargador: 150
   t2: 0
