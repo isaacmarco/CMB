@@ -7,7 +7,7 @@ public class JugadorTareaGaleriaTiro : MonoBehaviour
     
     [SerializeField] private GameObject laserPrefab; 
     [SerializeField] private GameObject arma; 
-    //[SerializeField] private GameObject bocaArma; 
+    
     private bool alterno = false; 
     private bool disparando = false; 
     private Vector3 posicionObjetivo; 
@@ -41,19 +41,22 @@ public class JugadorTareaGaleriaTiro : MonoBehaviour
         GameObject laser = (GameObject) Instantiate(laserPrefab);
         laser.name = "laser";
 
-        laser.transform.parent = gameObject.transform;
-        laser.transform.position = gameObject.transform.position; 
+        laser.transform.parent = Camera.main.gameObject.transform; // gameObject.transform;
+        //laser.transform.position = gameObject.transform.position; 
        
       
         float separacionLaser = 0.2f; 
         separacionLaser = 0.05f;
-        laser.transform.localPosition = new Vector3
-        (separacionLaser, 0, 0);
+
+        float altura = -0.3f; 
+        float d = 0.3f; 
+
+        laser.transform.localPosition = new Vector3 (separacionLaser, altura, d);
 
         if(alterno)
         {
             laser.transform.localPosition = new Vector3
-            (-separacionLaser, 0, 0);
+            (-separacionLaser, altura, d);
             alterno = false; 
         } else {
             alterno = true; 

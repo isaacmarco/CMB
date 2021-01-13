@@ -33,10 +33,15 @@ public class TareaGaleriaTiro : Tarea
     private int omisiones; 
     private float tiempoEntreCambiosCamara = 5f;
     private float tiempoDelUltimoCambioCamara; 
+    private bool avisoMunicionEscuchado = false; 
 
     public void MostrarInterfazRecarga()
     {
-        
+        if(!avisoMunicionEscuchado)
+        {
+            FindObjectOfType<Audio>().FeedbackCargadorVacio();
+            avisoMunicionEscuchado = true; 
+        }
         interfazRecarga.SetActive(true);
         avisoRecarga.SetActive(true);
     }
@@ -57,12 +62,14 @@ public class TareaGaleriaTiro : Tarea
         avisoRecarga.SetActive(false);
         // reponer municion
         FindObjectOfType<JugadorTareaGaleriaTiro>().Recargar();
-
+        avisoMunicionEscuchado = false; // permite volver a escucharlo 
         recargando = true; 
         // animaciones de recarga
         arma.SetActive(true);
         // esperamos a que termina la animacion 
+        FindObjectOfType<Audio>().FeedbackRecarga();
         yield return new WaitForSeconds(1.33f);
+        
         recargando = false; 
         // ocultamos el arma
         arma.SetActive(false);
@@ -315,7 +322,7 @@ public class TareaGaleriaTiro : Tarea
     {
         // cuando se alcanza una gema
         aciertos++;
-        FindObjectOfType<Audio>().FeedbackAcierto();
+        FindObjectOfType<Audio>().FeedbackAciertoBonus();
         aciertosUI.text = "Aciertos " + aciertos.ToString();
     }
   
