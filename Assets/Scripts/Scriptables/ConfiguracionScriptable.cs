@@ -43,6 +43,11 @@ public class ConfiguracionScriptable : ScriptableObject
     public int numberoDeBloquesDeEvaluacion = 3;    
     public int duracionDelBloqueDeEvaluacion = 10;    
     public int duracionEstimuloFijacionEvaluacion = 1;    
+    [Header("Configuracion tarea de galeria de tiro")]
+    public int puntuacionAciertoGaleriaTiro = 100;
+    public int puntuacionGemaGaleriaTiro = 500;
+    public int penalizacionErrorGaleriaTiro = 50;
+    public int penalizacionOmisionGaleriaTiro = 25;
     [Header("Lista de pacientes")]   
     public PacienteScriptable[] pacientes;
   

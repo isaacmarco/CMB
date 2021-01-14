@@ -12,8 +12,12 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
     public GameObject gemaA; 
     public GameObject gemaB;
     public GameObject gemaC;
-    [Header("Recarga")]
-    public GameObject recarga; 
+    
+    public bool EsVisible {
+        get {
+            return gameObject.transform.localScale == Vector3.one;
+        }
+    }
 
     protected override void Iniciar()
     {
@@ -24,6 +28,7 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
     
     public override void Mostrar()
     {
+        
         OcultarModelos();
         
         base.Mostrar();
@@ -40,17 +45,19 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
 
                 GameObject gema = gemas[Random.Range(0, gemas.Length)];
                 gema.SetActive(true);
+               
 
             } else {
 
                 // diana azul 
                 modeloDianaCorrecta.SetActive(true);
-
+               
             }
             
         } else {
             // diana roja
             modeloDianaIncorrecta.SetActive(true);
+            
         }
     }    
     protected override void AnimacionMostrar()
@@ -73,7 +80,7 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
         gemaA.SetActive(false);
         gemaB.SetActive(false);
         gemaC.SetActive(false);
-        recarga.SetActive(false);
+      
     }
 
 

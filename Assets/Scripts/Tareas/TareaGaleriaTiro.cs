@@ -11,6 +11,7 @@ public class TareaGaleriaTiro : Tarea
     public Text erroresUI;
     public Text omisionesUI;
     public Text municionUI;
+    public Text puntuacionUI;
     public GameObject interfazRecarga2D; 
     public GameObject avisoRecarga; 
    
@@ -30,7 +31,7 @@ public class TareaGaleriaTiro : Tarea
     // estado del juego
     private int errores; 
     private int aciertos; 
-    private int omisiones; 
+    private int omisiones;   
     private float tiempoEntreCambiosCamara = 5f;
     private float tiempoDelUltimoCambioCamara; 
     private bool avisoMunicionEscuchado = false; 
@@ -47,6 +48,7 @@ public class TareaGaleriaTiro : Tarea
     }
     public void Recargar()
     {   
+        FindObjectOfType<Audio>().FeedbackClickDefecto();
         StartCoroutine(CorrutinaRecarga());        
     }
 
@@ -81,6 +83,8 @@ public class TareaGaleriaTiro : Tarea
         JugadorTareaGaleriaTiro jugador = FindObjectOfType<JugadorTareaGaleriaTiro>();
         while(true)
         {           
+            // actualizamos aqui la puntuacion
+            puntuacionUI.text = puntuacion.ToString();
 
             // actualizamos el marcador de municion 
             int municion = jugador.Municion;
@@ -111,7 +115,6 @@ public class TareaGaleriaTiro : Tarea
     {          
         // crear el escenario
         InstanciarEscenario();
-        //interfazRecarga.SetActive(false);
         avisoRecarga.SetActive(false);
         Recargar();
         
@@ -147,7 +150,7 @@ public class TareaGaleriaTiro : Tarea
             if(diana.EnUso)
                 return true;
         
-        return false; //  dianas != null && dianas.Length > 0;
+        return false; 
     }
 
     private int bloqueActual = 0; 
@@ -161,7 +164,7 @@ public class TareaGaleriaTiro : Tarea
         // y bloque hay una animacion de camara
         while(true)
         {
-            Debug.Log("Bloque actual es " + bloqueActual);
+            //Debug.Log("Bloque actual es " + bloqueActual);
 
             // movemos la camara al siguiente bloque                            
             Vector3 posicion = bloqueTareaDisparo.posicionesCamara[bloqueActual].position;
@@ -262,19 +265,39 @@ public class TareaGaleriaTiro : Tarea
 
        
         yield return new WaitForSeconds(1f);
-        Debug.Log("Bloque de dianas terminado");
+        //Debug.Log("Bloque de dianas terminado");
     }
  
 
+    private int ContadorDianasVisibles()
+    {
+        int contador = 0; 
+        ObjetivoTareaDisparo[] dianas = FindObjectsOfType<ObjetivoTareaDisparo>();
+        foreach(ObjetivoTareaDisparo diana in dianas)
+            if(diana.EnUso)
+                contador++;        
+
+        return contador; 
+    }
+
     private void MostrarNuevoObjetivo()
     {
+        // mantenemos un maximo de 2 dianas visibles
+        if(ContadorDianasVisibles() >= 2)
+        {
+            Debug.Log("No se pueden generar mas dianas por ahora");
+            return; 
+        }
+
         ArrayList bloques = new ArrayList() {
             dianasPrimerBloque, dianasSegundoBloque, dianasTercerBloque
         };
         GameObject[] dianasBloque = (GameObject[]) bloques[bloqueActual];
         if(dianasBloque == null || dianasBloque.Length == 0)
         {
-            Debug.LogError("Faltan dianas para los bloques");
+            // no hay suficinetes dianas, usamos las del primer
+            // bloque. Esto solo es valido si no avanzamos
+            // mucho por el decorado
             dianasBloque = dianasPrimerBloque;
         }
 
@@ -318,12 +341,14 @@ public class TareaGaleriaTiro : Tarea
         
     }   
 
+   
     public void Bonus()
     {
         // cuando se alcanza una gema
         aciertos++;
         FindObjectOfType<Audio>().FeedbackAciertoBonus();
         aciertosUI.text = "Aciertos " + aciertos.ToString();
+        AgregarPuntuacion(Configuracion.puntuacionGemaGaleriaTiro);
     }
   
     public override void Acierto()
@@ -331,7 +356,8 @@ public class TareaGaleriaTiro : Tarea
         aciertos++;
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertosUI.text = "Aciertos " + aciertos.ToString();
-        
+        AgregarPuntuacion(Configuracion.puntuacionAciertoGaleriaTiro);
+       
     }
 
     public override void Error()
@@ -339,6 +365,8 @@ public class TareaGaleriaTiro : Tarea
         errores++;
         FindObjectOfType<Audio>().FeedbackError();
         erroresUI.text = "Errores " + errores.ToString();
+        AgregarPuntuacion(-Configuracion.penalizacionErrorGaleriaTiro);
+       
         
     } 
 
@@ -347,6 +375,8 @@ public class TareaGaleriaTiro : Tarea
         omisiones++;
         FindObjectOfType<Audio>().FeedbackOmision();
         omisionesUI.text = "Omisiones " + omisiones.ToString();
+        AgregarPuntuacion(-Configuracion.penalizacionOmisionGaleriaTiro);
+       
         
     }
 

@@ -9,7 +9,7 @@ public class DispararAlMirar : MonoBehaviour
 	private GazeAware gazeAware;	
     // referencia a la tarea
     private Tarea tarea;     
-    private ObjetivoTareaDisparo estimulo; 
+    private DianaEntrenamiento estimulo; 
     private bool estimuloMirado;
 	// momento en el que empezamos a mirar este estimulo	
 	private float tiempoInicioFijacion; 
@@ -22,7 +22,7 @@ public class DispararAlMirar : MonoBehaviour
 		tarea = FindObjectOfType<Tarea>();
 		gazeAware = GetComponent<GazeAware>();	        
 		interfazFijacion = GetComponentInChildren<InterfazFijacion>();	
-        estimulo = GetComponent<ObjetivoTareaDisparo>(); 
+        estimulo = GetComponent<DianaEntrenamiento>(); 
         // reiniciarmos la interfaz de fijacion
         DetenerFijacion();	
 	}
@@ -43,19 +43,16 @@ public class DispararAlMirar : MonoBehaviour
 			);
 	}
     
-
-
-	private void ActualizarVidaEnLaInterfazFijacion()
-	{
-		//float porcentaje = estimulo.vida / 1f; 
-		//interfazFijacion.Actualizar(porcentaje);		
-	}
-
 	 
     
 	void Update()
 	{
-		
+		// si el estimulo no esta en uso
+		if(!estimulo.EnUso)
+		{
+			DetenerFijacion();
+			return; 			
+		}
 		// si la tarea esta bloqueada no deberiamos usar
 		// esta interfaz o si el estimulo no esta en uso		
 		if(tarea.TareaBloqueada) //  || !estimulo.Visible)
@@ -63,6 +60,13 @@ public class DispararAlMirar : MonoBehaviour
 			
 			DetenerFijacion();
 			return; 
+		}
+
+		// si la diana no es completamente visible escapamos
+		if(!estimulo.EsVisible)
+		{
+			DetenerFijacion();
+			return;
 		}
 
 		// no disparar si estamos recargando
@@ -124,7 +128,6 @@ public class DispararAlMirar : MonoBehaviour
 		if(tiempoFijacionTranscurrido > tiempoNecesario)
 		{
 			// ya hemos terminado
-			//Disparar();
 			estimulo.Destruir();
 			DetenerFijacion();
 		} else {
@@ -137,13 +140,6 @@ public class DispararAlMirar : MonoBehaviour
 		tiempoInicioFijacion = Time.unscaledTime;
 		estimuloMirado = true; 
 	}
-	
-	/*
-	private void ContinuarFijacion()
-	{
-		estimuloMirado = true; 		
-		interfazFijacion.Actualizar(estimulo.vida / 100f);
-	}*/
 
 	protected void DetenerFijacion()
 	{		

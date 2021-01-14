@@ -68,7 +68,7 @@ public class Tarea : MonoBehaviour
         if(TareaBloqueada)
             return; 
 
-        Debug.Log("Puntos recibidos " + puntuacion );
+        //Debug.Log("Puntos recibidos " + puntuacion );
         this.puntuacion += puntuacion;         
         if(this.puntuacion < 0 )
             this.puntuacion = 0; 

@@ -5,13 +5,15 @@ using UnityEngine;
 public class ObjetivoTareaDisparo : MonoBehaviour
 {
        
-    //public float vida = 100;
     public bool esObjetivo;
     public bool esGema; 
+    [SerializeField]
     private bool enUso = false;
+    
     public bool EnUso {
         get { return this.enUso;}
     }
+  
   
     void Start()
     {

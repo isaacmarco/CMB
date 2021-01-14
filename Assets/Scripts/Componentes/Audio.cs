@@ -11,6 +11,7 @@ public class Audio : MonoBehaviour
     public AudioSource ASinteraccion, ASerrorInteraccion;
     public AudioSource ASrecarga, AScargadorVacio;
     public AudioSource ASestimuloBonus;
+    public AudioSource ASclickDefecto;
     [Header("Audio para el menu")]
     [SerializeField] private AudioSource ASelegirPerfil;
     [SerializeField] private AudioSource ASelegirTarea;  
@@ -22,6 +23,10 @@ public class Audio : MonoBehaviour
         tarea = FindObjectOfType<Tarea>();
     }
 
+    public void FeedbackClickDefecto()
+    {
+        ASclickDefecto.Play();
+    }
     public void FeedbackAciertoBonus()
     {
         ASestimuloBonus.Play();
