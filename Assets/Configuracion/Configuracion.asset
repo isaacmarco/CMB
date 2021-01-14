@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Configuracion
   m_EditorClassIdentifier: 
   pacienteActual: {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
-  nivelActual: {fileID: 11400000, guid: ca8fb8d38a675dc40bbb113e8c054941, type: 2}
+  nivelActual: {fileID: 11400000, guid: 2df558d2ef1385347a11ea484a494ca2, type: 2}
   tareaActual: 0
   utilizarRatonAdicionalmente: 1
   tiempoParaSeleccionEnMenus: 1
@@ -36,6 +36,10 @@ MonoBehaviour:
   numberoDeBloquesDeEvaluacion: 3
   duracionDelBloqueDeEvaluacion: 10
   duracionEstimuloFijacionEvaluacion: 1
+  puntuacionAciertoGaleriaTiro: 100
+  puntuacionGemaGaleriaTiro: 500
+  penalizacionErrorGaleriaTiro: 50
+  penalizacionOmisionGaleriaTiro: 25
   pacientes:
   - {fileID: 11400000, guid: ab77f26b6c30bd2429804513c4233aed, type: 2}
   - {fileID: 11400000, guid: 53c8f888e144f8a46812e5aaabdd9067, type: 2}

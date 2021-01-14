@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f4647d3683c2ef4caf449d741545a83, type: 3}
-  m_Name: NivelGaleriaTiro 0
+  m_Name: Nivel Galeria Tiro Prueba
   m_EditorClassIdentifier: 
   numeroDelNivel: 0
   dificultad: 0
   tipoDeNivel: 0
   dianas: 1
-  duracionDiana: 1
+  duracionDiana: 2
   tiempoParaNuevaDiana: 2
   duracionDeCadaBloqueDeDianas: 15
-  probabilidadAparicionGema: 0
-  probabilidadAparicionDianaErronea: 1
-  municionCargador: 426
+  probabilidadAparicionGema: 0.3
+  probabilidadAparicionDianaErronea: 0.4
+  municionCargador: 200
   t2: 0
