@@ -8,6 +8,7 @@ TagManager:
   - DianaPrimerBloque
   - DianaSegundoBloque
   - DianaTercerBloque
+  - PlanoRaypicking
   layers:
   - Default
   - TransparentFX
