@@ -8,7 +8,9 @@ public class InterfazFijacion : MonoBehaviour
     // referencia al rect transform del canvas de esta interfaz
     protected RectTransform canvasRect; 
     protected Tarea tarea; 
+    public bool es2D; 
   
+
     void Start()
     {
         // intentamos obtener una referencia a la tarea, 
@@ -40,11 +42,16 @@ public class InterfazFijacion : MonoBehaviour
 
     void Update()
     {
-        // si estamos en una tarea, no debemos mostrar esta interfaz
-        // de seleccion mientras la tarea este bloqueada
-        if(tarea!=null)
+        if(es2D)
         {
+            // es una interfaz de fijacion 2D, no tenemos que
+            // transformar coordenadas
+            //RectTransform rectPadre = gameObject.transform.parent.GetComponent<RectTransform>();
+           // GetComponent<RectTransform>().anchoredPosition = rectPadre.anchoredPosition +   
+            //new Vector2(rectPadre.sizeDelta.x / 2, 0);
+            return; 
         }
+        
         // coloca la interfaz de progreso sobre el estimulo 3D        
         ConvertirCoordenadasYPosicionarInterfaz();
     }
@@ -53,6 +60,8 @@ public class InterfazFijacion : MonoBehaviour
     // de pantalla
     protected virtual void ConvertirCoordenadasYPosicionarInterfaz()
     {
+
+
         // transformacion de coordenadas de 2D a 3D
         Vector3 posicion3D = gameObject.transform.parent.parent.position;                  
         Vector2 posicionViewport = Camera.main.WorldToViewportPoint(posicion3D);
