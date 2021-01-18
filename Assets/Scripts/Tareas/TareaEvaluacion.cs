@@ -13,9 +13,9 @@ public class TareaEvaluacion : Tarea
         get { return (NivelEvaluacion) Configuracion.nivelActual;} 
     }
 
-    private float intervaloActualizacion = 0.016f; // 60HZ
+    private float tasaRefresco = 0.033f; // 0.016f; // 30Hz 0.033f; // 30Hz 0.016f; // 60HZ
     // contador de ticks
-    private int nTimerTicks = 0;     
+    private int contadorTicks = 0;     
     // constantes arbitrarias de cristian
     private double b0 = 2;
     private double a1 = -4;
@@ -39,6 +39,8 @@ public class TareaEvaluacion : Tarea
         StartCoroutine(CorrutinaEvaluacion());
     }
     
+    
+
     private IEnumerator CorrutinaEvaluacion()
     {
         Debug.Log("Inicio de la evaluacion");
@@ -48,19 +50,28 @@ public class TareaEvaluacion : Tarea
 
         for(int i=0; i<Configuracion.numberoDeBloquesDeEvaluacion; i++)
         {
+           
             Debug.Log("Nuevo bloque");
+            
+            contadorTicks = 0; 
+
             // para cada bloque
             float tiempoInicioBloque = Time.time;
             // mostrar fijacion
             MostrarEstimuloFijacion();
-            // esperar
-            yield return new WaitForSeconds(1f);
+            // esperar y ocultar el estimulo
+            yield return new WaitForSeconds(Configuracion.duracionEstimuloFijacionEvaluacion);
             OcultarEstimuloFijacion();
-            // bucle de tarea            
+            
+            // centrar el estimulo 
+            CentrarEstimulo();    
+
+            
+            // bucle de tarea                
             while(Time.time < tiempoInicioBloque + Configuracion.duracionDelBloqueDeEvaluacion)
             {
-                MoverEstimulo();
-                yield return new WaitForSeconds(intervaloActualizacion);
+                Tick();
+                yield return new WaitForSeconds(tasaRefresco);
             }
          
         }
@@ -70,27 +81,33 @@ public class TareaEvaluacion : Tarea
         OcultarEstimulos();
     }
 
-    
-    private void MoverEstimulo()
+
+    private void CentrarEstimulo()
     {
-        /*
-        TODO: REINICIAR EL TIEMPO DE LA ANIMACION
-        DEL ESTIMULO CADA VEZ QUE SE CAMBIA
-        DE BLOQUE
-        */
+        Debug.Log("Centrando estimulo");
+        // obtener el centro
+        int centroX = Screen.width / 2;
+        int centroY = Screen.height / 2;   
+        estimulo.GetComponent<RectTransform>().anchoredPosition = new Vector2
+            (
+                centroX, centroY
+        );   
+    }
 
-        //while(true)
-        //{
+
+    private void Tick()
+    {    
             
-            nTimerTicks++;
-            float VI = Time.time;
+       
+          
+        float VI = contadorTicks * 2.14f * Mathf.PI / (amplitud * 30); 
+          
+        // obtener el centro
+        int centroX = Screen.width / 2;
+        int centroY = Screen.height / 2;
 
-            // obtener el centro
-            int centroX = Screen.width / 2;
-            int centroY = Screen.height / 2;
-
-            int xTarget =  (int) (amplitud *  // amplitud es 9 por defecto
-                (
+        int xTarget =  (int) (amplitud *  
+            (
                 b0 + a1 * Mathf.Sin(VI) + 
                 b1 * Mathf.Cos(VI) + 
                 a2 * Mathf.Sin(2 * VI) + 
@@ -103,16 +120,16 @@ public class TareaEvaluacion : Tarea
                 b5 * Mathf.Cos(5 * VI) + 
                 a6 * Mathf.Sin(6 * VI) + 
                 b6 * Mathf.Cos(6 * VI)
-                )
-            );
+            )
+        );
          
-            estimulo.GetComponent<RectTransform>().anchoredPosition = new Vector2
-            (
-                xTarget + centroX, centroY
-            );
+        estimulo.GetComponent<RectTransform>().anchoredPosition = new Vector2
+        (
+            xTarget + centroX - 100, centroY // - 100 unidades para centrar el estimulo
+        );
 
-            //yield return new WaitForSeconds(intervaloActualizacion);
-        //}
+         contadorTicks++;
+       
     }
 
     private void MostrarEstimuloFijacion()

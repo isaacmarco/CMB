@@ -22,4 +22,5 @@ MonoBehaviour:
   probabilidadAparicionGema: 0.3
   probabilidadAparicionDianaErronea: 0.4
   municionCargador: 200
-  t2: 0
+  aciertosParaSuperarElNivel: 15
+  omisionesOErroresParaPerder: 10

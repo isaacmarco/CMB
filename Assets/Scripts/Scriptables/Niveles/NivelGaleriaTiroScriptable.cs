@@ -18,5 +18,6 @@ public class NivelGaleriaTiroScriptable : NivelScriptable
     public float municionCargador = 300;
         
     [Header("Requisitos para la superacion")]
-    public int t2; 
+    public int aciertosParaSuperarElNivel; 
+    public int omisionesOErroresParaPerder;      
 }

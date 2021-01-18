@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Escenas/TareaMemory.unity
     guid: ec21abf5bd694d640a19a9221d8f3ca4
+  - enabled: 1
+    path: Assets/Escenas/TareaGaleriaTiro.unity
+    guid: 56e852e5fda379e43a410268e0ea0e45
+  - enabled: 1
+    path: Assets/Escenas/TareaEvaluacion.unity
+    guid: 7358da30ed63bcc489d2312787523a0b
   m_configObjects: {}

@@ -117,6 +117,17 @@ public class Tarea : MonoBehaviour
         Actualizacion();
     }
 
+    protected virtual bool TodosLosNivelesCompletados()
+    {
+        return false; 
+    }
+
+    protected virtual IEnumerator TareaCompletada()
+    {
+        Debug.Log("Tarea finalizada completamente");
+        yield return null; 
+    }
+
     protected virtual IEnumerator TerminarJuego(bool partidaGanada){
         
         // en este punto se vuelve al menu 
@@ -142,6 +153,14 @@ public class Tarea : MonoBehaviour
             yield return StartCoroutine(
                 MostrarMensaje("¡Nuevo record!", 0, null, Mensaje.TipoMensaje.Record)
             );
+
+        // comprobar el final de partida
+        if(TodosLosNivelesCompletados())
+            yield return StartCoroutine(TareaCompletada());
+
+        
+      
+
 
         // esperar 1 seg antes de lanzar el menu
         yield return new WaitForSeconds(1f);

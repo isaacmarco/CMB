@@ -341,7 +341,15 @@ public class TareaGaleriaTiro : Tarea
         
     }   
 
-   
+    
+    // se comprueba el estado de la partida despues de un error
+    // o una omision 
+    private void ComprobarOmisionError()
+    {
+        if(errores + omisiones >= Nivel.omisionesOErroresParaPerder)
+            JuegoPerdido();
+    }
+
     public void Bonus()
     {
         // cuando se alcanza una gema
@@ -366,7 +374,7 @@ public class TareaGaleriaTiro : Tarea
         FindObjectOfType<Audio>().FeedbackError();
         erroresUI.text = "Errores " + errores.ToString();
         AgregarPuntuacion(-Configuracion.penalizacionErrorGaleriaTiro);
-       
+        ComprobarOmisionError();
         
     } 
 
@@ -375,9 +383,53 @@ public class TareaGaleriaTiro : Tarea
         omisiones++;
         FindObjectOfType<Audio>().FeedbackOmision();
         omisionesUI.text = "Omisiones " + omisiones.ToString();
-        AgregarPuntuacion(-Configuracion.penalizacionOmisionGaleriaTiro);
-       
-        
+        AgregarPuntuacion(-Configuracion.penalizacionOmisionGaleriaTiro);       
+        ComprobarOmisionError();
     }
+
+     
+    public override string ObtenerNombreTarea()
+    {
+        return "Tarea galeria de tiro";
+    }
+    
+    protected override string ObtenerCabeceraTarea()
+    {
+        string cabecera = string.Empty;
+        string posicionesMatriz = string.Empty; 
+
+        // datos de la tarea
+        cabecera += "Tarea de galeria de tiro\n";
+        cabecera += "Nivel actual: " + Configuracion.nivelActual.numeroDelNivel + "\n";
+        // resultados
+        cabecera += "Aciertos: " + aciertos + "\n";
+        cabecera += "Errores: " + errores + "\n";
+        cabecera += "Omision: " + omisiones + "\n";
+        cabecera += "Puntos:" + puntuacion + "\n";
+
+        // posicion de la recarga        
+        Vector3 posicionInterfaz = interfazRecarga.transform.position;       
+        // transformar las coordeandas
+        Vector2 posicionViewport = Camera.main.WorldToViewportPoint(posicionInterfaz);
+        Vector2 posicionEnPantalla = new Vector2(
+            ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f)),
+            ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))
+        );
+        cabecera += "Posicion interfaz de recarga: " + posicionEnPantalla.x + ", " + posicionEnPantalla.y +  "\n";
+
+        cabecera += "Leyenda: tiempo; vision x ; vision y ; tipo estimulo A; tipo estimulo B; AX; AY; BX; BY; recargando?; municion";
+        return cabecera;
+    }
+
+    protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
+    {
+       
+        // devolvemos el nuevo registro
+        return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, 0,0,
+        0,0,0,0,false, 0
+        );
+        
+    } 
+
 
 }

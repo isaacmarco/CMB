@@ -617,6 +617,13 @@ MonoBehaviour:
   ASfeedbackOmision: {fileID: 563363725}
   ASfeedbackPartidaGanada: {fileID: 563363727}
   ASfeedbackPartidaPerdida: {fileID: 563363726}
+  ASaparicionEstimulo: {fileID: 0}
+  ASinteraccion: {fileID: 0}
+  ASerrorInteraccion: {fileID: 0}
+  ASrecarga: {fileID: 0}
+  AScargadorVacio: {fileID: 0}
+  ASestimuloBonus: {fileID: 0}
+  ASclickDefecto: {fileID: 0}
   ASelegirPerfil: {fileID: 0}
   ASelegirTarea: {fileID: 0}
 --- !u!4 &563363724
@@ -1021,7 +1028,6 @@ MonoBehaviour:
   mensaje: {fileID: 1269571273}
   estimulo: {fileID: 699372019}
   estimuloFijacion: {fileID: 79531422}
-  amplitud: 9
 --- !u!4 &681659154
 Transform:
   m_ObjectHideFlags: 0

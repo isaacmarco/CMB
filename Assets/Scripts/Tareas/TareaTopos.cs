@@ -90,6 +90,20 @@ public class TareaTopos : Tarea
         corrutinaJuego = StartCoroutine(CorrutinaPartida());       
     }
 
+    protected override bool TodosLosNivelesCompletados()
+    {
+        int numeroNiveles = 61;             
+        return Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos >= numeroNiveles;
+    }
+
+    protected override IEnumerator TareaCompletada()
+    {
+        base.TareaCompletada();    
+        yield return StartCoroutine(
+            MostrarMensaje("¡Has completado todos los niveles del juego!",0, null, Mensaje.TipoMensaje.Record)
+        );
+    }
+
     protected override bool GuardarProgreso(bool partidaGanada)
     {        
         Debug.Log("Guardando progreso de partida de topos");
@@ -104,11 +118,13 @@ public class TareaTopos : Tarea
             Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos++;
             
             // comprobar si hemos terminado todos los niveles
-            int numeroNiveles = 61;             
-            if(Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos >= numeroNiveles)
+            //int numeroNiveles = 61;             
+            //if(Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos >= numeroNiveles)
+            if(TodosLosNivelesCompletados())
             {
                 Debug.Log("Todos los niveles de la tarea completos");
                 // El juego se ha terminado, no hay mas niveles
+                int numeroNiveles = 61; 
                 Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaTopos = numeroNiveles; 
             }        
 
