@@ -19,7 +19,7 @@ MonoBehaviour:
   ultimoNivelDesbloqueadoTareaMemory: 3
   ultimoNivelDesbloqueadoTareaGaleriaTiro: 0
   nivelActualTareaMemory: 3
-  contadorNivelesGanadosParaBonus: 1
+  contadorNivelesGanadosParaBonus: 0
   jugandoNivelDeBonus: 0
   puntuacionTareaTopos: 0
   puntuacionTareaMemory: 3650

@@ -144,17 +144,51 @@ public class TareaMemory : Tarea
 
 
         // mensaje de aviso 
+        // ¡Hazlo lo más rápido que puedas!
+        /*
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)        
-            yield return StartCoroutine(
-                MostrarMensaje("Nivel de bonus. ¡Hazlo lo más rápido que puedas!", 4, null, Mensaje.TipoMensaje.Bonus)
-            );
+        {
+        }*/
             
 
 
         if(Configuracion.pacienteActual.jugandoNivelDeBonus)
         {            
             // se trata de un nivel de bonus con tiempo limite            
-            FindObjectOfType<Reloj>().IniciarCuentaAtras(60);
+            // obtenemos el tiempo disponible del jugador segun el nivel 
+            // 1-7: 20 seg; 
+            // 8-14: 60 seg; 
+            // 15-21 240 seg
+            int tiempoDisponible = 60; 
+            string tiempoFormateado = string.Empty; 
+            if(nivelEnJuego <= 7)
+            {
+                tiempoDisponible = 20; 
+                tiempoFormateado = "20 segundos";
+            } else if (nivelEnJuego <= 14) {
+                tiempoDisponible = 60; 
+                tiempoFormateado = "60 segundos";
+            } else if (nivelEnJuego <= 21)
+            {
+                tiempoDisponible = 240; 
+                tiempoFormateado = "4 minutos";
+            }
+
+            
+            
+
+            yield return StartCoroutine(
+                MostrarMensaje("¡Vas a jugar un nivel de bonus!", 
+                4, null, Mensaje.TipoMensaje.Bonus)
+            );
+
+            yield return StartCoroutine(
+                MostrarMensaje("Dispones de " + tiempoFormateado + " para completar el juego",
+                4, null, Mensaje.TipoMensaje.Tiempo)
+            );
+
+            FindObjectOfType<Reloj>().IniciarCuentaAtras(tiempoDisponible);
+            Debug.Log("El jugador dispone de " + tiempoDisponible + " segundos para este nivel de bonus");
 
         } else {
             // el nivel
@@ -238,6 +272,25 @@ public class TareaMemory : Tarea
         segundaTarjetaElegida = tarjeta;
         // comprobamos si las dos tarjetas son iguales
         ComprobarEleccionTarjetas();        
+    }
+
+    
+    protected override IEnumerator ComprobarNivelBonusCompletado(bool partidaGanada)
+    {
+        
+        if(partidaGanada)
+        {
+            yield return StartCoroutine(
+                MostrarMensaje("¡Has conseguido completar el nivel de bonus!",
+                4, null, Mensaje.TipoMensaje.Bonus)
+            );
+        }  else {
+             yield return StartCoroutine(
+                MostrarMensaje("No has podido completar el nivel de bonus",
+                4, null, Mensaje.TipoMensaje.Fallo)
+            );
+        }
+        yield return null; 
     }
 
     private void ComprobarEleccionTarjetas()

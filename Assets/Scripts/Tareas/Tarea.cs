@@ -128,6 +128,11 @@ public class Tarea : MonoBehaviour
         yield return null; 
     }
 
+    protected virtual IEnumerator ComprobarNivelBonusCompletado(bool partidaGanada)
+    {
+        yield return null; 
+    }
+
     protected virtual IEnumerator TerminarJuego(bool partidaGanada){
         
         // en este punto se vuelve al menu 
@@ -153,6 +158,9 @@ public class Tarea : MonoBehaviour
             yield return StartCoroutine(
                 MostrarMensaje("¡Nuevo record!", 0, null, Mensaje.TipoMensaje.Record)
             );
+
+        // feedback para cuando se completa una tarea de bonus
+        yield return ComprobarNivelBonusCompletado(partidaGanada);
 
         // comprobar el final de partida
         if(TodosLosNivelesCompletados())
