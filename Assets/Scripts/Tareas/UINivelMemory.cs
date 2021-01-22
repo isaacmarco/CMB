@@ -9,7 +9,11 @@ public class UINivelMemory : SeleccionarAlMirarUI
     //[SerializeField] private TextMeshPro tiempoRecord; 
     [SerializeField] private GameObject iconoTrofeo;
     [SerializeField] private TextMeshPro texto; 
-    
+    [SerializeField] private GameObject bronce; 
+	[SerializeField] private GameObject plata; 
+	[SerializeField] private GameObject oro;
+
+
 
     public void Configurar(int nivelACargar)
     {
@@ -39,6 +43,23 @@ public class UINivelMemory : SeleccionarAlMirarUI
 	public void Activar()
 	{
 		texto.color = Color.white;
+	}
+
+	public void ConfigurarMedallas(int medalla)
+	{
+		// 0
+		// 1 bronce
+		// 2 plata
+		// 3 oro
+		bronce.SetActive(false);
+		plata.SetActive(false);
+		oro.SetActive(false);
+		if(medalla > 0)
+			bronce.SetActive(true); 
+		if(medalla > 1)
+			plata.SetActive(true);
+		if(medalla > 2)
+			oro.SetActive(true);
 	}
 
 	public void MarcarComoRecord()

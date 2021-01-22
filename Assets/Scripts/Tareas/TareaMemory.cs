@@ -136,7 +136,7 @@ public class TareaMemory : Tarea
 
                 // ya hemos jugado, mostramos mensaje con el tiempo anterior
                 int ultimoTiempo = paciente.tiemposRecordPorNivelTareaMemory[nivelEnJuego];
-                yield return StartCoroutine(MostrarMensaje("Tu último tiempo en este nivel fue de " + ultimoTiempo + 
+                yield return StartCoroutine(MostrarMensaje("Tu último tiempo record en este nivel fue de " + ultimoTiempo + 
                 " segundos ", 5, null, Mensaje.TipoMensaje.Tiempo));
             }
         }
@@ -277,7 +277,10 @@ public class TareaMemory : Tarea
     
     protected override IEnumerator ComprobarNivelBonusCompletado(bool partidaGanada)
     {
-        
+        // si no es una partida de bonus abandonamos la corrutina
+        if(!Configuracion.pacienteActual.jugandoNivelDeBonus)
+            yield  break; 
+
         if(partidaGanada)
         {
             yield return StartCoroutine(
@@ -381,6 +384,10 @@ public class TareaMemory : Tarea
                     // anotamos el tiempo pero no damos record
                     paciente.tiemposRecordPorNivelTareaMemory[paciente.nivelActualTareaMemory] = tiempo; 
 
+                    // pero si damos la primera medalla, el valor del entero
+                    // en esa posicion dl vector pasa de 0 a 1
+                    paciente.medallasTareaMemory[paciente.nivelActualTareaMemory]++;
+
                 } else {
                     
                     // hemos vuelto a jugar, comprobamos si hay record                    
@@ -392,6 +399,8 @@ public class TareaMemory : Tarea
                         AgregarPuntuacion(Configuracion.puntuacionNuevoRecod);
                         // marcamos el record
                         paciente.nivelesConRecordTareaMemory[paciente.nivelActualTareaMemory] = true; 
+                        // incremetnamos el numero de medallas conseguidas en este nivel 
+                        paciente.medallasTareaMemory[paciente.nivelActualTareaMemory]++;
                         premioExtraRecordConcedido = true; 
 
                     } else {

@@ -45,8 +45,24 @@ public class MenuTareaMemory : MonoBehaviour
 
             // comprobar record
             PacienteScriptable paciente = FindObjectOfType<Aplicacion>().configuracion.pacienteActual; 
-            if(paciente.nivelesConRecordTareaMemory[i])
-                ui.MarcarComoRecord();
+
+            //if(paciente.nivelesConRecordTareaMemory[i])
+                //ui.MarcarComoRecord();
+
+            // nuevo sistema de medallas 
+            if(paciente.medallasTareaMemory!=null && paciente.medallasTareaMemory.Length != 0)           
+            {
+                int numeroMedallasDelNivel = paciente.medallasTareaMemory[i];
+                ui.ConfigurarMedallas(numeroMedallasDelNivel);
+                // == 0 no se ha jugado
+                // == 1 bronce (primer record o primera partida completada)
+                // == 2 plata (segundo record)
+                // >= 3 oro (tercer record)
+            } else {
+                Debug.LogError("Los datos de este usuario son de una version anterior el programa");
+            }
+            
+            
             
             // posicionamiento en la matriz
             contadorColumnas++;

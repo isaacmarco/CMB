@@ -20,7 +20,7 @@ public class PacienteScriptable : ScriptableObject
     public int nivelActualTareaMemory; 
     // lleva la cuenta de niveles ganados para lanzar un nivel de bonus
     public int contadorNivelesGanadosParaBonus; 
-    // indica que el nivel que se jugara es de bonus
+    // indica que el nivel que se jugara es de bonus (en la tarea de memory)
     public bool jugandoNivelDeBonus = false; 
     
     [Header("Puntuaciones")]
@@ -31,6 +31,7 @@ public class PacienteScriptable : ScriptableObject
     [Header("Tiempos record para tarea memory")]
     public int[] tiemposRecordPorNivelTareaMemory; 
     public bool[] nivelesConRecordTareaMemory; 
+    public int[] medallasTareaMemory; 
 
     public void Reiniciar()
     {
@@ -47,12 +48,14 @@ public class PacienteScriptable : ScriptableObject
         // vector de tiempos records
         tiemposRecordPorNivelTareaMemory = new int[28];
         nivelesConRecordTareaMemory = new bool[28];
+        medallasTareaMemory = new int[28];
         // iniciamos todo el vector al valor maximo de entero, de modo
         // que en la primera partida el record siempre se supere
         for(int i=0; i<tiemposRecordPorNivelTareaMemory.Length; i++)
         {
             tiemposRecordPorNivelTareaMemory[i] = int.MaxValue;
             nivelesConRecordTareaMemory[i] = false; 
+            medallasTareaMemory[i] = 0;
         }
     }
 
