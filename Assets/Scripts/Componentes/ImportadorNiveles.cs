@@ -23,6 +23,90 @@ public class ImportadorNiveles
         string ficheroNivelesTopos = refExcel.nivelesTopos.text;
         CrearNivelesTopos(ficheroNivelesTopos);
     }
+    [MenuItem("Niveles/Importar niveles galeria tiro")]
+    public static void ImportarNivelesGaleriaTiro()
+    {
+        ExcelNivelesScriptable refExcel = Resources.Load<ExcelNivelesScriptable>("NivelesExcel");
+        string ficheroNivelesGaleriaTiro = refExcel.nivelesGaleriaTiro.text;
+        CrearNivelesGaleriaTiro(ficheroNivelesGaleriaTiro);
+    }
+
+    private static void CrearNivelesGaleriaTiro(string fichero)
+    {
+        
+
+        Debug.Log("Comenzando importacion de niveles de galeria de tiro");
+
+        // partir el fichero en lineas
+        string[] lineas = fichero.Split('\n');
+        
+        Debug.Log(lineas.Length + " niveles encontrados");
+
+        for(int i=0; i<lineas.Length; i++)
+        {
+            Debug.Log("Importando nivel " + i);
+            
+            // para cada linea, partir la linea en campos
+            string[] campos = lineas[i].Split('\t');
+
+            // orden de los campos 
+            //0 Nivel
+            //1 Aciertos
+            //2 Omisiones/Errores
+            //3 Tipos de Diana            
+            //4 P/aparición de diana erronea
+            //5 P/aparición de gema	
+            //6 Munición cargador
+                                
+            // parseamos los campos
+            int numeroNivel = -1; 
+            int aciertos = -1; 
+            int omisionesErrores = -1; 
+            int municionCargador = -1;             
+            int probabilidadDianaErronea = -1; 
+            int probabilidadGema = -1; 
+            
+            // campos enteros     
+            int.TryParse(campos[0], out numeroNivel);
+            int.TryParse(campos[1], out aciertos);            
+            int.TryParse(campos[2], out omisionesErrores);
+            int.TryParse(campos[4], out probabilidadDianaErronea);
+            int.TryParse(campos[5], out probabilidadGema);
+            int.TryParse(campos[6], out municionCargador);
+
+            // parsear enumerdaos
+            EstimulosTareaGaleriaTiro estimulos = EstimulosTareaGaleriaTiro.SoloDianaObjetivo;
+            if(campos[3] == "Azul")
+            {
+                estimulos = EstimulosTareaGaleriaTiro.SoloDianaObjetivo;
+            } else {
+                estimulos = EstimulosTareaGaleriaTiro.VariosTiposDiana; 
+            }
+
+            
+            
+            // creamos el scriptable
+            string nombreScriptable = "NivelGaleriaTiro " + numeroNivel + ".asset";
+            string ruta ="Assets/Configuracion/Importador de niveles/" + nombreScriptable;
+            // Assets/Resources/Niveles Memory/
+            NivelGaleriaTiroScriptable nivel = ScriptableObject.CreateInstance<NivelGaleriaTiroScriptable>();
+            AssetDatabase.CreateAsset(nivel, ruta);
+            
+            // configuramos el scriptable
+            nivel.numeroDelNivel = numeroNivel; 
+            nivel.aciertosParaSuperarElNivel = aciertos; 
+            nivel.omisionesOErroresParaPerder = omisionesErrores;
+            nivel.dianas = estimulos;
+            nivel.probabilidadAparicionDianaErronea = probabilidadDianaErronea / 100f; 
+            nivel.probabilidadAparicionGema = probabilidadGema / 100f; 
+            nivel.municionCargador = municionCargador;
+           
+           
+            Debug.Log("Creado " + nombreScriptable);
+
+        }
+
+    }
 
 
     private static void CrearNivelesMemory(string fichero)

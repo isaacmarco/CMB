@@ -350,12 +350,56 @@ public class TareaGaleriaTiro : Tarea
             JuegoPerdido();
     }
 
+    
+    protected override bool TodosLosNivelesCompletados()
+    {
+        int numeroNiveles = 15;             
+        return Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaGaleriaTiro >= numeroNiveles;
+    }
+
+    protected override bool GuardarProgreso(bool partidaGanada)
+    {        
+        Debug.Log("Guardando progreso de partida de galeria de tiro");
+
+        if(partidaGanada)
+        {
+            // guardar la puntuacion
+            if(puntuacion > 0)
+                Configuracion.pacienteActual.puntuacionTareaGaleriaTiro += puntuacion; 
+
+            // progresar
+            Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaGaleriaTiro++;
+            
+            // comprobar si hemos terminado todos los niveles            
+            if(TodosLosNivelesCompletados())
+            {
+                Debug.Log("Todos los niveles de la tarea completos");
+                // El juego se ha terminado, no hay mas niveles
+                int numeroNiveles = 15; 
+                Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaGaleriaTiro = numeroNiveles; 
+            }        
+
+            // serializar los datos en disco 
+            Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+
+        } else {
+            
+            // no cambiamos el progreso ni guardamos datos
+            Debug.Log("La partida se ha perdido, no se guarda el progreso");
+        }
+
+        // devolvemos falso porque no se conceden premios adicionales
+        return false; 
+
+    }
     public void Bonus()
     {
-        // cuando se alcanza una gema
-        aciertos++;
-        FindObjectOfType<Audio>().FeedbackAciertoBonus();
-        aciertosUI.text = "Aciertos " + aciertos.ToString();
+        // cuando se alcanza una gema no voy a contabilizar
+        // como un acierto, los aciertos seran las dianas
+        // azules
+        //aciertos++;
+        //aciertosUI.text = "Aciertos " + aciertos.ToString();
+        FindObjectOfType<Audio>().FeedbackAciertoBonus();        
         AgregarPuntuacion(Configuracion.puntuacionGemaGaleriaTiro);
     }
   
@@ -365,6 +409,8 @@ public class TareaGaleriaTiro : Tarea
         FindObjectOfType<Audio>().FeedbackAcierto();
         aciertosUI.text = "Aciertos " + aciertos.ToString();
         AgregarPuntuacion(Configuracion.puntuacionAciertoGaleriaTiro);
+        if(aciertos >= Nivel.aciertosParaSuperarElNivel)
+            JuegoGanado();
        
     }
 

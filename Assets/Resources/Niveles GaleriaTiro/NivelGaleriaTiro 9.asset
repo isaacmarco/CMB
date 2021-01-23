@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f4647d3683c2ef4caf449d741545a83, type: 3}
-  m_Name: NivelGaleriaTiro 1
+  m_Name: NivelGaleriaTiro 9
   m_EditorClassIdentifier: 
-  numeroDelNivel: 1
+  numeroDelNivel: 9
   dificultad: 0
   tipoDeNivel: 0
-  dianas: 0
+  dianas: 1
   duracionDiana: 3
   tiempoParaNuevaDiana: 2
   duracionDeCadaBloqueDeDianas: 15
-  probabilidadAparicionGema: 0
-  probabilidadAparicionDianaErronea: 0
-  municionCargador: 1000
+  probabilidadAparicionGema: 0.5
+  probabilidadAparicionDianaErronea: 0.35
+  municionCargador: 300
   aciertosParaSuperarElNivel: 10
   omisionesOErroresParaPerder: 5

@@ -33,6 +33,10 @@ public class TareaEvaluacion : Tarea
     // amplitud del movimiento
     private int amplitud = 9; 
     private float tiempoInicioTarea;
+    // estado actual de la tarea 
+    private bool mostrandoEstimuloFijacion; 
+    private int numeroBloqueDeEvaluacion; 
+
 
     protected override void Inicio()
     {           
@@ -51,6 +55,7 @@ public class TareaEvaluacion : Tarea
         for(int i=0; i<Configuracion.numberoDeBloquesDeEvaluacion; i++)
         {
            
+            numeroBloqueDeEvaluacion = i + 1;
             Debug.Log("Nuevo bloque");
             
             contadorTicks = 0; 
@@ -77,10 +82,19 @@ public class TareaEvaluacion : Tarea
         }
 
         Debug.Log("Final de la evaluacion");
-
         OcultarEstimulos();
+        FinalizarTareaEvaluacion();
+        
+        
     }
-
+    private void FinalizarTareaEvaluacion()
+    {
+        // detenmos las corrutinas, registramos en disco los
+        // datos y volvemos al menu de la aplicacion 
+        StopAllCoroutines();
+        FinalizarRegistro();
+        AbandonarTarea();
+    }
 
     private void CentrarEstimulo()
     {
@@ -134,12 +148,14 @@ public class TareaEvaluacion : Tarea
 
     private void MostrarEstimuloFijacion()
     {
+        mostrandoEstimuloFijacion = true; 
         estimulo.SetActive(false);
         estimuloFijacion.SetActive(true);
     }
 
     private void OcultarEstimuloFijacion()
     {
+        mostrandoEstimuloFijacion = false; 
         estimulo.SetActive(true);
         estimuloFijacion.SetActive(false);
     }
@@ -161,7 +177,8 @@ public class TareaEvaluacion : Tarea
         string cabecera = string.Empty;
         // datos de la tarea
         cabecera += "Tarea de evaluacion\n";
-        cabecera += "Leyenda: tiempo; mirando x; mirando y; objetivo x; objetivo y";
+        cabecera += "Numero de bloques de evaluacion: " + Configuracion.numberoDeBloquesDeEvaluacion + "\n";
+        cabecera += "Leyenda: tiempo; estimulo fijacion visible; numero bloque actual; mirando x; mirando y; estimulo objetivo x; estimulo objetivo y";
         return cabecera;
     }
     
@@ -170,7 +187,8 @@ public class TareaEvaluacion : Tarea
         // obtener posicion del estimulo
         Vector2 posicionEstimulo = estimulo.GetComponent<RectTransform>().anchoredPosition;        
         return new RegistroPosicionOcularTareaEvaluacion(
-            tiempo, x, y, (int) posicionEstimulo.x, (int) posicionEstimulo.y
+            tiempo, x, y, (int) posicionEstimulo.x, (int) posicionEstimulo.y, numeroBloqueDeEvaluacion,
+            mostrandoEstimuloFijacion
         );
     } 
     

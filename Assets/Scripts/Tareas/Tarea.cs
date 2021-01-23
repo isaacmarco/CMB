@@ -74,7 +74,7 @@ public class Tarea : MonoBehaviour
             this.puntuacion = 0; 
     }
 
-    protected void JuegoGanado(){
+    protected virtual void JuegoGanado(){
         BloquearTarea();
         FindObjectOfType<Audio>().FeedbackPartidaGanada();
         FinalizarRegistro();
@@ -93,7 +93,7 @@ public class Tarea : MonoBehaviour
     }
 
     
-    private void FinalizarRegistro()
+    protected void FinalizarRegistro()
     {
         registrarEnDiario = false; 
         EscribirDiarioEnDisco();
@@ -175,7 +175,7 @@ public class Tarea : MonoBehaviour
         AbandonarTarea();
     }
 
-    private void AbandonarTarea()
+    protected void AbandonarTarea()
     {       
         SceneManager.LoadScene("Menu");
     }

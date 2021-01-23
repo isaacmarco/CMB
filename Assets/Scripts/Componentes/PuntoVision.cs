@@ -10,7 +10,8 @@ public class PuntoVision : MonoBehaviour
     private Image imagenPunto; 
     private float alphaNormal = 0.4f; 
     private float alphaSeleccion = 1f; 
-    private Vector2 puntoFiltrado = Vector2.zero;    
+    private Vector2 puntoFiltrado = Vector2.zero;   
+    [SerializeField] private bool noCambiarColorDelPunto = false; 
     [SerializeField] private RectTransform canvasRect; 
 
     void Awake()
@@ -26,11 +27,16 @@ public class PuntoVision : MonoBehaviour
         // actualizar alpha del punto dependiendo de si estamos
         // mirando a un objeto del juego 
         GameObject objetoFijado = TobiiAPI.GetFocusedObject();
-        if(objetoFijado!=null)
+
+        // esta tarea puede estar necesitando su propio color para el punto de vision
+        if(!noCambiarColorDelPunto)
         {
-            imagenPunto.color = new Color(1f, 1f, 1f, alphaNormal);
-        } else {
-            imagenPunto.color = new Color(1f, 1f, 1f, alphaSeleccion);
+            if(objetoFijado!=null)
+            {
+                imagenPunto.color = new Color(1f, 1f, 1f, alphaNormal);
+            } else {
+                imagenPunto.color = new Color(1f, 1f, 1f, alphaSeleccion);
+            }
         }
       
 

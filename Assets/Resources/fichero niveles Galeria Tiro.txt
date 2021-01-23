@@ -1,0 +1,15 @@
+1	10	5	Azul	0	0	1000
+2	10	5	Azul	0	0	1000
+3	10	5	Azul	0	0	750
+4	10	5	Azul/Roja	25	0	750
+5	10	5	Azul/Roja	25	0	750
+6	10	5	Azul/Roja	25	0	500
+7	10	5	Azul/Roja	35	0	500
+8	10	5	Azul/Roja	35	0	500
+9	10	5	Azul/Roja	35	50	300
+10	10	5	Azul/Roja	50	50	300
+11	10	5	Azul/Roja	50	50	300
+12	10	5	Azul/Roja	50	50	300
+13	10	5	Azul/Roja	50	50	300
+14	10	5	Azul/Roja	50	50	300
+15	10	5	Azul/Roja	50	50	300
