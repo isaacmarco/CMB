@@ -12,7 +12,9 @@ public class PuntoVision : MonoBehaviour
     private float alphaSeleccion = 1f; 
     private Vector2 puntoFiltrado = Vector2.zero;   
     [SerializeField] private bool noCambiarColorDelPunto = false; 
+    [SerializeField] private bool soloMoverEnHorizontal = false; 
     [SerializeField] private RectTransform canvasRect; 
+    
 
     void Awake()
     {
@@ -51,7 +53,14 @@ public class PuntoVision : MonoBehaviour
                 Mathf.RoundToInt(puntoFiltrado.y)
             );
 
-              
+            // si estamos en evaluacion, solo movemos en horizontal este punto
+            if(soloMoverEnHorizontal)
+            {
+                // centramos en la pantalla horizontalmente
+                posicionEntera.y = 540;
+                
+            }
+
             // posicionamos el punto. Debido al punto de pivote y configuracion
             // del canvas, podemos utilizar directamente las coordenadas en 
             // espacio de pantalla para dibujar en el canvas la UI del punto

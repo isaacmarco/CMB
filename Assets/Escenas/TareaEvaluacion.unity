@@ -1300,6 +1300,16 @@ PrefabInstance:
       propertyPath: canvasRect
       value: 
       objectReference: {fileID: 222543681}
+    - target: {fileID: 3949194867348692090, guid: 7f1a2be94eb28f4499ccc323082de2cb,
+        type: 3}
+      propertyPath: noCambiarColorDelPunto
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949194867348692090, guid: 7f1a2be94eb28f4499ccc323082de2cb,
+        type: 3}
+      propertyPath: soloMoverEnHorizontal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3949194867348692091, guid: 7f1a2be94eb28f4499ccc323082de2cb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1404,6 +1414,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949194867348692091, guid: 7f1a2be94eb28f4499ccc323082de2cb,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949194867348692091, guid: 7f1a2be94eb28f4499ccc323082de2cb,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f1a2be94eb28f4499ccc323082de2cb, type: 3}
