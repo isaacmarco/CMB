@@ -13,9 +13,14 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
     public GameObject gemaB;
     public GameObject gemaC;
     
-    public bool EsVisible {
+    public bool EsVisiblePlenamente {
         get {
             return gameObject.transform.localScale == Vector3.one;
+        }
+    }
+    public bool Visible {
+        get {
+            return gameObject.transform.localScale.x > 0.3f;
         }
     }
 

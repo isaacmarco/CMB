@@ -19,8 +19,8 @@ MonoBehaviour:
   duracionDiana: 3
   tiempoParaNuevaDiana: 2
   duracionDeCadaBloqueDeDianas: 15
-  probabilidadAparicionGema: 0
+  probabilidadAparicionGema: 0.5
   probabilidadAparicionDianaErronea: 0.35
-  municionCargador: 500
+  municionCargador: 300
   aciertosParaSuperarElNivel: 10
   omisionesOErroresParaPerder: 5

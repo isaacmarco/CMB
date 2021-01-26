@@ -350,6 +350,8 @@ public class TareaGaleriaTiro : Tarea
     // o una omision 
     private void ComprobarOmisionError()
     {
+       
+            
         if(errores + omisiones >= Nivel.omisionesOErroresParaPerder)
             JuegoPerdido();
     }
@@ -420,6 +422,11 @@ public class TareaGaleriaTiro : Tarea
 
     public override void Error()
     {
+        // si la tarea esta bloqueada no seguimos comprobando
+        // errores u omisiones para evitar perder multiples veces
+        if(tareaBloqueada)
+            return; 
+
         errores++;
         FindObjectOfType<Audio>().FeedbackError();
         erroresUI.text = "Errores " + errores.ToString();
@@ -430,6 +437,11 @@ public class TareaGaleriaTiro : Tarea
 
     public override void Omision()
     {
+        // si la tarea esta bloqueada no seguimos comprobando
+        // errores u omisiones para evitar perder multiples veces
+        if(tareaBloqueada)
+            return; 
+
         omisiones++;
         FindObjectOfType<Audio>().FeedbackOmision();
         omisionesUI.text = "Omisiones " + omisiones.ToString();
@@ -473,12 +485,19 @@ public class TareaGaleriaTiro : Tarea
 
     protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
     {
-        // obtenemos la municion actual
+        // obtenemos la municion actual, evitamos el null
+        // porque igual no existe todavia componente jugador
+        // en el primer frame?
         int municion = -1;
         JugadorTareaGaleriaTiro jugador = FindObjectOfType<JugadorTareaGaleriaTiro>();
         if(jugador != null)
             municion = jugador.Municion; 
         
+        /*
+            La tarea solo puede tener dos estimulos activos
+            al mismo tiempo. Uno seria el estimuloA y otro el estimuloB
+        */
+
         // comprobar los estimulos activos
         ObjetivoTareaDisparo[] objetivos = FindObjectsOfType<ObjetivoTareaDisparo>();
         EstimuloTareaGaleriaTiro estimuloA = EstimuloTareaGaleriaTiro.Ninguno;
@@ -491,17 +510,19 @@ public class TareaGaleriaTiro : Tarea
         //cada momento como maximo 
         foreach(ObjetivoTareaDisparo objetivo in objetivos)
         {
-            // si el objetivo es visible
-            if(objetivo.EnUso)
+            // si el objetivo esta en uso y es visible            
+            if(objetivo.EnUso && ((DianaEntrenamiento) objetivo).Visible)
             {
                 // si para el primer estimulo no hemos asignado 
                 // le asignamos este objetivo
                 if(estimuloA == EstimuloTareaGaleriaTiro.Ninguno)
                 {
                     estimuloA = objetivo.estimulo; 
-                    /*
-                        TODO: CALCULAR POSICION EN EL ESPACIO 2d
-                    */
+                    Vector2 posicionA = ObtenerPosicionPantallaDelEstimulo(
+                        objetivo.gameObject.transform.position
+                    );
+                    AX = (int) posicionA.x; 
+                    AY = (int) posicionA.y;                     
                     continue; 
                 }
                 // si para el segundo estimulo no hemos asignado
@@ -509,15 +530,16 @@ public class TareaGaleriaTiro : Tarea
                 if(estimuloB == EstimuloTareaGaleriaTiro.Ninguno)
                 {
                     estimuloB = objetivo.estimulo;
-                     /*
-                        TODO: CALCULAR POSICION EN EL ESPACIO 2d
-                    */
+                    Vector2 posicionB = ObtenerPosicionPantallaDelEstimulo(
+                        objetivo.gameObject.transform.position
+                    );
+                    BX = (int) posicionB.x; 
+                    BY = (int) posicionB.y; 
                     continue; 
                 }
             }
         }
-               
-               
+      
             
         // devolvemos el nuevo registro
         return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, estimuloA, estimuloB, 
@@ -525,6 +547,18 @@ public class TareaGaleriaTiro : Tarea
         );
         
     } 
+
+    private Vector2 ObtenerPosicionPantallaDelEstimulo(Vector3 posicionDiana)
+    {   
+         
+        // transformar las coordeandas
+        Vector2 posicionViewport = Camera.main.WorldToViewportPoint(posicionDiana);
+        Vector2 posicionEnPantalla = new Vector2(
+            ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f)),
+            ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))
+        );
+        return posicionEnPantalla;
+    }
 
 
 }

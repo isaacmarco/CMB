@@ -15,12 +15,12 @@ MonoBehaviour:
   numeroDelNivel: 3
   dificultad: 0
   tipoDeNivel: 0
-  dianas: 0
+  dianas: 1
   duracionDiana: 3
   tiempoParaNuevaDiana: 2
   duracionDeCadaBloqueDeDianas: 15
   probabilidadAparicionGema: 0
-  probabilidadAparicionDianaErronea: 0
+  probabilidadAparicionDianaErronea: 0.25
   municionCargador: 750
   aciertosParaSuperarElNivel: 10
   omisionesOErroresParaPerder: 5

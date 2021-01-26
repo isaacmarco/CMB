@@ -151,6 +151,14 @@ public class Tarea : MonoBehaviour
             yield return StartCoroutine(MostrarMensaje("Has perdido", 0, null, Mensaje.TipoMensaje.Fallo));
         }
 
+        
+        // feedback para cuando se completa una tarea de bonus
+        // de memory, comprobamos esto ANTES del metodo
+        // GuardarProgreso, porque ese metodo cambia el valor
+        // de la variable paciente.jugandoNivelBobus! 
+        yield return ComprobarNivelBonusCompletado(partidaGanada);
+
+
         // calcula el progreso del paciente, puntos, niveles, etc
         // y los guarda
         bool premioExtra = GuardarProgreso(partidaGanada);
@@ -158,9 +166,6 @@ public class Tarea : MonoBehaviour
             yield return StartCoroutine(
                 MostrarMensaje("¡Nuevo record!", 0, null, Mensaje.TipoMensaje.Record)
             );
-
-        // feedback para cuando se completa una tarea de bonus
-        yield return ComprobarNivelBonusCompletado(partidaGanada);
 
         // comprobar el final de partida
         if(TodosLosNivelesCompletados())

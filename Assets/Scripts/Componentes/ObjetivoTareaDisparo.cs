@@ -10,6 +10,7 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     [SerializeField]
     private bool enUso = false;
     
+    
     public bool EnUso {
         get { return this.enUso;}
     }

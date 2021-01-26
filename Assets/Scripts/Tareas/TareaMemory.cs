@@ -287,7 +287,9 @@ public class TareaMemory : Tarea
                 MostrarMensaje("¡Has ganado el bonus!",
                 4, null, Mensaje.TipoMensaje.Bonus)
             );
+
         }  else {
+            
              yield return StartCoroutine(
                 MostrarMensaje("Has perdido",
                 4, null, Mensaje.TipoMensaje.Fallo)

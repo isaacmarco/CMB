@@ -63,7 +63,7 @@ public class DispararAlMirar : MonoBehaviour
 		}
 
 		// si la diana no es completamente visible escapamos
-		if(!estimulo.EsVisible)
+		if(!estimulo.EsVisiblePlenamente)
 		{
 			DetenerFijacion();
 			return;
