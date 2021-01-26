@@ -10,6 +10,7 @@ public class MenuTareaMemory : MonoBehaviour
     [SerializeField] private TextMeshPro puntuacion; 
     [SerializeField] private Transform jerarquiaNiveles; 
     [SerializeField] private GameObject prefabNivelMemory; 
+    [SerializeField] private TextMeshPro nivelesBonusCompletos; 
 
     private int nivelSeleccionado; 
     
@@ -87,7 +88,7 @@ public class MenuTareaMemory : MonoBehaviour
         // puntuacion 
         int puntos = paciente.puntuacionTareaMemory;
         this.puntuacion.text = puntos.ToString();
-
+        nivelesBonusCompletos.text = paciente.nivelesBonusCompletosTareaMemory.ToString();
 
 
         // mostrar el nivel actual, al abrir este menu corresponde

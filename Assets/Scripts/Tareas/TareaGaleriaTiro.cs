@@ -313,16 +313,18 @@ public class TareaGaleriaTiro : Tarea
         
         switch(Nivel.dianas)
         {
-            case EstimulosTareaGaleriaTiro.SoloDianaObjetivo:
+            case DificultadTareaGaleriaTiro.SoloDianaObjetivo:
                 // la diana es objetivio                
                 objetivo.esObjetivo = true; 
-                
+                objetivo.estimulo = EstimuloTareaGaleriaTiro.DianaObjetivo;
                 
             break;
 
-            case EstimulosTareaGaleriaTiro.VariosTiposDiana:
+            case DificultadTareaGaleriaTiro.VariosTiposDiana:
                 // las dianas pueden ser no objetivos
                 objetivo.esObjetivo = Random.value > Nivel.probabilidadAparicionDianaErronea;
+                if(!objetivo.esObjetivo)
+                    objetivo.estimulo = EstimuloTareaGaleriaTiro.DianaErroena; 
                 
             break;
 
@@ -333,6 +335,8 @@ public class TareaGaleriaTiro : Tarea
         {
             bool esGema = Random.value < Nivel.probabilidadAparicionGema;
             objetivo.esGema = esGema;
+            if(objetivo.esGema)
+                objetivo.estimulo = EstimuloTareaGaleriaTiro.Gema;
         }
 
         objetivo.Mostrar();
@@ -469,10 +473,55 @@ public class TareaGaleriaTiro : Tarea
 
     protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
     {
-       
+        // obtenemos la municion actual
+        int municion = -1;
+        JugadorTareaGaleriaTiro jugador = FindObjectOfType<JugadorTareaGaleriaTiro>();
+        if(jugador != null)
+            municion = jugador.Municion; 
+        
+        // comprobar los estimulos activos
+        ObjetivoTareaDisparo[] objetivos = FindObjectsOfType<ObjetivoTareaDisparo>();
+        EstimuloTareaGaleriaTiro estimuloA = EstimuloTareaGaleriaTiro.Ninguno;
+        EstimuloTareaGaleriaTiro estimuloB = EstimuloTareaGaleriaTiro.Ninguno;
+        int AX = -1;
+        int AY = -1; 
+        int BX = -1;
+        int BY = -1; 
+        // solo puede haber dos dianas activas en 
+        //cada momento como maximo 
+        foreach(ObjetivoTareaDisparo objetivo in objetivos)
+        {
+            // si el objetivo es visible
+            if(objetivo.EnUso)
+            {
+                // si para el primer estimulo no hemos asignado 
+                // le asignamos este objetivo
+                if(estimuloA == EstimuloTareaGaleriaTiro.Ninguno)
+                {
+                    estimuloA = objetivo.estimulo; 
+                    /*
+                        TODO: CALCULAR POSICION EN EL ESPACIO 2d
+                    */
+                    continue; 
+                }
+                // si para el segundo estimulo no hemos asignado
+                // le asignamos este objetivo 
+                if(estimuloB == EstimuloTareaGaleriaTiro.Ninguno)
+                {
+                    estimuloB = objetivo.estimulo;
+                     /*
+                        TODO: CALCULAR POSICION EN EL ESPACIO 2d
+                    */
+                    continue; 
+                }
+            }
+        }
+               
+               
+            
         // devolvemos el nuevo registro
-        return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, 0,0,
-        0,0,0,0,false, 0
+        return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, estimuloA, estimuloB, 
+        AX, AY, BX, BY, recargando, municion
         );
         
     } 

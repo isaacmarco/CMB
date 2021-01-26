@@ -6,7 +6,7 @@ using UnityEngine;
 public class NivelGaleriaTiroScriptable : NivelScriptable
 {  
     [Header("Configuracion general")]    
-    public EstimulosTareaGaleriaTiro dianas;    
+    public DificultadTareaGaleriaTiro dianas;    
     public int duracionDiana = 3;    
     public int tiempoParaNuevaDiana = 2;
     public int duracionDeCadaBloqueDeDianas = 15;

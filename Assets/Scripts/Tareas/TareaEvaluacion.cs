@@ -13,10 +13,46 @@ public class TareaEvaluacion : Tarea
         get { return (NivelEvaluacion) Configuracion.nivelActual;} 
     }
 
+    // cada bloque tiene su lista de coeficientes
+    // <int (indice bloque), double[] (lista de coeficienes)>
+    ArrayList listaCoeficientes = new ArrayList{ 
+        new double[] { 3.2, 2.8, 0.1, 0.3, 3.4, 1.1, 2.3, 2.6, 0.5,-3.5,-3.7, 4.4, 2.3},
+        new double[] {-0.7, 4.4, 3.8,  -4, 0.6, 4.8, 0.8, 0.8, 1.3,  -3,-0.1,-4.1,-4.3},
+        new double[] { 3.8,-1.7, 0.9,-3.8, 4.2, 0.3,-2.5, 4.2,-4.6,-4.5, 3.5,-3.9, 3.5},
+        new double[] {-1.1, 1.7,-3.4,-3.6, 1.9,-0.2, 1.6, 0.8, 1.1, 1.3, 3.7,-3.5, 4.3},
+        new double[] { 2.6,-0.6,-2.9, 1.8, 0.8,   3,-4.1,-4.7,-1.3,-2.1,-2.3,-3.3, 4.7},
+        new double[] {  -1, 3.3,-0.9,   0, 3.1,-2.7, 1.2,-3.7,-4.4, 0.4,-2.9, 1.2, 3.5},
+        new double[] {   3, 2.6, 2.4,  -3, 3.7,   0, 1.6, 3.6,-0.1, 1.9, 0.6, 0.7, 2.8},
+        new double[] { 2.5,-3.3, 3.2,   0, 4.8, 3.9, 2.3,-0.2,  -3,   0, 1.4,-4.4, 0.1},
+        new double[] {-1.2, 3.5, 2.8,-3.5,-4.9, 0.7, 3.8, 3.4,-3.7, 0.4,-0.8, 4.2,-3.2},
+        new double[] {-2.8, 4.8,-1.8,-4.4, 3.6, 3.4, 4.7,-2.8,-2.9,-0.5,-2.9, 2.2,  -1}
+    };
+
+    /*
+        TODO: TODAVIA NO SE ESTAN USANDO LOS COEFICIENTES
+        PARA EL OTRO BRAZO
+    */
+    double[,] matrizCoeficientesBrazoIzquierdo = new double[10,13] {
+        {-3.6, 0.6, 4.8,-3.2,   4, 3.9,-0.4, 1.3, 2.4, 1.9, 0.5, 1.8, 2.4},
+        {-4.6, 3.5, 0.4,-1.4,-3.9,-4.2,-3.9,  -4,-4.8, 0.6,-0.1,-3.6,-2.6},
+        { 4.3,-1.5,   2,-4.3, 2.4,-2.5, 4.9,-4.1,-4.4,  -1, 3.8, 2.2, 2.3},
+        {-1.9,-0.5, 4.9, 0.2, 2.3,-4.4,-1.6, 2.7, 1.6,-4.3, 2.9,-3.8, 4.6},
+        {  -2,-4.4,-2.1,-1.6, 0.6,-0.6,  -2,   4,   1, 2.7, 2.3,-3.7, 3.6},
+        {-1.6,-3.2,-0.8,-3.2,-3.1,-4.8,-4.3, 0.3, 0.3,-1.6,-4.4, 1.4,-4.1},
+        {-0.3, 1.6,-0.3,-2.9,   1, 3.9,  -2,-3.8, 2.3, 1.1,-4.2,-1.7,-1.3},
+        { 1.5,-1.7, 2.6,   4,  -2,  -3,-4.4, 3.2,   2, 2.4,  -4, 1.5,-1.3},
+        {-4.7, 3.9, 3.1, 1.7,-3.6,  -4, 0.1,-1.6, 2.8,-3.9, 2.9, 2.4, 1.8},
+        { 3.4,-3.7,-3.9,-0.3,-2.8,-1.9, 2.6,  -2,-2.1,-3.6, 4.3, 0.8,   1}
+    };
+
+
+
+
     private float tasaRefresco = 0.033f; // 0.016f; // 30Hz 0.033f; // 30Hz 0.016f; // 60HZ
     // contador de ticks
     private int contadorTicks = 0;     
     // constantes arbitrarias de cristian
+    /*
     private double b0 = 2;
     private double a1 = -4;
     private double b1 = 3;
@@ -30,6 +66,7 @@ public class TareaEvaluacion : Tarea
     private double b5 = -0.5;
     private double a6 = 1; 
     private double b6 = 2.5;
+    */
     // amplitud del movimiento
     private int amplitud = 9; 
     private float tiempoInicioTarea;
@@ -44,6 +81,7 @@ public class TareaEvaluacion : Tarea
     }
     
     
+
 
     private IEnumerator CorrutinaEvaluacion()
     {
@@ -71,11 +109,13 @@ public class TareaEvaluacion : Tarea
             // centrar el estimulo 
             CentrarEstimulo();    
 
-            
+            // obtener coeficientes del bloque actual            
+            double[] coeficientesDelBloque = (double[]) listaCoeficientes[i];
+
             // bucle de tarea                
             while(Time.time < tiempoInicioBloque + Configuracion.duracionDelBloqueDeEvaluacion)
             {
-                Tick();
+                Tick(coeficientesDelBloque);
                 yield return new WaitForSeconds(tasaRefresco);
             }
          
@@ -109,10 +149,9 @@ public class TareaEvaluacion : Tarea
     }
 
 
-    private void Tick()
+    private void Tick(double[] coeficientesDelBloque)
     {    
-            
-       
+                   
           
         float VI = contadorTicks * 2.14f * Mathf.PI / (amplitud * 30); 
           
@@ -120,7 +159,25 @@ public class TareaEvaluacion : Tarea
         int centroX = Screen.width / 2;
         int centroY = Screen.height / 2;
 
-        int xTarget =  (int) (amplitud *  
+        int posicionX =  (int) (amplitud *  
+            (
+                coeficientesDelBloque[00] + coeficientesDelBloque[01] * Mathf.Sin(VI) + 
+                coeficientesDelBloque[02] * Mathf.Cos(VI) + 
+                coeficientesDelBloque[03] * Mathf.Sin(2 * VI) + 
+                coeficientesDelBloque[04] * Mathf.Cos(2 * VI) + 
+                coeficientesDelBloque[05] * Mathf.Sin(3 * VI) + 
+                coeficientesDelBloque[06] * Mathf.Cos(3 * VI) + 
+                coeficientesDelBloque[07] * Mathf.Sin(4 * VI) + 
+                coeficientesDelBloque[08] * Mathf.Cos(4 * VI) + 
+                coeficientesDelBloque[09] * Mathf.Sin(5 * VI) + 
+                coeficientesDelBloque[10] * Mathf.Cos(5 * VI) + 
+                coeficientesDelBloque[11] * Mathf.Sin(6 * VI) + 
+                coeficientesDelBloque[12] * Mathf.Cos(6 * VI)
+            )
+        );
+
+        /*
+        int posicionX =  (int) (amplitud *  
             (
                 b0 + a1 * Mathf.Sin(VI) + 
                 b1 * Mathf.Cos(VI) + 
@@ -136,13 +193,14 @@ public class TareaEvaluacion : Tarea
                 b6 * Mathf.Cos(6 * VI)
             )
         );
+        */
          
         estimulo.GetComponent<RectTransform>().anchoredPosition = new Vector2
         (
-            xTarget + centroX - 100, centroY // - 100 unidades para centrar el estimulo
+            posicionX + centroX - 100, centroY // - 100 unidades para centrar el estimulo
         );
 
-         contadorTicks++;
+        contadorTicks++;
        
     }
 

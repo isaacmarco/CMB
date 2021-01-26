@@ -55,7 +55,7 @@ public class TareaMemory : Tarea
         cabecera += "Nivel actual: " + Configuracion.nivelActual.numeroDelNivel + "\n";
 
         // partida de bonus      
-        string bonus = Configuracion.pacienteActual.jugandoNivelDeBonus ? "Si" : "No";
+        string bonus = Configuracion.pacienteActual.jugandoNivelDeBonusTareaMemory ? "Si" : "No";
         cabecera += "Partida de bonus? " + bonus + "\n";
 
         // resultados
@@ -123,7 +123,7 @@ public class TareaMemory : Tarea
         int nivelEnJuego = paciente.nivelActualTareaMemory; 
 
         // solo se puedne hacer recods en partidas que no sean de bonus
-        if(!Configuracion.pacienteActual.jugandoNivelDeBonus)
+        if(!Configuracion.pacienteActual.jugandoNivelDeBonusTareaMemory)
         {
             if(paciente.tiemposRecordPorNivelTareaMemory[nivelEnJuego] == int.MaxValue)
             {
@@ -136,7 +136,7 @@ public class TareaMemory : Tarea
 
                 // ya hemos jugado, mostramos mensaje con el tiempo anterior
                 int ultimoTiempo = paciente.tiemposRecordPorNivelTareaMemory[nivelEnJuego];
-                yield return StartCoroutine(MostrarMensaje("Tu último tiempo record en este nivel fue de " + ultimoTiempo + 
+                yield return StartCoroutine(MostrarMensaje("Tu record en este nivel es " + ultimoTiempo + 
                 " segundos ", 5, null, Mensaje.TipoMensaje.Tiempo));
             }
         }
@@ -152,7 +152,7 @@ public class TareaMemory : Tarea
             
 
 
-        if(Configuracion.pacienteActual.jugandoNivelDeBonus)
+        if(Configuracion.pacienteActual.jugandoNivelDeBonusTareaMemory)
         {            
             // se trata de un nivel de bonus con tiempo limite            
             // obtenemos el tiempo disponible del jugador segun el nivel 
@@ -278,18 +278,18 @@ public class TareaMemory : Tarea
     protected override IEnumerator ComprobarNivelBonusCompletado(bool partidaGanada)
     {
         // si no es una partida de bonus abandonamos la corrutina
-        if(!Configuracion.pacienteActual.jugandoNivelDeBonus)
+        if(!Configuracion.pacienteActual.jugandoNivelDeBonusTareaMemory)
             yield  break; 
 
         if(partidaGanada)
         {
             yield return StartCoroutine(
-                MostrarMensaje("¡Has conseguido completar el nivel de bonus!",
+                MostrarMensaje("¡Has ganado el bonus!",
                 4, null, Mensaje.TipoMensaje.Bonus)
             );
         }  else {
              yield return StartCoroutine(
-                MostrarMensaje("No has podido completar el nivel de bonus",
+                MostrarMensaje("Has perdido",
                 4, null, Mensaje.TipoMensaje.Fallo)
             );
         }
@@ -358,17 +358,17 @@ public class TareaMemory : Tarea
 
             // comprobar el tipo de partida, en las partidas de bonus
             // no progresamos en el juego
-            if(!paciente.jugandoNivelDeBonus)
+            if(!paciente.jugandoNivelDeBonusTareaMemory)
             {           
-                // registrar el progreso para los niveles de bonus
-                paciente.contadorNivelesGanadosParaBonus++;
+                // aumentamos la cuenta para el siguiente nivel de bonus
+                paciente.contadorNivelesGanadosParaBonusTareaMemory++;
                 
-                if(paciente.contadorNivelesGanadosParaBonus >= Configuracion.numeroDeNivelesParaBonus)
+                if(paciente.contadorNivelesGanadosParaBonusTareaMemory >= Configuracion.numeroDeNivelesParaBonus)
                 {
                     Debug.Log("La proxima partida debe ser de bonus");
                     // activamos el flag de nivel bonus y el contador de partidas jugadas
-                    paciente.jugandoNivelDeBonus = true;
-                    paciente.contadorNivelesGanadosParaBonus = 0; 
+                    paciente.jugandoNivelDeBonusTareaMemory = true;
+                    paciente.contadorNivelesGanadosParaBonusTareaMemory = 0; 
                 }
 
                 // comprobar records
@@ -431,13 +431,15 @@ public class TareaMemory : Tarea
             
                 // acabamos de terminar una partida de bonus, reiniciamos el flag
                 // y el contador de partidas para bonus
-                paciente.jugandoNivelDeBonus = false; 
-                paciente.contadorNivelesGanadosParaBonus = 0; 
+                paciente.jugandoNivelDeBonusTareaMemory = false; 
+                paciente.contadorNivelesGanadosParaBonusTareaMemory = 0; 
+                paciente.nivelesBonusCompletosTareaMemory++;
                 // damos puntos por la victoria
                 AgregarPuntuacion(Configuracion.puntuacionNivelBonus);
                 // guardar la puntuacion
                 if(puntuacion > 0)
                     paciente.puntuacionTareaMemory += puntuacion; 
+
                 
             }
             
@@ -447,10 +449,10 @@ public class TareaMemory : Tarea
             Debug.Log("La partida se ha perdido");            
 
             // reiniciamos las flags del bonus     
-            if(paciente.jugandoNivelDeBonus)
+            if(paciente.jugandoNivelDeBonusTareaMemory)
             {
-                paciente.jugandoNivelDeBonus = false; 
-                paciente.contadorNivelesGanadosParaBonus = 0; 
+                paciente.jugandoNivelDeBonusTareaMemory = false; 
+                paciente.contadorNivelesGanadosParaBonusTareaMemory = 0; 
             }
 
         }

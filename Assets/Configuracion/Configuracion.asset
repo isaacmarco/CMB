@@ -33,7 +33,7 @@ MonoBehaviour:
   tiempoParaOcultarPareja: 2
   numeroDeNivelesParaBonus: 5
   velocidadDeLaNave: 0.019
-  numberoDeBloquesDeEvaluacion: 2
+  numberoDeBloquesDeEvaluacion: 3
   duracionDelBloqueDeEvaluacion: 5
   duracionEstimuloFijacionEvaluacion: 1
   puntuacionAciertoGaleriaTiro: 100

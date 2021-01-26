@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjetivoTareaDisparo : MonoBehaviour
 {
-       
+    public EstimuloTareaGaleriaTiro estimulo; 
     public bool esObjetivo;
     public bool esGema; 
     [SerializeField]

@@ -6,12 +6,19 @@
 };
 
 
-public enum EstimulosTareaGaleriaTiro
+public enum DificultadTareaGaleriaTiro
 {
     SoloDianaObjetivo,
     VariosTiposDiana
 };
 
+public enum EstimuloTareaGaleriaTiro
+{
+    Ninguno, 
+    DianaObjetivo, 
+    DianaErroena, 
+    Gema
+};
 
 public enum TipoNivel 
 {

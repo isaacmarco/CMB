@@ -75,12 +75,12 @@ public class ImportadorNiveles
             int.TryParse(campos[6], out municionCargador);
 
             // parsear enumerdaos
-            EstimulosTareaGaleriaTiro estimulos = EstimulosTareaGaleriaTiro.SoloDianaObjetivo;
+            DificultadTareaGaleriaTiro estimulos = DificultadTareaGaleriaTiro.SoloDianaObjetivo;
             if(campos[3] == "Azul")
             {
-                estimulos = EstimulosTareaGaleriaTiro.SoloDianaObjetivo;
+                estimulos = DificultadTareaGaleriaTiro.SoloDianaObjetivo;
             } else {
-                estimulos = EstimulosTareaGaleriaTiro.VariosTiposDiana; 
+                estimulos = DificultadTareaGaleriaTiro.VariosTiposDiana; 
             }
 
             
