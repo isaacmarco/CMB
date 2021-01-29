@@ -5,6 +5,23 @@
     Dificil
 };
 
+public enum ManejoTareaEvaluacion
+{
+    Joystick, 
+    Vista
+};
+public enum CondicionTareaEvaluacion
+{
+    Entrenamiento, 
+    Experimental
+};
+
+public enum BloqueDeDianas
+{
+    PrimerBloqueDianas, 
+    SegundoBloqueDianas, 
+    TercerBloqueDianas
+};
 
 public enum DificultadTareaGaleriaTiro
 {

@@ -18,7 +18,9 @@ public class TareaGaleriaTiro : Tarea
     [Header("Arma")]
     public GameObject interfazRecarga;
     public GameObject arma; 
-    
+    [Header("Dianas")]
+    public DianaEntrenamiento dianaA;
+    public DianaEntrenamiento dianaB;
 
     // posicion de dianas y camaras para este nivel instanciado
     private BloqueTareaDisparo bloqueTareaDisparo; 
@@ -124,9 +126,9 @@ public class TareaGaleriaTiro : Tarea
         StartCoroutine(CorrutinaMunicion());
     }
 
-    private GameObject[] dianasPrimerBloque; 
-    private GameObject[] dianasSegundoBloque;
-    private GameObject[] dianasTercerBloque; 
+    private GameObject[] puntosAparicionDianasPrimerBloque; 
+    private GameObject[] puntosAparicionDianasSegundoBloque;
+    private GameObject[] puntosAparicionDianasTercerBloque; 
 
     private void InstanciarEscenario()
     {
@@ -137,13 +139,13 @@ public class TareaGaleriaTiro : Tarea
         escenario.transform.position = Vector3.zero;
         // crear referencias despues de instanciar el escenario
         bloqueTareaDisparo = FindObjectOfType<BloqueTareaDisparo>();
-        dianasPrimerBloque = GameObject.FindGameObjectsWithTag("DianaPrimerBloque");
-        dianasSegundoBloque = GameObject.FindGameObjectsWithTag("DianaSegundoBloque");
-        dianasTercerBloque = GameObject.FindGameObjectsWithTag("DianaTercerBloque");
+        puntosAparicionDianasPrimerBloque = GameObject.FindGameObjectsWithTag("DianaPrimerBloque");
+        puntosAparicionDianasSegundoBloque = GameObject.FindGameObjectsWithTag("DianaSegundoBloque");
+        puntosAparicionDianasTercerBloque = GameObject.FindGameObjectsWithTag("DianaTercerBloque");
 
     }
 
-    private bool HayEstimulosVisibles()
+    private bool _HayEstimulosVisibles()
     {
         ObjetivoTareaDisparo[] dianas = FindObjectsOfType<ObjetivoTareaDisparo>();
         foreach(ObjetivoTareaDisparo diana in dianas)
@@ -151,6 +153,10 @@ public class TareaGaleriaTiro : Tarea
                 return true;
         
         return false; 
+    }
+    private bool HayEstimulosVisibles()
+    {        
+        return dianaA.EnUso || dianaB.EnUso; 
     }
 
     private int bloqueActual = 0; 
@@ -164,21 +170,18 @@ public class TareaGaleriaTiro : Tarea
         // y bloque hay una animacion de camara
         while(true)
         {
-            //Debug.Log("Bloque actual es " + bloqueActual);
-
+            
             // movemos la camara al siguiente bloque                            
             Vector3 posicion = bloqueTareaDisparo.posicionesCamara[bloqueActual].position;
             GameObject jugador = Camera.main.gameObject; 
             float duracionAnimacionCamara = 3f; 
             iTween.MoveTo(jugador, posicion, duracionAnimacionCamara);
-            //camaraMoviendose = true; 
+            
             // esperamos a que la camara llegue al nuevo bloque
             yield return new WaitForSeconds(duracionAnimacionCamara);
-            //camaraMoviendose = false; 
-            // comenzamos el juego de disparos de este bloque
             
-            yield return StartCoroutine(CorrutinaBloqueDeDianas());
-           
+            // comenzamos el juego de disparos de este bloque            
+            yield return StartCoroutine(CorrutinaBloqueDeDianas());           
 
             // cambiamos al siguiente bloque
             bloqueActual++;
@@ -280,17 +283,33 @@ public class TareaGaleriaTiro : Tarea
         return contador; 
     }
 
+    private DianaEntrenamiento ObtenerDianaLibre()
+    {
+        if(!dianaA.EnUso)
+            return dianaA; 
+        if(!dianaB.EnUso)
+            return dianaB; 
+        return  null; 
+    }
     private void MostrarNuevoObjetivo()
     {
         // mantenemos un maximo de 2 dianas visibles
+        /*
         if(ContadorDianasVisibles() >= 2)
         {
             Debug.Log("No se pueden generar mas dianas por ahora");
             return; 
-        }
+        }*/
+        
+        // si ya se estan mostrando las dos dianas no generamos mas 
+        if(dianaA.EnUso && dianaB.EnUso)
+            return; 
 
+        // obtenemos los puntos de aparicion de dianas dependiendo del bloque actual 
         ArrayList bloques = new ArrayList() {
-            dianasPrimerBloque, dianasSegundoBloque, dianasTercerBloque
+            puntosAparicionDianasPrimerBloque, 
+            puntosAparicionDianasSegundoBloque, 
+            puntosAparicionDianasTercerBloque
         };
         GameObject[] dianasBloque = (GameObject[]) bloques[bloqueActual];
         if(dianasBloque == null || dianasBloque.Length == 0)
@@ -298,52 +317,67 @@ public class TareaGaleriaTiro : Tarea
             // no hay suficinetes dianas, usamos las del primer
             // bloque. Esto solo es valido si no avanzamos
             // mucho por el decorado
-            dianasBloque = dianasPrimerBloque;
+            dianasBloque = puntosAparicionDianasPrimerBloque;
         }
 
         // seleccionar posicion al azar         
         int indice = Random.Range(0, dianasBloque.Length);
-        GameObject diana = dianasBloque[indice];
+        GameObject puntoAparicionDiana = dianasBloque[indice];
 
-        ObjetivoTareaDisparo objetivo = diana.GetComponent<ObjetivoTareaDisparo>();
         // comprobar si ya esta en uso 
-        if(objetivo.EnUso)
+        PuntoAparicionDiana puntoAparicion = puntoAparicionDiana.GetComponent<PuntoAparicionDiana>();
+        if(puntoAparicion.EnUso)
             return; 
-        
+
+        // nuevo codigo
+
+        // obtenemos una diana que no se este usando de las dos existentes
+        // ya nos hemos aseguro de que haya una libre pero volvemos
+        // a comprobar el null
+        DianaEntrenamiento diana = ObtenerDianaLibre();
+        if(diana==null)
+            return; 
+                
         
         switch(Nivel.dianas)
         {
             case DificultadTareaGaleriaTiro.SoloDianaObjetivo:
                 // la diana es objetivio                
-                objetivo.esObjetivo = true; 
-                objetivo.estimulo = EstimuloTareaGaleriaTiro.DianaObjetivo;
+                diana.esObjetivo = true; 
+                diana.estimulo = EstimuloTareaGaleriaTiro.DianaObjetivo;
                 
             break;
 
             case DificultadTareaGaleriaTiro.VariosTiposDiana:
                 // las dianas pueden ser no objetivos
-                objetivo.esObjetivo = Random.value > Nivel.probabilidadAparicionDianaErronea;
-                if(!objetivo.esObjetivo)
-                    objetivo.estimulo = EstimuloTareaGaleriaTiro.DianaErroena; 
+                diana.esObjetivo = Random.value > Nivel.probabilidadAparicionDianaErronea;
+                if(!diana.esObjetivo)
+                {
+                    diana.estimulo = EstimuloTareaGaleriaTiro.DianaErroena; 
+                } else {
+                    diana.estimulo = EstimuloTareaGaleriaTiro.DianaObjetivo;
+                }
                 
             break;
 
         }
 
         // comprobamos si es una gema de bonus
-        if(objetivo.esObjetivo)
+        if(diana.esObjetivo)
         {
             bool esGema = Random.value < Nivel.probabilidadAparicionGema;
-            objetivo.esGema = esGema;
-            if(objetivo.esGema)
-                objetivo.estimulo = EstimuloTareaGaleriaTiro.Gema;
+            diana.esGema = esGema;
+            if(diana.esGema)
+                diana.estimulo = EstimuloTareaGaleriaTiro.Gema;
         }
 
-        objetivo.Mostrar();
+        diana.Mostrar(puntoAparicion);        
+        puntoAparicion.Usar();
 
         FindObjectOfType<Audio>().FeedbackAparicionEstimulo();
         
     }   
+
 
     
     // se comprueba el estado de la partida despues de un error
@@ -485,6 +519,11 @@ public class TareaGaleriaTiro : Tarea
 
     protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
     {
+
+        
+       // return new RegistroPosicionOcular(tiempo, 0, 0);
+
+
         // obtenemos la municion actual, evitamos el null
         // porque igual no existe todavia componente jugador
         // en el primer frame?
@@ -492,59 +531,43 @@ public class TareaGaleriaTiro : Tarea
         JugadorTareaGaleriaTiro jugador = FindObjectOfType<JugadorTareaGaleriaTiro>();
         if(jugador != null)
             municion = jugador.Municion; 
-        
-        /*
-            La tarea solo puede tener dos estimulos activos
-            al mismo tiempo. Uno seria el estimuloA y otro el estimuloB
-        */
-
-        // comprobar los estimulos activos
-        ObjetivoTareaDisparo[] objetivos = FindObjectsOfType<ObjetivoTareaDisparo>();
-        EstimuloTareaGaleriaTiro estimuloA = EstimuloTareaGaleriaTiro.Ninguno;
-        EstimuloTareaGaleriaTiro estimuloB = EstimuloTareaGaleriaTiro.Ninguno;
-        int AX = -1;
-        int AY = -1; 
-        int BX = -1;
-        int BY = -1; 
-        // solo puede haber dos dianas activas en 
-        //cada momento como maximo 
-        foreach(ObjetivoTareaDisparo objetivo in objetivos)
-        {
-            // si el objetivo esta en uso y es visible            
-            if(objetivo.EnUso && ((DianaEntrenamiento) objetivo).Visible)
-            {
-                // si para el primer estimulo no hemos asignado 
-                // le asignamos este objetivo
-                if(estimuloA == EstimuloTareaGaleriaTiro.Ninguno)
-                {
-                    estimuloA = objetivo.estimulo; 
-                    Vector2 posicionA = ObtenerPosicionPantallaDelEstimulo(
-                        objetivo.gameObject.transform.position
-                    );
-                    AX = (int) posicionA.x; 
-                    AY = (int) posicionA.y;                     
-                    continue; 
-                }
-                // si para el segundo estimulo no hemos asignado
-                // le asignamos este objetivo 
-                if(estimuloB == EstimuloTareaGaleriaTiro.Ninguno)
-                {
-                    estimuloB = objetivo.estimulo;
-                    Vector2 posicionB = ObtenerPosicionPantallaDelEstimulo(
-                        objetivo.gameObject.transform.position
-                    );
-                    BX = (int) posicionB.x; 
-                    BY = (int) posicionB.y; 
-                    continue; 
-                }
-            }
-        }
       
+
+        int AX = -1; 
+        int AY = -1; 
+        int BX = -1; 
+        int BY = -1; 
+
+        EstimuloTareaGaleriaTiro estimuloA = EstimuloTareaGaleriaTiro.Ninguno; 
+        EstimuloTareaGaleriaTiro estimuloB = EstimuloTareaGaleriaTiro.Ninguno; 
+
+        if(dianaA.EnUso)
+        {
+            Vector2 posicionDianaA = ObtenerPosicionPantallaDelEstimulo(
+                dianaA.gameObject.transform.position
+            );
+            AX = (int) posicionDianaA.x; 
+            AY = (int) posicionDianaA.y;  
+            estimuloA = dianaA.estimulo; 
+        } 
+        
+
+        if(dianaB.EnUso)
+        {
+            Vector2 posicionDianaB = ObtenerPosicionPantallaDelEstimulo(
+                dianaB.gameObject.transform.position
+            );
+            BX = (int) posicionDianaB.x; 
+            BY = (int) posicionDianaB.y; 
+            estimuloB = dianaB.estimulo; 
+        }
             
         // devolvemos el nuevo registro
-        return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, estimuloA, estimuloB, 
+        return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, 
+        estimuloA, estimuloB, 
         AX, AY, BX, BY, recargando, municion
         );
+
         
     } 
 

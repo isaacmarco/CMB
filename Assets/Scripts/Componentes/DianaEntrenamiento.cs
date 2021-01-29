@@ -31,13 +31,17 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
         OcultarModelos();               
     }
     
-    public override void Mostrar()
+    
+
+    public override void Mostrar(PuntoAparicionDiana puntoAparicionDiana)
     {
-        
+      
+
         OcultarModelos();
         
-        base.Mostrar();
+        base.Mostrar(puntoAparicionDiana);
 
+      
         // mostrar la diana correspondiente o gema
         if(esObjetivo)
         {

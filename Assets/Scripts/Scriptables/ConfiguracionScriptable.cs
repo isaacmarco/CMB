@@ -42,7 +42,10 @@ public class ConfiguracionScriptable : ScriptableObject
     [Header("Configuracion tarea de evaluacion")]
     public int numberoDeBloquesDeEvaluacion = 3;    
     public int duracionDelBloqueDeEvaluacion = 10;    
-    public int duracionEstimuloFijacionEvaluacion = 1;    
+    public int duracionEstimuloFijacionEvaluacion = 1;   
+    public CondicionTareaEvaluacion condicionTareaEvaluaion = CondicionTareaEvaluacion.Experimental;
+    public ManejoTareaEvaluacion manejoTareaEvalucion = ManejoTareaEvaluacion.Vista;
+    public bool usarFondoGrisTareaEvaluacion = false;  
     [Header("Configuracion tarea de galeria de tiro")]
     public int puntuacionAciertoGaleriaTiro = 100;
     public int puntuacionGemaGaleriaTiro = 500;

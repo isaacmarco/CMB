@@ -10,7 +10,9 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     [SerializeField]
     private bool enUso = false;
     
-    
+    protected Vector3 puntoAparicion; 
+    protected PuntoAparicionDiana puntoAparicionDiana;
+
     public bool EnUso {
         get { return this.enUso;}
     }
@@ -21,8 +23,15 @@ public class ObjetivoTareaDisparo : MonoBehaviour
         Iniciar();
     }
 
-    public virtual void Mostrar()
-    {        
+    public virtual void Mostrar(PuntoAparicionDiana puntoAparicionDiana)
+    {   
+        this.puntoAparicionDiana = puntoAparicionDiana;
+        //this.puntoAparicionDiana.Usar();
+
+        // obtener la posicion
+        this.puntoAparicion = puntoAparicionDiana.gameObject.transform.position; 
+        gameObject.transform.position = this.puntoAparicion; 
+        
         AnimacionMostrar();
         StartCoroutine(CorrtuinaMostrarObjetivo());
         enUso = true;        
@@ -65,6 +74,7 @@ public class ObjetivoTareaDisparo : MonoBehaviour
         StopAllCoroutines();                     
         AnimacionOcultar();
         enUso = false; 
+        puntoAparicionDiana.Liberar();
     }
 
     protected virtual void AnimacionMostrar()
