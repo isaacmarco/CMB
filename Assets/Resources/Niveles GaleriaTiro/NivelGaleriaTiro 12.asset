@@ -23,4 +23,4 @@ MonoBehaviour:
   probabilidadAparicionDianaErronea: 0.5
   municionCargador: 300
   aciertosParaSuperarElNivel: 10
-  omisionesOErroresParaPerder: 5
+  omisionesOErroresParaPerder: 3

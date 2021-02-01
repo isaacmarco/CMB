@@ -50,23 +50,8 @@ public class TareaEvaluacion : Tarea
 
     private float tasaRefresco = 0.033f; // 0.016f; // 30Hz 0.033f; // 30Hz 0.016f; // 60HZ
     // contador de ticks
-    private int contadorTicks = 0;     
-    // constantes arbitrarias de cristian
-    /*
-    private double b0 = 2;
-    private double a1 = -4;
-    private double b1 = 3;
-    private double a2 = -4.9;
-    private double b2 = -3.6;
-    private double a3 = 3.9;
-    private double b3 = 4.5;
-    private double a4 = 0;
-    private double b4 = 1;
-    private double a5 = -3.8;
-    private double b5 = -0.5;
-    private double a6 = 1; 
-    private double b6 = 2.5;
-    */
+    private int contadorTicks = 0;       
+  
     // amplitud del movimiento
     private int amplitud = 9; 
     private float tiempoInicioTarea;
@@ -74,9 +59,40 @@ public class TareaEvaluacion : Tarea
     private bool mostrandoEstimuloFijacion; 
     private int numeroBloqueDeEvaluacion; 
 
+    protected override void Actualizacion()
+    {
+        // cada tarea ejecuta aqui su propio update()
+        if(Input.GetKeyDown(KeyCode.Escape))
+            if(Configuracion.condicionTareaEvaluaion == CondicionTareaEvaluacion.Entrenamiento)
+                TerminarEntrenamiento();
+    }
+    private void FinalizarTareaEvaluacion()
+    {
+        // detenmos las corrutinas, registramos en disco los
+        // datos y volvemos al menu de la aplicacion 
+        StopAllCoroutines();
+        FinalizarRegistro();
+        AbandonarTarea();
+    }
+
+    private void TerminarEntrenamiento()
+    {
+        Debug.Log("Entrenamiento terminado");
+        // no se registra nada, se abandona directamente la tarea 
+        StopAllCoroutines();
+        AbandonarTarea();
+    }
 
     protected override void Inicio()
-    {           
+    {          
+
+        // configurar la tarea 
+        float gris = 0.7f; 
+        Color fondoNegro = new Color(0, 0, 0, 1);
+        Color fondoGris = new Color(gris, gris, gris, 1);
+        
+        Camera.main.backgroundColor = Configuracion.usarFondoGrisTareaEvaluacion ? 
+            fondoGris : fondoNegro; 
         StartCoroutine(CorrutinaEvaluacion());
     }
     
@@ -126,14 +142,6 @@ public class TareaEvaluacion : Tarea
         FinalizarTareaEvaluacion();
         
         
-    }
-    private void FinalizarTareaEvaluacion()
-    {
-        // detenmos las corrutinas, registramos en disco los
-        // datos y volvemos al menu de la aplicacion 
-        StopAllCoroutines();
-        FinalizarRegistro();
-        AbandonarTarea();
     }
 
     private void CentrarEstimulo()

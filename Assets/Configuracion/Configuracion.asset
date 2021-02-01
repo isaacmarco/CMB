@@ -36,6 +36,9 @@ MonoBehaviour:
   numberoDeBloquesDeEvaluacion: 3
   duracionDelBloqueDeEvaluacion: 5
   duracionEstimuloFijacionEvaluacion: 1
+  condicionTareaEvaluaion: 1
+  manejoTareaEvalucion: 1
+  usarFondoGrisTareaEvaluacion: 0
   puntuacionAciertoGaleriaTiro: 100
   puntuacionGemaGaleriaTiro: 500
   penalizacionErrorGaleriaTiro: 50
