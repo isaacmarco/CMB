@@ -236,6 +236,12 @@ Transform:
   m_Father: {fileID: 393049401}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &82045626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3190881896518316838, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+    type: 3}
+  m_PrefabInstance: {fileID: 866717491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &89202041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,6 +3429,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577268277}
   m_CullTransparentMesh: 0
+--- !u!1 &631784594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3190881896518316838, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1306018056}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &650170061
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,6 +4050,7 @@ MonoBehaviour:
   puntuacion: {fileID: 256277416}
   mensajeTareaFainalizada: {fileID: 1458955494}
   mensajeNivelAcutal: {fileID: 155583114}
+  botonJugar: {fileID: 82045626}
 --- !u!114 &681659157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4103,6 +4116,7 @@ MonoBehaviour:
   puntuacion: {fileID: 187165207}
   mensajeTareaFainalizada: {fileID: 659779904}
   mensajeNivelAcutal: {fileID: 2119431120}
+  botonJugar: {fileID: 631784594}
 --- !u!4 &699343316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5891333054053618582, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
