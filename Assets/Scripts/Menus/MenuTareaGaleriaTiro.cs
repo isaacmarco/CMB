@@ -10,6 +10,7 @@ public class MenuTareaGaleriaTiro : MonoBehaviour
     public TextMeshPro puntuacion; 
     public GameObject mensajeTareaFainalizada; 
     public GameObject mensajeNivelAcutal; 
+    public GameObject botonJugar; 
 
     public void Actualizar()
     {
@@ -36,10 +37,12 @@ public class MenuTareaGaleriaTiro : MonoBehaviour
             this.nivelActual.gameObject.SetActive(false);
             mensajeNivelAcutal.SetActive(false); 
             mensajeTareaFainalizada.SetActive(true);
+             botonJugar.SetActive(false);
 
         } else {
             // mostrar el nivel actual             
             this.nivelActual.text = (nivelActual + 1).ToString();            
+             botonJugar.SetActive(true);
             
         }
 
