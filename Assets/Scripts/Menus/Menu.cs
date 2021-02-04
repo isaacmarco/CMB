@@ -137,6 +137,11 @@ public class Menu : MonoBehaviour
 
     }
 
+    public void ComenzarTareaEvaluacion()
+    {
+        SceneManager.LoadScene("TareaEvaluacion");
+    }
+    
     public void EjecutarOpcionMenu(OpcionesSeleccionablesMenu opcion, int nivelACargar = -1)
     {
       
