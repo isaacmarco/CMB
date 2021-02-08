@@ -16,6 +16,15 @@ public enum CondicionTareaEvaluacion
     Experimental
 };
 
+public enum MovimientoDiana
+{
+    Ninguno, 
+    HorizontalDerecha, 
+    HorizontalIzquierda,
+    VerticalArriba,
+    VerticalAbajo
+};
+
 public enum BloqueDeDianas
 {
     PrimerBloqueDianas, 

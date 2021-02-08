@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PuntoAparicionDiana : MonoBehaviour
 {
+    public MovimientoDiana direccionMovimientoDiana; 
     private bool enUso; 
     public bool EnUso{
         get { return enUso; }

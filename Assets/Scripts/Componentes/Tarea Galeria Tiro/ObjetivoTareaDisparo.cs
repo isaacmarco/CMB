@@ -23,7 +23,7 @@ public class ObjetivoTareaDisparo : MonoBehaviour
         Iniciar();
     }
 
-    public virtual void Mostrar(PuntoAparicionDiana puntoAparicionDiana)
+    public virtual void Mostrar(PuntoAparicionDiana puntoAparicionDiana, MovimientoDiana movimientoDiana, bool enMovimiento = false)
     {   
         this.puntoAparicionDiana = puntoAparicionDiana;
         //this.puntoAparicionDiana.Usar();

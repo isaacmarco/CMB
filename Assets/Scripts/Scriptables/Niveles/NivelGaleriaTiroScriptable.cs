@@ -14,6 +14,11 @@ public class NivelGaleriaTiroScriptable : NivelScriptable
     public float probabilidadAparicionGema = 0.2f;
     [Range(0, 1)]
     public float probabilidadAparicionDianaErronea = 0.5f;
+    [Range(0, 1)]
+    public float probabilidadAparicionDianaMovil = 0.3f; 
+    [Range(0, 1)]
+    public float probabilidadAparicionBomba = 0.3f; 
+    public float tiempoDetonacionBomba = 2f; 
     [Range(100, 1000)]
     public float municionCargador = 300;
         

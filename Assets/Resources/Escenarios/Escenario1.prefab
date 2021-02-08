@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8883738170259004608}
   - component: {fileID: 8883738170259004609}
   m_Layer: 0
-  m_Name: Escenario0
+  m_Name: Escenario1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,6 +170,10 @@ Transform:
   - {fileID: 7451067238874665258}
   - {fileID: 8496778073732805786}
   - {fileID: 8101079852250711996}
+  - {fileID: 734583364173744412}
+  - {fileID: 2505684820445114522}
+  - {fileID: 4790144757770762771}
+  - {fileID: 7483563290792626566}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -347,6 +351,91 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1001 &1512531028110006218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8883738170259004608}
+    m_Modifications:
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_Name
+      value: PuntoAparicionDiana (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_TagString
+      value: DianaPrimerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
+--- !u!4 &734583364173744412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+    type: 3}
+  m_PrefabInstance: {fileID: 1512531028110006218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1985248942755456103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,6 +664,91 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4140430202947622110}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4326180541939592780
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8883738170259004608}
+    m_Modifications:
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_Name
+      value: PuntoAparicionDiana (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_TagString
+      value: DianaPrimerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
+--- !u!4 &2505684820445114522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+    type: 3}
+  m_PrefabInstance: {fileID: 4326180541939592780}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4402110229394899656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -714,6 +888,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: DianaPrimerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
@@ -1006,6 +1185,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: DianaPrimerBloque
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &5488780196409707111 stripped
@@ -1093,6 +1277,96 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4903173184963024, guid: af1ac26269830d347859c2c45ef72494,
     type: 3}
   m_PrefabInstance: {fileID: 6607179809898619244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6680621786391651525
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8883738170259004608}
+    m_Modifications:
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_Name
+      value: PuntoAparicionDiana (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_TagString
+      value: DianaTercerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: bloqueDeDianas
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
+--- !u!4 &4790144757770762771 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+    type: 3}
+  m_PrefabInstance: {fileID: 6680621786391651525}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6904408176974880550
 PrefabInstance:
@@ -1399,6 +1673,11 @@ PrefabInstance:
       propertyPath: bloqueDeDianas
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &8496778073732805786 stripped
@@ -1552,6 +1831,11 @@ PrefabInstance:
       propertyPath: bloqueDeDianas
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &8101079852250711996 stripped
@@ -1570,12 +1854,12 @@ PrefabInstance:
     - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.38
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.13
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
         type: 3}
@@ -1631,6 +1915,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: DianaPrimerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
@@ -1720,6 +2009,96 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8069920447719325213}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8725337733069084496
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8883738170259004608}
+    m_Modifications:
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_Name
+      value: PuntoAparicionDiana (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136271201101902269, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: m_TagString
+      value: DianaTercerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: bloqueDeDianas
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
+--- !u!4 &7483563290792626566 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
+    type: 3}
+  m_PrefabInstance: {fileID: 8725337733069084496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8767337995231612924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1796,6 +2175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: bloqueDeDianas
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}

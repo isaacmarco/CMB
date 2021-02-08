@@ -21,6 +21,8 @@ public class TareaGaleriaTiro : Tarea
     [Header("Dianas")]
     public DianaEntrenamiento dianaA;
     public DianaEntrenamiento dianaB;
+    [Header("Bomba")]
+    public GameObject prefabBomba; 
 
     // posicion de dianas y camaras para este nivel instanciado
     private BloqueTareaDisparo bloqueTareaDisparo; 
@@ -237,6 +239,22 @@ public class TareaGaleriaTiro : Tarea
         }
     }
 
+    private bool bombaColocada = false; 
+
+    private void NuevaBomba()
+    {
+        /*
+        // no genear una bomba si ya hay una 
+        if(bombaColocada)
+            return; 
+        if(Random.value < Nivel.probabilidadAparicionBomba)
+        {
+            GameObject bomba = (GameObject) Instantiate(prefabBomba);
+            // TODO COLOCAR!
+            bombaColocada = true; 
+        }*/
+    }
+
     private IEnumerator CorrutinaBloqueDeDianas()
     {                   
         Debug.Log("Nuevo bloque de dianas");              
@@ -323,7 +341,7 @@ public class TareaGaleriaTiro : Tarea
         // seleccionar posicion al azar         
         int indice = Random.Range(0, dianasBloque.Length);
         GameObject puntoAparicionDiana = dianasBloque[indice];
-
+        MovimientoDiana movimientoDiana = puntoAparicionDiana.GetComponent<PuntoAparicionDiana>().direccionMovimientoDiana; 
         // comprobar si ya esta en uso 
         PuntoAparicionDiana puntoAparicion = puntoAparicionDiana.GetComponent<PuntoAparicionDiana>();
         if(puntoAparicion.EnUso)
@@ -371,7 +389,11 @@ public class TareaGaleriaTiro : Tarea
                 diana.estimulo = EstimuloTareaGaleriaTiro.Gema;
         }
 
-        diana.Mostrar(puntoAparicion);        
+        
+        // comprobar si es un objetivo movil 
+        bool esDianaEnMovimiento = Random.value < Nivel.probabilidadAparicionDianaMovil;
+
+        diana.Mostrar(puntoAparicion, movimientoDiana, esDianaEnMovimiento);        
         puntoAparicion.Usar();
 
         FindObjectOfType<Audio>().FeedbackAparicionEstimulo();

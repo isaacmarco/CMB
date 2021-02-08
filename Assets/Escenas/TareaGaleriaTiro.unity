@@ -1963,6 +1963,8 @@ MonoBehaviour:
   arma: {fileID: 1736042090}
   dianaA: {fileID: 2043347024}
   dianaB: {fileID: 933283440}
+  prefabBomba: {fileID: 7401291364479330103, guid: 78305eb6227bee941a8e15f1b188f5ea,
+    type: 3}
 --- !u!4 &681659154
 Transform:
   m_ObjectHideFlags: 0
@@ -2424,7 +2426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1376787013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2878,7 +2880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1759758674
 RectTransform:
   m_ObjectHideFlags: 0

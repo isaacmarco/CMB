@@ -21,6 +21,9 @@ MonoBehaviour:
   duracionDeCadaBloqueDeDianas: 15
   probabilidadAparicionGema: 0
   probabilidadAparicionDianaErronea: 0
+  probabilidadAparicionDianaMovil: 0.838
+  probabilidadAparicionBomba: 0.3
+  tiempoDetonacionBomba: 2
   municionCargador: 1000
   aciertosParaSuperarElNivel: 10
   omisionesOErroresParaPerder: 10

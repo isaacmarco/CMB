@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 8883738170259004608}
   - component: {fileID: 8883738170259004609}
   m_Layer: 0
-  m_Name: Escenario12
+  m_Name: Escenario0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,6 +549,11 @@ PrefabInstance:
       propertyPath: bloqueDeDianas
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &3227453818807920260 stripped
@@ -629,6 +634,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: DianaPrimerBloque
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &3195873528223173421 stripped
@@ -708,6 +718,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: DianaPrimerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
@@ -794,6 +809,11 @@ PrefabInstance:
       propertyPath: bloqueDeDianas
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &6114080449919404187 stripped
@@ -812,7 +832,7 @@ PrefabInstance:
     - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.05
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 2219242560033660630, guid: e8f10943870295548bd4f5a3a69d9542,
         type: 3}
@@ -873,6 +893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: DianaPrimerBloque
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
@@ -1102,6 +1127,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: DianaPrimerBloque
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &8953010194049579787 stripped
@@ -1186,6 +1216,11 @@ PrefabInstance:
         type: 3}
       propertyPath: bloqueDeDianas
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
@@ -1352,6 +1387,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: DianaPrimerBloque
       objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
 --- !u!4 &8206284005686307873 stripped
@@ -1516,6 +1556,11 @@ PrefabInstance:
         type: 3}
       propertyPath: bloqueDeDianas
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263003051688933066, guid: e8f10943870295548bd4f5a3a69d9542,
+        type: 3}
+      propertyPath: direccionMovimientoDiana
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f10943870295548bd4f5a3a69d9542, type: 3}
