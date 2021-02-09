@@ -19,6 +19,7 @@ public class NivelGaleriaTiroScriptable : NivelScriptable
     [Range(0, 1)]
     public float probabilidadAparicionBomba = 0.3f; 
     public float tiempoDetonacionBomba = 2f; 
+    public bool esNecesarioRecargar = true; // esNecesarioRecargar = municionCargador > 0
     [Range(100, 1000)]
     public float municionCargador = 300;
         

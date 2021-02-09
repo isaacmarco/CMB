@@ -82,16 +82,25 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
             
         }
 
-        return; 
+       
         if(enMovimiento)
-            StartCoroutine(TareaMovimientoDiana());
+        {
+            if(corrutinaMovimiento!=null)
+                StopCoroutine(corrutinaMovimiento);
+
+            corrutinaMovimiento = StartCoroutine(CorrutinaMovimiento());
+        }
+            // TareaMovimientoDiana();
 
     }    
+    private Coroutine corrutinaMovimiento; 
+   
 
-    
-
-    private IEnumerator TareaMovimientoDiana()
+    private void TareaMovimientoDiana()
     {
+        iTween.Stop(gameObject);
+        posicionInicial = gameObject.transform.position; 
+
         float x = posicionInicial.x; 
         float z = posicionInicial.z; 
         float y = posicionInicial.y; 
@@ -130,8 +139,67 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
             "islocal", true)
         );
 
-        yield return null; 
+    }
+
+    private IEnumerator CorrutinaMovimiento()
+    {
+         posicionInicial = gameObject.transform.position; 
+
+        float x = posicionInicial.x; 
+        float z = posicionInicial.z; 
+        float y = posicionInicial.y; 
+
+
+        int cantidadDesplazamiento = 2;        
+        int destinoX = 0; 
+        int destinoY = 0; 
+
+        switch(movimientoDianas)
+        {
+            case MovimientoDiana.HorizontalIzquierda:
+                destinoX = -cantidadDesplazamiento; 
+            break;
+            case MovimientoDiana.HorizontalDerecha:
+                destinoX = cantidadDesplazamiento; 
+            break;
+            case MovimientoDiana.VerticalAbajo:
+                destinoY = -cantidadDesplazamiento;
+            break;
+            case MovimientoDiana.VerticalArriba:
+                destinoY = cantidadDesplazamiento; 
+            break;
+        }
         
+
+        Vector3 positionDisplacement;
+        Vector3 positionOrigin;
+        float _timePassed = 0f;         
+        positionDisplacement = new Vector3(destinoX, destinoY, 0);
+        positionOrigin = transform.position;
+     
+   
+
+        while(true)
+        {
+
+            
+            _timePassed += Time.deltaTime;
+            transform.position = Vector3.Lerp(positionOrigin, positionOrigin + positionDisplacement,
+            Mathf.PingPong(_timePassed, 1));
+    
+            /*
+
+            float distanciaRecorrida = 0f; 
+            float velocidad_ = Time.deltaTime * 2f; 
+            distanciaRecorrida += velocidad_; 
+            // desplazar en ping-pong las dianas
+            gameObject.transform.Translate(
+                new Vector3(destinoX, destinoY, 0) * velocidad_ , Space.Self
+            );
+            if(distanciaRecorrida > 5)*/
+
+            yield return null; 
+        }
     }
 
     protected override void AnimacionMostrar()
