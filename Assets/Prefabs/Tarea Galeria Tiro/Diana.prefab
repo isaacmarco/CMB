@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 3905528921293580163}
   - component: {fileID: 1705544035636247794}
   m_Layer: 0
-  m_Name: DianaEntrenamiento
+  m_Name: Diana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -638,7 +638,7 @@ Transform:
   m_GameObject: {fileID: 7401291364479330103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.09, y: 0, z: -0.14}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 7121071440479393208}
   - {fileID: 821970695461794362}
@@ -745,13 +745,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e10e7f4c8413c5439701a10caa1eec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  estimulo: 0
   esObjetivo: 1
   esGema: 0
+  enUso: 0
   modeloDianaCorrecta: {fileID: 7122736270725370210}
   modeloDianaIncorrecta: {fileID: 821970695461794341}
   gemaA: {fileID: 1968824208281693217}
   gemaB: {fileID: 2573562132255661876}
   gemaC: {fileID: 807251204714774393}
+  movimientoDianas: 0
 --- !u!54 &1705544035636247794
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -820,6 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d377e90c7feb8149b4cba9286036baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  es2D: 0
 --- !u!222 &8590550380575027839
 CanvasRenderer:
   m_ObjectHideFlags: 0

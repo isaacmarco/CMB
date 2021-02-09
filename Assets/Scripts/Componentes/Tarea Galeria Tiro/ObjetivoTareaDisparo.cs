@@ -26,11 +26,11 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     public virtual void Mostrar(PuntoAparicionDiana puntoAparicionDiana, MovimientoDiana movimientoDiana, bool enMovimiento = false)
     {   
         this.puntoAparicionDiana = puntoAparicionDiana;
-        //this.puntoAparicionDiana.Usar();
+        this.puntoAparicionDiana.Usar();
 
         // obtener la posicion
-        this.puntoAparicion = puntoAparicionDiana.gameObject.transform.position; 
-        gameObject.transform.position = this.puntoAparicion; 
+        //this.puntoAparicion = puntoAparicionDiana.gameObject.transform.position; 
+        //gameObject.transform.position = this.puntoAparicion; 
         
         AnimacionMostrar();
         StartCoroutine(CorrtuinaMostrarObjetivo());

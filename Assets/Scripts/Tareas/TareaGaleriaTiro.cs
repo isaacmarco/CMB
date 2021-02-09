@@ -21,8 +21,14 @@ public class TareaGaleriaTiro : Tarea
     [Header("Dianas")]
     public DianaEntrenamiento dianaA;
     public DianaEntrenamiento dianaB;
+    public DianaEntrenamiento dianaC; 
     [Header("Bomba")]
     public GameObject prefabBomba; 
+
+    //public Transform[] padresBloques; 
+    public Transform padreBloquesDianas; 
+    
+    public GameObject[] dianas; 
 
     // posicion de dianas y camaras para este nivel instanciado
     private BloqueTareaDisparo bloqueTareaDisparo; 
@@ -115,10 +121,54 @@ public class TareaGaleriaTiro : Tarea
         }
     }
 
+     private GameObject[] posiciones; 
+GameObject dom; 
+    public GameObject navegacion;
+    private void GenerarPuntosNavegacion()
+    {        
+        int numeroPosiciones = navegacion.transform.childCount; 
+        posiciones = new GameObject[numeroPosiciones];
+        for(int i=0; i<numeroPosiciones; i++)
+        {
+            // obtenemos el hijo y anotamos su posicion 
+            Transform hijo = navegacion.transform.GetChild(i);
+            hijo.name = "PuntoNavegacion " + i;             
+            hijo.gameObject.GetComponent<Renderer>().enabled = false; 
+            if(hijo.childCount> 0)
+                hijo.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false; 
+            posiciones[i] = hijo.gameObject; 
+        }
+        Debug.Log(posiciones.Length + " posiciones de navegacion");
+    }
+
+    private ArrayList listaBloquesDianas; // <Transform[]>
+
+    private void GenerarBloquesDianas()
+    {
+        /*
+        listaBloquesDianas = new ArrayList();
+
+        int numeroBloques = padreBloquesDianas.transform.childCount;
+        Transform[] bloquesDiana = new Transform[numeroBloques];
+        for(int i=0; i<numeroBloques; i++)
+        {
+            Transform hijo = padreBloquesDianas.GetChild(i);
+            hijo.name = "BloqueConDianas " + i;
+            listaBloquesDianas.Add(hijo);
+            // en esta lista tenemos el padre de cada bloque de dianas
+            //bloquesDiana[i] = hijo;             
+        }
+        Debug.Log(listaBloquesDianas.Count + " bloques de tiro creados");*/
+    }
+
+    int bloqueActual = 0; 
     protected override void Inicio()
     {          
+        GenerarPuntosNavegacion();
+        GenerarBloquesDianas();
+
         // crear el escenario
-        InstanciarEscenario();
+        //InstanciarEscenario();
         avisoRecarga.SetActive(false);
         Recargar();
         
@@ -126,8 +176,27 @@ public class TareaGaleriaTiro : Tarea
         DesbloquearTarea();
         StartCoroutine(CorrutinaTareaDisparo());  
         StartCoroutine(CorrutinaMunicion());
+        StartCoroutine(CorrutinaMirar());
     }
 
+    private IEnumerator CorrutinaMirar()
+    {
+        while(true)
+        {
+            if(dom!=null)
+            {
+            
+        Vector3 v = new Vector3(0, 0.7f, 0);
+        GameObject jugador = Camera.main.gameObject; 
+        jugador.transform.rotation = Quaternion.Slerp(
+            jugador.transform.rotation, (
+                Quaternion.LookRotation(
+                    (dom.transform.position + v) - jugador.transform.position)), Time.deltaTime * 10f);
+
+            }
+            yield return null; 
+        }
+    }
     private GameObject[] puntosAparicionDianasPrimerBloque; 
     private GameObject[] puntosAparicionDianasSegundoBloque;
     private GameObject[] puntosAparicionDianasTercerBloque; 
@@ -147,23 +216,12 @@ public class TareaGaleriaTiro : Tarea
 
     }
 
-    private bool _HayEstimulosVisibles()
-    {
-        ObjetivoTareaDisparo[] dianas = FindObjectsOfType<ObjetivoTareaDisparo>();
-        foreach(ObjetivoTareaDisparo diana in dianas)
-            if(diana.EnUso)
-                return true;
-        
-        return false; 
-    }
     private bool HayEstimulosVisibles()
     {        
-        return dianaA.EnUso || dianaB.EnUso; 
+        return dianaA.EnUso || dianaB.EnUso || dianaC.EnUso; 
     }
 
-    private int bloqueActual = 0; 
-    private bool camaraMoviendose = false; 
-
+   
     private IEnumerator CorrutinaTareaDisparo()
     {
    
@@ -173,6 +231,50 @@ public class TareaGaleriaTiro : Tarea
         while(true)
         {
             
+
+            // movemos la camara al siguiente bloque                            
+            Vector3 posicion = posiciones[bloqueActual].transform.position + Vector3.up;
+            GameObject jugador = Camera.main.gameObject; 
+            float duracionAnimacionCamara = 3f; 
+            
+            
+            
+
+            // orientamos la camara 
+            GameObject dummyOrientacion = posiciones[bloqueActual].transform.GetChild(0).gameObject;
+            dom = dummyOrientacion; 
+            
+          
+            iTween.MoveTo(jugador, 
+                iTween.Hash(
+                "x", posicion.x, 
+                "y", posicion.y, 
+                "z", posicion.z,
+                "easetype", iTween.EaseType.linear, 
+                "time", duracionAnimacionCamara
+                )
+            );
+        
+            
+            // esperamos a que la camara llegue al nuevo bloque
+            yield return new WaitForSeconds(duracionAnimacionCamara);
+
+           
+            // comenzamos el juego de disparos de este bloque            
+            yield return StartCoroutine(CorrutinaBloqueDeDianas());      
+
+            //yield return new WaitForSeconds( Nivel.duracionDeCadaBloqueDeDianas); // permanencia en bloque
+
+            // cambiamos al siguiente bloque
+            bloqueActual++;
+            if(bloqueActual >= posiciones.Length)
+            {
+                bloqueActual = 0; 
+                yield break;
+            }
+            yield return null; 
+
+/*
             // movemos la camara al siguiente bloque                            
             Vector3 posicion = bloqueTareaDisparo.posicionesCamara[bloqueActual].position;
             GameObject jugador = Camera.main.gameObject; 
@@ -188,7 +290,7 @@ public class TareaGaleriaTiro : Tarea
             // cambiamos al siguiente bloque
             bloqueActual++;
             if(bloqueActual >= bloqueTareaDisparo.posicionesCamara.Length)
-                bloqueActual = 0; 
+                bloqueActual = 0; */
         }
 
     }
@@ -290,57 +392,26 @@ public class TareaGaleriaTiro : Tarea
     }
  
 
-    private int ContadorDianasVisibles()
-    {
-        int contador = 0; 
-        ObjetivoTareaDisparo[] dianas = FindObjectsOfType<ObjetivoTareaDisparo>();
-        foreach(ObjetivoTareaDisparo diana in dianas)
-            if(diana.EnUso)
-                contador++;        
-
-        return contador; 
-    }
-
     private DianaEntrenamiento ObtenerDianaLibre()
     {
         if(!dianaA.EnUso)
             return dianaA; 
         if(!dianaB.EnUso)
             return dianaB; 
+        if(!dianaC.EnUso)
+            return dianaC; 
         return  null; 
     }
     private void MostrarNuevoObjetivo()
     {
-        // mantenemos un maximo de 2 dianas visibles
-        /*
-        if(ContadorDianasVisibles() >= 2)
-        {
-            Debug.Log("No se pueden generar mas dianas por ahora");
-            return; 
-        }*/
-        
+      
         // si ya se estan mostrando las dos dianas no generamos mas 
-        if(dianaA.EnUso && dianaB.EnUso)
+        if(dianaA.EnUso && dianaB.EnUso && dianaC.EnUso)
             return; 
-
-        // obtenemos los puntos de aparicion de dianas dependiendo del bloque actual 
-        ArrayList bloques = new ArrayList() {
-            puntosAparicionDianasPrimerBloque, 
-            puntosAparicionDianasSegundoBloque, 
-            puntosAparicionDianasTercerBloque
-        };
-        GameObject[] dianasBloque = (GameObject[]) bloques[bloqueActual];
-        if(dianasBloque == null || dianasBloque.Length == 0)
-        {
-            // no hay suficinetes dianas, usamos las del primer
-            // bloque. Esto solo es valido si no avanzamos
-            // mucho por el decorado
-            dianasBloque = puntosAparicionDianasPrimerBloque;
-        }
 
         // seleccionar posicion al azar         
-        int indice = Random.Range(0, dianasBloque.Length);
-        GameObject puntoAparicionDiana = dianasBloque[indice];
+        int indice = Random.Range(0, dianas.Length);
+        GameObject puntoAparicionDiana = dianas[indice];
         MovimientoDiana movimientoDiana = puntoAparicionDiana.GetComponent<PuntoAparicionDiana>().direccionMovimientoDiana; 
         // comprobar si ya esta en uso 
         PuntoAparicionDiana puntoAparicion = puntoAparicionDiana.GetComponent<PuntoAparicionDiana>();
@@ -393,10 +464,15 @@ public class TareaGaleriaTiro : Tarea
         // comprobar si es un objetivo movil 
         bool esDianaEnMovimiento = Random.value < Nivel.probabilidadAparicionDianaMovil;
 
+        Debug.Log("Mostrando diana en " + puntoAparicion.gameObject.transform.position);
+
         diana.Mostrar(puntoAparicion, movimientoDiana, esDianaEnMovimiento);        
         puntoAparicion.Usar();
 
         FindObjectOfType<Audio>().FeedbackAparicionEstimulo();
+
+        // la diana siempre mira al jugador
+        diana.gameObject.transform.LookAt(Camera.main.transform.position);
         
     }   
 
@@ -559,9 +635,12 @@ public class TareaGaleriaTiro : Tarea
         int AY = -1; 
         int BX = -1; 
         int BY = -1; 
+        int CX = -1; 
+        int CY = -1; 
 
         EstimuloTareaGaleriaTiro estimuloA = EstimuloTareaGaleriaTiro.Ninguno; 
         EstimuloTareaGaleriaTiro estimuloB = EstimuloTareaGaleriaTiro.Ninguno; 
+        EstimuloTareaGaleriaTiro estimuloC = EstimuloTareaGaleriaTiro.Ninguno; 
 
         if(dianaA.EnUso)
         {
@@ -583,6 +662,18 @@ public class TareaGaleriaTiro : Tarea
             BY = (int) posicionDianaB.y; 
             estimuloB = dianaB.estimulo; 
         }
+
+        
+        if(dianaC.EnUso)
+        {
+            Vector2 posicionDianaC = ObtenerPosicionPantallaDelEstimulo(
+                dianaC.gameObject.transform.position
+            );
+            CX = (int) posicionDianaC.x; 
+            CY = (int) posicionDianaC.y; 
+            estimuloC = dianaC.estimulo; 
+        }
+
             
         // devolvemos el nuevo registro
         return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, 

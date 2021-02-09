@@ -39,14 +39,19 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
     
     
 
-    public override void Mostrar(PuntoAparicionDiana puntoAparicionDiana, MovimientoDiana movimientoDiana, bool enMovimiento = false)
+    public override void Mostrar(PuntoAparicionDiana posicion, MovimientoDiana movimientoDiana, bool enMovimiento = false)
     {
       
+        gameObject.transform.LookAt(Camera.main.gameObject.transform.position);
 
         OcultarModelos();
         
-        base.Mostrar(puntoAparicionDiana, movimientoDiana);
+        base.Mostrar(posicion, movimientoDiana);
 
+         //this.puntoAparicion = puntoAparicionDiana.gameObject.transform.position; 
+        gameObject.transform.position = posicion.gameObject.transform.position; 
+
+ 
         this.movimientoDianas = movimientoDiana;
         posicionInicial = gameObject.transform.position; 
       
@@ -77,6 +82,7 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
             
         }
 
+        return; 
         if(enMovimiento)
             StartCoroutine(TareaMovimientoDiana());
 
@@ -90,23 +96,19 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
         float z = posicionInicial.z; 
         float y = posicionInicial.y; 
 
-        /*
-            TODO: DESPLAZAMIENTO VERTICAL U HORIZONTAL
-            DEPENDIENDO DEL ENUM
-        */
 
-        int cantidadDesplazamiento = 1; 
-        float velocidad = 0.5f; 
+        int cantidadDesplazamiento = 2; 
+        float velocidad = 1f; 
         int destinoX = 0; 
         int destinoY = 0; 
 
         switch(movimientoDianas)
         {
             case MovimientoDiana.HorizontalIzquierda:
-                destinoX = cantidadDesplazamiento; 
+                destinoX = -cantidadDesplazamiento; 
             break;
             case MovimientoDiana.HorizontalDerecha:
-                destinoX = -cantidadDesplazamiento; 
+                destinoX = cantidadDesplazamiento; 
             break;
             case MovimientoDiana.VerticalAbajo:
                 destinoY = -cantidadDesplazamiento;
@@ -119,11 +121,13 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
 
         iTween.MoveTo(gameObject, 
             iTween.Hash(
-                "x", x + destinoX,
+                //"x", x + destinoX,
                 "y", y + destinoY, 
-                "z", z,
+                "z", z + destinoX,
             "looptype", iTween.LoopType.pingPong,
-            "easetype", iTween.EaseType.linear, "speed", velocidad)
+            "easetype", iTween.EaseType.linear, 
+            "speed", velocidad,
+            "islocal", true)
         );
 
         yield return null; 
