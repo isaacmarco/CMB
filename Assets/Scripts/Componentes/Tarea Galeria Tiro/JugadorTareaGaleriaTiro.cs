@@ -17,6 +17,11 @@ public class JugadorTareaGaleriaTiro : MonoBehaviour
     
     public bool HayMunicion()
     {
+        // si no es necesario recargar en el nivel entonces
+        // siempre devolvemos q hay municion 
+        if ( !FindObjectOfType<TareaGaleriaTiro>().Nivel.esNecesarioRecargar)
+            return true; 
+            
         return municion > 0; 
     }
     public int Municion {

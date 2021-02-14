@@ -11,8 +11,7 @@ public class TareaGaleriaTiro : Tarea
     public Text erroresUI;
     public Text omisionesUI;
     public Text municionUI;
-    public Text puntuacionUI;
-    public GameObject interfazRecarga2D; 
+    public Text puntuacionUI;    
     public GameObject avisoRecarga; 
    
     [Header("Arma")]
@@ -169,15 +168,31 @@ GameObject dom;
 
         // crear el escenario
         //InstanciarEscenario();
-        avisoRecarga.SetActive(false);
-        Recargar();
+
+        // si hay municion en este nivel entonces
+        // mostramos la UI y lanzamos la corrutina de la mecanica
+        // de recarga 
+        if(Nivel.esNecesarioRecargar)
+        {
+            avisoRecarga.SetActive(false);
+            Recargar();            
+            StartCoroutine(CorrutinaMunicion());
+        } else {
+            // ocultamos la UI de recarga
+            interfazRecarga.SetActive(false);
+            avisoRecarga.transform.parent.gameObject.SetActive(false);
+            arma.SetActive(false);
+        }
+
+        
         
         // comenzar la tarea        
         DesbloquearTarea();
         StartCoroutine(CorrutinaTareaDisparo());  
-        StartCoroutine(CorrutinaMunicion());
         StartCoroutine(CorrutinaMirar());
     }
+
+    
 
     private IEnumerator CorrutinaMirar()
     {
@@ -464,7 +479,7 @@ GameObject dom;
         // comprobar si es un objetivo movil 
         bool esDianaEnMovimiento = Random.value < Nivel.probabilidadAparicionDianaMovil;
 
-        Debug.Log("Mostrando diana en " + puntoAparicion.gameObject.transform.position);
+        // Debug.Log("Mostrando diana en " + puntoAparicion.gameObject.transform.position);
 
         diana.Mostrar(puntoAparicion, movimientoDiana, esDianaEnMovimiento);        
         puntoAparicion.Usar();

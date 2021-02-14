@@ -24,6 +24,7 @@ MonoBehaviour:
   probabilidadAparicionDianaMovil: 0.356
   probabilidadAparicionBomba: 0.3
   tiempoDetonacionBomba: 2
+  esNecesarioRecargar: 0
   municionCargador: 400
   aciertosParaSuperarElNivel: 40
   omisionesOErroresParaPerder: 40
