@@ -56,8 +56,13 @@ public class ImportadorNiveles
             //3 Tipos de Diana            
             //4 P/aparición de diana erronea
             //5 P/aparición de gema	
-            //6 Munición cargador
-                                
+            //6 P/diana movil
+            //7 hay que recargar?
+            //8 Munición cargador
+            //9 ruta por la ciudad
+            //10 tiempo spawn de diana
+            //11 permanencia en un bloque
+
             // parseamos los campos
             int numeroNivel = -1; 
             int aciertos = -1; 
@@ -65,6 +70,12 @@ public class ImportadorNiveles
             int municionCargador = -1;             
             int probabilidadDianaErronea = -1; 
             int probabilidadGema = -1; 
+            int probabilidadDianaMovil = -1; 
+            int rutaPorLaCiudad = -1; 
+            int perameneciaBloque = -1; 
+
+            float tiempoAparicionDiana = -1;
+            
             
             // campos enteros     
             int.TryParse(campos[0], out numeroNivel);
@@ -72,7 +83,14 @@ public class ImportadorNiveles
             int.TryParse(campos[2], out omisionesErrores);
             int.TryParse(campos[4], out probabilidadDianaErronea);
             int.TryParse(campos[5], out probabilidadGema);
-            int.TryParse(campos[6], out municionCargador);
+            int.TryParse(campos[6], out probabilidadDianaMovil);
+            int.TryParse(campos[8], out municionCargador);
+            int.TryParse(campos[9], out rutaPorLaCiudad);
+            int.TryParse(campos[11], out perameneciaBloque);
+
+            // floats
+            float.TryParse(campos[10], out tiempoAparicionDiana);
+            
 
             // parsear enumerdaos
             DificultadTareaGaleriaTiro estimulos = DificultadTareaGaleriaTiro.SoloDianaObjetivo;
@@ -83,6 +101,9 @@ public class ImportadorNiveles
                 estimulos = DificultadTareaGaleriaTiro.VariosTiposDiana; 
             }
 
+            // hay que recargar?
+            bool esNecesarioRecargar = campos[7] == "si";
+            
             
             
             // creamos el scriptable
@@ -94,12 +115,17 @@ public class ImportadorNiveles
             
             // configuramos el scriptable
             nivel.numeroDelNivel = numeroNivel; 
+            nivel.rutaPorLaCiudad = rutaPorLaCiudad; 
             nivel.aciertosParaSuperarElNivel = aciertos; 
             nivel.omisionesOErroresParaPerder = omisionesErrores;
             nivel.dianas = estimulos;
             nivel.probabilidadAparicionDianaErronea = probabilidadDianaErronea / 100f; 
             nivel.probabilidadAparicionGema = probabilidadGema / 100f; 
+            nivel.probabilidadAparicionDianaMovil = probabilidadDianaMovil / 100f; 
             nivel.municionCargador = municionCargador;
+            nivel.esNecesarioRecargar = esNecesarioRecargar;
+            nivel.tiempoParaNuevaDiana = tiempoAparicionDiana;
+            nivel.duracionDeCadaBloqueDeDianas = perameneciaBloque;
            
            
             Debug.Log("Creado " + nombreScriptable);

@@ -7,7 +7,8 @@ public class Mensaje : MonoBehaviour
 {
     public enum TipoMensaje
     {
-        Exito, Fallo, Aviso, Bonus, Record, Tiempo, Topos, Memory, Comienzo, Ojo
+        Exito, Fallo, Aviso, Bonus, Record, Tiempo, Topos, Memory, Comienzo, Ojo,
+        GaleriaTiro, DianaAzul, DianaRoja, Municion
     };
    
     [SerializeField] private Text mensaje; 
@@ -15,7 +16,7 @@ public class Mensaje : MonoBehaviour
     [SerializeField] Image imagenTipoMensaje;    
     [SerializeField] private Sprite spriteExito, spriteFallo, 
         spriteAviso, spriteBonus, spriteRecord, spriteReloj, spriteTopos, spriteMemory,
-        spriteComienzo, spriteOjo; 
+        spriteComienzo, spriteOjo, spriteDianaAzul, spriteDianaRoja, spriteMunicion; 
     
     void Awake()
     {
@@ -85,6 +86,15 @@ public class Mensaje : MonoBehaviour
             break;
             case TipoMensaje.Ojo:
                 imagenTipoMensaje.sprite = spriteOjo; 
+            break;
+            case TipoMensaje.DianaAzul:
+                imagenTipoMensaje.sprite = spriteDianaAzul; 
+            break;
+            case TipoMensaje.DianaRoja:
+                imagenTipoMensaje.sprite = spriteDianaRoja; 
+            break;
+            case TipoMensaje.Municion:
+                imagenTipoMensaje.sprite = spriteMunicion;
             break;
         }
 

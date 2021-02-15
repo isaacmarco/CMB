@@ -7,9 +7,10 @@ public class NivelGaleriaTiroScriptable : NivelScriptable
 {  
     [Header("Configuracion general")]    
     public DificultadTareaGaleriaTiro dianas;    
+    public int rutaPorLaCiudad; 
     public int duracionDiana = 3;    
-    public int tiempoParaNuevaDiana = 2;
-    public int duracionDeCadaBloqueDeDianas = 15;
+    public float tiempoParaNuevaDiana = 0.5f;
+    public int duracionDeCadaBloqueDeDianas = 6;
     [Range(0, 1)]
     public float probabilidadAparicionGema = 0.2f;
     [Range(0, 1)]
@@ -19,7 +20,7 @@ public class NivelGaleriaTiroScriptable : NivelScriptable
     [Range(0, 1)]
     public float probabilidadAparicionBomba = 0.3f; 
     public float tiempoDetonacionBomba = 2f; 
-    public bool esNecesarioRecargar = true; // esNecesarioRecargar = municionCargador > 0
+    public bool esNecesarioRecargar = true; 
     [Range(100, 1000)]
     public float municionCargador = 300;
         

@@ -57,13 +57,16 @@ public class ObjetivoTareaDisparo : MonoBehaviour
             {
                 FindObjectOfType<TareaGaleriaTiro>().Bonus();
             } else {
-                FindObjectOfType<TareaGaleriaTiro>().Acierto();
+                FindObjectOfType<TareaGaleriaTiro>().Acierto();                
             }
             
         } else {
             FindObjectOfType<Tarea>().Error();
         }
         
+        FindObjectOfType<TareaGaleriaTiro>().InstanciarVFXDestruccion(
+            gameObject.transform.position,esGema, esObjetivo);
+      
         Ocultar();
         
     }

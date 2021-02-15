@@ -12,7 +12,9 @@ public class TareaGaleriaTiro : Tarea
     public Text omisionesUI;
     public Text municionUI;
     public Text puntuacionUI;    
+    public Image tiempoUI;
     public GameObject avisoRecarga; 
+    public GameObject interfaz2D; 
    
     [Header("Arma")]
     public GameObject interfazRecarga;
@@ -23,6 +25,10 @@ public class TareaGaleriaTiro : Tarea
     public DianaEntrenamiento dianaC; 
     [Header("Bomba")]
     public GameObject prefabBomba; 
+    [Header("VFX")]
+    public GameObject particulasDianaCorrecta; 
+    public GameObject particulasDianaIncorrecta; 
+    public GameObject particulasGema; 
 
     //public Transform[] padresBloques; 
     public Transform padreBloquesDianas; 
@@ -44,7 +50,39 @@ public class TareaGaleriaTiro : Tarea
     private float tiempoEntreCambiosCamara = 5f;
     private float tiempoDelUltimoCambioCamara; 
     private bool avisoMunicionEscuchado = false; 
+    private bool bombaColocada = false; 
+    private bool recargando = false; 
+    public bool Recargando{
+        get{ return this.recargando;}
+    }
+    private GameObject[] posiciones; 
+    GameObject dom; 
+    public GameObject navegacion;
+    
+    private GameObject[] puntosAparicionDianasPrimerBloque; 
+    private GameObject[] puntosAparicionDianasSegundoBloque;
+    private GameObject[] puntosAparicionDianasTercerBloque; 
+    private ArrayList listaBloquesDianas; // <Transform[]>
+    int bloqueActual = 0; 
+    private bool haciendoMovimientosAleatorios = false; 
 
+    public void InstanciarVFXDestruccion(Vector3 posicionDiana, bool esGema, bool dianaCorrecta)
+    {
+        //if(particulasDianaCorrecta==null)
+        //    return; 
+        GameObject prefab = particulasDianaCorrecta; 
+        if(!dianaCorrecta)
+            prefab = particulasDianaIncorrecta; 
+        if( esGema)
+            prefab = particulasGema; 
+        
+        GameObject vfx = (GameObject) Instantiate(prefab);
+        vfx.transform.position = posicionDiana;
+        float factoEscala = 0.1f;  
+        vfx.transform.localScale = new Vector3(
+            factoEscala, factoEscala, factoEscala
+        );
+    }
     public void MostrarInterfazRecarga()
     {
         if(!avisoMunicionEscuchado)
@@ -55,16 +93,14 @@ public class TareaGaleriaTiro : Tarea
         interfazRecarga.SetActive(true);
         avisoRecarga.SetActive(true);
     }
+
     public void Recargar()
     {   
         FindObjectOfType<Audio>().FeedbackClickDefecto();
         StartCoroutine(CorrutinaRecarga());        
     }
 
-    private bool recargando = false; 
-    public bool Recargando{
-        get{ return this.recargando;}
-    }
+    
     private IEnumerator CorrutinaRecarga()
     {
         
@@ -120,17 +156,25 @@ public class TareaGaleriaTiro : Tarea
         }
     }
 
-     private GameObject[] posiciones; 
-GameObject dom; 
-    public GameObject navegacion;
+    
     private void GenerarPuntosNavegacion()
     {        
-        int numeroPosiciones = navegacion.transform.childCount; 
+
+        // instanciamos el trayecto en el objeto navegacion 
+        string rutaPrefab = "Escenarios/NivelGaleriaTiro" + Nivel.rutaPorLaCiudad; // Nivel.numeroDelNivel;
+        GameObject _rutaPrefab = (GameObject) Resources.Load(rutaPrefab);        
+        GameObject rutaJugador = (GameObject) Instantiate(_rutaPrefab, navegacion.transform);
+        rutaJugador.transform.position = Vector3.zero;
+        
+        // generamos los puntos 
+        Transform ruta = navegacion.transform.GetChild(0);
+
+        int numeroPosiciones = ruta.transform.childCount; // navegacion.transform.childCount; 
         posiciones = new GameObject[numeroPosiciones];
         for(int i=0; i<numeroPosiciones; i++)
         {
             // obtenemos el hijo y anotamos su posicion 
-            Transform hijo = navegacion.transform.GetChild(i);
+            Transform hijo = ruta.transform.GetChild(i); // navegacion.transform.GetChild(i);
             hijo.name = "PuntoNavegacion " + i;             
             hijo.gameObject.GetComponent<Renderer>().enabled = false; 
             if(hijo.childCount> 0)
@@ -140,7 +184,7 @@ GameObject dom;
         Debug.Log(posiciones.Length + " posiciones de navegacion");
     }
 
-    private ArrayList listaBloquesDianas; // <Transform[]>
+   
 
     private void GenerarBloquesDianas()
     {
@@ -159,15 +203,13 @@ GameObject dom;
         }
         Debug.Log(listaBloquesDianas.Count + " bloques de tiro creados");*/
     }
-
-    int bloqueActual = 0; 
+    
     protected override void Inicio()
     {          
         GenerarPuntosNavegacion();
         GenerarBloquesDianas();
 
-        // crear el escenario
-        //InstanciarEscenario();
+        interfaz2D.SetActive(false); 
 
         // si hay municion en este nivel entonces
         // mostramos la UI y lanzamos la corrutina de la mecanica
@@ -212,10 +254,6 @@ GameObject dom;
             yield return null; 
         }
     }
-    private GameObject[] puntosAparicionDianasPrimerBloque; 
-    private GameObject[] puntosAparicionDianasSegundoBloque;
-    private GameObject[] puntosAparicionDianasTercerBloque; 
-
     private void InstanciarEscenario()
     {
         // instanciar el prefab del nivel        
@@ -239,7 +277,61 @@ GameObject dom;
    
     private IEnumerator CorrutinaTareaDisparo()
     {
-   
+        
+        // posicionamos la camar en el primer punto 
+        Vector3 _posicion = posiciones[bloqueActual].transform.position + Vector3.up;
+        Camera.main.gameObject.transform.position = _posicion; 
+        // miramos hacia el segundo punto
+        Vector3 _posicionSegundoPunto = posiciones[bloqueActual+1].transform.position + Vector3.up; 
+        Camera.main.gameObject.transform.LookAt(_posicionSegundoPunto);
+
+        int nivel = Configuracion.nivelActual.numeroDelNivel;
+
+        // mensaje por defecto
+        int numeroDianas = Nivel.aciertosParaSuperarElNivel; 
+        yield return StartCoroutine(MostrarMensaje(
+            "Rompe " + numeroDianas + " dianas azules",0, null, Mensaje.TipoMensaje.DianaAzul));
+
+        // mensajes segun el nivel 
+        if(nivel == 0)
+            yield return StartCoroutine(MostrarMensaje(
+            "¡Hazlo antes de que se acabe el tiempo!",0, null, Mensaje.TipoMensaje.Tiempo));
+       
+        if(nivel == 1)
+            yield return StartCoroutine(MostrarMensaje(
+            "¡No te dejes ninguna diana azul!",0, null, Mensaje.TipoMensaje.DianaAzul));
+
+        if(nivel == 2)
+            yield return StartCoroutine(MostrarMensaje(
+            "¡No rompas las dianas rojas!",0, null, Mensaje.TipoMensaje.DianaRoja));
+
+        if(nivel == 3)         
+        {
+            yield return StartCoroutine(MostrarMensaje(
+            "Ahora tu munición se gasta",0, null, Mensaje.TipoMensaje.Municion));
+
+            yield return StartCoroutine(MostrarMensaje(
+            "Mira al dibujo para recargar",0, null, Mensaje.TipoMensaje.Municion));
+        }
+
+        if(nivel == 4)
+            yield return StartCoroutine(MostrarMensaje(
+            "¡Las gemas te darán puntuación extra!",0, null, Mensaje.TipoMensaje.Bonus));
+
+        if(nivel == 5)
+            yield return StartCoroutine(MostrarMensaje(
+            "¡Vamos a mover las dianas!",0, null, Mensaje.TipoMensaje.DianaAzul));
+        
+        if(nivel == 6 || nivel == 8 || nivel == 11)
+            yield return StartCoroutine(MostrarMensaje(
+            "¡Ahora tienes menos munición!",0, null, Mensaje.TipoMensaje.Municion));
+
+        
+        // mostrar toda la interfaz despues de los mensajes 
+        interfaz2D.SetActive(true); 
+
+        // iniciamos la tarea de ui del tiempo
+        StartCoroutine(CorrutinaTiempo());
 
         // hay varios bloques de disparos, entre bloque
         // y bloque hay una animacion de camara
@@ -284,33 +376,19 @@ GameObject dom;
             bloqueActual++;
             if(bloqueActual >= posiciones.Length)
             {
+
+                // aqui abandonamos la corutina pero la partida debe perderse 
+                JuegoPerdido();                
                 bloqueActual = 0; 
                 yield break;
             }
             yield return null; 
 
-/*
-            // movemos la camara al siguiente bloque                            
-            Vector3 posicion = bloqueTareaDisparo.posicionesCamara[bloqueActual].position;
-            GameObject jugador = Camera.main.gameObject; 
-            float duracionAnimacionCamara = 3f; 
-            iTween.MoveTo(jugador, posicion, duracionAnimacionCamara);
-            
-            // esperamos a que la camara llegue al nuevo bloque
-            yield return new WaitForSeconds(duracionAnimacionCamara);
-            
-            // comenzamos el juego de disparos de este bloque            
-            yield return StartCoroutine(CorrutinaBloqueDeDianas());           
-
-            // cambiamos al siguiente bloque
-            bloqueActual++;
-            if(bloqueActual >= bloqueTareaDisparo.posicionesCamara.Length)
-                bloqueActual = 0; */
         }
 
     }
 
-    private bool haciendoMovimientosAleatorios = false; 
+    
 
     private IEnumerator CorrutinaMovimientosAleatorios()
     {
@@ -356,22 +434,25 @@ GameObject dom;
         }
     }
 
-    private bool bombaColocada = false; 
+   
 
     private void NuevaBomba()
     {
-        /*
-        // no genear una bomba si ya hay una 
-        if(bombaColocada)
-            return; 
-        if(Random.value < Nivel.probabilidadAparicionBomba)
-        {
-            GameObject bomba = (GameObject) Instantiate(prefabBomba);
-            // TODO COLOCAR!
-            bombaColocada = true; 
-        }*/
     }
 
+    private IEnumerator CorrutinaTiempo()
+    {
+        float tiempoTotal = posiciones.Length * Nivel.duracionDeCadaBloqueDeDianas + 
+        posiciones.Length * 5; // duracion de la animacion de movimiento 
+        float tiempoInicio = Time.time; 
+
+        while(true)
+        {
+            float tiempoTrascurrido = Time.time - tiempoInicio; 
+            tiempoUI.fillAmount =  1 - tiempoTrascurrido / tiempoTotal;
+            yield return null; 
+        }
+    }
     private IEnumerator CorrutinaBloqueDeDianas()
     {                   
         Debug.Log("Nuevo bloque de dianas");              
@@ -419,7 +500,10 @@ GameObject dom;
     }
     private void MostrarNuevoObjetivo()
     {
-      
+        
+        if(tareaBloqueada)
+            return; 
+
         // si ya se estan mostrando las dos dianas no generamos mas 
         if(dianaA.EnUso && dianaB.EnUso && dianaC.EnUso)
             return; 
@@ -496,9 +580,7 @@ GameObject dom;
     // se comprueba el estado de la partida despues de un error
     // o una omision 
     private void ComprobarOmisionError()
-    {
-       
-            
+    {            
         if(errores + omisiones >= Nivel.omisionesOErroresParaPerder)
             JuegoPerdido();
     }

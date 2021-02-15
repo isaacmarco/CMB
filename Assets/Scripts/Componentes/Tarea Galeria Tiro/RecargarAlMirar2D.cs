@@ -77,6 +77,8 @@ public class RecargarAlMirar2D : MonoBehaviour
     
 	void Update()
 	{
+		if(tarea.TareaBloqueada)
+			return;
 		
 		// comprobamos si tenemos la vista sobre este
 		// estimulo 

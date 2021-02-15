@@ -16,11 +16,16 @@ MonoBehaviour:
   dificultad: 0
   tipoDeNivel: 0
   dianas: 1
+  rutaPorLaCiudad: 7
   duracionDiana: 3
-  tiempoParaNuevaDiana: 2
-  duracionDeCadaBloqueDeDianas: 15
-  probabilidadAparicionGema: 0
-  probabilidadAparicionDianaErronea: 0.35
+  tiempoParaNuevaDiana: 1
+  duracionDeCadaBloqueDeDianas: 6
+  probabilidadAparicionGema: 0.15
+  probabilidadAparicionDianaErronea: 0.3
+  probabilidadAparicionDianaMovil: 0.5
+  probabilidadAparicionBomba: 0.3
+  tiempoDetonacionBomba: 2
+  esNecesarioRecargar: 1
   municionCargador: 500
-  aciertosParaSuperarElNivel: 10
+  aciertosParaSuperarElNivel: 25
   omisionesOErroresParaPerder: 8

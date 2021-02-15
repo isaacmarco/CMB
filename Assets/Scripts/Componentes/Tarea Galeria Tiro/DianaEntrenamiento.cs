@@ -107,7 +107,7 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
 
 
         int cantidadDesplazamiento = 2; 
-        float velocidad = 1f; 
+        float velocidad = 0.8f; 
         int destinoX = 0; 
         int destinoY = 0; 
 
