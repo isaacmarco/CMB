@@ -56,7 +56,7 @@ public class TareaGaleriaTiro : Tarea
         get{ return this.recargando;}
     }
     private GameObject[] posiciones; 
-    GameObject dom; 
+    public GameObject dom; 
     public GameObject navegacion;
     
     private GameObject[] puntosAparicionDianasPrimerBloque; 
@@ -112,14 +112,15 @@ public class TareaGaleriaTiro : Tarea
         avisoMunicionEscuchado = false; // permite volver a escucharlo 
         recargando = true; 
         // animaciones de recarga
-        arma.SetActive(true);
+        //arma.SetActive(true);
+        arma.GetComponent<Animator>().SetTrigger("Recargar");
         // esperamos a que termina la animacion 
         FindObjectOfType<Audio>().FeedbackRecarga();
         yield return new WaitForSeconds(1.33f);
         
         recargando = false; 
         // ocultamos el arma
-        arma.SetActive(false);
+        //arma.SetActive(false);
         interfazRecarga.SetActive(true);
     }
 
@@ -223,7 +224,7 @@ public class TareaGaleriaTiro : Tarea
             // ocultamos la UI de recarga
             interfazRecarga.SetActive(false);
             avisoRecarga.transform.parent.gameObject.SetActive(false);
-            arma.SetActive(false);
+            //arma.SetActive(false);
         }
 
         

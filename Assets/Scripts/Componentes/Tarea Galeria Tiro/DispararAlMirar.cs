@@ -150,6 +150,8 @@ public class DispararAlMirar : MonoBehaviour
     private void Disparar()
     {
         estimulo.RecibirDisparo();
+
+		FindObjectOfType<JugadorTareaGaleriaTiro>().Orientar(this.gameObject);
     }
 
 

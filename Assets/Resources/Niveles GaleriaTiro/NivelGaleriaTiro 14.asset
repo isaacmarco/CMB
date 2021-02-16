@@ -26,6 +26,6 @@ MonoBehaviour:
   probabilidadAparicionBomba: 0.3
   tiempoDetonacionBomba: 2
   esNecesarioRecargar: 1
-  municionCargador: 150
-  aciertosParaSuperarElNivel: 30
-  omisionesOErroresParaPerder: 3
+  municionCargador: 300
+  aciertosParaSuperarElNivel: 25
+  omisionesOErroresParaPerder: 10

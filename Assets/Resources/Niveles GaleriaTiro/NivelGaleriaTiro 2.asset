@@ -28,4 +28,4 @@ MonoBehaviour:
   esNecesarioRecargar: 0
   municionCargador: 0
   aciertosParaSuperarElNivel: 20
-  omisionesOErroresParaPerder: 10
+  omisionesOErroresParaPerder: 20

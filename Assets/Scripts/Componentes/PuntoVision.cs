@@ -15,6 +15,12 @@ public class PuntoVision : MonoBehaviour
     [SerializeField] private bool soloMoverEnHorizontal = false; 
     [SerializeField] private RectTransform canvasRect; 
     
+    private Vector2 posicioEnPantalla; 
+    public Vector2 PosicionEnPantalla{
+        get {
+             return this.posicioEnPantalla; 
+        }
+    }
 
     void Awake()
     {
@@ -65,6 +71,7 @@ public class PuntoVision : MonoBehaviour
             // del canvas, podemos utilizar directamente las coordenadas en 
             // espacio de pantalla para dibujar en el canvas la UI del punto
             imagenPunto.GetComponent<RectTransform>().anchoredPosition = posicionEntera; // posicionEnElCanvas; 
+            posicioEnPantalla = posicionEntera; 
 			
 		} 
       
