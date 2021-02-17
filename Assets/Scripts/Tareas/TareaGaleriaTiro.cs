@@ -129,8 +129,7 @@ public class TareaGaleriaTiro : Tarea
         JugadorTareaGaleriaTiro jugador = FindObjectOfType<JugadorTareaGaleriaTiro>();
         while(true)
         {           
-            // actualizamos aqui la puntuacion
-            puntuacionUI.text = puntuacion.ToString();
+           
 
             // actualizamos el marcador de municion 
             int municion = jugador.Municion;
@@ -275,7 +274,11 @@ public class TareaGaleriaTiro : Tarea
         return dianaA.EnUso || dianaB.EnUso || dianaC.EnUso; 
     }
 
-   
+    protected override void Actualizacion()
+    {
+        // actualizamos aqui la puntuacion
+        puntuacionUI.text = puntuacion.ToString();
+    }
     private IEnumerator CorrutinaTareaDisparo()
     {
         
@@ -339,6 +342,7 @@ public class TareaGaleriaTiro : Tarea
         while(true)
         {
             
+         
 
             // movemos la camara al siguiente bloque                            
             Vector3 posicion = posiciones[bloqueActual].transform.position + Vector3.up;
@@ -643,7 +647,7 @@ public class TareaGaleriaTiro : Tarea
     {
         aciertos++;
         FindObjectOfType<Audio>().FeedbackAcierto();
-        aciertosUI.text = "Aciertos " + aciertos.ToString();
+        aciertosUI.text = aciertos.ToString(); // "Aciertos " + aciertos.ToString();
         AgregarPuntuacion(Configuracion.puntuacionAciertoGaleriaTiro);
         if(aciertos >= Nivel.aciertosParaSuperarElNivel)
             JuegoGanado();
@@ -709,17 +713,14 @@ public class TareaGaleriaTiro : Tarea
         );
         cabecera += "Posicion interfaz de recarga: " + posicionEnPantalla.x + ", " + posicionEnPantalla.y +  "\n";
 
-        cabecera += "Leyenda: tiempo; vision x ; vision y ; tipo estimulo A; tipo estimulo B; AX; AY; BX; BY; recargando?; municion";
+        cabecera += "Leyenda: tiempo; vision x ; vision y ; tipo estimulo A; tipo estimulo B; tipo estimulo C; AX; AY; BX; BY; CX; CY; recargando?; municion";
         return cabecera;
     }
 
     protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
     {
 
-        
-       // return new RegistroPosicionOcular(tiempo, 0, 0);
-
-
+      
         // obtenemos la municion actual, evitamos el null
         // porque igual no existe todavia componente jugador
         // en el primer frame?
@@ -775,8 +776,8 @@ public class TareaGaleriaTiro : Tarea
             
         // devolvemos el nuevo registro
         return new RegistroPosicionOcularTareaGaleriaTiro(tiempo, x, y, 
-        estimuloA, estimuloB, 
-        AX, AY, BX, BY, recargando, municion
+            estimuloA, estimuloB, estimuloC, 
+            AX, AY, BX, BY, CX, CY, recargando, municion
         );
 
         

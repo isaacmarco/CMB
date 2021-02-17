@@ -8,13 +8,20 @@ public class RegistroPosicionOcularTareaGaleriaTiro : RegistroPosicionOcular
     private int municion; 
     private EstimuloTareaGaleriaTiro estimuloA;
     private EstimuloTareaGaleriaTiro estimuloB;
+    private EstimuloTareaGaleriaTiro estimuloC; 
     private int estimuloAX, estimuloAY;
     private int estimuloBX, estimuloBY;
+    private int estimuloCX, estimuloCY; 
 
     public RegistroPosicionOcularTareaGaleriaTiro(
         float tiempo, int x, int y,
-        EstimuloTareaGaleriaTiro estimuloA, EstimuloTareaGaleriaTiro estimuloB, 
-        int estimuloAX, int estimuloAY, int estimuloBX, int estimuloBY, bool recargando, int municion
+        EstimuloTareaGaleriaTiro estimuloA, 
+        EstimuloTareaGaleriaTiro estimuloB, 
+        EstimuloTareaGaleriaTiro estimuloC,
+        int estimuloAX, int estimuloAY, 
+        int estimuloBX, int estimuloBY, 
+        int estimuloCX, int estimuloCY, 
+        bool recargando, int municion
     ) : base(tiempo, x, y)
     {
         
@@ -22,10 +29,13 @@ public class RegistroPosicionOcularTareaGaleriaTiro : RegistroPosicionOcular
         this.municion = municion; 
         this.estimuloA = estimuloA; 
         this.estimuloB = estimuloB; 
+        this.estimuloC = estimuloC; 
         this.estimuloAX = estimuloAX; 
         this.estimuloAY = estimuloAY;
         this.estimuloBX = estimuloBX; 
         this.estimuloBY = estimuloBY;
+        this.estimuloCX = estimuloCX; 
+        this.estimuloCY = estimuloCY; 
 
     }
     
@@ -33,9 +43,10 @@ public class RegistroPosicionOcularTareaGaleriaTiro : RegistroPosicionOcular
     public override string RegistroFormateadoParaEscribirEnDisco()
     {
         return tiempo.ToString("0.0000") + ";" + x +";" + y + ";" +
-        estimuloA + ";" + estimuloB + ";" + 
+        estimuloA + ";" + estimuloB + ";" + estimuloC + ";" + 
         estimuloAX + ";" + estimuloAY + ";" + 
         estimuloBX + ";" + estimuloBY + ";" +
+        estimuloCX + ";" + estimuloCY + ";" + 
         recargando + ";" + municion;
     }
         

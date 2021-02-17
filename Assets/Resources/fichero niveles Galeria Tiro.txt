@@ -1,11 +1,11 @@
 0	20	999	Azul	0	0	0	no	0	0	1,4	5
 1	20	20	Azul	0	0	0	no	0	1	1,4	5
 2	20	20	Azul/Roja	20	0	0	no	0	2	1,4	6
-3	20	20	Azul/Roja	25	0	0	si	1000	3	1,2	6
-4	25	17	Azul/Roja	25	15	0	si	1000	4	1,2	6
-5	25	17	Azul/Roja	25	15	40	si	1000	5	1,2	6
-6	25	17	Azul/Roja	30	15	40	si	700	6	1,2	6
-7	25	15	Azul/Roja	30	15	50	si	700	7	1	6
+3	20	20	Azul/Roja	25	0	0	si	700	3	1,2	6
+4	25	17	Azul/Roja	25	15	0	si	700	4	1,2	6
+5	25	17	Azul/Roja	25	15	40	si	700	5	1,2	6
+6	25	17	Azul/Roja	30	15	40	si	600	6	1,2	6
+7	25	15	Azul/Roja	30	15	50	si	600	7	1	6
 8	25	15	Azul/Roja	30	15	50	si	500	1	1	6
 9	25	15	Azul/Roja	35	15	70	si	500	2	1	6
 10	25	15	Azul/Roja	35	15	70	si	500	3	0,9	6

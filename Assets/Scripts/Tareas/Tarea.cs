@@ -67,8 +67,7 @@ public class Tarea : MonoBehaviour
         // no modificar la puntuacion si el juego ya ha terminado 
         if(TareaBloqueada)
             return; 
-
-        //Debug.Log("Puntos recibidos " + puntuacion );
+                    
         this.puntuacion += puntuacion;         
         if(this.puntuacion < 0 )
             this.puntuacion = 0; 
