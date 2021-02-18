@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
 
     private Vector3 posicionInicial; 
 
-
+    
     public bool EsVisiblePlenamente {
         get {
             return gameObject.transform.localScale == Vector3.one;

@@ -29,6 +29,8 @@ public class TareaGaleriaTiro : Tarea
     public GameObject particulasDianaCorrecta; 
     public GameObject particulasDianaIncorrecta; 
     public GameObject particulasGema; 
+    public GameObject puntuacionVFX; 
+
 
     //public Transform[] padresBloques; 
     public Transform padreBloquesDianas; 
@@ -68,21 +70,40 @@ public class TareaGaleriaTiro : Tarea
 
     public void InstanciarVFXDestruccion(Vector3 posicionDiana, bool esGema, bool dianaCorrecta)
     {
-        //if(particulasDianaCorrecta==null)
-        //    return; 
-        GameObject prefab = particulasDianaCorrecta; 
-        if(!dianaCorrecta)
-            prefab = particulasDianaIncorrecta; 
-        if( esGema)
-            prefab = particulasGema; 
         
-        GameObject vfx = (GameObject) Instantiate(prefab);
+        
+        GameObject prefabParticulas = particulasDianaCorrecta; 
+        if(!dianaCorrecta)
+            prefabParticulas = particulasDianaIncorrecta; 
+        if( esGema)
+            prefabParticulas = particulasGema; 
+        
+        GameObject vfx = (GameObject) Instantiate(prefabParticulas);
         vfx.transform.position = posicionDiana;
         float factoEscala = 0.1f;  
         vfx.transform.localScale = new Vector3(
             factoEscala, factoEscala, factoEscala
         );
+
+        // instanciar puntuacion 
+        GameObject points = (GameObject) Instantiate(puntuacionVFX);
+        points.transform.position = posicionDiana; 
+        // points.transform.LookAt(Camera.main.gameObject.transform.position);
+        
+        string mensaje = string.Empty;
+        if(dianaCorrecta)
+            mensaje = "+" + Configuracion.puntuacionAciertoGaleriaTiro;
+        if(!dianaCorrecta)
+            mensaje = "-" + Configuracion.penalizacionErrorGaleriaTiro;
+        if(esGema)
+            mensaje = "+" + Configuracion.puntuacionGemaGaleriaTiro; 
+        
+        bool acierto = dianaCorrecta || esGema; 
+        points.GetComponent<PuntosGaleriaTiroVFX>().Mostrar(acierto);
+        points.GetComponent<TextMeshPro>().text = mensaje;
+
     }
+
     public void MostrarInterfazRecarga()
     {
         if(!avisoMunicionEscuchado)
