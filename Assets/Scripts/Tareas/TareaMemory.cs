@@ -83,8 +83,8 @@ public class TareaMemory : Tarea
             // transformar las coordeandas
             Vector2 posicionViewport = Camera.main.WorldToViewportPoint(posicionElementoMatriz);
             Vector2 posicionEnPantalla = new Vector2(
-                ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f)),
-                ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))
+                ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f))+960,
+                ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))+540
             );
             posicionesFijasTarjetas += "(" + (int)posicionEnPantalla.x + "," + (int)posicionEnPantalla.y + ") ";            
         }

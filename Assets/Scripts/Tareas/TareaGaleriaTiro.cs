@@ -447,14 +447,19 @@ public class TareaGaleriaTiro : Tarea
 
     private IEnumerator CorrutinaTiempo()
     {
+        /*
+        float duracionBloque = 4 + Nivel.duracionDeCadaBloqueDeDianas;        
         float tiempoTotal = posiciones.Length * Nivel.duracionDeCadaBloqueDeDianas + 
         posiciones.Length * 5; // duracion de la animacion de movimiento 
-        float tiempoInicio = Time.time; 
+        tiempoTotal = duracionBloque * (posiciones.Length+2); 
+        float tiempoInicio = Time.time; */
 
         while(true)
-        {
-            float tiempoTrascurrido = Time.time - tiempoInicio; 
-            tiempoUI.fillAmount =  1 - tiempoTrascurrido / tiempoTotal;
+        {               
+            //float tiempoTrascurrido = Time.time - tiempoInicio; 
+            //tiempoUI.fillAmount =  1 - tiempoTrascurrido / tiempoTotal;
+            tiempoUI.fillAmount = 1 -  ((float)bloqueActual / (float)posiciones.Length); 
+            //Debug.Log(bloqueActual + "/" + posiciones.Length);
             yield return null; 
         }
     }
@@ -789,8 +794,8 @@ public class TareaGaleriaTiro : Tarea
         // transformar las coordeandas
         Vector2 posicionViewport = Camera.main.WorldToViewportPoint(posicionDiana);
         Vector2 posicionEnPantalla = new Vector2(
-            ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f)),
-            ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))
+            ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f))+960,
+            ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f))+540
         );
         return posicionEnPantalla;
     }

@@ -123,6 +123,13 @@ public class DispararAlMirar : MonoBehaviour
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
 		float tiempoNecesario = tarea.Configuracion.tiempoParaSeleccion;
+
+		// fix para la jugabilidad, si la diana es
+		// roja damos menos tiempo para destruirla
+		if(!estimulo.esObjetivo)
+			tiempoNecesario = tiempoNecesario * 0.7f;
+		
+
 		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;		
 		interfazFijacion.Actualizar(tiempoNormalizado);
 		if(tiempoFijacionTranscurrido > tiempoNecesario)

@@ -17,7 +17,10 @@ public class ObjetivoTareaDisparo : MonoBehaviour
         get { return this.enUso;}
     }
   
-  
+    public bool EsObjetivo {
+        get { return this.esObjetivo;}
+    }
+    
     void Start()
     {
         Iniciar();

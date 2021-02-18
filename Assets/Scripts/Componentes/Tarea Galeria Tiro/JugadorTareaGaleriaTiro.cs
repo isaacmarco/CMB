@@ -175,25 +175,25 @@ public class JugadorTareaGaleriaTiro : MonoBehaviour
     private IEnumerator GeneracionDisparos()
     {
         while(true)
-        {
-            
+        {            
             if(disparando && Random.value > 0.8f)
             {
                 yield return new WaitForSeconds(0.1f);
                 InstanciarLaser();
                 ControlMunicion();
-                
-
             }
             disparando = false; 
             yield return null;             
         }
     }
+
     private void ControlMunicion()
     {
         // actualizar municion  
         float gasto = 10f;        
         municion -= gasto; 
+        if(municion < 0)
+            municion = 0; 
     }
     
     public void Disparar(Vector3 posicion)
