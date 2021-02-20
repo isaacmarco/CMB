@@ -13,8 +13,10 @@ public class TareaGaleriaTiro : Tarea
     public Text municionUI;
     public Text puntuacionUI;    
     public Image tiempoUI;
+    [Header("Recarga")]
     public GameObject avisoRecarga; 
     public GameObject interfaz2D; 
+    public GameObject contadorMunicion; 
    
     [Header("Arma")]
     public GameObject interfazRecarga;
@@ -88,8 +90,7 @@ public class TareaGaleriaTiro : Tarea
         // instanciar puntuacion 
         GameObject points = (GameObject) Instantiate(puntuacionVFX);
         points.transform.position = posicionDiana; 
-        // points.transform.LookAt(Camera.main.gameObject.transform.position);
-        
+                
         string mensaje = string.Empty;
         if(dianaCorrecta)
             mensaje = "+" + Configuracion.puntuacionAciertoGaleriaTiro;
@@ -235,19 +236,18 @@ public class TareaGaleriaTiro : Tarea
         // si hay municion en este nivel entonces
         // mostramos la UI y lanzamos la corrutina de la mecanica
         // de recarga 
+
+        avisoRecarga.SetActive(false);
+
         if(Nivel.esNecesarioRecargar)
-        {
-            avisoRecarga.SetActive(false);
+        {   
             Recargar();            
             StartCoroutine(CorrutinaMunicion());
         } else {
             // ocultamos la UI de recarga
             interfazRecarga.SetActive(false);
-            avisoRecarga.transform.parent.gameObject.SetActive(false);
-            //arma.SetActive(false);
+            contadorMunicion.SetActive(false);
         }
-
-        
         
         // comenzar la tarea        
         DesbloquearTarea();
