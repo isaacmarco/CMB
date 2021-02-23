@@ -82,6 +82,7 @@ public class Tarea : MonoBehaviour
     }
 
     protected void JuegoPerdido(){
+       
         BloquearTarea();
         FindObjectOfType<Audio>().FeedbackPartidaPerdida();
         // reiniciamos el flag de nivel de bonus

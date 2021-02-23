@@ -16,7 +16,7 @@ MonoBehaviour:
   dificultad: 0
   tipoDeNivel: 0
   dianas: 1
-  rutaPorLaCiudad: 2
+  rutaPorLaCiudad: 1
   duracionDiana: 3
   tiempoParaNuevaDiana: 1
   duracionDeCadaBloqueDeDianas: 6

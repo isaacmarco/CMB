@@ -182,6 +182,12 @@ public class TareaGaleriaTiro : Tarea
     private void GenerarPuntosNavegacion()
     {        
 
+        // limpiar jerarquia que pueda existir en el editor
+        /*
+        int hijos = navegacion.transform.childCount; 
+        for(int i=0; i<hijos; i++)
+            Destroy(navegacion.transform.GetChild(i));*/
+
         // instanciamos el trayecto en el objeto navegacion 
         string rutaPrefab = "Escenarios/NivelGaleriaTiro" + Nivel.rutaPorLaCiudad; // Nivel.numeroDelNivel;
         GameObject _rutaPrefab = (GameObject) Resources.Load(rutaPrefab);        
@@ -228,6 +234,9 @@ public class TareaGaleriaTiro : Tarea
     
     protected override void Inicio()
     {          
+
+        // Time.timeScale = 10f; 
+
         GenerarPuntosNavegacion();
         GenerarBloquesDianas();
 
