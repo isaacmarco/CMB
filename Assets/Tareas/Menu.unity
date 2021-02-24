@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &89202042
 Transform:
   m_ObjectHideFlags: 0
@@ -8261,6 +8261,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BotonTareaEvaluacion
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190881896518316838, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3708071913119442978, guid: 7d2157fd15d5d6b4aaced6c7e7b2350d,
         type: 3}
