@@ -69,7 +69,8 @@ public class TareaGaleriaTiro : Tarea
     private ArrayList listaBloquesDianas; // <Transform[]>
     int bloqueActual = 0; 
     private bool haciendoMovimientosAleatorios = false; 
-
+    private Coroutine corrutinaTiempo; 
+    
     public void InstanciarVFXDestruccion(Vector3 posicionDiana, bool esGema, bool dianaCorrecta)
     {
         
@@ -212,7 +213,7 @@ public class TareaGaleriaTiro : Tarea
         Debug.Log(posiciones.Length + " posiciones de navegacion");
     }
 
-   
+    private bool noContabilizarTiempo = false; 
 
     private void GenerarBloquesDianas()
     {
@@ -234,8 +235,7 @@ public class TareaGaleriaTiro : Tarea
     
     protected override void Inicio()
     {          
-
-        // Time.timeScale = 10f; 
+        
 
         GenerarPuntosNavegacion();
         GenerarBloquesDianas();
@@ -365,7 +365,7 @@ public class TareaGaleriaTiro : Tarea
         interfaz2D.SetActive(true); 
 
         // iniciamos la tarea de ui del tiempo
-        StartCoroutine(CorrutinaTiempo());
+        corrutinaTiempo = StartCoroutine(CorrutinaTiempo());
 
         // hay varios bloques de disparos, entre bloque
         // y bloque hay una animacion de camara
@@ -411,7 +411,7 @@ public class TareaGaleriaTiro : Tarea
             bloqueActual++;
             if(bloqueActual >= posiciones.Length)
             {
-
+                noContabilizarTiempo = true; 
                 // aqui abandonamos la corutina pero la partida debe perderse 
                 JuegoPerdido();                
                 bloqueActual = 0; 
@@ -477,19 +477,14 @@ public class TareaGaleriaTiro : Tarea
 
     private IEnumerator CorrutinaTiempo()
     {
-        /*
-        float duracionBloque = 4 + Nivel.duracionDeCadaBloqueDeDianas;        
-        float tiempoTotal = posiciones.Length * Nivel.duracionDeCadaBloqueDeDianas + 
-        posiciones.Length * 5; // duracion de la animacion de movimiento 
-        tiempoTotal = duracionBloque * (posiciones.Length+2); 
-        float tiempoInicio = Time.time; */
-
         while(true)
-        {               
-            //float tiempoTrascurrido = Time.time - tiempoInicio; 
-            //tiempoUI.fillAmount =  1 - tiempoTrascurrido / tiempoTotal;
-            tiempoUI.fillAmount = 1 -  ((float)bloqueActual / (float)posiciones.Length); 
-            //Debug.Log(bloqueActual + "/" + posiciones.Length);
+        {                           
+            float progreso = 1 - ((float)bloqueActual / (float)(posiciones.Length));            
+            tiempoUI.fillAmount =  progreso;  
+            if(noContabilizarTiempo)           
+                tiempoUI.fillAmount = 0; 
+
+            //Debug.Log(bloqueActual + "/" + (posiciones.Length) + "-> " + progreso);
             yield return null; 
         }
     }
@@ -622,7 +617,15 @@ public class TareaGaleriaTiro : Tarea
     private void ComprobarOmisionError()
     {            
         if(errores + omisiones >= Nivel.omisionesOErroresParaPerder)
+        {   
+            /*
+            // detenemos el tiempo
+            if(corrutinaTiempo!=null)
+                StopCoroutine(corrutinaTiempo);            
+            tiempoUI.fillAmount =  0; */
+
             JuegoPerdido();
+        }
     }
 
     
