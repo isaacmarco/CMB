@@ -8,6 +8,7 @@ public class TareaEvaluacion : Tarea
     [Header("Estimulos")]
     public GameObject estimulo;
     public GameObject estimuloFijacion;
+    private ComunicacionPuertoSerie puertoSerie; 
     
     public NivelEvaluacion Nivel { 
         get { return (NivelEvaluacion) Configuracion.nivelActual;} 
@@ -86,6 +87,9 @@ public class TareaEvaluacion : Tarea
     protected override void Inicio()
     {          
 
+        // obtener componente de puerto series
+        puertoSerie = GetComponent<ComunicacionPuertoSerie>();
+
         // configurar la tarea 
         float gris = 0.7f; 
         Color fondoNegro = new Color(0, 0, 0, 1);
@@ -106,6 +110,9 @@ public class TareaEvaluacion : Tarea
 
         tiempoInicioTarea = Time.time; 
 
+        // enviar msg comienzo tarea
+        puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Comienzo);
+
         for(int i=0; i<Configuracion.numberoDeBloquesDeEvaluacion; i++)
         {
            
@@ -118,12 +125,19 @@ public class TareaEvaluacion : Tarea
             float tiempoInicioBloque = Time.time;
             // mostrar fijacion
             MostrarEstimuloFijacion();
+
+            // enviar msg estimulo fijacion 
+            puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Fijacion);
+
             // esperar y ocultar el estimulo
             yield return new WaitForSeconds(Configuracion.duracionEstimuloFijacionEvaluacion);
             OcultarEstimuloFijacion();
             
             // centrar el estimulo 
             CentrarEstimulo();    
+
+            // enviar msg de comienzo del seguimiento
+            puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Seguimiento);
 
             // obtener coeficientes del bloque actual            
             double[] coeficientesDelBloque = (double[]) listaCoeficientes[i];
@@ -137,9 +151,16 @@ public class TareaEvaluacion : Tarea
          
         }
 
+        // enviar msg de final de la tara
+        puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Final);
+
+        // cerrar el puerto
+        puertoSerie.CerrarPuertoSerie();
+        
         Debug.Log("Final de la evaluacion");
         OcultarEstimulos();
         FinalizarTareaEvaluacion();
+        
         
         
     }
