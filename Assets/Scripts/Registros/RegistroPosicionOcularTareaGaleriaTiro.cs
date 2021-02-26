@@ -13,6 +13,18 @@ public class RegistroPosicionOcularTareaGaleriaTiro : RegistroPosicionOcular
     private int estimuloBX, estimuloBY;
     private int estimuloCX, estimuloCY; 
 
+    public EstimuloTareaGaleriaTiro[] Estimulos
+    {
+        get { return new EstimuloTareaGaleriaTiro[] {estimuloA, estimuloB, estimuloC}; }
+    }
+    public int AX{ get {return estimuloAX;}}
+    public int BX{ get {return estimuloBX;}}
+    public int CX{ get {return estimuloCX;}}
+    public int AY{ get {return estimuloAY;}}
+    public int BY{ get {return estimuloBY;}}
+    public int CY{ get {return estimuloCY;}}
+
+
     public RegistroPosicionOcularTareaGaleriaTiro(
         float tiempo, int x, int y,
         EstimuloTareaGaleriaTiro estimuloA, 

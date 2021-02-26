@@ -9,6 +9,9 @@ public class RegistroPosicionOcular
     // punto al que se mira
     protected int x, y;
     
+    public int X{get {return x; }}
+    public int Y{get { return y; }}
+    
     public RegistroPosicionOcular(float tiempo, int x, int y)
     {
         this.tiempo = tiempo; 

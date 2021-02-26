@@ -7,7 +7,14 @@ public class RegistroPosicionOcultarTareaTopos : RegistroPosicionOcular
     // matriz para la tarae de topos    
     private EstimulosTareaTopos[] matrizTarea = new EstimulosTareaTopos[9];
     private EstimulosTareaTopos estimuloObjetivo; 
-
+    public EstimulosTareaTopos EstimuloObjetivo
+    {
+        get {return this.estimuloObjetivo;}
+    }
+    public EstimulosTareaTopos[] Matriz
+    {
+        get{return this.matrizTarea;}
+    }
     public RegistroPosicionOcultarTareaTopos(float tiempo, int x, int y, EstimulosTareaTopos estimuloObjetivo, EstimulosTareaTopos[] matrizTarea) : base(tiempo, x, y)
     {
         this.estimuloObjetivo = estimuloObjetivo; 

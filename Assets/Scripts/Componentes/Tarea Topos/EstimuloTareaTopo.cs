@@ -190,7 +190,7 @@ public class EstimuloTareaTopo : MonoBehaviour
         Vector3 posicion = gameObject.transform.position; 
         float tiempoAnimacion = 0.5f; 
         float alturaObjetivo = 0.5f; 
-
+ 
         // animacion de salida al exterior        
         iTween.MoveTo(gameObject, new Vector3(posicion.x, alturaObjetivo, posicion.z), tiempoAnimacion);
 
