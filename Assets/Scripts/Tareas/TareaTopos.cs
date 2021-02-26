@@ -68,7 +68,8 @@ public class TareaTopos : Tarea
         // creamos la matriz que define el estado actual del tablero 
         EstimulosTareaTopos[] matriz = new EstimulosTareaTopos[estimulos.Length];
         for(int i=0; i<estimulos.Length;i++)
-        {
+        {   
+            /*
             // comprobamos que el estimulo este visible
             if(!estimulos[i].Escondido)
             {   
@@ -77,7 +78,18 @@ public class TareaTopos : Tarea
             } else {
                 // en caso contrario lo marcamos como 'ninguno' en la matriz
                 matriz[i] = EstimulosTareaTopos.Ninguno;
+            }*/
+
+            // fix, tiene que ser realmente visible para el jugador
+            if(estimulos[i].VisibleParaRegistrar)
+            {   
+                // si es visible anotamos el estimulo en la matriz
+                matriz[i] = estimulos[i].Estimulo;
+            } else {
+                // en caso contrario lo marcamos como 'ninguno' en la matriz
+                matriz[i] = EstimulosTareaTopos.Ninguno;
             }
+
         }
         // devolvemos el nuevo registro
         return new RegistroPosicionOcultarTareaTopos(tiempo, x, y, Nivel.estimuloObjetivo, matriz);        

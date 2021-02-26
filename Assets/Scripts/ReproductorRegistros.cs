@@ -17,12 +17,28 @@ public class ReproductorRegistros : MonoBehaviour
     public GameObject dianaB; 
     public GameObject dianaC; 
 
+    public bool reproducirTopos; 
+    public bool reproducirGaleriaTiro; 
+
     void Start()
     {
         if(fichero==null)
             return; 
-        registros = CargarFicheroTopos();
-        StartCoroutine(ReproducirRegistroTopos());
+        
+        if(reproducirTopos)
+        {
+            registros = CargarFicheroTopos();
+            StartCoroutine(ReproducirRegistroTopos());
+        } else if (reproducirGaleriaTiro)
+        {
+            registros = CargarFicheroGaleriaTiro();
+            StartCoroutine(ReproducirRegistroGaleriaTiro());
+        } else
+        {
+            // memory
+        }
+        
+       
     }
     
     private IEnumerator ReproducirRegistroGaleriaTiro()
@@ -32,7 +48,7 @@ public class ReproductorRegistros : MonoBehaviour
        
       
         int contador = 0; 
-        float esperaEntreRegistros = 0.1f; 
+        float esperaEntreRegistros = 0.01f; 
 
         while(contador < registros.Count)
         {   

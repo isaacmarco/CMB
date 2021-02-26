@@ -11,6 +11,10 @@ public class EstimuloTareaTopo : MonoBehaviour
         get{ return escondido; }
     }
 
+    public bool EsVisible {
+        get { return false; }
+    }
+
     public bool EnUso {
         get { return enUso; }
     }
@@ -32,7 +36,7 @@ public class EstimuloTareaTopo : MonoBehaviour
     public bool VisibleParaRegistrar
     {
         get {
-            return transform.position.y > 0; 
+            return transform.position.y > 0.3f; 
         }
     }
     // tipo de estimulo 
