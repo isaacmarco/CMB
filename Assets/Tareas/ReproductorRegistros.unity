@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ec4fc284a9adf429c86599584e8d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fichero: {fileID: 4900000, guid: 66a8e5df8ab905647be11297d44b1b4b, type: 3}
+  fichero: {fileID: 4900000, guid: cbaea41086dd5834da007436b858be29, type: 3}
   puntoVision: {fileID: 3949194867520230684}
   estimulosTareaTopos:
   - {fileID: 890860398}
@@ -1105,8 +1105,8 @@ MonoBehaviour:
   dianaA: {fileID: 1346676969}
   dianaB: {fileID: 1733095780}
   dianaC: {fileID: 1512370997}
-  reproducirTopos: 0
-  reproducirGaleriaTiro: 1
+  reproducirTopos: 1
+  reproducirGaleriaTiro: 0
 --- !u!4 &681659154
 Transform:
   m_ObjectHideFlags: 0
@@ -1319,7 +1319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &985777316
 Transform:
   m_ObjectHideFlags: 0
