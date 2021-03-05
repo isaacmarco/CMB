@@ -58,7 +58,7 @@ public class ReproductorRegistros : MonoBehaviour
        
       
         int contador = 0; 
-        float esperaEntreRegistros = 0.01f; 
+        float esperaEntreRegistros = 0.06f; 
 
         while(contador < registros.Count)
         {   
@@ -78,8 +78,9 @@ public class ReproductorRegistros : MonoBehaviour
                 registro.objetivoX, registro.objetivoY
             );
 
-            // cruz
+            // visibilidad
             estimuloFijacion.SetActive( registro.mostrandoEstimuloFijacion );
+            estimuloTareaEvaluacion.SetActive( !registro.mostrandoEstimuloFijacion );
 
 
             contador++;
@@ -210,6 +211,7 @@ public class ReproductorRegistros : MonoBehaviour
     {
        
         /*           
+            0,0000;True;1;1747;97;960;540
             tiempo; 
             estimulo fijacion visible; 
             numero bloque actual; 
@@ -230,12 +232,13 @@ public class ReproductorRegistros : MonoBehaviour
             string[] campos = lineas[i].Split(';');
             string ctiempo = campos[0];
             string fijacion = campos[1];
-            string x = campos[2];
-            string y = campos[3];
-            string ex = campos[4];
-            string ey = campos[5];
+            string bloque = campos[2];
+            string x = campos[3];
+            string y = campos[4];
+            string ex = campos[5];
+            string ey = campos[6];
             
-            bool mostrandoFijacion = fijacion == "true" ? true : false; 
+            bool mostrandoFijacion = fijacion == "True" ? true : false; 
 
             /*
               public RegistroPosicionOcularTareaEvaluacion(
