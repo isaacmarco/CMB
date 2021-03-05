@@ -16,9 +16,14 @@ public class ReproductorRegistros : MonoBehaviour
     public GameObject dianaA; 
     public GameObject dianaB; 
     public GameObject dianaC; 
-
+    [Header("Tarea de evaluacion")]
+    public GameObject estimuloTareaEvaluacion; 
+    public GameObject estimuloFijacion; 
+    [Header("Configuracion reproductor")]
     public bool reproducirTopos; 
     public bool reproducirGaleriaTiro; 
+    public bool reproducirEvaluacion; 
+
 
     void Start()
     {
@@ -33,6 +38,10 @@ public class ReproductorRegistros : MonoBehaviour
         {
             registros = CargarFicheroGaleriaTiro();
             StartCoroutine(ReproducirRegistroGaleriaTiro());
+        } else if (reproducirEvaluacion)
+        {
+            registros = CargarFicheroEvaluacion();
+            StartCoroutine(ReproducirRegistroEvaluacion());
         } else
         {
             // memory
@@ -41,9 +50,48 @@ public class ReproductorRegistros : MonoBehaviour
        
     }
     
+
+    private IEnumerator ReproducirRegistroEvaluacion()
+    {
+         
+        Debug.Log("Comenzado la reproduccion");
+       
+      
+        int contador = 0; 
+        float esperaEntreRegistros = 0.01f; 
+
+        while(contador < registros.Count)
+        {   
+            // extraemos un registro
+            RegistroPosicionOcularTareaEvaluacion registro = 
+                (RegistroPosicionOcularTareaEvaluacion) registros[contador];
+            
+            // posicionamos el punto de vision 
+            puntoVision.GetComponent<RectTransform>().anchoredPosition = new Vector2
+            (
+                registro.X, registro.Y
+            );
+
+            // estimulo circular
+            estimuloTareaEvaluacion.GetComponent<RectTransform>().anchoredPosition = new Vector2
+            ( 
+                registro.objetivoX, registro.objetivoY
+            );
+
+            // cruz
+            estimuloFijacion.SetActive( registro.mostrandoEstimuloFijacion );
+
+
+            contador++;
+            yield return new WaitForSeconds(esperaEntreRegistros);
+        }
+        Debug.Log("Reproduccion terminada");
+    }
+
+
     private IEnumerator ReproducirRegistroGaleriaTiro()
     {
-            
+     
         Debug.Log("Comenzado la reproduccion");
        
       
@@ -91,6 +139,7 @@ public class ReproductorRegistros : MonoBehaviour
         }
         Debug.Log("Reproduccion terminada");
     }
+
     private IEnumerator ReproducirRegistroTopos()
     {
 
@@ -157,6 +206,62 @@ public class ReproductorRegistros : MonoBehaviour
         Debug.Log("Reproduccion terminada");
     }
 
+    private ArrayList CargarFicheroEvaluacion()
+    {
+       
+        /*           
+            tiempo; 
+            estimulo fijacion visible; 
+            numero bloque actual; 
+            mirando x; 
+            mirando y; 
+            estimulo objetivo x; 
+            estimulo objetivo y";
+        */
+
+        registros = new ArrayList();
+
+        
+        // obtenemos todas las lineas
+        string[] lineas = fichero.text.Split('\n');
+        // convertimos cada linea en un nuevo registro
+        for(int i=0; i<lineas.Length; i++)
+        {
+            string[] campos = lineas[i].Split(';');
+            string ctiempo = campos[0];
+            string fijacion = campos[1];
+            string x = campos[2];
+            string y = campos[3];
+            string ex = campos[4];
+            string ey = campos[5];
+            
+            bool mostrandoFijacion = fijacion == "true" ? true : false; 
+
+            /*
+              public RegistroPosicionOcularTareaEvaluacion(
+                float tiempo, 
+                int x, 
+                int y,
+                int objetivoX, 
+                int objetivoY, 
+                int numeroBloqueEvaluacion, 
+                bool mostrandoEstimuloFijacion) 
+            {
+            */
+
+            RegistroPosicionOcularTareaEvaluacion registro = new RegistroPosicionOcularTareaEvaluacion
+            (
+                0, int.Parse(x), int.Parse(y), int.Parse(ex), int.Parse(ey), 0, mostrandoFijacion
+            );
+         
+            registros.Add(registro);
+  
+        }
+
+        Debug.Log("Registros creados: " + registros.Count);
+        return registros; 
+
+    }
     private ArrayList CargarFicheroGaleriaTiro()
     {
         registros = new ArrayList();
