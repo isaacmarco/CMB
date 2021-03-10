@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Tobii.Gaming;
+
 public class IsometricPlayerMovementController : MonoBehaviour
 {
     
     public float movementSpeed = 5f;
     public RectTransform canvasRect; 
     IsometricCharacterRenderer isoRenderer;
-
+    private Vector2 puntoFiltrado = Vector2.zero;   
     Rigidbody2D rbody;
 
     private void Awake()
@@ -39,8 +41,26 @@ public class IsometricPlayerMovementController : MonoBehaviour
         rbody.MovePosition(newPos);*/
 
 
-        //if(Input.GetMouseButton(0))
+         // obtenemos la posicion mirada
+        GazePoint gazePoint = TobiiAPI.GetGazePoint();
+
+        if (gazePoint.IsValid)
+		{
+			Vector2 posicionGaze = gazePoint.Screen;	
+            puntoFiltrado = Vector2.Lerp(puntoFiltrado, posicionGaze, 0.5f);
+			Vector2 posicionEntera = new Vector2(
+                Mathf.RoundToInt(puntoFiltrado.x), 
+                Mathf.RoundToInt(puntoFiltrado.y)
+            );
+
+            Mover(posicionGaze);
+            
+
+		} else {        
+
+            // mover usando el raton 
             Mover(Input.mousePosition);
+        }
 
 
     }
@@ -79,7 +99,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         // normalizar la direccion
         direccion.Normalize();     
         isoRenderer.SetDirection(direccion);
-        float velocidad = 1f; 
+        float velocidad = 2f; 
         Vector2 newPos = _p + direccion * velocidad * Time.fixedDeltaTime;
         rbody.velocity = direccion * velocidad; 
         //rbody.MovePosition(newPos);
