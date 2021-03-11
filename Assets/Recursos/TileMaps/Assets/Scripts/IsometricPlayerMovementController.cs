@@ -6,7 +6,7 @@ using Tobii.Gaming;
 
 public class IsometricPlayerMovementController : MonoBehaviour
 {
-    
+    public AnimationCurve curvaVelocidad; 
     public float movementSpeed = 5f;
     public RectTransform canvasRect; 
     IsometricCharacterRenderer isoRenderer;
@@ -38,10 +38,14 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 movement = inputVector * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         isoRenderer.SetDirection(movement);
-        rbody.MovePosition(newPos);*/
+        rbody.MovePosition(newPos);
+        return;
+        */
+       
 
+      
 
-         // obtenemos la posicion mirada
+        // obtenemos la posicion mirada
         GazePoint gazePoint = TobiiAPI.GetGazePoint();
 
         if (gazePoint.IsValid)
@@ -81,27 +85,39 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private void Mover(Vector3 destino)
     {
         // obtener la posicion en pantalla del jugador
-        Vector2 p = ObtenerPosicionPantalla(gameObject.transform.position);
-        //Debug.Log("Mouse " + destino + "; Jugador " + p);
-
-        
+        Vector2 p = ObtenerPosicionPantalla(gameObject.transform.position);        
         Vector3 _p = new Vector3(p.x, p.y, 0) ;
 
-        //Vector3 p = gameObject.transform.position; 
+        // obtenemos la direccion normalizada entre el jugador
+        // y el desitno
+        Vector3 direccion = destino - _p;        
+        direccion.Normalize();      
+      
+        float distanciaJugadorDestino = Vector2.Distance(_p, destino);
+ 
+        // evaluar curva de velocidad, partimos la distancia entre 100
+        // para ajustarnos a la escala de la grafica en el eje X
+        float velocidadInterpolada = curvaVelocidad.Evaluate( distanciaJugadorDestino / 100f );
+            
+        // nueva posicion
+        Vector2 nuevaPosicion = rbody.position + (Vector2) direccion * velocidadInterpolada * Time.fixedDeltaTime;
+        
 
-        //destino.z = 1;         
-        //p.z = 1; 
-        //gameObject.transform.position = p; 
+        if( velocidadInterpolada > 0.1f )
+        {   
+            // movemos el jugador 
+            isoRenderer.SetDirection(direccion);
+            rbody.MovePosition(nuevaPosicion);           
+            
+        } else {
 
-        Vector3 direccion = destino - _p;
+            // detenemos el jugador por completo             
+            isoRenderer.SetDirection(Vector2.zero);
+            rbody.MovePosition(rbody.position);
+        }
+   
 
-     
-        // normalizar la direccion
-        direccion.Normalize();     
-        isoRenderer.SetDirection(direccion);
-        float velocidad = 2f; 
-        Vector2 newPos = _p + direccion * velocidad * Time.fixedDeltaTime;
-        rbody.velocity = direccion * velocidad; 
-        //rbody.MovePosition(newPos);
+        
+       
     }
 }
