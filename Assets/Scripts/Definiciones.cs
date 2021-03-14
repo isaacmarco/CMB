@@ -1,4 +1,12 @@
-﻿public enum Dificultad 
+﻿public enum ObjetosAventuras
+{
+    Ninguno = 0, 
+    Cofre = 1, 
+    Llave = 2, 
+    Comida = 3
+};
+
+public enum Dificultad 
 {
     Baja, 
     Media, 
@@ -151,5 +159,6 @@ public enum Tareas
     Topos,
     Memory,
     GaleriaTiro,
-    Evaluacion
+    Evaluacion,
+    Aventuras
 }
