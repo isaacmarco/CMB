@@ -2,9 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TareaAventuras : MonoBehaviour
+public class TareaAventuras : Tarea
 {
-    private ItemInventario[] inventario; 
+    [Header("Inventario")]
+    public ItemInventario[] inventario; 
+
+    public NivelAventurasScriptable Nivel { 
+        get { return (NivelAventurasScriptable) Configuracion.nivelActual;} 
+    }
+
+    protected override void Actualizacion()
+    {
+
+    }
+
+    protected override void Inicio()
+    {
+
+    }
 
     // devuelve verdadero si hay espacio en el inventario
     private bool HayEspacioInventario()
@@ -45,16 +60,18 @@ public class TareaAventuras : MonoBehaviour
         if(!HayEspacioInventario())
             return false; 
 
+        AgregarInventario(item);
+        
         switch(item)
         {
             case ObjetosAventuras.Cofre:
                 // no se agrega, se suman puntos
             break;
-            case ObjetosAventuras.Comida:
-                AgregarInventario(item);
-            break;
+            //case ObjetosAventuras.Comida:
+            //    AgregarInventario(item);
+            //break;
             case ObjetosAventuras.Llave:
-                AgregarInventario(item);
+                //AgregarInventario(item);
             break;
         }
 
@@ -70,4 +87,28 @@ public class TareaAventuras : MonoBehaviour
     }
 
 
+
+    
+    public override string ObtenerNombreTarea()
+    {
+        return "Tarea aventuras";
+    }
+    
+    protected override string ObtenerCabeceraTarea()
+    {
+        string cabecera = string.Empty;
+        // datos de la tarea
+        cabecera += "Tarea de evaluacion\n";
+        cabecera += "Numero de bloques de evaluacion: " + Configuracion.numberoDeBloquesDeEvaluacion + "\n";
+        cabecera += "Leyenda: tiempo; estimulo fijacion visible; numero bloque actual; mirando x; mirando y; estimulo objetivo x; estimulo objetivo y";
+        return "Cabecera por decidir";
+    }
+    
+    protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
+    {        
+        return new RegirstroPosicionOcultarTareaAventuras(
+            tiempo, x, y
+        );
+    } 
+    
 }

@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ItemInventario : MonoBehaviour
 {
-    
+    private GestorSpritesAventuras gestorSprites; 
+    [SerializeField]
+    private Image imagen;
     private bool libre; 
+    [SerializeField]
     private ObjetosAventuras tipo;     
+   
 
     public bool Libre {
         get { return libre;}
@@ -18,19 +22,28 @@ public class ItemInventario : MonoBehaviour
     
     void Start()
     {
-        // liberar
-        libre = true; 
-        // TODO: CAMBIAR MARCO
+        // inciar
+        gestorSprites = FindObjectOfType<GestorSpritesAventuras>();        
+        Actualizar();
+    }
+
+    private void Actualizar()
+    {
+        // marcar como libre y cambiar la imagen
+        libre = tipo == ObjetosAventuras.Ninguno;
+        imagen.enabled = !libre;         
+        imagen.sprite = gestorSprites.ObtenerSprite(tipo);
     }
 
     public void Agregar(ObjetosAventuras tipo)
     {
         this.tipo = tipo; 
-        libre = false; 
+        Actualizar();
     }
 
     public void Usar()
     {
-        libre = true; 
+        this.tipo = ObjetosAventuras.Ninguno; 
+        Actualizar();
     }
 }

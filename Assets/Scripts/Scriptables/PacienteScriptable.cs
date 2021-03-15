@@ -18,6 +18,7 @@ public class PacienteScriptable : ScriptableObject
     public int ultimoNivelDesbloqueadoTareaTopos; 
     public int ultimoNivelDesbloqueadoTareaMemory;
     public int ultimoNivelDesbloqueadoTareaGaleriaTiro;
+    public int ultimoNivelDesbloqueadoTareaAventuras;
     // el nivel actual seleccionado, ya que el jugador
     // puede elegri cualquier nivel desde el menu
     public int nivelActualTareaMemory; 
@@ -31,6 +32,7 @@ public class PacienteScriptable : ScriptableObject
     public int puntuacionTareaTopos;
     public int puntuacionTareaMemory; 
     public int puntuacionTareaGaleriaTiro;
+    public int puntuacionTareaAventuras;
     
     [Header("Tiempos record para tarea memory")]
     public int[] tiemposRecordPorNivelTareaMemory; 
