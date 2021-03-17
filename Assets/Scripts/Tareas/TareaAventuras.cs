@@ -18,7 +18,7 @@ public class TareaAventuras : Tarea
 
     protected override void Inicio()
     {
-
+        tareaBloqueada = false; 
     }
 
     // devuelve verdadero si hay espacio en el inventario

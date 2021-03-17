@@ -57,7 +57,7 @@ public class UsarAlMirar2D : MonoBehaviour
             return PuntoDentroRect(posicionEnteraTobii);
 
 		} else {
-            
+
             // no hay informacion del tobii, comprobamos
             // si estamos usando el raton
             if( tarea.Configuracion.utilizarRatonAdicionalmente)           
@@ -78,14 +78,21 @@ public class UsarAlMirar2D : MonoBehaviour
 		// comprobamos si tenemos la vista sobre este
 		// estimulo 
 		if(MirandoItem() )
-		{				
+		{	
+
 			// si no estabamos mirando el estimulo entonces
 			// empezamos a mirarlo 
 			if(!itemMirado)
 			{
 				if(!tarea.TareaBloqueada)
-					ComenzarFijacion();
+				{
+					// tiene que haber un item dentro de la ranura
+					// de inventario para poder usarse
+					if(!itemInventario.Libre)
+						ComenzarFijacion();
+				}
 			} else {
+
 				// ya estamos mirando el estimulo 
 				ContinuarFijacion();
 			}
@@ -111,7 +118,7 @@ public class UsarAlMirar2D : MonoBehaviour
 		// comprobar el tiempo
 		float tiempoFijacionTranscurrido = Time.unscaledTime - tiempoInicioFijacion;
 		// actualizar barra de tiempo
-		float tiempoNecesario = tarea.Configuracion.tiempoParaSeleccion;
+		float tiempoNecesario = 1.5f; // tarea.Configuracion.tiempoParaSeleccion;
 		float tiempoNormalizado = tiempoFijacionTranscurrido / tiempoNecesario;		
 		interfazFijacion.Actualizar(tiempoNormalizado);        
 		if(tiempoFijacionTranscurrido > tiempoNecesario)
@@ -154,7 +161,8 @@ public class UsarAlMirar2D : MonoBehaviour
 	}
 
     protected virtual void SeleccionarItem()
-    {	 
+    {	
+		
         itemInventario.Usar();
     }
 
