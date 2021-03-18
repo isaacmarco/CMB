@@ -18,6 +18,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private Transform jerarquiaMenuTareaMemory;   
     [SerializeField] private Transform jerarquiaMenuTareaGaleriaTiro;
     [SerializeField] private Transform jerarquiaMenuTareaEvaluacion;
+    [SerializeField] private Transform jerarquiaMenuTareaAventuras;
     
     [SerializeField] private Transform jerarquiaMenuPerfiles;     
     [Header("Debug")]
@@ -127,7 +128,7 @@ public class Menu : MonoBehaviour
         Transform[] jerarquias = {
             jerarquiaMenuPrincipal, jerarquiaMenuTareaTopos, jerarquiaMenuPerfiles,
             jerarquiaMenuTareaMemory, jerarquiaMenuTareaEvaluacion, 
-            jerarquiaMenuTareaGaleriaTiro
+            jerarquiaMenuTareaGaleriaTiro, jerarquiaMenuTareaAventuras
         };
         // desactivamos menus
         foreach(Transform j in jerarquias)
@@ -166,6 +167,10 @@ public class Menu : MonoBehaviour
 
             case OpcionesSeleccionablesMenu.MenuTareaGaleriaTiro:
                 MostrarMenu(jerarquiaMenuTareaGaleriaTiro);
+            break;
+
+            case OpcionesSeleccionablesMenu.MenuTareaAventuras:
+                MostrarMenu(jerarquiaMenuTareaAventuras);
             break;
 
             case OpcionesSeleccionablesMenu.MenuTareaEvaluacion:

@@ -102,8 +102,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
         // nueva posicion
         Vector2 nuevaPosicion = rbody.position + (Vector2) direccion * velocidadInterpolada * Time.fixedDeltaTime;
         
-
-        if( velocidadInterpolada > 0.1f )
+        // solo desplazamos el jugador si tenemos un minimo de velocidad, 
+        // ademas, tenemos que estar mirando por debajo de la interfaz de inventario
+        float alturaComienzoInterfazInventario = 920; 
+        if( velocidadInterpolada > 0.1f && destino.y < alturaComienzoInterfazInventario)
         {   
             // movemos el jugador 
             isoRenderer.SetDirection(direccion);

@@ -3,7 +3,15 @@
     Ninguno = 0, 
     Cofre = 1, 
     Llave = 2, 
-    Comida = 3
+    Manzana = 3,
+    Platano = 4, 
+    Agua = 5, 
+    PocimaSalud = 6,
+    Tronco = 7, 
+    Oro = 8, 
+    Diamante = 9, 
+    Esmeralda = 10, 
+    Rubi = 11
 };
 
 public enum Dificultad 
@@ -141,15 +149,17 @@ public enum OpcionesSeleccionablesMenu
     MenuTareaMemory = 4, 
     MenuTareaEvaluacion = 12,
     MenuTareaGaleriaTiro = 14,
+    MenuTareaAventuras = 16,
     ComenzarTareaTopos = 5,
     ComenzarTareaMemory = 6,        
     ComenzarTareaEvaluacion = 13,
     ComenzarTareaGaleriaTiro = 15,
+    ComenzarTareaAventuras = 17,
     SeleccionarPaciente1 = 7, 
     SeleccionarPaciente2 = 8,
     SeleccionarPaciente3 = 9,
     SeleccionarPaciente4 = 10,   
-    SeleccionarNivelMemory = 11
+    SeleccionarNivelMemory = 11    
 
 }
 

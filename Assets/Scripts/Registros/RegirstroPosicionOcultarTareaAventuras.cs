@@ -5,8 +5,7 @@ using UnityEngine;
 public class RegirstroPosicionOcultarTareaAventuras : RegistroPosicionOcular
 {
     public RegirstroPosicionOcultarTareaAventuras(
-        float tiempo, int x, int y,
-        int tipoA, int tipoB, int Ax, int Ay, int Bx, int By, bool recargando, int municion
+        float tiempo, int x, int y
     ) : base(tiempo, x, y)
     {
         //this.estimuloObjetivo = estimuloObjetivo; 
