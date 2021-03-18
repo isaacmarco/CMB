@@ -9,14 +9,14 @@ public class ComunicacionPuertoSerie : MonoBehaviour
 {
     public enum MensajesPuertoSerie
     {
-        Comienzo, 
+        Comienzo=65, 
         Fijacion, 
         Seguimiento, 
         Final
     };
     
     
-	private SerialPort puerteSerie = new SerialPort(); 
+	private SerialPort puerteSerie = new SerialPort("COM4", 115200, 0, 8, (StopBits) 1); 
     
     // devuelve si el puerto se encuentra abierto
     public bool PuertoAbierto {
@@ -45,13 +45,15 @@ public class ComunicacionPuertoSerie : MonoBehaviour
        
 	}
     
-    public void EnviarPorPuertoSerie(MensajesPuertoSerie mensaje)
+    //public void EnviarPorPuertoSerie(MensajesPuertoSerie mensaje)
+    public void EnviarPorPuertoSerie(String mensaje)
     {
         if(puerteSerie!=null)
         {
             if(puerteSerie.IsOpen)
             {
-                puerteSerie.Write(mensaje.ToString());
+                //puerteSerie.Write(mensaje.ToString());
+                puerteSerie.Write(mensaje);
                 Debug.Log("Enviado por puerto de serie: " + mensaje);
             } else {
                 Debug.LogError("El puerto serie no esta abierto");

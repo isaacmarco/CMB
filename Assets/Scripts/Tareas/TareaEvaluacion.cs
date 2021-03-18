@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class TareaEvaluacion : Tarea
 {
     [Header("Estimulos")]
@@ -89,6 +90,7 @@ public class TareaEvaluacion : Tarea
 
         // obtener componente de puerto series
         puertoSerie = GetComponent<ComunicacionPuertoSerie>();
+       
 
         // configurar la tarea 
         float gris = 0.7f; 
@@ -108,12 +110,19 @@ public class TareaEvaluacion : Tarea
         Debug.Log("Inicio de la evaluacion");
         OcultarEstimulos();
 
+       
+        // espera por el arduino
+         yield return new WaitForSeconds(3f);
+
         tiempoInicioTarea = Time.time; 
 
         // enviar msg comienzo tarea
-        puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Comienzo);
+        //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Comienzo);
+        puertoSerie.EnviarPorPuertoSerie("C");
+        yield return new WaitForSeconds(1f);
 
-        for(int i=0; i<Configuracion.numberoDeBloquesDeEvaluacion; i++)
+
+        for (int i=0; i<Configuracion.numberoDeBloquesDeEvaluacion; i++)
         {
            
             numeroBloqueDeEvaluacion = i + 1;
@@ -127,7 +136,8 @@ public class TareaEvaluacion : Tarea
             MostrarEstimuloFijacion();
 
             // enviar msg estimulo fijacion 
-            puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Fijacion);
+            //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Fijacion);
+            puertoSerie.EnviarPorPuertoSerie("F");
 
             // esperar y ocultar el estimulo
             yield return new WaitForSeconds(Configuracion.duracionEstimuloFijacionEvaluacion);
@@ -137,7 +147,8 @@ public class TareaEvaluacion : Tarea
             CentrarEstimulo();    
 
             // enviar msg de comienzo del seguimiento
-            puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Seguimiento);
+            //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Seguimiento);
+            puertoSerie.EnviarPorPuertoSerie("S");
 
             // obtener coeficientes del bloque actual            
             double[] coeficientesDelBloque = (double[]) listaCoeficientes[i];
@@ -152,7 +163,8 @@ public class TareaEvaluacion : Tarea
         }
 
         // enviar msg de final de la tara
-        puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Final);
+        //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Final);
+        puertoSerie.EnviarPorPuertoSerie("E");
 
         // cerrar el puerto
         puertoSerie.CerrarPuertoSerie();
