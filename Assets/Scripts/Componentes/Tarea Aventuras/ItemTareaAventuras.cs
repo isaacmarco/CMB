@@ -13,7 +13,14 @@ public class ItemTareaAventuras : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D col)
     {
-        CogerItem();
+        // se puede consumir directamente o coger
+        // dependiendo del tipo
+        if(tipo == ObjetosAventuras.Corazon || tipo == ObjetosAventuras.Cofre)
+        {
+            ProcesarItem();
+        } else {
+            CogerItem();
+        }
     }
 
     void Start()
@@ -23,6 +30,12 @@ public class ItemTareaAventuras : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         // actualizamos el sprite
         spriteRenderer.sprite = gestorSprites.ObtenerSprite(tipo);    
+    }
+
+    private void ProcesarItem()
+    {
+        FindObjectOfType<TareaAventuras>().ConsumirItem(tipo);
+        Destroy(this.gameObject);
     }
 
     private void CogerItem()

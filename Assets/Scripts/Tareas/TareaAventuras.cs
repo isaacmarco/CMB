@@ -6,19 +6,64 @@ public class TareaAventuras : Tarea
 {
     [Header("Inventario")]
     public ItemInventario[] inventario; 
+    [Header("Interfaz")]
+    public GameObject[] corazones; 
 
     public NivelAventurasScriptable Nivel { 
         get { return (NivelAventurasScriptable) Configuracion.nivelActual;} 
     }
+
+    // vida del jugador
+    private int vida = 3; 
+    private int vidaMaxima = 3; 
 
     protected override void Actualizacion()
     {
 
     }
 
+   
+    public void RecibirImpacto()
+    {      
+        PerderVida();
+    }
+
+    private void PerderPartida()
+    {
+
+    }
+
+    private void PerderVida()
+    {
+        vida--;
+        if(vida < 0)
+        {
+            vida = 0; 
+            PerderPartida();
+        }        
+        ActualizarMarcadorVida();
+    }
+
+    private void GanarVida()
+    {        
+        vida++;
+        if(vida > vidaMaxima)
+            vida = vidaMaxima; 
+        ActualizarMarcadorVida();
+    }
+
+    private void ActualizarMarcadorVida()
+    {
+        // actualizar marcador de corazones
+        for(int i=0; i<corazones.Length; i++)
+            corazones[i].SetActive(vida >= i + 1);
+    }
+
     protected override void Inicio()
     {
         tareaBloqueada = false; 
+        vida = 3; 
+        ActualizarMarcadorVida();
     }
 
     // devuelve verdadero si hay espacio en el inventario
@@ -54,36 +99,57 @@ public class TareaAventuras : Tarea
         espacioLibre.Agregar(item);
     }
 
-    public bool RecogerItem(ObjetosAventuras item)
+    public void ConsumirItem(ObjetosAventuras item)
     {
-        // comprobamos si hay espacio
-        if(!HayEspacioInventario())
-            return false; 
+        Debug.Log("Consumiendo " + item);
 
-        AgregarInventario(item);
-        
+        // items que no van al inventario
         switch(item)
         {
+            case ObjetosAventuras.Corazon:
+                // vida directa
+                GanarVida();
+            break;
             case ObjetosAventuras.Cofre:
                 // no se agrega, se suman puntos
             break;
-            //case ObjetosAventuras.Comida:
-            //    AgregarInventario(item);
-            //break;
+        }
+    }
+
+    public bool RecogerItem(ObjetosAventuras item)
+    {        
+        // comprobamos si hay espacio
+        if(!HayEspacioInventario())
+            return false; 
+        
+        // logica        
+        switch(item)
+        {           
             case ObjetosAventuras.Llave:
-                //AgregarInventario(item);
+                
             break;
         }
+
+        AgregarInventario(item);
 
         // devolvemos true para que el objeto sea destruido
         return true; 
     }
 
 
-
-    public void UsarItem()
+            
+    public void UsarItem(ObjetosAventuras item)
     {
-        // al mirar el item 
+        Debug.Log("Usando " + item);
+
+        
+
+        switch(item)
+        {
+            case ObjetosAventuras.PocimaSalud:
+                GanarVida();
+            break;
+        }
     }
 
 

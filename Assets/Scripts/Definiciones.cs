@@ -11,7 +11,8 @@
     Oro = 8, 
     Diamante = 9, 
     Esmeralda = 10, 
-    Rubi = 11
+    Rubi = 11,
+    Corazon = 12
 };
 
 public enum Dificultad 

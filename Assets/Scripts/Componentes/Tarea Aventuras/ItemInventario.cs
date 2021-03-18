@@ -43,7 +43,15 @@ public class ItemInventario : MonoBehaviour
 
     public void Usar()
     {
+        // skip de los items que no son usable
+        // TODO
+        //if(tipo == ObjetosAventuras.Diamante)
+        //    return;
+
+
+        FindObjectOfType<TareaAventuras>().UsarItem(tipo);
         this.tipo = ObjetosAventuras.Ninguno; 
         Actualizar();
+        
     }
 }
