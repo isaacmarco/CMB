@@ -8,7 +8,8 @@ public class Fuego : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D col)
     {
-        FindObjectOfType<TareaAventuras>().RecibirImpacto();
+        if(col.gameObject.tag == "Player")
+            FindObjectOfType<TareaAventuras>().RecibirImpacto();
     }
 
 

@@ -25,6 +25,7 @@ public class TareaAventuras : Tarea
    
     public void RecibirImpacto()
     {      
+        Debug.Log("impacto");
         PerderVida();
     }
 
