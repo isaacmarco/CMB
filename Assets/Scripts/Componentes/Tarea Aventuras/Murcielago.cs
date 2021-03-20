@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Serpiente : MonoBehaviour
+public class Murcielago : MonoBehaviour
 {
-    
+   
+   
     public enum DireccionMovimiento
     {
         Vertical, 
@@ -25,6 +26,11 @@ public class Serpiente : MonoBehaviour
         isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
     }
 
+    void Start()
+    {
+        StartCoroutine(CorrutinaIA());
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Player")
@@ -34,10 +40,50 @@ public class Serpiente : MonoBehaviour
     private float distanciaRecorridaEnUnSentido = 0; // distancia recorrida en cada sentido
     private float sentido = 1f;  // sentido en la direccion del movimiento
 
+    private bool detenido = false; 
+
+    private IEnumerator CorrutinaDetener()
+    {   
+        float duracion = Random.Range(1, 3); 
+        detenido = true; 
+        yield return new WaitForSeconds(duracion);
+        detenido = false;         
+    }
+
+    private IEnumerator CorrutinaIA()
+    {
+        // tomar decisiones cada 2s
+        while(true)
+        {            
+            // comprobar si se detiene
+            if(Random.value > 0.8f && !detenido)
+            {
+                StartCoroutine(CorrutinaDetener());
+            }
+
+            // comprobar si hacemos un cambio de sentido
+            if(Random.value > 0.7f && !detenido)
+                CambioSentido();
+
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private void CambioSentido()
+    {
+        // cambio de sentido
+        distanciaRecorridaEnUnSentido = 0; 
+        sentido = sentido * -1;
+    }
+
     void FixedUpdate()
     {   
-       
-        // direccion y posicion de la serpiente
+        
+     
+        if(detenido)
+            return; 
+
+        // direccion y posicion del murcielago
         Vector2 vectorDireccion = new Vector2(1, 0) * sentido;
 
         if(direccion == DireccionMovimiento.Vertical)
@@ -52,6 +98,7 @@ public class Serpiente : MonoBehaviour
             spriteRenderer.flipX = sentido > 0 ? false : true; 
         }
 
+
         Vector2 nuevaPosicion = 
             rbody.position + (Vector2) vectorDireccion * velocidad * Time.fixedDeltaTime;
 
@@ -61,16 +108,13 @@ public class Serpiente : MonoBehaviour
         // comprobamos si ha llegado al final
        
         if (distanciaRecorridaEnUnSentido > distanciaPorCubrir) 
-        {
-            // cambio de sentido
-            distanciaRecorridaEnUnSentido = 0; 
-            sentido = sentido * -1;
-        }
+            CambioSentido();
+        
+
 
         // actualizar el enemigo 
         isoRenderer.SetDirection(vectorDireccion);
         rbody.MovePosition(nuevaPosicion);           
-      
+       
     }
-
 }

@@ -16,6 +16,7 @@ public class TareaAventuras : Tarea
     // vida del jugador
     private int vida = 3; 
     private int vidaMaxima = 3; 
+    private IsometricPlayerMovementController jugador; 
 
     protected override void Actualizacion()
     {
@@ -24,9 +25,11 @@ public class TareaAventuras : Tarea
 
    
     public void RecibirImpacto()
-    {      
-        Debug.Log("impacto");
+    {     
+        
         PerderVida();
+        // parpadeo del jugador 
+        jugador.RecibirImpacto();
     }
 
     private void PerderPartida()
@@ -65,6 +68,7 @@ public class TareaAventuras : Tarea
         tareaBloqueada = false; 
         vida = 3; 
         ActualizarMarcadorVida();
+        jugador = FindObjectOfType<IsometricPlayerMovementController>();
     }
 
     // devuelve verdadero si hay espacio en el inventario

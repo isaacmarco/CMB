@@ -11,11 +11,16 @@ public class IsometricCharacterRenderer : MonoBehaviour
 
     Animator animator;
     int lastDirection;
+    
+    public SpriteRenderer SpriteRenderer {
+        get { return this.GetComponent<SpriteRenderer>(); }
+    }
 
     private void Awake()
     {
         //cache the animator component
         animator = GetComponent<Animator>();
+        
     }
 
 

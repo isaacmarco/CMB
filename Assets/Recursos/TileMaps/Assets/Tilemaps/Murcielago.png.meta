@@ -1,0 +1,322 @@
+fileFormatVersion: 2
+guid: ffd15e3ad98e5e64587d727ac3e2c4ac
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4462718537291387961
+    second: Murcielago_0
+  - first:
+      213: -7063170740061434249
+    second: Murcielago_1
+  - first:
+      213: -182327103335289261
+    second: Murcielago_2
+  - first:
+      213: 86306526853991992
+    second: Murcielago_3
+  - first:
+      213: -4499773861329511518
+    second: Murcielago_4
+  - first:
+      213: 537900664256038277
+    second: Murcielago_5
+  - first:
+      213: -412293825560089217
+    second: Murcielago_6
+  - first:
+      213: -1012810471151974945
+    second: Murcielago_7
+  - first:
+      213: 5671473523648518636
+    second: Murcielago_8
+  - first:
+      213: -8237436229097746508
+    second: Murcielago_9
+  - first:
+      213: 553778673709549288
+    second: Murcielago_10
+  - first:
+      213: -34894622983146244
+    second: Murcielago_11
+  - first:
+      213: -6510310677711054215
+    second: Murcielago_12
+  - first:
+      213: 3457758697382128593
+    second: Murcielago_13
+  - first:
+      213: -8203239292246087050
+    second: Murcielago_14
+  - first:
+      213: 5495378247937548655
+    second: Murcielago_15
+  - first:
+      213: -2609828351410966338
+    second: Murcielago_16
+  - first:
+      213: -727788083441372693
+    second: Murcielago_17
+  - first:
+      213: 6344335330924542938
+    second: Murcielago_18
+  - first:
+      213: -3301788662200928046
+    second: Murcielago_19
+  - first:
+      213: 7137755546300354978
+    second: Murcielago_20
+  - first:
+      213: -3117702986392014499
+    second: Murcielago_21
+  - first:
+      213: 3565773226817563402
+    second: Murcielago_22
+  - first:
+      213: 7736278481900157845
+    second: Murcielago_23
+  - first:
+      213: -696408114046304319
+    second: Murcielago_24
+  - first:
+      213: 7280726370720964270
+    second: Murcielago_25
+  - first:
+      213: -7041834480887236857
+    second: Murcielago_26
+  - first:
+      213: 3421218017678230303
+    second: Murcielago_27
+  - first:
+      213: 5972139202041033930
+    second: Murcielago_28
+  - first:
+      213: -4247955696109388186
+    second: Murcielago_29
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Murcielago_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 121
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 934ddcb7dd2ceed30800000000000000
+      internalID: 4462718537291387961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Murcielago_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 121
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77e84ba52a39afd90800000000000000
+      internalID: -7063170740061434249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Murcielago_2
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 121
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e26cc277e387df0800000000000000
+      internalID: -182327103335289261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Murcielago_3
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 121
+        width: 10
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83e0ee2345f923100800000000000000
+      internalID: 86306526853991992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Murcielago_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 121
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2abddd193879d81c0800000000000000
+      internalID: -4499773861329511518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d092d7e2ec362c64b936b2cc4c969a40
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

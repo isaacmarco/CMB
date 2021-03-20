@@ -12,16 +12,40 @@ public class IsometricPlayerMovementController : MonoBehaviour
     IsometricCharacterRenderer isoRenderer;
     private Vector2 puntoFiltrado = Vector2.zero;   
     Rigidbody2D rbody;
+    private Coroutine corrutinaImpacto; 
+   
+   
+    public void RecibirImpacto()
+    {
+        if(corrutinaImpacto != null)
+            StopCoroutine(corrutinaImpacto);
 
-    private void Awake()
+        corrutinaImpacto = StartCoroutine(CorrutinaImpacto());
+    }
+
+    private IEnumerator CorrutinaImpacto()
+    {
+        Color normal = new Color(1f, 1f, 1f, 1f);
+        Color impacto = new Color(1f, 0f, 0f, 1f);
+
+        // hacemos parpadear el sprite
+        for(int i=0; i<5; i++)
+        {
+            isoRenderer.SpriteRenderer.color = impacto; 
+            yield return new WaitForSeconds(0.3f);
+            isoRenderer.SpriteRenderer.color = normal; 
+            yield return new WaitForSeconds(0.3f);
+        }
+        
+        isoRenderer.SpriteRenderer.color = normal;                
+    }
+
+    void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
         isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
-
         Camera.main.transparencySortMode = TransparencySortMode.CustomAxis;
         Camera.main.transparencySortAxis = new Vector3(0,1,0);
-        
-
     }
 
 
