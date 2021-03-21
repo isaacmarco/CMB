@@ -107,7 +107,7 @@ public class Murcielago : MonoBehaviour
 
         // comprobamos si ha llegado al final
        
-        if (distanciaRecorridaEnUnSentido > distanciaPorCubrir) 
+        if (distanciaRecorridaEnUnSentido > distanciaPorCubrir * 100) 
             CambioSentido();
         
 

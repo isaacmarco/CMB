@@ -60,7 +60,7 @@ public class Serpiente : MonoBehaviour
 
         // comprobamos si ha llegado al final
        
-        if (distanciaRecorridaEnUnSentido > distanciaPorCubrir) 
+        if (distanciaRecorridaEnUnSentido > distanciaPorCubrir * 100) 
         {
             // cambio de sentido
             distanciaRecorridaEnUnSentido = 0; 
