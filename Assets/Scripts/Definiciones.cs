@@ -12,7 +12,8 @@
     Diamante = 9, 
     Esmeralda = 10, 
     Rubi = 11,
-    Corazon = 12
+    Corazon = 12,
+    Hacha = 13
 };
 
 public enum Dificultad 

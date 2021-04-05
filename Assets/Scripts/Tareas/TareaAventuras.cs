@@ -6,9 +6,12 @@ public class TareaAventuras : Tarea
 {
     [Header("Inventario")]
     public ItemInventario[] inventario; 
+    public ArrayList objetosRecogidos = new ArrayList();     
+    public ArrayList objetosConsumidos = new ArrayList();
     [Header("Interfaz")]
     public GameObject[] corazones; 
 
+    
     public NivelAventurasScriptable Nivel { 
         get { return (NivelAventurasScriptable) Configuracion.nivelActual;} 
     }
@@ -107,6 +110,9 @@ public class TareaAventuras : Tarea
     public void ConsumirItem(ObjetosAventuras item)
     {
         Debug.Log("Consumiendo " + item);
+        
+        objetosRecogidos.Add(item); 
+        objetosConsumidos.Add(item);
 
         // items que no van al inventario
         switch(item)
@@ -127,6 +133,8 @@ public class TareaAventuras : Tarea
         if(!HayEspacioInventario())
             return false; 
         
+        objetosRecogidos.Add(item); 
+
         // logica        
         switch(item)
         {           
