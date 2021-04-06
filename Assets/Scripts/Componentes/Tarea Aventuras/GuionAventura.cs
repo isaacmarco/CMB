@@ -32,6 +32,8 @@ public class GuionAventura : MonoBehaviour
     {}
     
     public virtual void SalidaAlcanzada()
-    {}
+    {
+        Debug.Log("Salida alcanzada");
+    }
 
 }

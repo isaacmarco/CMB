@@ -22,6 +22,16 @@ public class PuntoVision : MonoBehaviour
         }
     }
 
+    public void Mostrar()
+    {        
+        imagenPunto.gameObject.SetActive(true);
+    }
+
+    public void Ocultar()
+    {
+        imagenPunto.gameObject.SetActive(false);
+    }
+
     void Awake()
     {
         // crear referencias

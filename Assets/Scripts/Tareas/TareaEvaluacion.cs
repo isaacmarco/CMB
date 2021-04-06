@@ -10,6 +10,7 @@ public class TareaEvaluacion : Tarea
     public GameObject estimulo;
     public GameObject estimuloFijacion;
     private ComunicacionPuertoSerie puertoSerie; 
+    private PuntoVision puntoVision; 
     
     public NivelEvaluacion Nivel { 
         get { return (NivelEvaluacion) Configuracion.nivelActual;} 
@@ -90,7 +91,8 @@ public class TareaEvaluacion : Tarea
 
         // obtener componente de puerto series
         puertoSerie = GetComponent<ComunicacionPuertoSerie>();
-       
+        // referencia al punto vision 
+        puntoVision = FindObjectOfType<PuntoVision>();
 
         // configurar la tarea 
         float gris = 0.7f; 
@@ -247,6 +249,7 @@ public class TareaEvaluacion : Tarea
 
     private void MostrarEstimuloFijacion()
     {
+        puntoVision.Ocultar();
         mostrandoEstimuloFijacion = true; 
         estimulo.SetActive(false);
         estimuloFijacion.SetActive(true);
@@ -254,6 +257,7 @@ public class TareaEvaluacion : Tarea
 
     private void OcultarEstimuloFijacion()
     {
+        puntoVision.Mostrar();
         mostrandoEstimuloFijacion = false; 
         estimulo.SetActive(true);
         estimuloFijacion.SetActive(false);

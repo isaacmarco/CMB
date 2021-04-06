@@ -13,8 +13,8 @@ public class Esqueleto : MonoBehaviour
     };
 
     public DireccionMovimiento direccion = DireccionMovimiento.Vertical; 
-    public float velocidad = 1f; 
-    public float umbralBusqueda = 2f; 
+    private float velocidad = 0.5f; 
+    private float umbralBusqueda = 1f; 
     public float distanciaPorCubrir = 10f; 
     private Rigidbody2D rbody;
     private IsometricCharacterRenderer isoRenderer;
