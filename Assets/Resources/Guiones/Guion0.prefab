@@ -12070,8 +12070,8 @@ Transform:
   m_LocalPosition: {x: -1.3255919, y: 0.0021328088, z: -6.577533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6830136993958553554}
   - {fileID: 9036601512120094373}
+  - {fileID: 6830136993958553554}
   - {fileID: 5874444680560590224}
   - {fileID: 12131162733609254}
   - {fileID: 4515450075823652454}
@@ -12279,7 +12279,7 @@ PrefabInstance:
     - target: {fileID: 5021506805351680609, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}
       propertyPath: tipo
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7353825754601737118, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}
@@ -13081,7 +13081,7 @@ PrefabInstance:
     - target: {fileID: 7353825754601737118, guid: 02533c6b505089b43ae83b07733766fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7353825754601737118, guid: 02533c6b505089b43ae83b07733766fa,
         type: 3}
@@ -14166,7 +14166,7 @@ PrefabInstance:
     - target: {fileID: 5021506805351680609, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}
       propertyPath: tipo
-      value: 8
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7353825754601737118, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}
@@ -14341,7 +14341,7 @@ PrefabInstance:
     - target: {fileID: 5021506805351680609, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}
       propertyPath: tipo
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7353825754601737118, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}
@@ -14381,7 +14381,7 @@ PrefabInstance:
     - target: {fileID: 7353825754601737118, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7353825754601737118, guid: 48b88d1c48ade654dbe377f8863c49cd,
         type: 3}

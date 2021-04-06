@@ -89,10 +89,13 @@ public class TareaEvaluacion : Tarea
     protected override void Inicio()
     {          
 
+
+
         // obtener componente de puerto series
         puertoSerie = GetComponent<ComunicacionPuertoSerie>();
         // referencia al punto vision 
         puntoVision = FindObjectOfType<PuntoVision>();
+        puntoVision.Ocultar();
 
         // configurar la tarea 
         float gris = 0.7f; 

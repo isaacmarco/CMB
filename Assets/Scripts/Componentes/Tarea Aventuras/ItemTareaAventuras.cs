@@ -22,7 +22,8 @@ public class ItemTareaAventuras : MonoBehaviour
 
         // se puede consumir directamente o coger
         // dependiendo del tipo
-        if(tipo == ObjetosAventuras.Corazon || tipo == ObjetosAventuras.Cofre)
+        if(tipo == ObjetosAventuras.Corazon || tipo == ObjetosAventuras.Oro || 
+        tipo == ObjetosAventuras.Lingote || tipo == ObjetosAventuras.Monedas)
         {
             ProcesarItem();
         } else {

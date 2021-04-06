@@ -18,7 +18,7 @@ public class GuionNivel3 : GuionAventura
             ObjetosAventuras item = (ObjetosAventuras) tarea.objetosConsumidos[i];
             if(item == ObjetosAventuras.Tronco)
                 troncos++;
-            if(item == ObjetosAventuras.Hacha)
+            if(item == ObjetosAventuras.Espada)
                 hachaEncontrada = true; 
 
         }

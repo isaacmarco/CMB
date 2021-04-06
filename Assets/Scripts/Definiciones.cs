@@ -13,7 +13,9 @@
     Esmeralda = 10, 
     Rubi = 11,
     Corazon = 12,
-    Hacha = 13
+    Espada = 13,
+    Monedas = 14,
+    Lingote = 15
 };
 
 public enum Dificultad 

@@ -37,7 +37,7 @@ public class ComunicacionPuertoSerie : MonoBehaviour
 		    puerteSerie.ReadTimeout = 10; 
             Debug.Log("Puerto de serie abierto");
 
-        } catch(UnauthorizedAccessException)
+        } catch(Exception)
         {
             Debug.LogError("No se puede abrir el puerto");
         }
