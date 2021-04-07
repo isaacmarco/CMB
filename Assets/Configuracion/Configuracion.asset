@@ -33,9 +33,9 @@ MonoBehaviour:
   tiempoParaOcultarPareja: 2
   numeroDeNivelesParaBonus: 5
   velocidadDeLaNave: 0.019
-  numberoDeBloquesDeEvaluacion: 10
+  numberoDeBloquesDeEvaluacion: 20
   duracionDelBloqueDeEvaluacion: 20
-  duracionEstimuloFijacionEvaluacion: 20
+  duracionEstimuloFijacionEvaluacion: 5
   condicionTareaEvaluaion: 1
   manejoTareaEvalucion: 1
   usarFondoGrisTareaEvaluacion: 0

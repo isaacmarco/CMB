@@ -89,8 +89,6 @@ public class TareaEvaluacion : Tarea
     protected override void Inicio()
     {          
 
-
-
         // obtener componente de puerto series
         puertoSerie = GetComponent<ComunicacionPuertoSerie>();
         // referencia al punto vision 
@@ -104,6 +102,7 @@ public class TareaEvaluacion : Tarea
         
         Camera.main.backgroundColor = Configuracion.usarFondoGrisTareaEvaluacion ? 
             fondoGris : fondoNegro; 
+
         StartCoroutine(CorrutinaEvaluacion());
     }
     
@@ -113,18 +112,18 @@ public class TareaEvaluacion : Tarea
     private IEnumerator CorrutinaEvaluacion()
     {
         Debug.Log("Inicio de la evaluacion");
-        OcultarEstimulos();
 
+        // ocultamos todo
+        OcultarEstimulos();
        
         // espera por el arduino
-         yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f);
 
-        tiempoInicioTarea = Time.time; 
-
-        // enviar msg comienzo tarea
-        //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Comienzo);
+        // enviar msg comienzo tarea        
         puertoSerie.EnviarPorPuertoSerie("C");
         yield return new WaitForSeconds(1f);
+
+        tiempoInicioTarea = Time.time; 
 
 
         for (int i=0; i<Configuracion.numberoDeBloquesDeEvaluacion; i++)
@@ -140,8 +139,7 @@ public class TareaEvaluacion : Tarea
             // mostrar fijacion
             MostrarEstimuloFijacion();
 
-            // enviar msg estimulo fijacion 
-            //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Fijacion);
+            // enviar msg estimulo fijacion             
             puertoSerie.EnviarPorPuertoSerie("F");
 
             // esperar y ocultar el estimulo
@@ -151,8 +149,7 @@ public class TareaEvaluacion : Tarea
             // centrar el estimulo 
             CentrarEstimulo();    
 
-            // enviar msg de comienzo del seguimiento
-            //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Seguimiento);
+            // enviar msg de comienzo del seguimiento            
             puertoSerie.EnviarPorPuertoSerie("S");
 
             // obtener coeficientes del bloque actual            
@@ -167,8 +164,7 @@ public class TareaEvaluacion : Tarea
          
         }
 
-        // enviar msg de final de la tara
-        //puertoSerie.EnviarPorPuertoSerie(ComunicacionPuertoSerie.MensajesPuertoSerie.Final);
+        // enviar msg de final de la tara        
         puertoSerie.EnviarPorPuertoSerie("E");
 
         // cerrar el puerto
@@ -184,7 +180,7 @@ public class TareaEvaluacion : Tarea
 
     private void CentrarEstimulo()
     {
-        Debug.Log("Centrando estimulo");
+        //Debug.Log("Centrando estimulo");
         // obtener el centro
         int centroX = Screen.width / 2;
         int centroY = Screen.height / 2;   
@@ -252,18 +248,19 @@ public class TareaEvaluacion : Tarea
 
     private void MostrarEstimuloFijacion()
     {
-        puntoVision.Ocultar();
-        mostrandoEstimuloFijacion = true; 
+        
+        puntoVision.Ocultar();        
         estimulo.SetActive(false);
         estimuloFijacion.SetActive(true);
+        mostrandoEstimuloFijacion = true; 
     }
 
     private void OcultarEstimuloFijacion()
-    {
-        puntoVision.Mostrar();
-        mostrandoEstimuloFijacion = false; 
+    {        
+        puntoVision.Mostrar();        
         estimulo.SetActive(true);
         estimuloFijacion.SetActive(false);
+        mostrandoEstimuloFijacion = false; 
     }
 
     private void OcultarEstimulos()
