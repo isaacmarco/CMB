@@ -35,7 +35,7 @@ MonoBehaviour:
   velocidadDeLaNave: 0.019
   numberoDeBloquesDeEvaluacion: 20
   duracionDelBloqueDeEvaluacion: 20
-  duracionEstimuloFijacionEvaluacion: 5
+  duracionEstimuloFijacionEvaluacion: 20
   condicionTareaEvaluaion: 1
   manejoTareaEvalucion: 1
   usarFondoGrisTareaEvaluacion: 0

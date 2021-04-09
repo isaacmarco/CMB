@@ -123,19 +123,20 @@ public class TareaEvaluacion : Tarea
         puertoSerie.EnviarPorPuertoSerie("C");
         yield return new WaitForSeconds(1f);
 
+        // momento real en el que se inicia la tarea
         tiempoInicioTarea = Time.time; 
 
-
+        // para cada bloque
         for (int i=0; i<Configuracion.numberoDeBloquesDeEvaluacion; i++)
         {
-           
-            numeroBloqueDeEvaluacion = i + 1;
             Debug.Log("Nuevo bloque");
-            
-            contadorTicks = 0; 
 
-            // para cada bloque
+            numeroBloqueDeEvaluacion = i + 1;
+            contadorTicks = 0; 
+            
+            // momento en el que comienza este bloque
             float tiempoInicioBloque = Time.time;
+
             // mostrar fijacion
             MostrarEstimuloFijacion();
 
@@ -155,8 +156,13 @@ public class TareaEvaluacion : Tarea
             // obtener coeficientes del bloque actual            
             double[] coeficientesDelBloque = (double[]) listaCoeficientes[i];
 
-            // bucle de tarea                
-            while(Time.time < tiempoInicioBloque + Configuracion.duracionDelBloqueDeEvaluacion)
+            
+            // bucle de tarea: se repetira mientras que el tiempo trascurrido sea menor
+            // que la duracion del bloque
+            float tiempoDuracionDelBloque = Configuracion.duracionEstimuloFijacionEvaluacion + 
+                Configuracion.duracionDelBloqueDeEvaluacion;
+
+            while(Time.time < tiempoInicioBloque + tiempoDuracionDelBloque)
             {
                 Tick(coeficientesDelBloque);
                 yield return new WaitForSeconds(tasaRefresco);
