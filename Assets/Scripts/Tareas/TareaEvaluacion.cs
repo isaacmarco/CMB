@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Tobii.Gaming;
 
 public class TareaEvaluacion : Tarea
 {
@@ -68,7 +68,22 @@ public class TareaEvaluacion : Tarea
         if(Input.GetKeyDown(KeyCode.Escape))
             if(Configuracion.condicionTareaEvaluaion == CondicionTareaEvaluacion.Entrenamiento)
                 TerminarEntrenamiento();
+
+        // mover el estimulo con el joystick
+        if(Configuracion.manejoTareaEvalucion == ManejoTareaEvaluacion.Joystick)
+        {
+            /*
+            // el vector esta normalizado 
+            Vector2 axisJoystick = new Vector2(
+                Input.GetAxis("Vertical"), 
+                Input.GetAxis("Horizontal")
+            );*/
+
+            // mover el estimulo
+
+        }
     }
+
     private void FinalizarTareaEvaluacion()
     {
         // detenmos las corrutinas, registramos en disco los
@@ -94,8 +109,9 @@ public class TareaEvaluacion : Tarea
         // referencia al punto vision 
         puntoVision = FindObjectOfType<PuntoVision>();
         puntoVision.Ocultar();
-
-        // configurar la tarea 
+     
+     
+        // configurar la tarea (color de fondo)
         float gris = 0.7f; 
         Color fondoNegro = new Color(0, 0, 0, 1);
         Color fondoGris = new Color(gris, gris, gris, 1);
@@ -103,6 +119,7 @@ public class TareaEvaluacion : Tarea
         Camera.main.backgroundColor = Configuracion.usarFondoGrisTareaEvaluacion ? 
             fondoGris : fondoNegro; 
 
+        
         StartCoroutine(CorrutinaEvaluacion());
     }
     
@@ -185,8 +202,7 @@ public class TareaEvaluacion : Tarea
     }
 
     private void CentrarEstimulo()
-    {
-        //Debug.Log("Centrando estimulo");
+    {       
         // obtener el centro
         int centroX = Screen.width / 2;
         int centroY = Screen.height / 2;   
@@ -194,6 +210,10 @@ public class TareaEvaluacion : Tarea
             (
                 centroX, centroY
         );   
+
+        // centramos el circulo del joystick
+        if(Configuracion.manejoTareaEvalucion == ManejoTareaEvaluacion.Joystick)
+            puntoVision.Centrar();
     }
 
 
@@ -299,6 +319,69 @@ public class TareaEvaluacion : Tarea
             tiempo, x, y, (int) posicionEstimulo.x, (int) posicionEstimulo.y, numeroBloqueDeEvaluacion,
             mostrandoEstimuloFijacion
         );
+    } 
+
+
+    
+    // corrutina para registrar a donde mira el paciente
+    // en cada momento
+    protected override IEnumerator RegistroDiario()
+    {
+        float tiempoEspera = 1 / Configuracion.intervaloRegistroOcularEnHZ;
+        listaRegistrosOculares = new ArrayList();
+        float tiempoInicio = Time.time;
+
+        while(registrarEnDiario)
+        {                       
+
+            // calculamos el tiempo actual 
+            float tiempoActual = Time.time - tiempoInicio; 
+
+
+            if(Configuracion.manejoTareaEvalucion == ManejoTareaEvaluacion.Vista)
+            {
+
+                // control ocular 
+                GazePoint gazePoint = TobiiAPI.GetGazePoint();
+
+		        if (gazePoint.IsValid)
+		        {
+			        Vector2 posicionGaze = gazePoint.Screen;	            		
+                	        
+                    // creamos el nuevo registro y lo introducimos en la lista
+                    RegistroPosicionOcular r = NuevoRegistro(
+                        tiempoActual, (int) posicionGaze.x, (int) posicionGaze.y
+                    );
+                    listaRegistrosOculares.Add(r);                 
+
+                } else {
+                
+                    // si el punto no es valido lo indicamos con un valor especial
+                    // x,y negativo
+                    RegistroPosicionOcular r = NuevoRegistro(
+                        tiempoActual, -1, -1
+                    );
+                    listaRegistrosOculares.Add(r);              
+                }      
+                
+
+            } else {
+                
+                // control con joystick 
+                // TODO!
+                Vector2 posicionRegistrada = puntoVision.PosicionEnPantalla; 
+                RegistroPosicionOcular r = NuevoRegistro(
+                    tiempoActual, (int) posicionRegistrada.x, (int) posicionRegistrada.y                    
+                );
+                listaRegistrosOculares.Add(r);
+               
+            }
+
+
+          
+            yield return new WaitForSeconds(tiempoEspera); 
+            
+		}  
     } 
     
     

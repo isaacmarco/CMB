@@ -45,7 +45,10 @@ public class ConfiguracionScriptable : ScriptableObject
     public int duracionEstimuloFijacionEvaluacion = 1;   
     public CondicionTareaEvaluacion condicionTareaEvaluaion = CondicionTareaEvaluacion.Experimental;
     public ManejoTareaEvaluacion manejoTareaEvalucion = ManejoTareaEvaluacion.Vista;
+    [Range(0, 1)]
+    public float sensibilidadJoystick;
     public bool usarFondoGrisTareaEvaluacion = false;  
+    public string passwordTareaEvaluacion = string.Empty; 
     [Header("Configuracion tarea de galeria de tiro")]
     public int puntuacionAciertoGaleriaTiro = 100;
     public int puntuacionGemaGaleriaTiro = 500;

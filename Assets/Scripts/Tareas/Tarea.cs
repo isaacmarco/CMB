@@ -9,8 +9,8 @@ using System;
 public class Tarea : MonoBehaviour
 {
     protected bool tareaBloqueada;
-    private ArrayList listaRegistrosOculares; 
-    private bool registrarEnDiario = true; 
+    protected ArrayList listaRegistrosOculares; 
+    protected bool registrarEnDiario = true; 
     
     // fecha para registrar los datosw 
     private string fechaRegistro = string.Empty; 
@@ -107,12 +107,13 @@ public class Tarea : MonoBehaviour
 
     void Update()
     {
-        
+        /*
             // para el debug 
             if(Input.GetKeyDown(KeyCode.W))
                 JuegoGanado();
             if(Input.GetKeyDown(KeyCode.L))
                 JuegoPerdido();
+        */
         
         Actualizacion();
     }
@@ -326,7 +327,7 @@ public class Tarea : MonoBehaviour
     
     // corrutina para registrar a donde mira el paciente
     // en cada momento
-    private IEnumerator RegistroDiario()
+    protected virtual IEnumerator RegistroDiario()
     {
         float tiempoEspera = 1 / Configuracion.intervaloRegistroOcularEnHZ;
         listaRegistrosOculares = new ArrayList();

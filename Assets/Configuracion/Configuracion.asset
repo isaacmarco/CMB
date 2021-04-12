@@ -37,8 +37,10 @@ MonoBehaviour:
   duracionDelBloqueDeEvaluacion: 20
   duracionEstimuloFijacionEvaluacion: 20
   condicionTareaEvaluaion: 1
-  manejoTareaEvalucion: 1
+  manejoTareaEvalucion: 0
+  sensibilidadJoystick: 0.6
   usarFondoGrisTareaEvaluacion: 0
+  passwordTareaEvaluacion: rebeca
   puntuacionAciertoGaleriaTiro: 100
   puntuacionGemaGaleriaTiro: 500
   penalizacionErrorGaleriaTiro: 50

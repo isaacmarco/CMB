@@ -140,7 +140,13 @@ public class Menu : MonoBehaviour
 
     public void ComenzarTareaEvaluacion()
     {
-        SceneManager.LoadScene("TareaEvaluacion");
+        // comprobar contraseña
+        if( GetComponent<MenuTareaEvaluacion>().PasswordActual == Configuracion.passwordTareaEvaluacion)
+        {
+            SceneManager.LoadScene("TareaEvaluacion");
+        } else {
+            Debug.LogError("Password incorrecta");
+        }
     }
     
     public void EjecutarOpcionMenu(OpcionesSeleccionablesMenu opcion, int nivelACargar = -1)
@@ -174,6 +180,8 @@ public class Menu : MonoBehaviour
             break;
 
             case OpcionesSeleccionablesMenu.MenuTareaEvaluacion:
+                // limpiar la password de la tarea de evaluacion
+                GetComponent<MenuTareaEvaluacion>().LimpiarPassword();
                 // menu de evaluacion
                 MostrarMenu(jerarquiaMenuTareaEvaluacion);
             break;

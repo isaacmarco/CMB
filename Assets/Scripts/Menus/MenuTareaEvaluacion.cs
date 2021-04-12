@@ -4,9 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MenuTareaEvaluacion : MonoBehaviour
 {
-   
+    
+    // campos de configuracion de la tarea
     public Toggle fondoGrisToggle, experimentoToggle, entrenamientoToggle, joystickToggle, vistaToggle; 
-   
+    public InputField password; 
+
+    public void LimpiarPassword()
+    {
+        password.text = string.Empty; 
+    }
+
+    public string PasswordActual {
+        get { return this.password.text;}
+    }
 
     void Start()
     {
