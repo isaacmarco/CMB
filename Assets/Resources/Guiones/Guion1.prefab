@@ -16462,7 +16462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1974402638616070348}
-  - component: {fileID: 1974402638616070349}
+  - component: {fileID: 6808071783292140878}
   m_Layer: 0
   m_Name: Guion1
   m_TagString: Untagged
@@ -16490,7 +16490,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1974402638616070349
+--- !u!114 &6808071783292140878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16499,7 +16499,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1974402638616070323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36e8c0373cde19940a1c4f0ec6944a5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 73b35074214574a4d8cf17e2ee626a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1974402639479591711

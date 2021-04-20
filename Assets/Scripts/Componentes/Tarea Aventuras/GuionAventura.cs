@@ -15,10 +15,18 @@ public class GuionAventura : MonoBehaviour
 
     // para establacer propiedades y referencias
     public virtual void Inicio()
-    {}
+    {        
+    }
+    
+    protected virtual IEnumerator Mensajes()
+    {
+        yield return null; 
+    }
+
     // ejecucion
     protected IEnumerator Guion()
     {
+        StartCoroutine(Mensajes());
         while(true)
         {
             ComprobacionesGuion();
@@ -28,12 +36,15 @@ public class GuionAventura : MonoBehaviour
     // comprobacion 
     public virtual void ComprobacionesGuion()
     {}
+    
     public virtual void Fin()
-    {}
+    {
+        // conseguido
+        if(!tarea.TareaBloqueada)        
+            tarea.GanarPartida();
+    }
     
     public virtual void SalidaAlcanzada()
-    {
-        Debug.Log("Salida alcanzada");
-    }
+    {}
 
 }

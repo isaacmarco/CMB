@@ -20,13 +20,64 @@ public class TareaAventuras : Tarea
     private int vida = 3; 
     private int vidaMaxima = 3; 
     private IsometricPlayerMovementController jugador; 
-
-    protected override void Actualizacion()
+       protected override void Actualizacion()
     {
 
     }
 
-   
+    
+    protected override void JuegoGanado()
+    {    
+        BloquearTarea();
+        // FindObjectOfType<Audio>().FeedbackPartidaGanada();
+        FinalizarRegistro();
+        StopAllCoroutines();
+        StartCoroutine(TerminarJuego(true)); 
+    }
+    
+    protected override IEnumerator TerminarJuego(bool partidaGanada)
+    {
+        // NO USAR ESTE METODO, ELIMINAR DESPUES DE LDEBUG
+        AbandonarTarea();
+        yield return null; 
+    } 
+
+    protected override bool GuardarProgreso(bool partidaGanada)
+    {        
+        Debug.Log("Guardando progreso de partida de aventuras");
+
+        if(partidaGanada)
+        {
+            // guardar la puntuacion
+            if(puntuacion > 0)
+                Configuracion.pacienteActual.puntuacionTareaAventuras += puntuacion; 
+
+            // progresar
+            Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaAventuras++;
+            
+            // comprobar si hemos terminado todos los niveles   
+            if(TodosLosNivelesCompletados())
+            {
+                Debug.Log("Todos los niveles de la tarea completos");
+                // El juego se ha terminado, no hay mas niveles
+                int numeroNiveles = 15; 
+                Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaAventuras = numeroNiveles; 
+            }        
+
+            // serializar los datos en disco 
+            Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+
+        } else {
+            
+            // no cambiamos el progreso ni guardamos datos
+            Debug.Log("La partida se ha perdido, no se guarda el progreso");
+        }
+
+        // devolvemos falso porque no se conceden premios adicionales
+        return false; 
+
+    }
+
     public void RecibirImpacto()
     {     
         
@@ -35,9 +86,16 @@ public class TareaAventuras : Tarea
         jugador.RecibirImpacto();
     }
 
-    private void PerderPartida()
+    public void PerderPartida()
     {
 
+    }
+    
+    
+
+    public void GanarPartida()
+    {
+        JuegoGanado();
     }
 
     private void PerderVida()
@@ -71,7 +129,23 @@ public class TareaAventuras : Tarea
         tareaBloqueada = false; 
         vida = 3; 
         ActualizarMarcadorVida();
+        InstanciarNivel();
+        //StartCoroutine(CorrutinaPartida());               
+    }
+/*
+    private IEnumerator CorrutinaPartida()
+    {
+        //int nivel = Configuracion.nivelActual.numeroDelNivel;
+        //if(nivel == 0)
+            yield return StartCoroutine(MostrarMensaje("Mira al topo",0,null,Mensaje.TipoMensaje.Topos));
+        yield return null; 
+    }*/
+    private void InstanciarNivel()
+    {
+        // cargamos el nivel completo y referenciamos el jugador
+        GameObject nivel = (GameObject) Instantiate (Nivel.prefabGuionParaCargar);
         jugador = FindObjectOfType<IsometricPlayerMovementController>();
+
     }
 
     // devuelve verdadero si hay espacio en el inventario

@@ -12,7 +12,7 @@ public class SalidaGuion : MonoBehaviour
             // al encontrar la salida informamos al guion y
             // eliminamos la salida
             FindObjectOfType<GuionAventura>().SalidaAlcanzada();
-            Destroy(gameObject);
+            // Destroy(gameObject);
         }
     }
 

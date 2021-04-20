@@ -46,6 +46,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
         Camera.main.transparencySortMode = TransparencySortMode.CustomAxis;
         Camera.main.transparencySortAxis = new Vector3(0,1,0);
+        canvasRect = FindObjectOfType<Tarea>().CanvasRect;
     }
 
 

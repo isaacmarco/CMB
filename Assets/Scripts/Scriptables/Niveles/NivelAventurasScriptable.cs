@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class NivelAventurasScriptable : NivelScriptable
 {
     
-    public int saludMaxima; 
+    public GameObject prefabGuionParaCargar; 
+    public int saludMaxima;         
     public int tiempoLimiteEnMinutos; 
-    public ObjetosAventuras[] objetosQueConseguir; 
     
     
 }

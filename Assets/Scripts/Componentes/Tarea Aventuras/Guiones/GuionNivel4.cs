@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuionNivel3 : GuionAventura
+public class GuionNivel4 : GuionAventura
 {
     
     /*
-        Encontrar la salida por el nivel. “La pradera está en llamas, encuentra una salida” - 
-        “Puedes curarte recogiendo los corazones”
+        Encontrar los tesoros y esquivar serpientes (explicación serpientes) 
+        “Encuentra todos los tesoros” - “Ten cuidado con las serpientes”
+
     */
 
      

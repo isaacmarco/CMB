@@ -186,7 +186,7 @@ public class Tarea : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
     
-    protected IEnumerator MostrarMensaje(
+    public IEnumerator MostrarMensaje(
         string mensaje, int duracion = 0, Sprite image = null, 
         Mensaje.TipoMensaje tipoMensaje = Mensaje.TipoMensaje.Aviso
     )

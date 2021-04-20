@@ -4,25 +4,37 @@ using UnityEngine;
 
 public class GuionNivel2 : GuionAventura
 {
+     
     /*
-    Encontrar 4 frutas para comer y comerlas desde el inventario. 
-    “Algunas cosas que recojas van a tus bolsillos para usarlas cuando quieras” - 
-    “Recoge 4 frutas y cómetelas”
+        Encontrar 3 troncos y el hacha “Encuentra suficiente leña y 
+        un hacha para hacer un campamento”
     */
-
 
     public override void ComprobacionesGuion()
     {
-        bool todosSonFrutas = true; 
+        int troncos = 0; 
+        bool hachaEncontrada = true; 
         for(int i=0; i<tarea.objetosConsumidos.Count; i++)        
         {
             ObjetosAventuras item = (ObjetosAventuras) tarea.objetosConsumidos[i];
-            if(item != ObjetosAventuras.Manzana)
-                todosSonFrutas = false; 
+            if(item == ObjetosAventuras.Tronco)
+                troncos++;
+            if(item == ObjetosAventuras.Espada)
+                hachaEncontrada = true; 
 
         }
-        if(todosSonFrutas && tarea.objetosConsumidos.Count >= 4)
+        if(hachaEncontrada && troncos > 2)
             Fin();
     }
 
+      
+    protected override IEnumerator Mensajes()
+    {
+        yield return StartCoroutine(tarea.MostrarMensaje(
+            "Busca 3 troncos de leña y algo para cortar"
+            ,0,null,Mensaje.TipoMensaje.Topos)
+        );
+      
+        
+    }
 }
