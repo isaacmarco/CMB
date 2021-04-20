@@ -109,6 +109,8 @@ public class TareaEvaluacion : Tarea
         // referencia al punto vision 
         puntoVision = FindObjectOfType<PuntoVision>();
         puntoVision.Ocultar();
+        // iniciar el componente punto vision para la tarea de evaluacion
+        puntoVision.IniciarParaEvaluacion();
      
      
         // configurar la tarea (color de fondo)

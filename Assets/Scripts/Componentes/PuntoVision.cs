@@ -40,6 +40,12 @@ public class PuntoVision : MonoBehaviour
         // crear referencias
         imagenPunto = GetComponent<Image>();
 
+       
+
+    }
+
+    public void IniciarParaEvaluacion()
+    {
         tarea = FindObjectOfType<Tarea>(); 
 
         // comprobar configuracion
@@ -53,7 +59,6 @@ public class PuntoVision : MonoBehaviour
             Debug.Log ("La tarea usa joystick");
             Centrar();
         }
-
     }
 
     public void Centrar()
