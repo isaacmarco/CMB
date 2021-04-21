@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuionNivel4 : GuionAventura
+public class GuionNivel7 : GuionAventura
 {
     
     /*
-        Encontrar los tesoros y esquivar serpientes (explicación serpientes) 
-        “Encuentra todos los tesoros” - “Ten cuidado con las serpientes”
+        Encontrar tesoros dentro de la cripta “Encuentra los tesoros” - “Cuidado con los murciélagos”
+
 
     */
 
@@ -15,30 +15,33 @@ public class GuionNivel4 : GuionAventura
     protected override IEnumerator Mensajes()
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
-            "Tienes que encontrar las 4 esmeraldas",
+            "Encuentra los 3 rubíes",
             0,null,Mensaje.TipoMensaje.Topos)
         );
+        /*
         yield return StartCoroutine(tarea.MostrarMensaje(
-            "¡Ten cuidado con las serpientes!",
+            "¡Cuidado con los murciélagos",
             0,null,Mensaje.TipoMensaje.Topos)
-        );
+        );*/
         
     }
     
+ 
     public override void ComprobacionesGuion()
     {
-        int esmeraldas = 0;         
+        int rubies = 0;         
         for(int i=0; i<tarea.objetosRecogidos.Count; i++)        
         {
             ObjetosAventuras item = (ObjetosAventuras) tarea.objetosRecogidos[i];
-            if(item == ObjetosAventuras.Esmeralda)
-                esmeraldas++;
+            if(item == ObjetosAventuras.Rubi)
+                rubies++;
           
         }
-        if(esmeraldas > 3)
+        if(rubies > 2)
             Fin();
     }
 
+ 
 
     
 }

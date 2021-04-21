@@ -14,9 +14,9 @@ public class GuionNivel2 : GuionAventura
     {
         int troncos = 0; 
         bool hachaEncontrada = true; 
-        for(int i=0; i<tarea.objetosConsumidos.Count; i++)        
+        for(int i=0; i<tarea.objetosRecogidos.Count; i++)        
         {
-            ObjetosAventuras item = (ObjetosAventuras) tarea.objetosConsumidos[i];
+            ObjetosAventuras item = (ObjetosAventuras) tarea.objetosRecogidos[i];
             if(item == ObjetosAventuras.Tronco)
                 troncos++;
             if(item == ObjetosAventuras.Espada)
