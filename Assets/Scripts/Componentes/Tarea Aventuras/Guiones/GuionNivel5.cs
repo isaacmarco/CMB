@@ -17,11 +17,11 @@ public class GuionNivel5 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Tienes que encontrar la entrada a la cripta",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Puerta)
         );
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Recoge y usa las pócimas rojas para curarte",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Corazon)
         );
         
     }

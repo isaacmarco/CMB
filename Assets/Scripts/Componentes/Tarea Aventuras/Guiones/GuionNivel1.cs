@@ -30,11 +30,11 @@ public class GuionNivel1 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Busca 4 frutas para alimentarte"
-            ,0,null,Mensaje.TipoMensaje.Topos)
+            ,0,null,Mensaje.TipoMensaje.Frutas)
         );
          yield return StartCoroutine(tarea.MostrarMensaje(
             "Puedes comer la fruta después de recogerla"
-            ,0,null,Mensaje.TipoMensaje.Topos)
+            ,0,null,Mensaje.TipoMensaje.Ojo)
         );
         
     }

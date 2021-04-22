@@ -70,6 +70,16 @@ public class Aplicacion : MonoBehaviour
         // CARGAR AQUI EL NIVEL CONFIGURADO
     }
 
+    public void CargarNivelTareaAventuras(int nivel)
+    {
+        Debug.Log("Cargando nivel " + nivel);
+        string ruta = "Niveles Aventuras/NivelAventuras " + nivel; 
+        NivelAventurasScriptable nivelAventuras = (NivelAventurasScriptable) Resources.Load(ruta); 
+        configuracion.nivelActual = nivelAventuras; 		
+        configuracion.tareaActual = Tareas.Aventuras;
+        Debug.Log("Cargado nivel de aventuras " + nivelAventuras.numeroDelNivel);
+    }
+
     public void CargarNivelTareaGaleriaTiro(int nivel)
     {
         string ruta = "Niveles GaleriaTiro/NivelGaleriaTiro " + nivel; 

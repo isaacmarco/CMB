@@ -41,17 +41,22 @@ public class ItemInventario : MonoBehaviour
         Actualizar();
     }
 
+    
+
     public void Usar()
     {
-        // skip de los items que no son usable
-        // TODO
-        //if(tipo == ObjetosAventuras.Diamante)
-        //    return;
-
+        // saltamos los items que no se pueden usar 
+        if(tipo == ObjetosAventuras.Diamante || tipo == ObjetosAventuras.Esmeralda ||
+        tipo == ObjetosAventuras.Rubi || tipo == ObjetosAventuras.Tronco || 
+        tipo == ObjetosAventuras.Espada || tipo == ObjetosAventuras.Llave)
+        {
+            Debug.Log("Este item no se puede usar");
+            return; 
+        }
 
         FindObjectOfType<TareaAventuras>().UsarItem(tipo);
         this.tipo = ObjetosAventuras.Ninguno; 
-        Actualizar();
-        
+        Actualizar();        
     }
+
 }

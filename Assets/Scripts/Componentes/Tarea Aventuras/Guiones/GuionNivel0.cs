@@ -22,11 +22,11 @@ public class GuionNivel0 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Encuentra el refugio antes de que anochezca",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Refugio)
         );
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Recoge los tesoros que veas",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Tesoros)
         );
         
     }

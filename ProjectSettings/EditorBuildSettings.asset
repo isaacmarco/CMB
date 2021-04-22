@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tareas/TareaEvaluacion.unity
     guid: 7358da30ed63bcc489d2312787523a0b
+  - enabled: 1
+    path: Assets/Tareas/TareaAventuras.unity
+    guid: 744a46d0026785345a110496b66c66d4
   m_configObjects: {}

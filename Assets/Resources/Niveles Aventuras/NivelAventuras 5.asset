@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71a30de1fca1d0148a4877a29a0da5de, type: 3}
-  m_Name: NivelAventuras2
+  m_Name: NivelAventuras 5
   m_EditorClassIdentifier: 
-  numeroDelNivel: 2
+  numeroDelNivel: 5
   dificultad: 0
   tipoDeNivel: 0
-  prefabGuionParaCargar: {fileID: 1974402638616070323, guid: 6a7f1d1434233d34fbf8eb1669a4ec52,
+  prefabGuionParaCargar: {fileID: 1974402638616070323, guid: c07e5439b38ea9347888ccbe8c662d0a,
     type: 3}
   saludMaxima: 3
   tiempoLimiteEnMinutos: 5

@@ -16,7 +16,7 @@ public class GuionNivel7 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Encuentra los 3 rubíes",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Bonus)
         );
         /*
         yield return StartCoroutine(tarea.MostrarMensaje(

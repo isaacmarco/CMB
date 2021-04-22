@@ -32,7 +32,7 @@ public class GuionNivel2 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Busca 3 troncos de leña y algo para cortar"
-            ,0,null,Mensaje.TipoMensaje.Topos)
+            ,0,null,Mensaje.TipoMensaje.Troncos)
         );
       
         

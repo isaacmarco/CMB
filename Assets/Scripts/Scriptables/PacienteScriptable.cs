@@ -44,6 +44,7 @@ public class PacienteScriptable : ScriptableObject
         ultimoNivelDesbloqueadoTareaMemory = 0;
         ultimoNivelDesbloqueadoTareaTopos = 0; 
         ultimoNivelDesbloqueadoTareaGaleriaTiro = 0;
+        ultimoNivelDesbloqueadoTareaAventuras = 0; 
         nivelActualTareaMemory = 0; 
         contadorNivelesGanadosParaBonusTareaMemory = 0;
         jugandoNivelDeBonusTareaMemory = false; 
@@ -51,6 +52,7 @@ public class PacienteScriptable : ScriptableObject
         puntuacionTareaMemory = 0; 
         puntuacionTareaTopos = 0; 
         puntuacionTareaGaleriaTiro = 0;
+        puntuacionTareaAventuras = 0; 
 
         // vector de tiempos records
         tiemposRecordPorNivelTareaMemory = new int[28];

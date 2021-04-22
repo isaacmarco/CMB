@@ -8,7 +8,10 @@ public class Mensaje : MonoBehaviour
     public enum TipoMensaje
     {
         Exito, Fallo, Aviso, Bonus, Record, Tiempo, Topos, Memory, Comienzo, Ojo,
-        GaleriaTiro, DianaAzul, DianaRoja, Municion
+        GaleriaTiro, DianaAzul, DianaRoja, Municion, 
+        Refugio, Frutas, Troncos, Fuego, Tesoros, 
+        Serpientes, Puerta, Llave, Agua, Esqueletos, 
+        Murcielago, Corazon, Espada
     };
    
     [SerializeField] private Text mensaje; 
@@ -16,7 +19,10 @@ public class Mensaje : MonoBehaviour
     [SerializeField] Image imagenTipoMensaje;    
     [SerializeField] private Sprite spriteExito, spriteFallo, 
         spriteAviso, spriteBonus, spriteRecord, spriteReloj, spriteTopos, spriteMemory,
-        spriteComienzo, spriteOjo, spriteDianaAzul, spriteDianaRoja, spriteMunicion; 
+        spriteComienzo, spriteOjo, spriteDianaAzul, spriteDianaRoja, spriteMunicion,
+        spriteRefugio, spriteFrutas, spriteTroncos, spriteFuego, spriteTesoros, 
+        spriteSerpiente, spritePuerta, spriteLlave, spriteAgua, spriteEsqueletos, 
+        spriteMurcielagos, spriteCorazon, spriteEspada;  
     
     void Awake()
     {

@@ -14,6 +14,7 @@ public class MenuTareaAventuras : MonoBehaviour
 
     public void Actualizar()
     {
+        
         int nivelActual = FindObjectOfType<Menu>().Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaAventuras;
         int puntos = FindObjectOfType<Menu>().Configuracion.pacienteActual.puntuacionTareaAventuras;
         this.puntuacion.text = puntos.ToString();

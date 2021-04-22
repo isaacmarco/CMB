@@ -15,11 +15,11 @@ public class GuionNivel3 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "¡La pradera está en llamas, debes volver al campamento!",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Fuego)
         );
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Puedes curarte recogiendo corazones",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Corazon)
         );
         
     }

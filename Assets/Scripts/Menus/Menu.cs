@@ -94,6 +94,10 @@ public class Menu : MonoBehaviour
                     // menu de la galeria de tiro
                     MostrarMenu(jerarquiaMenuTareaGaleriaTiro);
                 break;
+                case Tareas.Aventuras:
+                    // menu de aventuras
+                    MostrarMenu(jerarquiaMenuTareaAventuras);
+                break;
                 
             }
            
@@ -109,12 +113,13 @@ public class Menu : MonoBehaviour
         Debug.Log("Mostrando menu " + jerarquia.name);
 
         if(jerarquia == jerarquiaMenuTareaMemory || jerarquia == jerarquiaMenuTareaTopos || 
-        jerarquia == jerarquiaMenuTareaGaleriaTiro)
+        jerarquia == jerarquiaMenuTareaGaleriaTiro || jerarquia == jerarquiaMenuTareaAventuras )
         {
             // actualizar ui dependiendo el progreso
             FindObjectOfType<MenuTareaTopos>().Actualizar();
             FindObjectOfType<MenuTareaMemory>().Actualizar();
             FindObjectOfType<MenuTareaGaleriaTiro>().Actualizar();
+            FindObjectOfType<MenuTareaAventuras>().Actualizar();
             // feedback
             FindObjectOfType<Audio>().FeedbackElegirTarea();
         }
@@ -222,6 +227,14 @@ public class Menu : MonoBehaviour
                 );
                 // lanzamos la tarea de memoria
                 SceneManager.LoadScene("TareaMemory");
+            break;
+
+            case OpcionesSeleccionablesMenu.ComenzarTareaAventuras:
+                Aplicacion.instancia.CargarNivelTareaAventuras(
+                    Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaAventuras
+                );
+                // lanzamos la tarea de memoria
+                SceneManager.LoadScene("TareaAventuras");
             break;
 
             /*

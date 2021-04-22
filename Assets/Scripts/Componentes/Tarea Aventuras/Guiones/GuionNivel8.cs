@@ -17,7 +17,7 @@ public class GuionNivel8 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Encuentra la llave para salir del templo",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Llave)
         );
         /*
         yield return StartCoroutine(tarea.MostrarMensaje(

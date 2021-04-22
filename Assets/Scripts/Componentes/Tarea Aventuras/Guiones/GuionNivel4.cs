@@ -16,11 +16,11 @@ public class GuionNivel4 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Tienes que encontrar las 4 esmeraldas",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Bonus)
         );
         yield return StartCoroutine(tarea.MostrarMensaje(
             "¡Ten cuidado con las serpientes!",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Serpientes)
         );
         
     }

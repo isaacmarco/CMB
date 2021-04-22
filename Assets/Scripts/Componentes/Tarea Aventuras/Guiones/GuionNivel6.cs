@@ -16,11 +16,11 @@ public class GuionNivel6 : GuionAventura
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
             "Encuentra los 3 rubíes",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Bonus)
         );
         yield return StartCoroutine(tarea.MostrarMensaje(
             "¡Cuidado con los murciélagos",
-            0,null,Mensaje.TipoMensaje.Topos)
+            0,null,Mensaje.TipoMensaje.Fallo)
         );
         
     }

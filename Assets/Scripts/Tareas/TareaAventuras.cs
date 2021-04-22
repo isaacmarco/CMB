@@ -35,12 +35,6 @@ public class TareaAventuras : Tarea
         StartCoroutine(TerminarJuego(true)); 
     }
     
-    protected override IEnumerator TerminarJuego(bool partidaGanada)
-    {
-        // NO USAR ESTE METODO, ELIMINAR DESPUES DE LDEBUG
-        AbandonarTarea();
-        yield return null; 
-    } 
 
     protected override bool GuardarProgreso(bool partidaGanada)
     {        
