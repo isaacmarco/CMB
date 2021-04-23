@@ -14,14 +14,14 @@ public class GuionNivel1 : GuionAventura
     public override void ComprobacionesGuion()
     {
         bool todosSonFrutas = true; 
-        for(int i=0; i<tarea.objetosConsumidos.Count; i++)        
+        for(int i=0; i<tarea.objetosUsados.Count; i++)        
         {
-            ObjetosAventuras item = (ObjetosAventuras) tarea.objetosConsumidos[i];
+            ObjetosAventuras item = (ObjetosAventuras) tarea.objetosUsados[i];
             if(item != ObjetosAventuras.Manzana)
                 todosSonFrutas = false; 
 
         }
-        if(todosSonFrutas && tarea.objetosConsumidos.Count >= 4)
+        if(todosSonFrutas && tarea.objetosUsados.Count >= 4)
             Fin();
     }
 

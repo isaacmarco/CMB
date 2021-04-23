@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ public class TareaAventuras : Tarea
     public ItemInventario[] inventario; 
     public ArrayList objetosRecogidos = new ArrayList();     
     public ArrayList objetosConsumidos = new ArrayList();
+    public ArrayList objetosUsados = new ArrayList();
     [Header("Interfaz")]
     public GameObject[] corazones; 
 
@@ -222,8 +223,8 @@ public class TareaAventuras : Tarea
     public void UsarItem(ObjetosAventuras item)
     {
         Debug.Log("Usando " + item);
-
         
+        objetosUsados.Add(item); 
 
         switch(item)
         {
