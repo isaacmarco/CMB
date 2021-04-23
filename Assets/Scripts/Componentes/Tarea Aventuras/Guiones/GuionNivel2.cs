@@ -13,7 +13,7 @@ public class GuionNivel2 : GuionAventura
     public override void ComprobacionesGuion()
     {
         int troncos = 0; 
-        bool hachaEncontrada = true; 
+        bool hachaEncontrada = false; 
         for(int i=0; i<tarea.objetosRecogidos.Count; i++)        
         {
             ObjetosAventuras item = (ObjetosAventuras) tarea.objetosRecogidos[i];
@@ -31,7 +31,7 @@ public class GuionNivel2 : GuionAventura
     protected override IEnumerator Mensajes()
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
-            "Busca 3 troncos de leña y algo para cortar"
+            "Busca 3 troncos de leña y una espada para cortar"
             ,0,null,Mensaje.TipoMensaje.Troncos)
         );
       
