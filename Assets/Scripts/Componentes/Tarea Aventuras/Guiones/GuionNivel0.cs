@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class GuionNivel0 : GuionAventura
 {
-    
-    /*
-    Encontrar el refugio por el nivel (sin inventario) pero con ítems 
-    que recoger que te den punto (monedas). “Encuentra el refugio y recoge los tesoros”
-    */
+   
 
     public override void SalidaAlcanzada()
     {

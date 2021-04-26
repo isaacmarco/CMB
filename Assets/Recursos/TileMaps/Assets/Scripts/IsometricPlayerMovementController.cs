@@ -13,7 +13,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private Vector2 puntoFiltrado = Vector2.zero;   
     Rigidbody2D rbody;
     private Coroutine corrutinaImpacto; 
-   
+    
+    private Tarea tarea; 
    
     public void RecibirImpacto()
     {
@@ -47,13 +48,19 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Camera.main.transparencySortMode = TransparencySortMode.CustomAxis;
         Camera.main.transparencySortAxis = new Vector3(0,1,0);
         canvasRect = FindObjectOfType<Tarea>().CanvasRect;
+        tarea = FindObjectOfType<Tarea>(); 
     }
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-     
+        
+        // evitar el movimiento cuando la tarea esta 
+        // bloqueada
+        if(tarea.TareaBloqueada)
+            return; 
+            
         // obtenemos la posicion mirada
         GazePoint gazePoint = TobiiAPI.GetGazePoint();
 

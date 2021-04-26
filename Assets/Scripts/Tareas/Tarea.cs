@@ -81,12 +81,10 @@ public class Tarea : MonoBehaviour
         StartCoroutine(TerminarJuego(true)); 
     }
 
-    protected void JuegoPerdido(){
-               
+    protected void JuegoPerdido()
+    {               
         BloquearTarea();
-        FindObjectOfType<Audio>().FeedbackPartidaPerdida();
-        // reiniciamos el flag de nivel de bonus
-        //Configuracion.pacienteActual.jugandoNivelDeBonus = false; 
+        FindObjectOfType<Audio>().FeedbackPartidaPerdida();        
         FinalizarRegistro();
         StopAllCoroutines();        
         StartCoroutine(TerminarJuego(false)); 
@@ -213,12 +211,12 @@ public class Tarea : MonoBehaviour
             
     }
 
-    protected void BloquearTarea()
+    public void BloquearTarea()
     {
         tareaBloqueada = true; 
     }
 
-    protected void DesbloquearTarea()
+    public void DesbloquearTarea()
     {
         tareaBloqueada = false; 
     }

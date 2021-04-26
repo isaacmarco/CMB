@@ -26,13 +26,18 @@ public class GuionAventura : MonoBehaviour
     // ejecucion
     protected IEnumerator Guion()
     {
-        StartCoroutine(Mensajes());
+        // mostramos los mensajes del nivel 
+        yield return StartCoroutine(Mensajes());        
+        // despues desbloqueamos la tarea
+        tarea.DesbloquearTarea();
+        // comenzamos a comprobar que se cumplen las condiciones del guion 
         while(true)
         {
             ComprobacionesGuion();
             yield return null; 
         }
     }
+
     // comprobacion 
     public virtual void ComprobacionesGuion()
     {}

@@ -57,9 +57,6 @@ public class Mensaje : MonoBehaviour
         gameObject.SetActive(true);
         Debug.Log("Mensaje: " + mensaje);        
 
-      
-        // StartCoroutine(Animar());
-
         // icono segun el tipo de mensaje, por defecto es de tipo aviso 
         switch(tipoMensaje)
         {
@@ -102,6 +99,46 @@ public class Mensaje : MonoBehaviour
             case TipoMensaje.Municion:
                 imagenTipoMensaje.sprite = spriteMunicion;
             break;
+            case TipoMensaje.Refugio:
+                imagenTipoMensaje.sprite = spriteRefugio; 
+            break;
+            case TipoMensaje.Frutas:
+                imagenTipoMensaje.sprite = spriteFrutas; 
+            break;
+            case TipoMensaje.Troncos:
+                imagenTipoMensaje.sprite = spriteTroncos; 
+            break;
+            case TipoMensaje.Fuego:
+                imagenTipoMensaje.sprite = spriteFuego; 
+            break;
+            case TipoMensaje.Tesoros:
+                imagenTipoMensaje.sprite = spriteTesoros; 
+            break;
+            case TipoMensaje.Serpientes:
+                imagenTipoMensaje.sprite = spriteSerpiente; 
+            break;
+            case TipoMensaje.Puerta:
+                imagenTipoMensaje.sprite = spritePuerta; 
+            break;
+            case TipoMensaje.Llave:
+                imagenTipoMensaje.sprite = spriteLlave; 
+            break;
+            case TipoMensaje.Agua:
+                imagenTipoMensaje.sprite = spriteAgua; 
+            break;
+            case TipoMensaje.Esqueletos:
+                imagenTipoMensaje.sprite = spriteEsqueletos; 
+            break;
+            case TipoMensaje.Murcielago:
+                imagenTipoMensaje.sprite = spriteMurcielagos; 
+            break;
+            case TipoMensaje.Corazon:
+                imagenTipoMensaje.sprite = spriteCorazon; 
+            break;
+            case TipoMensaje.Espada:
+                imagenTipoMensaje.sprite = spriteEspada; 
+            break;
+            
         }
 
         // asignar parametros 

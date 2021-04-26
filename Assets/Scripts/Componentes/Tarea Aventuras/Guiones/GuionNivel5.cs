@@ -20,7 +20,7 @@ public class GuionNivel5 : GuionAventura
             0,null,Mensaje.TipoMensaje.Puerta)
         );
         yield return StartCoroutine(tarea.MostrarMensaje(
-            "Recoge y usa las pócimas rojas para curarte",
+            "Puedes recoger y usar las pócimas rojas para curarte",
             0,null,Mensaje.TipoMensaje.Corazon)
         );
         

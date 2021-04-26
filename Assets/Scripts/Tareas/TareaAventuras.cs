@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class TareaAventuras : Tarea
 {
@@ -11,7 +12,7 @@ public class TareaAventuras : Tarea
     public ArrayList objetosUsados = new ArrayList();
     [Header("Interfaz")]
     public GameObject[] corazones; 
-
+    public Text puntos; 
     
     public NivelAventurasScriptable Nivel { 
         get { return (NivelAventurasScriptable) Configuracion.nivelActual;} 
@@ -21,7 +22,8 @@ public class TareaAventuras : Tarea
     private int vida = 3; 
     private int vidaMaxima = 3; 
     private IsometricPlayerMovementController jugador; 
-       protected override void Actualizacion()
+    
+    protected override void Actualizacion()
     {
 
     }
@@ -74,19 +76,11 @@ public class TareaAventuras : Tarea
     }
 
     public void RecibirImpacto()
-    {     
-        
+    {             
         PerderVida();
         // parpadeo del jugador 
         jugador.RecibirImpacto();
     }
-
-    public void PerderPartida()
-    {
-
-    }
-    
-    
 
     public void GanarPartida()
     {
@@ -96,10 +90,10 @@ public class TareaAventuras : Tarea
     private void PerderVida()
     {
         vida--;
-        if(vida < 0)
+        if(vida <= 0)
         {
             vida = 0; 
-            PerderPartida();
+            JuegoPerdido();
         }        
         ActualizarMarcadorVida();
     }
@@ -120,21 +114,12 @@ public class TareaAventuras : Tarea
     }
 
     protected override void Inicio()
-    {
-        tareaBloqueada = false; 
+    {        
         vida = 3; 
         ActualizarMarcadorVida();
         InstanciarNivel();
-        //StartCoroutine(CorrutinaPartida());               
     }
-/*
-    private IEnumerator CorrutinaPartida()
-    {
-        //int nivel = Configuracion.nivelActual.numeroDelNivel;
-        //if(nivel == 0)
-            yield return StartCoroutine(MostrarMensaje("Mira al topo",0,null,Mensaje.TipoMensaje.Topos));
-        yield return null; 
-    }*/
+
     private void InstanciarNivel()
     {
         // cargamos el nivel completo y referenciamos el jugador
@@ -194,6 +179,30 @@ public class TareaAventuras : Tarea
                 // no se agrega, se suman puntos
             break;
         }
+
+        
+        // logica para puntos        
+
+        switch(item)
+        {   
+            // tesoros        
+            case ObjetosAventuras.Monedas:
+            AgregarPuntuacion(50);
+            break;
+            case ObjetosAventuras.Oro:
+            AgregarPuntuacion(100);                            
+            break;
+            case ObjetosAventuras.Lingote:
+            AgregarPuntuacion(200); 
+            break;
+         
+            
+            // cosas...
+            
+        }
+
+        // actualizamos los puntos
+        puntos.text = Puntuacion.ToString();
     }
 
     public bool RecogerItem(ObjetosAventuras item)
@@ -204,11 +213,18 @@ public class TareaAventuras : Tarea
         
         objetosRecogidos.Add(item); 
 
-        // logica        
         switch(item)
-        {           
-            case ObjetosAventuras.Llave:
-                
+        {
+               
+            // gemas
+            case ObjetosAventuras.Rubi:
+            AgregarPuntuacion(500);
+            break;
+            case ObjetosAventuras.Diamante:
+            AgregarPuntuacion(1000);
+            break;
+            case ObjetosAventuras.Esmeralda:
+            AgregarPuntuacion(500);
             break;
         }
 
