@@ -152,9 +152,9 @@ MonoBehaviour:
   spriteSerpiente: {fileID: 21300000, guid: ebc188345f7bd764cac03e8928509eb1, type: 3}
   spritePuerta: {fileID: 21300000, guid: b72aae698a90bf3438d77ff39adc36e5, type: 3}
   spriteLlave: {fileID: 21300000, guid: 873e8e9dd377d3543b57645465a8fa51, type: 3}
-  spriteAgua: {fileID: 21300000, guid: 73d5b162343122c47aa27e0f80f23eb5, type: 3}
-  spriteEsqueletos: {fileID: 21300000, guid: 73d5b162343122c47aa27e0f80f23eb5, type: 3}
-  spriteMurcielagos: {fileID: 21300000, guid: 73d5b162343122c47aa27e0f80f23eb5, type: 3}
+  spriteAgua: {fileID: 21300000, guid: 92cf82414bb7b5b4b8c50dec12caf9c5, type: 3}
+  spriteEsqueletos: {fileID: 21300000, guid: 7b081092fde699e4c9cd5bf001d6234d, type: 3}
+  spriteMurcielagos: {fileID: 21300000, guid: d0bf6dbd61536f84cb53733889d9e106, type: 3}
   spriteCorazon: {fileID: 21300000, guid: df8ccca0fa6f4be47b2331343f19c95a, type: 3}
   spriteEspada: {fileID: 21300000, guid: ee69e9ebe87184c4eb51b7f62ab1b879, type: 3}
 --- !u!225 &5544084081656932995

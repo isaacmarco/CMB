@@ -6,8 +6,8 @@ public class GuionNivel9 : GuionAventura
 {
     
     /*
-    Encontrar el refugio por el nivel (sin inventario) pero con ítems 
-    que recoger que te den punto (monedas). “Encuentra el refugio y recoge los tesoros”
+    Encontrar la salida y beber agua “Encuentra la salida” - 
+    “Tienes que recoger y beber botellas de agua”
     */
 
     private bool aguaEncontrada = false; 
@@ -25,7 +25,7 @@ public class GuionNivel9 : GuionAventura
                 // si llegamos al refugio pero no tenemos agua
                 StartCoroutine(tarea.MostrarMensaje(
                     "¡Tienes que beber mas agua!"
-                ,0,null,Mensaje.TipoMensaje.Refugio)
+                ,0,null,Mensaje.TipoMensaje.Agua)
                 );
             }
         }
@@ -35,15 +35,19 @@ public class GuionNivel9 : GuionAventura
 
     public override void ComprobacionesGuion()
     {
-        bool todoEsAgua = true; 
+        /*
+            TODO: ESTO ESTA MAL
+        */
+        
+        int aguaBebida = 0; 
         for(int i=0; i<tarea.objetosUsados.Count; i++)        
         {
             ObjetosAventuras item = (ObjetosAventuras) tarea.objetosUsados[i];
-            if(item != ObjetosAventuras.Agua)
-                todoEsAgua = false; 
-
+            if( item == ObjetosAventuras.Agua)
+                aguaBebida++;            
         }
-        if(todoEsAgua && tarea.objetosUsados.Count >= 3)
+
+        if(aguaBebida > 2)
         {
             aguaEncontrada = true; 
             if(!mensajeRefugio)
@@ -66,7 +70,7 @@ public class GuionNivel9 : GuionAventura
         );
          yield return StartCoroutine(tarea.MostrarMensaje(
             "Recoge y bebe 3 botellas de agua"
-            ,0,null,Mensaje.TipoMensaje.Ojo)
+            ,0,null,Mensaje.TipoMensaje.Agua)
         );
         
     }

@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direccion: 0
   velocidad: 1
-  distanciaPorCubrir: 100
+  distanciaPorCubrir: 15
 --- !u!210 &7353825754601737117
 SortingGroup:
   m_ObjectHideFlags: 0
