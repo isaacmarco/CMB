@@ -28,7 +28,7 @@ public class GuionAventura : MonoBehaviour
     {
         // mensaje por defecto
          yield return StartCoroutine(tarea.MostrarMensaje(
-            "En este juego las partidas siempre duran 5 minutos"
+            "En este juego las partidas siempre duran " + tarea.Nivel.tiempoLimiteEnMinutos + " minutos"
             ,0,null,Mensaje.TipoMensaje.Tiempo)
         );
                 
