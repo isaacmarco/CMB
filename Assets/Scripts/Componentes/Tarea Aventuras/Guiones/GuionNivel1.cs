@@ -29,11 +29,15 @@ public class GuionNivel1 : GuionAventura
     protected override IEnumerator Mensajes()
     {
         yield return StartCoroutine(tarea.MostrarMensaje(
-            "Busca 4 frutas para alimentarte"
+            "Debes recoger y comer 4 frutas"
             ,0,null,Mensaje.TipoMensaje.Frutas)
         );
+        yield return StartCoroutine(tarea.MostrarMensaje(
+            "Cuando recoges cosas van a tu inventario"
+            ,0,null,Mensaje.TipoMensaje.Aviso)
+        );
          yield return StartCoroutine(tarea.MostrarMensaje(
-            "Puedes comer la fruta después de recogerla"
+            "Usa la vista para comer/beber lo que recojas"
             ,0,null,Mensaje.TipoMensaje.Ojo)
         );
         

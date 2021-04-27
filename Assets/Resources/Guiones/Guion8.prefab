@@ -9864,7 +9864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1974402638616070348}
-  - component: {fileID: 8877440083859537796}
+  - component: {fileID: 3767495837167847187}
   m_Layer: 0
   m_Name: Guion8
   m_TagString: Untagged
@@ -9892,7 +9892,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8877440083859537796
+--- !u!114 &3767495837167847187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9901,7 +9901,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1974402638616070323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afac4802822ef1e4fafdbb11dc7daa2e, type: 3}
+  m_Script: {fileID: 11500000, guid: d41e21d8a978caf4f9e395ba5de14ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1974402639479591711
