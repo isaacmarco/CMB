@@ -8,7 +8,7 @@ public class NivelAventurasScriptable : NivelScriptable
     
     public GameObject prefabGuionParaCargar; 
     public int saludMaxima;         
-    public int tiempoLimiteEnMinutos; 
+    public int tiempoLimiteEnMinutos = 5; 
     
     
 }

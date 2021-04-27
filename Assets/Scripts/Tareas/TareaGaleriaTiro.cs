@@ -183,12 +183,6 @@ public class TareaGaleriaTiro : Tarea
     private void GenerarPuntosNavegacion()
     {        
 
-        // limpiar jerarquia que pueda existir en el editor
-        /*
-        int hijos = navegacion.transform.childCount; 
-        for(int i=0; i<hijos; i++)
-            Destroy(navegacion.transform.GetChild(i));*/
-
         // instanciamos el trayecto en el objeto navegacion 
         string rutaPrefab = "Escenarios/NivelGaleriaTiro" + Nivel.rutaPorLaCiudad; // Nivel.numeroDelNivel;
         GameObject _rutaPrefab = (GameObject) Resources.Load(rutaPrefab);        
@@ -217,20 +211,6 @@ public class TareaGaleriaTiro : Tarea
 
     private void GenerarBloquesDianas()
     {
-        /*
-        listaBloquesDianas = new ArrayList();
-
-        int numeroBloques = padreBloquesDianas.transform.childCount;
-        Transform[] bloquesDiana = new Transform[numeroBloques];
-        for(int i=0; i<numeroBloques; i++)
-        {
-            Transform hijo = padreBloquesDianas.GetChild(i);
-            hijo.name = "BloqueConDianas " + i;
-            listaBloquesDianas.Add(hijo);
-            // en esta lista tenemos el padre de cada bloque de dianas
-            //bloquesDiana[i] = hijo;             
-        }
-        Debug.Log(listaBloquesDianas.Count + " bloques de tiro creados");*/
     }
     
     protected override void Inicio()
@@ -404,8 +384,6 @@ public class TareaGaleriaTiro : Tarea
            
             // comenzamos el juego de disparos de este bloque            
             yield return StartCoroutine(CorrutinaBloqueDeDianas());      
-
-            //yield return new WaitForSeconds( Nivel.duracionDeCadaBloqueDeDianas); // permanencia en bloque
 
             // cambiamos al siguiente bloque
             bloqueActual++;

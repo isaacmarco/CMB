@@ -26,16 +26,35 @@ public class GuionAventura : MonoBehaviour
     // ejecucion
     protected IEnumerator Guion()
     {
+        // mensaje por defecto
+         yield return StartCoroutine(tarea.MostrarMensaje(
+            "En este juego las partidas siempre duran 5 minutos"
+            ,0,null,Mensaje.TipoMensaje.Tiempo)
+        );
+                
+
         // mostramos los mensajes del nivel 
         yield return StartCoroutine(Mensajes());        
         // despues desbloqueamos la tarea
         tarea.DesbloquearTarea();
+        
+        // comenzqamos a contar el tiempo
+        StartCoroutine(CorrutinaTiempoPartida());
+
         // comenzamos a comprobar que se cumplen las condiciones del guion 
         while(true)
         {
             ComprobacionesGuion();
             yield return null; 
         }
+    }
+
+    private IEnumerator CorrutinaTiempoPartida()
+    {
+        Debug.Log("Contabilizando tiempo");
+        int duracionEnSegundos = tarea.Nivel.tiempoLimiteEnMinutos * 60;
+        yield return new WaitForSeconds(duracionEnSegundos); 
+        tarea.TiempoExcedido();
     }
 
     // comprobacion 

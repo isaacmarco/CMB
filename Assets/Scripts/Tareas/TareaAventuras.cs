@@ -28,7 +28,12 @@ public class TareaAventuras : Tarea
 
     }
 
-    
+    public override void TiempoExcedido()
+    {
+        Debug.Log("Tiempo excedido, se pierde la partida");
+        JuegoPerdido();
+    }
+
     protected override void JuegoGanado()
     {    
         BloquearTarea();
@@ -83,12 +88,19 @@ public class TareaAventuras : Tarea
     }
 
     public void GanarPartida()
-    {
+    {              
+        if(tareaBloqueada)      
+            return; 
+
         JuegoGanado();
     }
 
     private void PerderVida()
     {
+              
+        if(tareaBloqueada)      
+            return; 
+
         vida--;
         if(vida <= 0)
         {

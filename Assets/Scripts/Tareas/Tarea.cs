@@ -73,7 +73,8 @@ public class Tarea : MonoBehaviour
             this.puntuacion = 0; 
     }
 
-    protected virtual void JuegoGanado(){
+    protected virtual void JuegoGanado()
+    {
         BloquearTarea();
         FindObjectOfType<Audio>().FeedbackPartidaGanada();
         FinalizarRegistro();
@@ -82,7 +83,7 @@ public class Tarea : MonoBehaviour
     }
 
     protected void JuegoPerdido()
-    {               
+    {   
         BloquearTarea();
         FindObjectOfType<Audio>().FeedbackPartidaPerdida();        
         FinalizarRegistro();
