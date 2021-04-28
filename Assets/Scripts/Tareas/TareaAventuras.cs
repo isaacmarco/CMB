@@ -43,6 +43,20 @@ public class TareaAventuras : Tarea
         StartCoroutine(TerminarJuego(true)); 
     }
     
+    
+    protected override bool TodosLosNivelesCompletados()
+    {
+        int numeroNiveles = 15;             
+        return Configuracion.pacienteActual.ultimoNivelDesbloqueadoTareaAventuras >= numeroNiveles;
+    }
+
+    protected override IEnumerator TareaCompletada()
+    {
+        base.TareaCompletada();    
+        yield return StartCoroutine(
+            MostrarMensaje("¡Has completado todos los niveles del juego!",0, null, Mensaje.TipoMensaje.Record)
+        );
+    }
 
     protected override bool GuardarProgreso(bool partidaGanada)
     {        
@@ -95,9 +109,13 @@ public class TareaAventuras : Tarea
         JuegoGanado();
     }
 
+    private bool juegoPerdido = false; 
+
     private void PerderVida()
     {
-              
+        if(juegoPerdido)
+            return; 
+            
         if(tareaBloqueada)      
             return; 
 
@@ -105,6 +123,7 @@ public class TareaAventuras : Tarea
         if(vida <= 0)
         {
             vida = 0; 
+            juegoPerdido = true; 
             JuegoPerdido();
         }        
         ActualizarMarcadorVida();
