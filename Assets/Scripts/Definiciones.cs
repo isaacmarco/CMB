@@ -15,7 +15,8 @@
     Corazon = 12,
     Espada = 13,
     Monedas = 14,
-    Lingote = 15
+    Lingote = 15,
+    Libro = 16
 };
 
 public enum Dificultad 

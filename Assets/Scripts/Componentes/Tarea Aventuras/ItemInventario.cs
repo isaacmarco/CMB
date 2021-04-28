@@ -48,7 +48,8 @@ public class ItemInventario : MonoBehaviour
         // saltamos los items que no se pueden usar 
         if(tipo == ObjetosAventuras.Diamante || tipo == ObjetosAventuras.Esmeralda ||
         tipo == ObjetosAventuras.Rubi || tipo == ObjetosAventuras.Tronco || 
-        tipo == ObjetosAventuras.Espada || tipo == ObjetosAventuras.Llave)
+        tipo == ObjetosAventuras.Espada || tipo == ObjetosAventuras.Llave ||
+        tipo == ObjetosAventuras.Lingote)
         {
             Debug.Log("Este item no se puede usar");
             return; 

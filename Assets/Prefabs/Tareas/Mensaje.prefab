@@ -157,6 +157,7 @@ MonoBehaviour:
   spriteMurcielagos: {fileID: 21300000, guid: d0bf6dbd61536f84cb53733889d9e106, type: 3}
   spriteCorazon: {fileID: 21300000, guid: df8ccca0fa6f4be47b2331343f19c95a, type: 3}
   spriteEspada: {fileID: 21300000, guid: ee69e9ebe87184c4eb51b7f62ab1b879, type: 3}
+  spriteLibro: {fileID: 21300000, guid: 75e0b7aed7746384d9b2331f51b06727, type: 3}
 --- !u!225 &5544084081656932995
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class Mensaje : MonoBehaviour
         GaleriaTiro, DianaAzul, DianaRoja, Municion, 
         Refugio, Frutas, Troncos, Fuego, Tesoros, 
         Serpientes, Puerta, Llave, Agua, Esqueletos, 
-        Murcielago, Corazon, Espada
+        Murcielago, Corazon, Espada, Libro
     };
    
     [SerializeField] private Text mensaje; 
@@ -22,7 +22,7 @@ public class Mensaje : MonoBehaviour
         spriteComienzo, spriteOjo, spriteDianaAzul, spriteDianaRoja, spriteMunicion,
         spriteRefugio, spriteFrutas, spriteTroncos, spriteFuego, spriteTesoros, 
         spriteSerpiente, spritePuerta, spriteLlave, spriteAgua, spriteEsqueletos, 
-        spriteMurcielagos, spriteCorazon, spriteEspada;  
+        spriteMurcielagos, spriteCorazon, spriteEspada, spriteLibro;  
     
     void Awake()
     {
@@ -137,6 +137,9 @@ public class Mensaje : MonoBehaviour
             break;
             case TipoMensaje.Espada:
                 imagenTipoMensaje.sprite = spriteEspada; 
+            break;
+            case TipoMensaje.Libro:
+                imagenTipoMensaje.sprite = spriteLibro; 
             break;
             
         }
