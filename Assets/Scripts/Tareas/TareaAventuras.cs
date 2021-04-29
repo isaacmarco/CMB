@@ -119,7 +119,11 @@ public class TareaAventuras : Tarea
         if(tareaBloqueada)      
             return; 
 
+
+        FindObjectOfType<Audio>().FeedbackError();
+
         vida--;
+
         if(vida <= 0)
         {
             vida = 0; 
@@ -199,6 +203,8 @@ public class TareaAventuras : Tarea
         objetosRecogidos.Add(item); 
         objetosConsumidos.Add(item);
 
+        FindObjectOfType<Audio>().FeedbackTesoro();
+
         // items que no van al inventario
         switch(item)
         {
@@ -244,6 +250,8 @@ public class TareaAventuras : Tarea
         
         objetosRecogidos.Add(item); 
 
+        FindObjectOfType<Audio>().FeedbackAcierto();
+        
         switch(item)
         {
                
@@ -271,6 +279,8 @@ public class TareaAventuras : Tarea
     {
         Debug.Log("Usando " + item);
         
+        FindObjectOfType<Audio>().FeedbackInteraccion();
+
         objetosUsados.Add(item); 
 
         switch(item)

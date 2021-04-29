@@ -15,6 +15,8 @@ public class Audio : MonoBehaviour
     [Header("Audio para el menu")]
     [SerializeField] private AudioSource ASelegirPerfil;
     [SerializeField] private AudioSource ASelegirTarea;  
+    [Header("Audio para aventuras")]
+    [SerializeField] private AudioSource ASTesoro;  
 
     private Tarea tarea;
     
@@ -22,7 +24,10 @@ public class Audio : MonoBehaviour
     {
         tarea = FindObjectOfType<Tarea>();
     }
-
+    public void FeedbackTesoro()
+    {
+        ASTesoro.Play();
+    }
     public void FeedbackClickDefecto()
     {
         ASclickDefecto.Play();

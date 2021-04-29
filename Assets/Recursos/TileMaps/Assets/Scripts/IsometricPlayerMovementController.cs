@@ -13,7 +13,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private Vector2 puntoFiltrado = Vector2.zero;   
     Rigidbody2D rbody;
     private Coroutine corrutinaImpacto; 
-    
+    private Pasos pasos; 
     private Tarea tarea; 
    
     public void RecibirImpacto()
@@ -49,6 +49,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Camera.main.transparencySortAxis = new Vector3(0,1,0);
         canvasRect = FindObjectOfType<Tarea>().CanvasRect;
         tarea = FindObjectOfType<Tarea>(); 
+        pasos = FindObjectOfType<Pasos>();
+
     }
 
 
@@ -125,7 +127,11 @@ public class IsometricPlayerMovementController : MonoBehaviour
         {   
             // movemos el jugador 
             isoRenderer.SetDirection(direccion);
-            rbody.MovePosition(nuevaPosicion);           
+            rbody.MovePosition(nuevaPosicion);     
+            // sonido de pasos
+            if(pasos!=null)
+                pasos.EscucharPaso();
+
             
         } else {
 
