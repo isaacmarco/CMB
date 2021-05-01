@@ -19,11 +19,17 @@ public class ReproductorRegistros : MonoBehaviour
     [Header("Tarea de evaluacion")]
     public GameObject estimuloTareaEvaluacion; 
     public GameObject estimuloFijacion; 
+    [Header("Tarea de Aventuras")]
+    public GameObject[] items; 
+    public GameObject[] peligros; 
+    public GameObject jugadorAventuras; 
+
     [Header("Configuracion reproductor")]
     public bool reproducirTopos; 
     public bool reproducirGaleriaTiro; 
-    public bool reproducirEvaluacion; 
-
+    public bool reproducirEvaluacion;
+    public bool reproducirMemory;      
+    public bool reproducirAventuras; 
 
     void Start()
     {
@@ -42,14 +48,66 @@ public class ReproductorRegistros : MonoBehaviour
         {
             registros = CargarFicheroEvaluacion();
             StartCoroutine(ReproducirRegistroEvaluacion());
-        } else
+        } else if (reproducirMemory)
         {
             // memory
+        } else if (reproducirAventuras)
+        {
+            // aventuras
+            registros = CargarFicheroAventuras();
+            StartCoroutine(ReproducirRegistroAventuras());
         }
         
        
     }
     
+
+    private IEnumerator ReproducirRegistroAventuras()
+    {
+        Debug.Log("Comenzado la reproduccion");
+       
+      
+        int contador = 0; 
+        float esperaEntreRegistros = 0.06f; 
+
+        while(contador < registros.Count)
+        {   
+            // extraemos un registro
+            RegirstroPosicionOcultarTareaAventuras registro = 
+                (RegirstroPosicionOcultarTareaAventuras) registros[contador];
+            
+            // posicionamos el punto de vision 
+            puntoVision.GetComponent<RectTransform>().anchoredPosition = new Vector2
+            (
+                registro.X, registro.Y
+            );
+
+            // jugador 
+            // TODO (siempre en el centro)
+
+            // items 
+            for(int i=0; i<items.Length; i++)
+            {
+                items[i].GetComponent<RectTransform>().anchoredPosition = new Vector2
+                (
+                    registro.items[i].x, registro.items[i].y
+                );
+            }
+
+            // peligros
+            for(int i=0; i<peligros.Length; i++)
+            {
+                peligros[i].GetComponent<RectTransform>().anchoredPosition = new Vector2
+                (
+                    registro.peligros[i].x, registro.peligros[i].y
+                );
+            }
+
+            contador++;
+            yield return new WaitForSeconds(esperaEntreRegistros);
+        }
+        Debug.Log("Reproduccion terminada");
+    }
 
     private IEnumerator ReproducirRegistroEvaluacion()
     {
@@ -205,6 +263,114 @@ public class ReproductorRegistros : MonoBehaviour
             yield return new WaitForSeconds(esperaEntreRegistros);
         }
         Debug.Log("Reproduccion terminada");
+    }
+
+    private ArrayList CargarFicheroAventuras()
+    {
+       
+        /*      
+            tiempo;             
+            mirando x; 
+            mirando y; 
+            [x, y items]
+            [x, y peligros]
+        */
+
+        registros = new ArrayList();
+                
+        // obtenemos todas las lineas
+        string[] lineas = fichero.text.Split('\n');
+        // convertimos cada linea en un nuevo registro
+        for(int i=0; i<lineas.Length; i++)
+        {
+            string[] campos = lineas[i].Split(';');
+            string ctiempo = campos[0];         
+            string x = campos[1];
+            string y = campos[2];
+            
+            // de 3 -> 22 (x,y de los items)
+            Vector2[] items = new Vector2[10]; 
+
+           
+            items[0].x = int.Parse(campos[3]);
+            items[0].y = int.Parse(campos[4]);
+
+            items[1].x = int.Parse(campos[5]);
+            items[1].y = int.Parse(campos[6]);
+
+            items[2].x = int.Parse(campos[7]);
+            items[2].y = int.Parse(campos[8]);
+
+            items[3].x = int.Parse(campos[9]);
+            items[3].y = int.Parse(campos[10]);
+
+            items[4].x = int.Parse(campos[11]);
+            items[4].y = int.Parse(campos[12]);
+
+            items[5].x = int.Parse(campos[13]);
+            items[5].y = int.Parse(campos[14]);
+
+            items[6].x = int.Parse(campos[15]);
+            items[6].y = int.Parse(campos[16]);
+
+            items[7].x = int.Parse(campos[17]);
+            items[7].y = int.Parse(campos[18]);
+
+            items[8].x = int.Parse(campos[19]);
+            items[8].y = int.Parse(campos[20]);
+
+            items[9].x = int.Parse(campos[21]);
+            items[9].y = int.Parse(campos[22]);
+            
+            
+            // de 23 -> 42 (x,y de los peligros)
+            Vector2[] peligros = new Vector2[10];
+            
+            peligros[0].x = int.Parse(campos[23]);
+            peligros[0].y = int.Parse(campos[24]);
+
+            peligros[1].x = int.Parse(campos[25]);
+            peligros[1].y = int.Parse(campos[26]);
+
+            peligros[2].x = int.Parse(campos[27]);
+            peligros[2].y = int.Parse(campos[28]);
+
+            peligros[3].x = int.Parse(campos[29]);
+            peligros[3].y = int.Parse(campos[30]);
+
+            peligros[4].x = int.Parse(campos[31]);
+            peligros[4].y = int.Parse(campos[32]);
+
+            peligros[5].x = int.Parse(campos[33]);
+            peligros[5].y = int.Parse(campos[34]);
+
+            peligros[6].x = int.Parse(campos[35]);
+            peligros[6].y = int.Parse(campos[36]);
+
+            peligros[7].x = int.Parse(campos[37]);
+            peligros[7].y = int.Parse(campos[38]);
+
+            peligros[8].x = int.Parse(campos[39]);
+            peligros[8].y = int.Parse(campos[40]);
+            
+            peligros[9].x = int.Parse(campos[41]);
+            peligros[9].y = int.Parse(campos[42]);
+            
+
+            RegirstroPosicionOcultarTareaAventuras registro = new RegirstroPosicionOcultarTareaAventuras
+            (
+                0, int.Parse(x), int.Parse(y), null, null 
+            );
+
+            registro.items = items; 
+            registro.peligros = peligros;          
+            registros.Add(registro);
+  
+        }
+
+        Debug.Log("Registros creados: " + registros.Count);
+
+        return registros; 
     }
 
     private ArrayList CargarFicheroEvaluacion()

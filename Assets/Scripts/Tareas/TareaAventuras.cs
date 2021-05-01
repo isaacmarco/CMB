@@ -14,6 +14,10 @@ public class TareaAventuras : Tarea
     public GameObject[] corazones; 
     public Text puntos; 
     
+    private ItemTareaAventuras[] referenciasItemsParaRegistro; 
+    private PeligroAventura[] referenciasPeligrosParaRegistro; 
+
+
     public NivelAventurasScriptable Nivel { 
         get { return (NivelAventurasScriptable) Configuracion.nivelActual;} 
     }
@@ -25,7 +29,9 @@ public class TareaAventuras : Tarea
     
     protected override void Actualizacion()
     {
-
+        if(Application.isEditor)
+            if(Input.GetKeyDown(KeyCode.W))
+                GanarPartida();
     }
 
     public override void TiempoExcedido()
@@ -153,6 +159,41 @@ public class TareaAventuras : Tarea
         vida = 3; 
         ActualizarMarcadorVida();
         InstanciarNivel();
+        // crear las referencias para los enemigos e items del nivel 
+        CrearReferenciasParaRegistro();
+    }
+
+    private void CrearReferenciasParaRegistro()
+    {
+        // como maximo registraremos 10 items y enemigos
+        referenciasItemsParaRegistro = new ItemTareaAventuras[10];
+        referenciasPeligrosParaRegistro = new PeligroAventura[10];
+        // localizar todos los items y enemigos del nivel 
+        ItemTareaAventuras[] items = FindObjectsOfType<ItemTareaAventuras>();
+        PeligroAventura[] peligros = FindObjectsOfType<PeligroAventura>();
+        
+        // guardar las referencias
+        int contadorItems = 0; 
+        foreach(ItemTareaAventuras item in items)
+        {
+            if(contadorItems < 10)
+            {
+                referenciasItemsParaRegistro[contadorItems] = item; 
+                contadorItems++;            
+            }
+        }
+
+        int contadorPeligros = 0; 
+        foreach(PeligroAventura peligro in peligros)
+        {
+            if(contadorPeligros < 10)
+            {
+                referenciasPeligrosParaRegistro[contadorPeligros] = peligro; 
+                contadorPeligros++;            
+            }
+        }
+
+
     }
 
     private void InstanciarNivel()
@@ -303,17 +344,75 @@ public class TareaAventuras : Tarea
     {
         string cabecera = string.Empty;
         // datos de la tarea
-        cabecera += "Tarea de evaluacion\n";
-        cabecera += "Numero de bloques de evaluacion: " + Configuracion.numberoDeBloquesDeEvaluacion + "\n";
-        cabecera += "Leyenda: tiempo; estimulo fijacion visible; numero bloque actual; mirando x; mirando y; estimulo objetivo x; estimulo objetivo y";
-        return "Cabecera por decidir";
+        cabecera += "Tarea de aventuras\n";
+        cabecera += "Nivel: " + Configuracion.nivelActual.numeroDelNivel + "\n"; 
+        cabecera += "Puntuacion: " + Puntuacion + "\n";         
+        cabecera += "Leyenda: tiempo; mirando x; mirando y; [x,y de items]; [x,y de peligros]";
+        return cabecera; 
     }
     
     protected override RegistroPosicionOcular NuevoRegistro(float tiempo, int x, int y)
     {        
+        
+        // obtener la posicion en pantalla de cada item 
+        string matrizItems = string.Empty; 
+
+        for(int i=0; i<referenciasItemsParaRegistro.Length; i++)
+        {
+            ItemTareaAventuras item = referenciasItemsParaRegistro[i];
+            // comprobamos nulos porque pueden haberse destruido items
+            if(item != null)
+            {
+                Vector2 posicion = ObtenerPosicionPantallaDelEstimulo(
+                    item.gameObject.transform.position
+                ); 
+                string registroItem = (int) posicion.x + ";" + (int)posicion.y + ";"; 
+                matrizItems += registroItem; 
+            } else {
+                string registroItem = (-1).ToString() + ";" + (-1).ToString() + ";"; 
+                matrizItems += registroItem; 
+            }
+
+        }
+
+        string matrizPeligros = string.Empty; 
+        for(int i=0; i<referenciasPeligrosParaRegistro.Length; i++)
+        {
+            PeligroAventura peligro = referenciasPeligrosParaRegistro[i];
+            // comprobamos nulos porque pueden haberse destruido items
+            if(peligro != null)
+            {
+                Vector2 posicion = ObtenerPosicionPantallaDelEstimulo(
+                    peligro.gameObject.transform.position
+                ); 
+                string registroPeligro = (int)posicion.x + ";" + (int)posicion.y + ";"; 
+                matrizPeligros += registroPeligro; 
+            } else {
+                string registroItem = (-1).ToString() + ";" + (-1).ToString() + ";"; 
+                matrizItems += registroItem; 
+            }
+
+        }
+
+        // obtener la posicion en pantalla de cada peligro 
+
         return new RegirstroPosicionOcultarTareaAventuras(
-            tiempo, x, y
+            tiempo, x, y, matrizItems, matrizPeligros
         );
     } 
-    
+        
+    private Vector2 ObtenerPosicionPantallaDelEstimulo(Vector3 objeto)
+    {   
+         
+        // transformar las coordeandas
+        Vector2 posicionViewport = Camera.main.WorldToViewportPoint(objeto);
+        Vector2 posicionEnPantalla = new Vector2(
+            ((posicionViewport.x * CanvasRect.sizeDelta.x)-(CanvasRect.sizeDelta.x * 0.5f)) + 960,
+            ((posicionViewport.y * CanvasRect.sizeDelta.y)-(CanvasRect.sizeDelta.y * 0.5f)) + 540
+        );
+        return posicionEnPantalla;
+    }
+
+
+
 }
