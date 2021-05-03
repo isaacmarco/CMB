@@ -23,7 +23,7 @@ public class RegirstroPosicionOcultarTareaAventuras : RegistroPosicionOcular
     public override string RegistroFormateadoParaEscribirEnDisco()
     {       
         return tiempo.ToString("0.0000") + ";" + x + ";" + y + ";" + 
-        matrizItems + ";" + matrizPeligros;
+        matrizItems + matrizPeligros;
     }
     
 

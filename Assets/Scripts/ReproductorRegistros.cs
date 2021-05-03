@@ -64,14 +64,16 @@ public class ReproductorRegistros : MonoBehaviour
 
     private IEnumerator ReproducirRegistroAventuras()
     {
-        Debug.Log("Comenzado la reproduccion");
+        Debug.Log("Comenzado la reproduccion de " + registros.Count);
        
       
         int contador = 0; 
-        float esperaEntreRegistros = 0.06f; 
+        float esperaEntreRegistros = 0.01f; 
 
         while(contador < registros.Count)
         {   
+            Debug.Log(contador);
+
             // extraemos un registro
             RegirstroPosicionOcultarTareaAventuras registro = 
                 (RegirstroPosicionOcultarTareaAventuras) registros[contador];
@@ -282,7 +284,8 @@ public class ReproductorRegistros : MonoBehaviour
         string[] lineas = fichero.text.Split('\n');
         // convertimos cada linea en un nuevo registro
         for(int i=0; i<lineas.Length; i++)
-        {
+        {            
+
             string[] campos = lineas[i].Split(';');
             string ctiempo = campos[0];         
             string x = campos[1];
