@@ -189,6 +189,26 @@ public class TareaEvaluacion : Tarea
          
         }
 
+        /*
+            nueva modificacion: la tarea debe terminar siempre
+            con un ultimo bloque de fijacion adicional
+        */
+
+        Debug.Log("Ultimo bloque de fijacion antes de finalizar la tarea");
+        
+        // mostrar estimulo
+        MostrarEstimuloFijacion();
+         // enviar msg estimulo fijacion             
+        puertoSerie.EnviarPorPuertoSerie("F");
+        // esperar y ocultar el estimulo
+        yield return new WaitForSeconds(Configuracion.duracionEstimuloFijacionEvaluacion);
+        OcultarEstimuloFijacion();
+        
+        // desde este punto la tarea ya finaliza como siempre
+        // ...
+
+
+
         // enviar msg de final de la tara        
         puertoSerie.EnviarPorPuertoSerie("E");
 
