@@ -92,7 +92,7 @@ public class SeleccionarAlMirarUI : MonoBehaviour
 		// comprobamos tanto el tobii como el mouse 	
 		return gazeAware.HasGazeFocus || 
 			(
-				menu.Configuracion.utilizarRatonAdicionalmente && 		
+				// menu.Configuracion.utilizarRatonAdicionalmente && 		
 				Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject
 			);
 	}
