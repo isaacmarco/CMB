@@ -18,6 +18,8 @@ public class ConfiguracionScriptable : ScriptableObject
     public int duracionDeMensajes;
     public float intervaloRegistroOcularEnHZ = 60f;
     [Range(0, 1)]
+    public float multiplicadorVelocidad = 1f; 
+    [Range(0, 1)]
     public float volumenDelFeedback = 1f; 
     [Header("Sistema de puntuaciones")]
     public int puntuacionAciertoTopo = 100;

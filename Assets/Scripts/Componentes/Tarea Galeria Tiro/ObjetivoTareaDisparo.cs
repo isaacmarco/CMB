@@ -30,10 +30,6 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     {   
         this.puntoAparicionDiana = puntoAparicionDiana;
         this.puntoAparicionDiana.Usar();
-
-        // obtener la posicion
-        //this.puntoAparicion = puntoAparicionDiana.gameObject.transform.position; 
-        //gameObject.transform.position = this.puntoAparicion; 
         
         AnimacionMostrar();
         StartCoroutine(CorrtuinaMostrarObjetivo());
@@ -91,10 +87,12 @@ public class ObjetivoTareaDisparo : MonoBehaviour
     protected virtual IEnumerator CorrtuinaMostrarObjetivo()
     {
         // obtener la duracion del objetivo en pantalla
-        float duracion = FindObjectOfType<TareaGaleriaTiro>().Nivel.duracionDiana;
+        TareaGaleriaTiro tarea = FindObjectOfType<TareaGaleriaTiro>();
+        float duracion = tarea.Nivel.duracionDiana;
         
-        // esperamos
-        yield return new WaitForSecondsRealtime(duracion);   
+        // esperamos, multiplicando la espera por el factor
+        // de velocidad 
+        yield return new WaitForSecondsRealtime(duracion * tarea.Configuracion.multiplicadorVelocidad);   
 
         // contabilizamos la omision si llegamos a este punto
         // y si el estimulo era objetivo. Las gemas no cuentan como omision

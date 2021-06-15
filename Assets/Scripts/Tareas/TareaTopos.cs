@@ -237,7 +237,10 @@ public class TareaTopos : Tarea
 
             
             // esperar un tiempo antes de mostrar otro estimulo 
-            yield return new WaitForSeconds(Nivel.tiempoParaNuevoEstimulo);
+            // aplicando el multiplicador de espera
+            yield return new WaitForSeconds(
+                Nivel.tiempoParaNuevoEstimulo * Configuracion.multiplicadorVelocidad
+            );
         }
     }
 

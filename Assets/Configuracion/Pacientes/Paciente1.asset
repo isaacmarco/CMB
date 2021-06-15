@@ -15,11 +15,19 @@ MonoBehaviour:
   nombre: Luigi
   codigo: 001
   esZurdo: 0
-  nivelActualTareaTopos: 3
+  ultimoNivelDesbloqueadoTareaTopos: 20
+  ultimoNivelDesbloqueadoTareaMemory: 0
+  ultimoNivelDesbloqueadoTareaGaleriaTiro: 0
+  ultimoNivelDesbloqueadoTareaAventuras: 0
   nivelActualTareaMemory: 0
-  partidasDeMemoryGanadas: 0
+  contadorNivelesGanadosParaBonusTareaMemory: 0
+  jugandoNivelDeBonusTareaMemory: 0
+  nivelesBonusCompletosTareaMemory: 0
   puntuacionTareaTopos: 0
   puntuacionTareaMemory: 0
-  recordTareaMemoryNivelBajo: 0
-  recordTareaMemoryNivelMedio: 0
-  recordTareaMemoryNivelDificil: 0
+  puntuacionTareaGaleriaTiro: 0
+  puntuacionTareaAventuras: 0
+  tiemposRecordPorNivelTareaMemory: ffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7f
+  nivelesConRecordTareaMemory: 00000000000000000000000000000000000000000000000000000000
+  medallasTareaMemory: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  multiplicadorVelocidad: 1

@@ -23,7 +23,9 @@ public class Menu : MonoBehaviour
     [SerializeField] private Transform jerarquiaMenuPerfiles;     
     [Header("Debug")]
     [SerializeField] private Text debug; 
-
+    [Header("Multiplicador de velocidad")]
+    [SerializeField] private Slider sliderMultiplicadorVelocidad; 
+    [SerializeField] private Text valorMultiplicadorVelocidad;
     private bool mostrarDebug = false; 
 
     private void TrazadoProgreso()
@@ -55,8 +57,44 @@ public class Menu : MonoBehaviour
 
     }
 
-    void Start()
+
+    private void RecuperarMultiplicadorVelocidad()
     {
+        if( Configuracion.pacienteActual.multiplicadorVelocidad == 0)
+            Configuracion.pacienteActual.multiplicadorVelocidad = 1; 
+
+        Configuracion.multiplicadorVelocidad = Configuracion.pacienteActual.multiplicadorVelocidad; 
+        // actualizamos la UI
+        sliderMultiplicadorVelocidad.value =  Configuracion.multiplicadorVelocidad ;
+        Debug.Log("Multiplicador de velocidad es " +  Configuracion.multiplicadorVelocidad );        
+    }
+    
+    private void CambioEnSliderMultiplicadorVelocidad()
+    {
+        // salvamos la opcion
+        Configuracion.multiplicadorVelocidad = sliderMultiplicadorVelocidad.value;       
+        Configuracion.pacienteActual.multiplicadorVelocidad = Configuracion.multiplicadorVelocidad; 
+        valorMultiplicadorVelocidad.text = Configuracion.multiplicadorVelocidad + "";
+    }
+
+    public void GuardarCambiosMultiplicadorVelocidad()
+    {        
+        Aplicacion.instancia.GuardarDatosPaciente(Configuracion.pacienteActual);
+    }
+
+    void Start()
+    {   
+
+        // nuevo codigo para ajustar la velocidad de algunas
+        // tareas mediente la UI 
+
+        // incluir el listener al slider de recuperacion 
+        sliderMultiplicadorVelocidad.onValueChanged.AddListener(delegate {
+            CambioEnSliderMultiplicadorVelocidad(); 
+        });
+      
+
+        // arranque normal del menu
        
         // cargamos todos los json de los perfiles disponibles
         Aplicacion.instancia.CargarPerfilesExistentes();        
@@ -73,6 +111,7 @@ public class Menu : MonoBehaviour
            
             // ya existe un paciente actual?
             Debug.Log("Paciente actual existente, mostrando menu correspondiente");
+          
 
             // comprobamos si venimos de jugar una tarea o si acabamos
             // de entrar en el menu
@@ -272,6 +311,10 @@ public class Menu : MonoBehaviour
       
         // establecer el paciente actual 
         Configuracion.pacienteActual = configuracion.pacientes[indice];
+
+          
+        // recuperar la configuracion de velocidad
+        RecuperarMultiplicadorVelocidad();
 
         // feedback
         FindObjectOfType<Audio>().FeedbackElegirPerfil();

@@ -38,6 +38,8 @@ public class PacienteScriptable : ScriptableObject
     public int[] tiemposRecordPorNivelTareaMemory; 
     public bool[] nivelesConRecordTareaMemory; 
     public int[] medallasTareaMemory; 
+    [Header("Multiplicador de velocidad")]
+    public float multiplicadorVelocidad;
 
     public void Reiniciar()
     {
@@ -53,6 +55,7 @@ public class PacienteScriptable : ScriptableObject
         puntuacionTareaTopos = 0; 
         puntuacionTareaGaleriaTiro = 0;
         puntuacionTareaAventuras = 0; 
+        multiplicadorVelocidad = 1; 
 
         // vector de tiempos records
         tiemposRecordPorNivelTareaMemory = new int[28];

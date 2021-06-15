@@ -48,7 +48,7 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
         
         base.Mostrar(posicion, movimientoDiana);
 
-         //this.puntoAparicion = puntoAparicionDiana.gameObject.transform.position; 
+        
         gameObject.transform.position = posicion.gameObject.transform.position; 
 
  
@@ -90,9 +90,10 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
 
             corrutinaMovimiento = StartCoroutine(CorrutinaMovimiento());
         }
-            // TareaMovimientoDiana();
+           
 
     }    
+
     private Coroutine corrutinaMovimiento; 
    
 
@@ -181,23 +182,11 @@ public class DianaEntrenamiento : ObjetivoTareaDisparo
 
         while(true)
         {
-
-            
+            // movimiento de pingpong            
             _timePassed += Time.deltaTime;
             transform.position = Vector3.Lerp(positionOrigin, positionOrigin + positionDisplacement,
             Mathf.PingPong(_timePassed, 1));
     
-            /*
-
-            float distanciaRecorrida = 0f; 
-            float velocidad_ = Time.deltaTime * 2f; 
-            distanciaRecorrida += velocidad_; 
-            // desplazar en ping-pong las dianas
-            gameObject.transform.Translate(
-                new Vector3(destinoX, destinoY, 0) * velocidad_ , Space.Self
-            );
-            if(distanciaRecorrida > 5)*/
-
             yield return null; 
         }
     }

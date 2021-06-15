@@ -204,7 +204,11 @@ public class EstimuloTareaTopo : MonoBehaviour
 
         // esperamos el tiempo de permanencia configurado en el 
         // scriptable del nivel de dificultad 
-        yield return new WaitForSeconds(tarea.Nivel.tiempoPermanenciaDelEstimulo);
+        // añadimos aqui el multiplicador de velocidad
+        yield return new WaitForSeconds(
+            tarea.Nivel.tiempoPermanenciaDelEstimulo *
+            tarea.Configuracion.multiplicadorVelocidad
+        );
 
         // empezamos la animacion de vuelta a la tierra
         iTween.MoveTo(gameObject, new Vector3(posicion.x, -1, posicion.z), tiempoAnimacion);

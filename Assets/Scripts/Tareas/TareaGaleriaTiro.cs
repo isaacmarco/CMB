@@ -352,14 +352,11 @@ public class TareaGaleriaTiro : Tarea
         while(true)
         {
             
-         
 
             // movemos la camara al siguiente bloque                            
             Vector3 posicion = posiciones[bloqueActual].transform.position + Vector3.up;
             GameObject jugador = Camera.main.gameObject; 
             float duracionAnimacionCamara = 3f; 
-            
-            
             
 
             // orientamos la camara 
@@ -474,14 +471,21 @@ public class TareaGaleriaTiro : Tarea
         // solo son para dar mas variedad al juego 
         Coroutine tareaMoverCamaraAleatoriamente = StartCoroutine(CorrutinaMovimientosAleatorios());
 
-        // calculamos el tiempo de permanencia del bloque 
-        float tiempoFinBloque = Time.time + Nivel.duracionDeCadaBloqueDeDianas;     
-        // permanecemos en el bloque de dianas hasta cuando se haya
-        // pasado el tiempo y haya dianas visibles           
+        // calculamos el tiempo de permanencia del bloque,
+        // considerando el multiplicador de velocidad
+        float tiempoFinBloque = Time.time + 
+            (Nivel.duracionDeCadaBloqueDeDianas * Configuracion.multiplicadorVelocidad);     
+        
+        // permanecemos en el bloque de dianas mientras no haya
+        // pasado el tiempo y no veamos dianas 
         while(Time.time < tiempoFinBloque)
         {              
-            // instanciar un nuevo estimulo despues de esperar el tiempo                       
-            yield return new WaitForSeconds(Nivel.tiempoParaNuevaDiana);
+            // instanciar un nuevo estimulo despues de esperar el tiempo  
+            // usando el factor de espera
+            yield return new WaitForSeconds(
+                Nivel.tiempoParaNuevaDiana * Configuracion.multiplicadorVelocidad
+            );
+
             MostrarNuevoObjetivo();            
             yield return null; 
         }  
@@ -575,8 +579,6 @@ public class TareaGaleriaTiro : Tarea
         
         // comprobar si es un objetivo movil 
         bool esDianaEnMovimiento = Random.value < Nivel.probabilidadAparicionDianaMovil;
-
-        // Debug.Log("Mostrando diana en " + puntoAparicion.gameObject.transform.position);
 
         diana.Mostrar(puntoAparicion, movimientoDiana, esDianaEnMovimiento);        
         puntoAparicion.Usar();
